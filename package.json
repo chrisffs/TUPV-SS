@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tailwindcss -i input.css -o ./css/main.css",
-    "watch": "tailwindcss -i input.css -o ./css/main.css --watch"
+    "build": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css",
+    "watch": "tailwindcss -i ./src/css/input.css -o ./src/css/main.css --watch"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/chrisffs/TUPV-SS#readme",
   "devDependencies": {
     "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "flowbite": "^1.8.1"
   }
 }
