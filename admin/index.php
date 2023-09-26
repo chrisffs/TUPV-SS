@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/main.css">
     <?php 
-    include '../codes/fonts.php';
+    include '../php/fonts.php';
     session_start();
     ?>
     <title>Admin Login | TUPV Syllabus System</title>
@@ -15,7 +15,7 @@
         <img src="../src/img/admin_bg.png" class="w-full z-0" srcset="">
     </div>
     <main class="z-99 relative flex justify-center mb-8 mx-4">
-        <div class="mt-[10%] bg-light w-[31rem] p-12 rounded-[0.5rem] border border-light-200">
+        <div class="mt-[10%] bg-light w-[31rem] p-12 rounded-[0.5rem] border border-light-200 shadow">
             <div class="flex justify-center items-center mb-10">
                 <div class="me-2 w-[50px]">
                     <img src="../src/img/tupvlogo.png" class="object-cover" alt="" srcset="">
@@ -28,18 +28,18 @@
                 </div>
             </div>
             <div class="mb-8">
-                <h1 class="text-2xl font-semibold text-secondary">Admin Login</h1>
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary md:text-2xl dark:text-white">Admin Login</h1>
                 <h3 class="text-sm text-secondary">Log in with your admin cridentials</h3>
             </div>
             <div>
-                <form id="login-form" action="../codes/admin_login.php" method="post">
+                <form id="login-form" action="../php/admin_login.php" method="post">
                     <div class="mb-2.5">
-                        <label for="username" class="block mb-2 text-sm font-medium text-secondary">Username</label>
-                        <input type="text" id="username" class="bg-light border border-light-200 text-secondary text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue" name="username" required>
+                        <label for="username" class="block mb-2 text-sm text-secondary">Username</label>
+                        <input type="text" id="username" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" name="username" placeholder="name@company.com" required>
                     </div>
                     <div class="mb-6">
-                        <label for="password" class="block mb-2 text-sm font-medium text-secondary ">Password</label>
-                        <input type="password" id="password" class="bg-light border border-light-200 text-secondary text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue" name="password" required>
+                        <label for="password" class="block mb-2 text-sm text-secondary ">Password</label>
+                        <input type="password" id="password" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" placeholder="••••••••" name="password" required>
                         <h6 class="text-xs text-main italic mt-1.5">
                             <?php 
                             if(isset($_SESSION['invalid'])){
