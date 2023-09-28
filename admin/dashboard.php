@@ -63,173 +63,85 @@ include '../php/header.php'
       </div>
       <div class="grid grid-cols-3 gap-6">
          <div class="col-span-1">
-            <h1 class="text-2xl font-bold mb-2">Recent</h1>
+            <h1 class="leading-tight tracking-tight text-2xl font-bold mb-2">Recent</h1>
          </div>
          <div class="col-span-2">
-            <h1 class="text-2xl font-bold mb-2">Quick Actions</h1>
+            <h1 class="leading-tight tracking-tight text-2xl font-bold mb-2">Quick Actions</h1>
          </div>
       </div>
       <div class="grid grid-cols-3 grid-rows-2 gap-6 content-stretch">
          <div class="col-span-1 row-span-2">
             <div class="bg-light p-6 border border-light-200 rounded-lg ">
-               <h2 class="font-semibold text-dark mb-4">Activity Log</h2>
-               <div>
-                  <div class="mb-4 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                     <ol class="divide-y divider-gray-200 dark:divide-gray-700">
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
-                                 </div>
+               <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Activity Log</h2>
+               <div class="mb-4 min-h-[480px]">
+                  <ol class="divide-y divider-gray-200 dark:divide-gray-700">
+                     <li>
+                        <div class="group/main cursor-default px-2 py-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
+                           <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
+                              <div class="">
+                                 <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
+                                 </svg>
                               </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
+                              <div class="min-w-0">
+                                 <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                    <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
-                                 </div>
+                           <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
+                              <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
+                           </div>
+                        </div>
+                     </li>
+                     <li>
+                        <div class="group/main cursor-default px-2 py-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
+                           <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
+                              <div class="">
+                                 <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                 <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
+                                 </svg>
                               </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
+                              <div class="min-w-0">
+                                 <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
                               </div>
                            </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                    <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
-                                 </div>
+                           <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
+                              <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
+                           </div>
+                        </div>
+                     </li>
+                     <li>
+                        <div class="group/main cursor-default px-2 py-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
+                           <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
+                              <div class="">
+                                 <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                 <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
+                                 </svg>
                               </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
+                              <div class="min-w-0">
+                                 <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
                               </div>
                            </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
-                                 </div>
-                              </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
-                              </div>
+                           <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
+                              <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
                            </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                    <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
-                                 </div>
-                              </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
-                              </div>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                    <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
-                                 </div>
-                              </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
-                              </div>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
-                                 </div>
-                              </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
-                              </div>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="group/main cursor-default p-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                              <div class="w-5/6 flex gap-2 text-gray-600 dark:text-gray-400 ">
-                                 <div class="">
-                                    <svg class="w-[24px] h-[24px] text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                    <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                                    </svg>
-                                 </div>
-                                 <div class="min-w-0">
-                                    <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                    <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
-                                    <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
-                                 </div>
-                              </div>
-                              <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                                 <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
-                              </div>
-                           </div>
-                        </li>
-                     </ol>
-                  </div>
+                        </div>
+                     </li>
+                     
+                  </ol>
+               </div>
+               <div class="mt-auto mx-0 text-end">
+                  <a href="#" class="inline-flex items-center font-medium text-main hover:text-red-800">
+                     View more
+                     <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                     </svg>
+                  </a>
                </div>
             </div>
          </div>
