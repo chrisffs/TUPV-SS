@@ -9,6 +9,6 @@
     unset($_SESSION['full_name']);
     unset($_SESSION['department']);
     unset($_SESSION['type']);
-    header('location: ../admin/index.php'); //redirect to login
+    header('location: ../admin/'); //redirect to login
     exit();  // terminate execution of current script(logout.php)
 ?>

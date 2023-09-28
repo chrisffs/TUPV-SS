@@ -25,7 +25,7 @@
                 <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
               </button>
             </div>
-            <div class="z-50 w-[12rem] hidden my-4 text-base list-none bg-light divide-y divide-light-200 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+            <div class="z-50 hidden my-4 text-base list-none bg-light divide-y divide-light-200 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
               <div class="px-4 py-3" role="none">
                 <p class="text-sm text-secondary dark:text-light" role="none">
                   <?php echo $_SESSION['full_name']?>
@@ -89,7 +89,6 @@
                <span class="ml-3">Exam Generator</span>
             </a>
          </li>
-
       </ul>
    </div>
 </aside>
