@@ -3,10 +3,10 @@ include 'conn.php';
 session_start();
 
 if(isset($_POST['login'])) {
-    $username_in = $_POST['username'];
+    $username_in = $_POST['tupv_id'];
     $pass_in = $_POST['password'];
 
-    $sql = "SELECT * FROM accounts_tbl WHERE username = '$username_in' AND password = '$pass_in' AND type = 'admin'";
+    $sql = "SELECT * FROM accounts_tbl WHERE tupv_id = '$username_in' AND password = '$pass_in' AND type = 'admin'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
