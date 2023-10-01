@@ -14,9 +14,17 @@ include '../php/session.php'
 $page = 'syllabus';
 include '../php/header.php' 
 ?>
-
-<div class="p-4 sm:ml-64">
-   <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+<div class="absolute w-full">
+   <img src="../src/img/admin_bg.png" class="object-cover w-full z-0 h-[16rem]" srcset="">
+</div>
+<div class="p-4 sm:ml-64 relative">
+   <div class="p-4 mt-14">
+      <div class="mb-4">
+         <h1 class="text-4xl font-bold text-light">Syllabus Module Upload Approval</h1>
+      </div>
+      <div class="bg-light p-6 border border-light-200 rounded-lg">
+         a
+      </div>
       <div class="grid grid-cols-3 gap-4 mb-4">
          <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
             <p class="text-2xl text-gray-400 dark:text-gray-500">
