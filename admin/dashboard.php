@@ -62,10 +62,10 @@ include '../php/header.php'
       </div>
       <div class="grid grid-cols-3 gap-4">
          <div class="col-span-1">
-            <h1 class="leading-tight tracking-tight text-2xl font-bold mb-2">Recent</h1>
+            <h1 class="leading-tight tracking-tight text-xl font-bold mb-2">Recent</h1>
          </div>
          <div class="col-span-2">
-            <h1 class="leading-tight tracking-tight text-2xl font-bold mb-2">Quick Actions</h1>
+            <h1 class="leading-tight tracking-tight text-xl font-bold mb-2">Quick Actions</h1>
          </div>
       </div>
       <div class="grid grid-cols-3 grid-rows-2 gap-4 content-stretch">
