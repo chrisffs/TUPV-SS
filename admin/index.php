@@ -35,7 +35,7 @@
                 <form id="login-form" action="../php/admin_login.php" method="post">
                     <div class="mb-2.5">
                         <label for="username" class="block mb-2 text-sm text-secondary">Username</label>
-                        <input type="text" id="username" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" name="tupv_id" placeholder="name@company.com" required>
+                        <input type="text" id="username" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" name="tupv_id" placeholder="TUPV-23-1234" required>
                     </div>
                     <div class="mb-6">
                         <label for="password" class="block mb-2 text-sm text-secondary ">Password</label>

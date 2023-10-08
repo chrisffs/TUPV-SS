@@ -1,0 +1,660 @@
+<?php 
+include '../php/session.php'
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/main.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body class="bg-light-100">
+<?php 
+// $page = 'syllabus';
+include '../php/header.php' 
+?>
+<div class="p-2 sm:ml-64 relative">
+    <div class="p-4 mt-14">
+        <div class="bg-light border border-light-200 rounded-lg h-full p-4">
+            <div class="mb-6">
+                <h1 class="text-2xl font-semibold">System Settings</h1>
+                <h6 class="text-gray-600 leading-tight tracking-tight">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h6>
+            </div>
+            <div>
+                <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 rounded-t-lg active hover:bg-gray-50 dark:bg-gray-800 dark:text-blue-500 aria-selected:bg-gray-100 aria-selected:text-main" id="campussettings-tab" data-tabs-target="#campussettings" role="tab" aria-controls="campussettings" aria-selected="false"  type="button">Campus Settings</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300 aria-selected:bg-gray-100 aria-selected:text-main" id="usersettings-tab" data-tabs-target="#usersettings" type="button" role="tab" aria-controls="usersettings" aria-selected="false">User Settings</button>
+                    </li>
+                </ul>
+            </div>
+            <div id="myTabContent">
+                <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="campussettings" role="tabpanel" aria-labelledby="campussettings-tab">
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                        <div class="flex justify-between mb-6">
+                            <div>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Departments <span class="text-main">(4)</span></h1>
+                            </div>
+                            <div>
+                                <a href="#" data-modal-target="small-modal" data-modal-toggle="small-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                    + Add new Department
+                                </a>
+                                <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-md max-h-full">
+                                       <!-- Modal content -->
+                                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                             <!-- Modal header -->
+                                             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                                                   Small modal
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="small-modal">
+                                                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                   </svg>
+                                                   <span class="sr-only">Close modal</span>
+                                                </button>
+                                             </div>
+                                             <!-- Modal body -->
+                                             <div class="p-6 space-y-6">
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                                                </p>
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                                                </p>
+                                             </div>
+                                             <!-- Modal footer -->
+                                             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                <button data-modal-hide="small-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                                                <button data-modal-hide="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                                             </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="settingsTable" class=" pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Department
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control(COAC)
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                        <div class="flex justify-between mb-6">
+                            <div>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Courses <span class="text-main">(11)</span></h1>
+                            </div>
+                            <div>
+                                <a href="#" data-modal-target="small-modal" data-modal-toggle="small-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                    + Add new Course
+                                </a>
+                                <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-md max-h-full">
+                                       <!-- Modal content -->
+                                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                             <!-- Modal header -->
+                                             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                                                   Small modal
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="small-modal">
+                                                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                   </svg>
+                                                   <span class="sr-only">Close modal</span>
+                                                </button>
+                                             </div>
+                                             <!-- Modal body -->
+                                             <div class="p-6 space-y-6">
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                                                </p>
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                                                </p>
+                                             </div>
+                                             <!-- Modal footer -->
+                                             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                <button data-modal-hide="small-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                                                <button data-modal-hide="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                                             </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Course
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Department
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        Bachelor of Science in Instrumentation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        COET
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        Bachelor of Science in Instrumentation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        COET
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                        <div class="flex justify-between mb-6">
+                            <div>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Subjects <span class="text-main">(205)</span></h1>
+                            </div>
+                            <div>
+                                <a href="#" data-modal-target="small-modal" data-modal-toggle="small-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                    + Add new Subject
+                                </a>
+                                <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-md max-h-full">
+                                       <!-- Modal content -->
+                                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                             <!-- Modal header -->
+                                             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                                                   Small modal
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="small-modal">
+                                                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                   </svg>
+                                                   <span class="sr-only">Close modal</span>
+                                                </button>
+                                             </div>
+                                             <!-- Modal body -->
+                                             <div class="p-6 space-y-6">
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                                                </p>
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                                                </p>
+                                             </div>
+                                             <!-- Modal footer -->
+                                             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                <button data-modal-hide="small-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                                                <button data-modal-hide="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                                             </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Subject Name
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Department
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        Bachelor of Science in Instrumentation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        COET
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        Bachelor of Science in Instrumentation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        COET
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                        <div class="mb-6">
+                            <h1 class="leading-tight tracking-tight text-lg font-medium">School Year</h1>
+                        </div>
+                        <label for="schoolyear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">S.Y.</label>
+                        <select id="schoolyear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <?php 
+                            $currentYear = date("Y");
+                            $endYear = $currentYear + 75; // Assuming you want options up to 75 years in the future
+
+                            for ($year = $currentYear; $year <= $endYear; $year++) {
+                                $nextYear = $year + 1;
+                                $schoolYear = $year . "-" . $nextYear;
+                                echo "<option value='$schoolYear'>$schoolYear</option>";
+                            }
+                        ?>
+                        </select>
+
+                        
+                    </div>
+                </div>
+                <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="usersettings" role="tabpanel" aria-labelledby="usersettings-tab">
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                        <div class="flex justify-between mb-6">
+                            <div>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Users <span class="text-main">(103)</span></h1>
+                            </div>
+                            <div>
+                                <a href="#" data-modal-target="small-modal" data-modal-toggle="small-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                    + Add new User
+                                </a>
+                                <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative w-full max-w-md max-h-full">
+                                       <!-- Modal content -->
+                                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                             <!-- Modal header -->
+                                             <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                                                   Small modal
+                                                </h3>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="small-modal">
+                                                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                   </svg>
+                                                   <span class="sr-only">Close modal</span>
+                                                </button>
+                                             </div>
+                                             <!-- Modal body -->
+                                             <div class="p-6 space-y-6">
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                                                </p>
+                                                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                                   The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                                                </p>
+                                             </div>
+                                             <!-- Modal footer -->
+                                             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                <button data-modal-hide="small-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                                                <button data-modal-hide="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                                             </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                       Pic
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        TUPV ID
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        USERNAME
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        PASSWORD
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        FULLNAME
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        DEPARTMENT
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        TYPE
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        ACTIONS
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
+                                    <td class="px-2 py-2">
+                                        <div class=" h-6 w-6">
+                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                        </div>
+                                        
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        TUPV-2296
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        **********
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        John Doe
+                                    </td>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        College of Automation and Control Engineering
+                                    </th>
+                                    <td class="px-4 py-2">
+                                        User
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="../node_modules/flowbite/dist/datepicker.js"></script>
+<script src="../src/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready( function () {
+        $('.settingsTable').DataTable({
+        "ordering": false,
+        "lengthChange": false,
+        "info": false,
+        
+        });
+        $('#settingsTable').DataTable({
+        "ordering": false,
+        "lengthChange": false,
+        "info": false,
+        "paging": false,
+        });
+    } );
+</script>
+</body>
+</html>

@@ -18,8 +18,8 @@ $page = 'syllabus';
 include '../php/header.php' 
 ?>
 <div class="p-2 sm:ml-64 relative">
-   <div class="p-4 mt-14">
-      <div class="bg-light border border-light-200 rounded-lg h-full">
+   <div class="p-4 mt-14"> 
+      <div class="bg-light border border-light-200 rounded-lg h-full px-4 pb-4 pt-2">
         <div class="border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                <li class="mr-2" role="presentation">
@@ -28,13 +28,13 @@ include '../php/header.php'
                <li class="mr-2" role="presentation">
                     <button class="relative inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 aria-selected:border-main aria-selected:text-main" id="pending-tab" data-tabs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">
                     Pending
-                    <span class="bg-red-200 text-xs font-medium text-red-800 text-center p-1 leading-none rounded-full px-2 dark:bg-blue-900 dark:text-blue-200 ">99+</span>
+                    <span class="bg-red-200 text-xs font-medium text-red-800 text-center p-1 leading-none rounded-full px-2 dark:bg-blue-900 dark:text-blue-200 ml-1">99+</span>
                     </button>
                </li>
             </ul>
         </div>
         <div id="myTabContent">
-            <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="list" role="tabpanel" aria-labelledby="list-tab">
+            <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="list" role="tabpanel" aria-labelledby="list-tab">
                 <div>
                     <div class="">
                         <h1 class="leading-tight tracking-tight text-2xl font-bold">Files List</h1>
@@ -42,31 +42,31 @@ include '../php/header.php'
                     <div>
                         <h2 class="text-sm font-medium mb-6">Total number of Files: <span class="text-main">204</span></h2>
                         <div class="relative overflow-x-auto">
-                            <table id="syllabusListTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <table id="syllabusListTable" class="syllabusTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             File Name
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Subject
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Year
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Sem
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Term
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Uploaded by
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Date Uploaded
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Action
                                         </th>
                                     </tr>
@@ -106,7 +106,7 @@ include '../php/header.php'
                     </div>
                 </div>
             </div>
-            <div class="hidden p-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+            <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                 <div>
                     <div class="">
                         <h1 class="leading-tight tracking-tight text-2xl font-bold">Pending List</h1>
@@ -114,31 +114,31 @@ include '../php/header.php'
                     <div>
                         <h2 class="text-sm font-medium mb-6">Total number of Pending Files: <span class="text-main">204</span></h2>
                         <div class="relative overflow-x-auto">
-                            <table id="syllabusPendingTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <table id="syllabusPendingTable" class="syllabusTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             File Name
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Subject
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Year
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Sem
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Term
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Uploaded by
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Date Uploaded
                                         </th>
-                                        <th scope="col" class="px-4 py-2">
+                                        <th scope="col" class="px-4 py-2 font-medium">
                                             Action
                                         </th>
                                     </tr>
@@ -187,18 +187,23 @@ include '../php/header.php'
 </div>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script>
-  $(document).ready( function () {
-    $('#syllabusListTable').DataTable({
-      "ordering": false,
-      "lengthChange": false,
-      "info": false
-    });
-    $('#syllabusPendingTable').DataTable({
-      "ordering": false,
-      "lengthChange": false,
-      "info": false
-    });
-} );
+    $(document).ready( function () {
+        // $('#syllabusListTable').DataTable({
+        // "ordering": false,
+        // "lengthChange": false,
+        // "info": false
+        // });
+        // $('#syllabusPendingTable').DataTable({
+        // "ordering": false,
+        // "lengthChange": false,
+        // "info": false
+        // });
+        $('.syllabusTable').DataTable({
+        "ordering": false,
+        "lengthChange": false,
+        "info": false
+        });
+    } );
 </script>
 <!-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script> -->
 <script src="../src/js/jquery.dataTables.js"></script>
