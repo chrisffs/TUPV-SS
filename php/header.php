@@ -56,7 +56,6 @@
       <ul class="space-y-2 font-normal">
          <li>
             <a href="../admin/dashboard.php" class="text-sm flex items-center px-4 py-3 <?php if($page=='dashboard'){echo 'text-main';} else {echo 'text-secondary';}?> rounded-lg dark:text-light hover:bg-light-100 dark:hover:bg-gray-700 group">
-    
                   <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                      <path d="M9 4.025A7.5 7.5 0 1 0 16.975 12H9V4.025Z"/>
                      <path d="M12.5 1c-.169 0-.334.014-.5.025V9h7.975c.011-.166.025-.331.025-.5A7.5 7.5 0 0 0 12.5 1Z"/>
