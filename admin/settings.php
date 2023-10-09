@@ -1,5 +1,32 @@
 <?php 
-include '../php/session.php'
+include '../php/session.php';
+include '../php/conn.php';
+
+
+$sql = "SELECT * FROM departmenttbl";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$data = $stmt->fetchAll();
+
+
+
+// Department Count
+
+$sql = "SELECT COUNT(dptname)`dptname` FROM departmenttbl";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetch(); // Use fetch instead of fetchAll
+
+if ($result) {
+    $qty = $result['dptname'];
+} else {
+    $qty = 0; // Handle the case when no rows are returned
+}
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +65,7 @@ include '../php/header.php'
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
                             <div>
-                                <h1 class="leading-tight tracking-tight text-lg font-medium">Departments <span class="text-main">(4)</span></h1>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Departments <span class="text-main"><?php echo $qty; ?></span></h1>
                             </div>
                             <div>
                                 <a href="#" data-modal-target="small-modal" data-modal-toggle="small-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
@@ -79,11 +106,18 @@ include '../php/header.php'
                                 </div>
                             </div>
                         </div>
+                       
+      
+                        <!-- table for department -->
                         <table id="settingsTable" class=" pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
+                         
+                            <tr>
                                     <th scope="col" class="px-4 py-2 font-medium">
                                         Department
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Acronym
                                     </th>
                                     <th scope="col" class="px-4 py-2 font-medium">
                                         Actions
@@ -91,22 +125,33 @@ include '../php/header.php'
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php foreach ($data as $row): ?>
                                 <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control(COAC)
+                                    <?php echo $row['dptname']; ?>
                                     </th>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                    <?php echo $row['acronym']; ?>
+                                    </th>
+
+                                   
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
                                             <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                         </div>
                                         <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        <a href="../php/delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+
                                         </div>
                                     </td>
                                 </tr>
+
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
+
+
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
                             <div>
@@ -316,6 +361,30 @@ include '../php/header.php'
                         
                     </div>
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="usersettings" role="tabpanel" aria-labelledby="usersettings-tab">
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">

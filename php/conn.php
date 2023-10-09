@@ -1,14 +1,17 @@
-<?php
-    //Connect to database
-    $servername = "localhost";		//example = localhost or 192.168.0.0
-    $username = "root";		//example = root
-    $password = "";	
-    $dbname = "syllabussystem_db";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Database Connection failed: " . $conn->connect_error);
-    }
+
+<?php
+$host = 'localhost';
+$db   = 'syllabussystem_db';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+$conn = new PDO($dsn, $user, $pass, $opt);
 ?>
