@@ -137,7 +137,7 @@ include '../php/header.php'
                                    
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button"> Edit  </button>
                                         </div>
                                         <div class="inline-block">
                                         <a href="../php/delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
