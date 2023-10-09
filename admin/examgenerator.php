@@ -7,6 +7,8 @@ include '../php/session.php'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/main.css">
+    <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body class="bg-light-100">
@@ -15,106 +17,85 @@ $page = 'examgenerator';
 include '../php/header.php' 
 ?>
 
-<div class="p-4 sm:ml-64">
-   <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-      <div class="grid grid-cols-3 gap-4 mb-4">
-         <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
+<div class="p-2 sm:ml-64 relative">
+   <div class="p-4 mt-14">
+      <div class="bg-light border border-light-200 rounded-lg h-full p-4">
+         <div class="mb-6">
+            <h1 class="leading-tight tracking-tight text-2xl font-bold">Exam Generator History</h1>
+            <h2 class="text-sm font-medium">Total number of Files: <span class="text-main">204</span></h2>
          </div>
-         <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-      </div>
-      <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-         <p class="text-2xl text-gray-400 dark:text-gray-500">
-            <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-            </svg>
-         </p>
-      </div>
-      <div class="grid grid-cols-2 gap-4 mb-4">
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-      </div>
-      <div class="flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
-         <p class="text-2xl text-gray-400 dark:text-gray-500">
-            <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-            </svg>
-         </p>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
-         </div>
-         <div class="flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800">
-            <p class="text-2xl text-gray-400 dark:text-gray-500">
-               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-               </svg>
-            </p>
+         <div>
+            <table id="examGenListTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+               <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Subject
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Year
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Sem
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Term
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        No. of items
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Generated by
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Date Generated
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
+                        Exam Code
+                     </th>
+                  </tr>
+               </thead>
+               <tbody class="text-gray-900">
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                     <th scope="row" class="px-4 py-2 font-medium  whitespace-nowrap dark:text-white">
+                        Robotics and Intelligent Control Systems Engineering 1
+                     </th>
+                     <td class="px-4 py-2">
+                        3rd
+                     </td>
+                     <td class="px-4 py-2">
+                        2nd
+                     </td>
+                     <td class="px-4 py-2">
+                        Midterm
+                     </td>
+                     <td class="px-4 py-2">
+                        50
+                     </td>
+                     <td class="px-4 py-2">
+                        Ramon Lito
+                     </td>
+                     <td class="px-4 py-2">
+                        2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
+                     </td>
+                     <td class="px-4 py-2">
+                        P4Mth'25rQyB
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
          </div>
       </div>
    </div>
 </div>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+<script>
+$(document).ready( function () {
+   $('#examGenListTable').DataTable({
+      "ordering": false,
+      "lengthChange": false,
+      "info": false
+   });
+} );
+</script>
+<script src="../src/js/jquery.dataTables.js"></script>
 </body>

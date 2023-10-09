@@ -18,7 +18,7 @@ $page = 'syllabus';
 include '../php/header.php' 
 ?>
 <div class="p-2 sm:ml-64 relative">
-   <div class="p-4 mt-14"> 
+   <div class="p-4 mt-14">
       <div class="bg-light border border-light-200 rounded-lg h-full px-4 pb-4 pt-2">
         <div class="border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
@@ -36,11 +36,11 @@ include '../php/header.php'
         <div id="myTabContent">
             <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="list" role="tabpanel" aria-labelledby="list-tab">
                 <div>
-                    <div class="">
+                    <div class="mb-6">
                         <h1 class="leading-tight tracking-tight text-2xl font-bold">Files List</h1>
+                        <h2 class="text-sm font-medium">Total number of Files: <span class="text-main">204</span></h2>
                     </div>
                     <div>
-                        <h2 class="text-sm font-medium mb-6">Total number of Files: <span class="text-main">204</span></h2>
                         <div class="relative overflow-x-auto">
                             <table id="syllabusListTable" class="syllabusTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -72,8 +72,8 @@ include '../php/header.php'
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
                                             <a class="text-main hover:underline hover:underline-offset-4" href="../files/ECON-Learning-Content.pdf" target="_blank">ECON-Learning-Content.pdf</a>
                                         </th>
                                         <td class="px-4 py-2">
@@ -92,7 +92,7 @@ include '../php/header.php'
                                             Ramon Lito
                                         </td>
                                         <td class="px-4 py-2">
-                                            2023-10-03 17:16:18
+                                            2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
                                         </td>
                                         <td class="px-4 py-2">
                                             <div class="inline-block">
@@ -108,11 +108,11 @@ include '../php/header.php'
             </div>
             <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                 <div>
-                    <div class="">
+                    <div class="mb-6">
                         <h1 class="leading-tight tracking-tight text-2xl font-bold">Pending List</h1>
+                        <h2 class="text-sm font-medium">Total number of Pending Files: <span class="text-main">204</span></h2>
                     </div>
                     <div>
-                        <h2 class="text-sm font-medium mb-6">Total number of Pending Files: <span class="text-main">204</span></h2>
                         <div class="relative overflow-x-auto">
                             <table id="syllabusPendingTable" class="syllabusTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -144,8 +144,8 @@ include '../php/header.php'
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
                                             <a class="text-main hover:underline hover:underline-offset-4" href="../files/ECON-Learning-Content.pdf" target="_blank">ECON-Learning-Content.pdf</a>
                                         </th>
                                         <td class="px-4 py-2">
@@ -164,7 +164,7 @@ include '../php/header.php'
                                             Ramon Lito
                                         </td>
                                         <td class="px-4 py-2">
-                                            2023-10-03 17:16:18
+                                            2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
                                         </td>
                                         <td class="px-4 py-2">
                                             <div class="inline-block mr-2">
