@@ -84,7 +84,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -103,7 +103,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
                               </div>
                            </div>
@@ -122,7 +122,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Syllabus    </span>•<span class="text-gray-400 italic">    1 hour ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Module</span> Uploaded by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">ENVIRONMENTAL_ENGINEERINGWEEK1&2.pdf</h4>
                               </div>
                            </div>
@@ -141,7 +141,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -160,7 +160,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -179,7 +179,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -198,7 +198,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -217,7 +217,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -236,7 +236,7 @@ include '../php/header.php'
                               </div>
                               <div class="min-w-0">
                                  <h4 class="text-main text-xs font-medium mb-1"><span>Question Bank    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">Ramon Lito</span> </h4>
+                                 <h4 class="text-dark text-sm font-medium">Accepted <span class="text-main italic">Question</span> Submitted by <span class="font-semibold text-dark">John Doe</span> </h4>
                                  <h4 class="text-gray-500 text-sm truncate">What is the main component of the Earth's atmosphere?</h4>
                               </div>
                            </div>
@@ -267,7 +267,7 @@ include '../php/header.php'
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark">Ramon Lito    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
                               </div>
                               
                               <h4 class="text-dark text-sm font-medium">What is the main component of the Earth's atmosphere?</h4>
@@ -308,7 +308,7 @@ include '../php/header.php'
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark">Ramon Lito    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
                               </div>
                               
                               <h4 class="text-dark text-sm font-medium">What is the main component of the Earth's atmosphere?</h4>
@@ -363,7 +363,7 @@ include '../php/header.php'
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">Ramon Lito    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
                               </div>
                               <div class="items-center gap-2 text-main inline-block hover:underline hover:underline-offset-4">
                                  <div class="flex items-center gap-2">
@@ -404,7 +404,7 @@ include '../php/header.php'
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">Ramon Lito    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
                               </div>
                               <div class="items-center gap-2 text-main inline-block hover:underline hover:underline-offset-4">
                                  <div class="flex items-center gap-2">
