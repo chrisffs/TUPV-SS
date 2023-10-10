@@ -95,7 +95,7 @@ include '../php/header.php'
                         </div>
                        
                         
-      <!-- ================= DEPARTMENT ======================== -->
+                        <!-- ================= DEPARTMENT ======================== -->
                         <!-- table for department -->
                         <table id="settingsTable" class=" pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -125,7 +125,10 @@ include '../php/header.php'
                                    
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <button id="openEditModalButton" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="authentication-modal"> Edit  </button>
+                                            <!-- <button id="editDepartment-modal" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="editDepartment-modal"> Edit  </button> -->
+                                            <a href="#" data-modal-target="editDepartment-modal" data-modal-toggle="editDepartment-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-department" data-id="<?php echo $row['id']; ?>" data-dptname="<?php echo $row['dptname']; ?>" data-acronym="<?php echo $row['acronym']; ?>">
+                                                Edit
+                                            </a>
                                         </div>
                                         <div class="inline-block">
                                         <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delfa=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
@@ -276,10 +279,10 @@ include '../php/header.php'
                             <?php foreach ($data as $row): ?>
                                 <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                    <?php echo $row['subjCode']; ?>
+                                    <?php echo $row['subjectName']; ?>
                                     </th>
                                     <td class="px-4 py-2">
-                                    <?php echo $row['subjectName']; ?>
+                                    <?php echo $row['subjCode']; ?>
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
@@ -634,7 +637,20 @@ include '../php/header.php'
         "info": false,
         "paging": false,
         });
+        // Function to open the edit modal and populate it with data
+        $(".edit-department").click(function () {
+            var departmentId = $(this).data("id");
+            var departmentName = $(this).data("dptname");
+            var departmentAcronym = $(this).data("acronym");
 
+            // Populate the modal fields with the data
+            $("#editid").val(departmentId);
+            $("#editdptname").val(departmentName);
+            $("#editacronym").val(departmentAcronym);
+
+            // Show the edit modal
+            $("#editDepartment-modal").removeClass("hidden");
+        });
 
       
   

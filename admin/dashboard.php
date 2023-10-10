@@ -361,15 +361,12 @@ include '../php/header.php'
          <div class="flex flex-col col-span-2 row-span-1 bg-light p-6 border border-light-200 rounded-lg h-50">
             <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Pending Modules</h2>
             <div class="mb-4">
-
-            <?php 
-                                $sql = "SELECT * FROM syllabuschecker_tbl  ";
-                                $stmt = $conn->prepare($sql);
-                                $stmt->execute();
-                                $data = $stmt->fetchAll();
-
-                  ?>
-          
+               <?php 
+                  $sql = "SELECT * FROM syllabuschecker_tbl  ";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->execute();
+                  $data = $stmt->fetchAll();
+               ?>
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
                    <!-- START -->
                    <?php foreach ($data as $row): ?>
@@ -401,22 +398,22 @@ include '../php/header.php'
                            </div>
                         </div>
                         <div class="invisible group-hover/main:visible w-1/12 flex gap-2 flex-col justify-center items-center">
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
-                              <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                              </svg>
-                           </a>
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
-                              <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                              </svg>
-                           </a>
-                           
+                              <a href="../php/accept.syllabus.php?ID=<?php echo $row['ID'];?>" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700">
+                                 <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                 </svg>
+                              </a>
+
+                              <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
+                                 <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                 </svg>
+                              </a>
                         </div>
                      </div>
                   </li>
                   <?php endforeach; ?>
-<!-- END -->
+               <!-- END -->
                   
                </ol>
             </div>
