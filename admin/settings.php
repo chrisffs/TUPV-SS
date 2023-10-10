@@ -21,31 +21,9 @@ include '../php/header.php'
 
 <div class="p-2 sm:ml-64 relative">
     <div class="p-4 mt-14">
-        <?php
-            if (isset($_SESSION['department_added']) && $_SESSION['department_added'] === true) {
-                // Display the success alert
-                echo '<div class="">
-                        <div id="alert-border-3" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
-                            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                            </svg>
-                            <div class="ml-3 text-sm font-medium">
-                                Department added successfully!
-                            </div>
-                            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"  data-dismiss-target="#alert-border-3" aria-label="Close">
-                                <span class="sr-only">Dismiss</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>';
-                
-                // Reset the session variable to prevent displaying the alert on page reload
-                $_SESSION['department_added'] = false;
-            }
-        ?>
-
+    <?php 
+    include "../php/success_insert.setting.php"
+    ?>
         <div class="bg-light border border-light-200 rounded-lg h-full p-4">
             <div class="mb-6">
                 <h1 class="text-2xl font-semibold">System Settings</h1>
@@ -125,8 +103,7 @@ include '../php/header.php'
                                    
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <!-- <button id="editDepartment-modal" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="editDepartment-modal"> Edit  </button> -->
-                                            <a href="#" data-modal-target="editDepartment-modal" data-modal-toggle="editDepartment-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-department" data-id="<?php echo $row['id']; ?>" data-dptname="<?php echo $row['dptname']; ?>" data-acronym="<?php echo $row['acronym']; ?>">
+                                            <a type="button" data-modal-target="editDepartment-modal" data-modal-toggle="editDepartment-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-department" data-id="<?php echo $row['id']; ?>" data-dptname="<?php echo $row['dptname']; ?>" data-acronym="<?php echo $row['acronym']; ?>">
                                                 Edit
                                             </a>
                                         </div>
@@ -172,7 +149,7 @@ include '../php/header.php'
                             </div>
                             <div>
                                 <a href="#" data-modal-target="addSubject-modal" data-modal-toggle="addSubject-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
-                                    + Add new Subject
+                                    + Add new Course
                                 </a>
                             </div>
                         </div>
@@ -207,7 +184,13 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <a href="#" data-modal-target="editCourses-modal" data-modal-toggle="editCourses-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-course" 
+                                            data-id="<?php echo $row['id']; ?>" 
+                                            data-crsname="<?php echo $row['courseName']; ?>" 
+                                            data-acronym="<?php echo $row['acro']; ?>"
+                                            data-deptname="<?php echo $row['dept']; ?>">
+                                                Edit
+                                            </a>
                                         </div>
                                         <div class="inline-block">
                                         <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delcourse=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
@@ -251,7 +234,7 @@ include '../php/header.php'
                             </div>
                             <div>
                                 <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
-                                    + Add new Course
+                                    + Add new Subject
                                 </a>
                             </div>
                         </div>
@@ -286,7 +269,12 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <a href="#" data-modal-target="editSubject-modal" data-modal-toggle="editSubject-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-subject" 
+                                            data-id="<?php echo $row['id']; ?>" 
+                                            data-sbjname="<?php echo $row['subjectName']; ?>" 
+                                            data-sbjcode="<?php echo $row['subjCode']; ?>">
+                                                Edit
+                                            </a>
                                         </div>
                                         <div class="inline-block">
                                             <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delsub=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
@@ -623,49 +611,6 @@ include '../php/header.php'
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/flowbite/dist/datepicker.js"></script>
 <script src="../src/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready( function () {
-        $('.settingsTable').DataTable({
-        "ordering": false,
-        "lengthChange": false,
-        "info": false,
-        
-        });
-        $('#settingsTable').DataTable({
-        "ordering": false,
-        "lengthChange": false,
-        "info": false,
-        "paging": false,
-        });
-        // Function to open the edit modal and populate it with data
-        $(".edit-department").click(function () {
-            var departmentId = $(this).data("id");
-            var departmentName = $(this).data("dptname");
-            var departmentAcronym = $(this).data("acronym");
-
-            // Populate the modal fields with the data
-            $("#editid").val(departmentId);
-            $("#editdptname").val(departmentName);
-            $("#editacronym").val(departmentAcronym);
-
-            // Show the edit modal
-            $("#editDepartment-modal").removeClass("hidden");
-        });
-
-      
-  
-        $('#openEditModalButton').click(function () {
-            $('#editModalContainer').load('edit.php', function () {
-            $('#authentication-modal').show(); // Show the modal
-            });
-        });
-
-
-
-
-    } );
-
-    
-</script>
+<script src="../src/js/settings.js"></script>
 </body>
 </html>

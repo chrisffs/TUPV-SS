@@ -1,8 +1,6 @@
 <?php
 include './conn.php'; // Include the database connection script
-
-
-
+session_start(); // Start a PHP session
 
 if(isset($_POST['insertdpt']))
 {
@@ -19,38 +17,12 @@ if(isset($_POST['insertdpt']))
     
     // Execute the query
     if ($stmt->execute()) {
+        $_SESSION['department_added'] = true;
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
     }
 }
-
-
-
-
-
-if(isset($_POST['insertsubject']))
-{
-    $sn = $_POST['subjectName'];
-    $sc = $_POST['subjCode'];
-
-    // Prepare the SQL statement
-    $sql = "INSERT INTO subject_tbl (subjectName, subjCode) VALUES (:names, :code)";
-    $stmt = $conn->prepare($sql);
-    
-    // Bind parameters
-    $stmt->bindParam(':names', $sn);
-    $stmt->bindParam(':code', $sc);
-    
-    // Execute the query
-    if ($stmt->execute()) {
-        header("Location: ../ADMIN/settings.php");
-    } else {
-        echo '<script> alert("Data Not Saved"); </script>';
-    }
-}
-
-
 
 if(isset($_POST['insertcourse']))
 {
@@ -69,9 +41,36 @@ if(isset($_POST['insertcourse']))
     
     // Execute the query
     if ($stmt->execute()) {
+        $_SESSION['course_added'] = true;
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
     }
 }
+
+if(isset($_POST['insertsubject']))
+{
+    $sn = $_POST['subjectName'];
+    $sc = $_POST['subjCode'];
+
+    // Prepare the SQL statement
+    $sql = "INSERT INTO subject_tbl (subjectName, subjCode) VALUES (:names, :code)";
+    $stmt = $conn->prepare($sql);
+    
+    // Bind parameters
+    $stmt->bindParam(':names', $sn);
+    $stmt->bindParam(':code', $sc);
+    
+    // Execute the query
+    if ($stmt->execute()) {
+        $_SESSION['subject_added'] = true;
+        header("Location: ../ADMIN/settings.php");
+    } else {
+        echo '<script> alert("Data Not Saved"); </script>';
+    }
+}
+
+
+
+
 ?>
