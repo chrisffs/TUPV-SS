@@ -1,6 +1,6 @@
 <?php
 include './conn.php'; // Include the database connection script
-
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dptname = $_POST['dptname'];
     $acronym = $_POST['acronym'];
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':acronym', $acronym);
     
     if ($stmt->execute()) {
-        
+        $_SESSION['department_added'] = true; 
         header("Location: ../ADMIN/settings.php");
     } else {
         echo "Error: " . $sql . "<br>" . $stmt->errorInfo()[2];
@@ -25,3 +25,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn = null; // Close the PDO connection
 ?>
+
+
