@@ -37,6 +37,7 @@ if ($result) {
     <title>Document</title>
     <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="bg-light-100">
 <?php 
@@ -137,7 +138,7 @@ include '../php/header.php'
                                    
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button"> Edit  </button>
+                                            <button id="openEditModalButton" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="authentication-modal> Edit  </button>
                                         </div>
                                         <div class="inline-block">
                                         <a href="../php/delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
@@ -149,7 +150,12 @@ include '../php/header.php'
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <div id="editModalContainer">
+                            <?php include '../ADMIN/MODAL/edit.php' ?>
+                        </div>
                     </div>
+
+                    
 
 
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
@@ -723,7 +729,22 @@ include '../php/header.php'
         "info": false,
         "paging": false,
         });
+
+
+      
+  
+        $('#openEditModalButton').click(function () {
+            $('#editModalContainer').load('edit.php', function () {
+            $('#authentication-modal').show(); // Show the modal
+            });
+        });
+
+
+
+
     } );
+
+    
 </script>
 </body>
 </html>
