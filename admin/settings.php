@@ -70,7 +70,7 @@ include '../php/header.php'
                         </div>
                        
                         
-      
+      <!-- ================= DEPARTMENT ======================== -->
                         <!-- table for department -->
                         <table id="settingsTable" class=" pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -103,7 +103,7 @@ include '../php/header.php'
                                             <button id="openEditModalButton" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="authentication-modal"> Edit  </button>
                                         </div>
                                         <div class="inline-block">
-                                        <a href="../php/delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delfa=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
 
                                         </div>
                                     </td>
@@ -112,79 +112,35 @@ include '../php/header.php'
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <div id="editModalContainer">
-                            <?php include '../ADMIN/MODAL/edit.php' ?>
-                        </div>
+    
                     </div>
+                    <!-- ========================= END OF DEPARTMENT ======================== -->
 
-                    
 
+                    <!-- ======================= COURSES ============================= -->
+                      <div class="mb-6 border border-light-200 rounded-lg p-6">
 
-                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                      <?php 
+                                $sql = "SELECT * FROM courses_tbl";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $data = $stmt->fetchAll();
+                                
+                                // Course Count
+                                $sql = "SELECT COUNT(courseName)`courseName` FROM courses_tbl";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                                
+                                if ($result) {
+                                    $qtys = $result['courseName'];
+                                } else {
+                                    $qtys = 0; // Handle the case when no rows are returned
+                                }
+                            ?>
                         <div class="flex justify-between mb-6">
                             <div>
-                                <h1 class="leading-tight tracking-tight text-lg font-medium">Courses <span class="text-main">(11)</span></h1>
-                            </div>
-                            <div>
-                                <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
-                                    + Add new Course
-                                </a>
-                            </div>
-                        </div>
-                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-4 py-2 font-medium">
-                                        Course
-                                    </th>
-                                    <th scope="col" class="px-4 py-2 font-medium">
-                                        Department
-                                    </th>
-                                    <th scope="col" class="px-4 py-2 font-medium">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        Bachelor of Science in Instrumentation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        COET
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        Bachelor of Science in Instrumentation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        COET
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="mb-6 border border-light-200 rounded-lg p-6">
-                        <div class="flex justify-between mb-6">
-                            <div>
-                                <h1 class="leading-tight tracking-tight text-lg font-medium">Subjects <span class="text-main">(205)</span></h1>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Courses <span class="text-main">(<?php echo $qtys; ?>)</span></h1>
                             </div>
                             <div>
                                 <a href="#" data-modal-target="addSubject-modal" data-modal-toggle="addSubject-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
@@ -196,10 +152,13 @@ include '../php/header.php'
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 py-2 font-medium">
-                                        Subject Name
+                                        Courses
                                     </th>
                                     <th scope="col" class="px-4 py-2 font-medium">
-                                        Department
+                                        Course Acronym
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Department 
                                     </th>
                                     <th scope="col" class="px-4 py-2 font-medium">
                                         Actions
@@ -207,41 +166,112 @@ include '../php/header.php'
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php foreach ($data as $row): ?>
                                 <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        Bachelor of Science in Instrumentation and Control Engineering
+                                    <?php echo $row['courseName']; ?>
                                     </th>
                                     <td class="px-4 py-2">
-                                        COET
+                                    <?php echo $row['acro']; ?>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                    <?php echo $row['dept']; ?>
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
                                             <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                         </div>
                                         <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delcourse=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        Bachelor of Science in Instrumentation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        COET
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
+                                
                             </tbody>
                         </table>
                     </div>
+                
+                    <!-- =========================== END OF COURSES =============================== -->
+
+                    
+
+                    <!-- ================= SUBJECT ======================== -->
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                    <?php 
+                                $sql = "SELECT * FROM subject_tbl";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $data = $stmt->fetchAll();
+                                
+                                // Department Count
+                                $sql = "SELECT COUNT(subjectName)`subjectName` FROM subject_tbl";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                                
+                                if ($result) {
+                                    $qty2 = $result['subjectName'];
+                                } else {
+                                    $qty2 = 0; // Handle the case when no rows are returned
+                                }
+                            ?>
+                        <div class="flex justify-between mb-6">
+                            <div>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Subjects <span class="text-main">(<?php echo $qty2; ?>)</span></h1>
+                            </div>
+                            <div>
+                                <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                    + Add new Course
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                               
+                            
+                            
+                            <tr>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Subject
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Subject Code
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        Actions
+                                    </th>
+                                  
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($data as $row): ?>
+                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                    <?php echo $row['subjCode']; ?>
+                                    </th>
+                                    <td class="px-4 py-2">
+                                    <?php echo $row['subjectName']; ?>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="inline-block mr-2">
+                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        </div>
+                                        <div class="inline-block">
+                                            <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delsub=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ============== END OF SUBJECT =============================== -->
+                  
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
                             <div>
