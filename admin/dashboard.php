@@ -1,5 +1,6 @@
 <?php 
-include '../php/session.php'
+include '../php/conn.php';
+include '../php/session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -261,6 +262,7 @@ include '../php/header.php'
             <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Pending Questions</h2>
             <div class="mb-4">
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
+                  <!-- START -->
                   <li>
                      <div class="group/main cursor-default p-4 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="w-11/12 flex gap-2 text-gray-600 dark:text-gray-400">
@@ -302,6 +304,9 @@ include '../php/header.php'
                         </div>
                      </div>
                   </li>
+
+
+                  <!-- END -->
                   <li>
                      <div class="group/main cursor-default p-4 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="w-11/12 flex gap-2 text-gray-600 dark:text-gray-400">
@@ -356,30 +361,42 @@ include '../php/header.php'
          <div class="flex flex-col col-span-2 row-span-1 bg-light p-6 border border-light-200 rounded-lg h-50">
             <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Pending Modules</h2>
             <div class="mb-4">
+
+            <?php 
+                                $sql = "SELECT * FROM syllabuschecker_tbl  ";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $data = $stmt->fetchAll();
+
+                  ?>
+          
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
+                   <!-- START -->
+                   <?php foreach ($data as $row): ?>
                   <li>
                      <div class="group/main cursor-default px-4 py-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="w-11/12 flex gap-2 text-gray-600 dark:text-gray-400">
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">  <?php echo $row['NameUpload']; ?> </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
                               </div>
                               <div class="items-center gap-2 text-main inline-block hover:underline hover:underline-offset-4">
                                  <div class="flex items-center gap-2">
                                     <svg class="w-[16px] h-[16px] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
                                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
                                     </svg>
-                                    <a class="" href="../files/ECON-Learning-Content.pdf" target="_blank">ECON-Learning-Content.pdf</a>
+                                    <!-- FILE LOCATION -->
+                                    <a class="" href="../files/ECON-Learning-Content.pdf" target="_blank"><?php echo $row['file']; ?></a>
                                  </div>
                               </div>
                               <div class="mt-2 flex flex-wrap gap-2">
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Bachelor of Science in Mechanical Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Engineering Subject</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">3rd Year</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Prelim</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">1st Semester</div>   
+                     
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?php echo $row['subj']; ?></div>
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?php echo $row['subjCode']; ?></div>
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?php echo $row['year']; ?></div>
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?php echo $row['term']; ?></div>
+                              
                               </div>
                            </div>
                         </div>
@@ -398,47 +415,8 @@ include '../php/header.php'
                         </div>
                      </div>
                   </li>
-                  <li>
-                     <div class="group/main cursor-default px-4 py-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="w-11/12 flex gap-2 text-gray-600 dark:text-gray-400">
-                           <div class="grow">
-                              <div class="flex align-center mb-1">
-                                 <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                              </div>
-                              <div class="items-center gap-2 text-main inline-block hover:underline hover:underline-offset-4">
-                                 <div class="flex items-center gap-2">
-                                    <svg class="w-[16px] h-[16px] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
-                                       <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
-                                    </svg>
-                                    <a class="" href="../files/ECON-Learning-Content.pdf" target="_blank">ECON-Learning-Content.pdf</a>
-                                 </div>
-                              </div>
-                              <div class="mt-2 flex flex-wrap gap-2">
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Bachelor of Science in Mechanical Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Engineering Subject</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">3rd Year</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Prelim</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">1st Semester</div>   
-                              </div>
-                           </div>
-                        </div>
-                        <div class="invisible group-hover/main:visible w-1/12 flex gap-2 flex-col justify-center items-center">
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
-                              <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                              </svg>
-                           </a>
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
-                              <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                              </svg>
-                           </a>
-                           
-                        </div>
-                     </div>
-                  </li>
+                  <?php endforeach; ?>
+<!-- END -->
                   
                </ol>
             </div>
