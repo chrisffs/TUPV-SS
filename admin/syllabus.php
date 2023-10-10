@@ -89,7 +89,7 @@ include '../php/header.php'
                                             Midterm
                                         </td>
                                         <td class="px-4 py-2">
-                                            Ramon Lito
+                                            John Doe
                                         </td>
                                         <td class="px-4 py-2">
                                             2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
@@ -161,7 +161,7 @@ include '../php/header.php'
                                             Midterm
                                         </td>
                                         <td class="px-4 py-2">
-                                            Ramon Lito
+                                            John Doe
                                         </td>
                                         <td class="px-4 py-2">
                                             2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
