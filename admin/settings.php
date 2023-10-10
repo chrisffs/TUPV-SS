@@ -24,7 +24,7 @@ include '../php/header.php'
         <div class="bg-light border border-light-200 rounded-lg h-full p-4">
             <div class="mb-6">
                 <h1 class="text-2xl font-semibold">System Settings</h1>
-                <h6 class="text-gray-600 leading-tight tracking-tight">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h6>
+                <h6 class="text-gray-600 leading-tight tracking-tight">Manage the system settings including user settings and campus settings. </h6>
             </div>
             <div>
                 <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
@@ -69,6 +69,7 @@ include '../php/header.php'
                             </div>
                         </div>
                        
+                        
       
                         <!-- table for department -->
                         <table id="settingsTable" class=" pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -99,7 +100,7 @@ include '../php/header.php'
                                    
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <button id="openEditModalButton" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="authentication-modal> Edit  </button>
+                                            <button id="openEditModalButton" class="font-normal text-blue-600 dark:text-blue-500 hover:underline" type="button" data-modal-toggle="authentication-modal"> Edit  </button>
                                         </div>
                                         <div class="inline-block">
                                         <a href="../php/delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
