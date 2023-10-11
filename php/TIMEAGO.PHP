@@ -21,4 +21,14 @@ function getTimeAgo($timestamp) {
     }
 }
 
+
+// DATE
+$currentDate = date('Y-m-d'); // Format: Year-Month-Day
+
+// TIME
+$currentTime = date('H:i:s'); // Format: Hour:Minute:Second
+
+// DATE TIME
+$currentDateTime = date('Y-m-d H:i:s');
+
 ?>

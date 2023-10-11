@@ -16,6 +16,7 @@ include '../php/TIMEAGO.PHP';
 <?php 
 $page = 'dashboard';
 include '../php/header.php' 
+
 ?>
 
 <div class="absolute w-full">
@@ -35,7 +36,19 @@ include '../php/header.php'
                </svg>
             </div>
             <div>
-               <h1 class="text-2xl font-bold text-dark">148</h1>
+               <?php
+               $sql = "SELECT COUNT(id)`id` FROM syllabus_tbl";
+               $stmt = $conn->prepare($sql);
+               $stmt->execute();
+               $result = $stmt->fetch(); // Use fetch instead of fetchAll
+
+               if ($result) {
+                  $qty232 = $result['id'];
+               } else {
+                  $qty232 = 0; // Handle the case when no rows are returned
+               }
+               ?>
+               <h1 class="text-2xl font-bold text-dark"><?php echo $qty232; ?> </h1>
                <h3 class="text-sm text-secondary">Modules Uploaded</h3>
             </div>
          </div>
@@ -359,6 +372,8 @@ include '../php/header.php'
                </a>
             </div>
          </div>
+
+         <!-- ========================= PENDING MODULES ====================== -->
          <div class="flex flex-col col-span-2 row-span-1 bg-light p-6 border border-light-200 rounded-lg h-50">
             <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Pending Modules</h2>
             <div class="mb-4">
@@ -405,7 +420,7 @@ include '../php/header.php'
                         </div>
                         <div class="invisible group-hover/main:visible w-1/12 flex gap-2 flex-col justify-center items-center">
                            <!-- ACCEPT -->
-                           <form method="POST" action="../php/insert.php">
+                           <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
                               <input type="hidden" name="syllabusid" value="<?php echo $row['ID']; ?>">
                               <button name = "accept" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700">
                                  <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
@@ -416,12 +431,14 @@ include '../php/header.php'
 
 
                         <!-- DECLINE -->
-                              <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
+                        <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to decline this?');">
+                        <input type="hidden" name="syllabusidec" value="<?php echo $row['ID']; ?>">
+                              <button name = "decline" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
                                  <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                  </svg>
-                              </a>
-
+                              </button>
+                        </form>
                              
                         </div>
                      </div>
