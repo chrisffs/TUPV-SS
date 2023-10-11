@@ -119,7 +119,17 @@ include '../php/header.php'
                                         <?php echo $row['NAMEUPLOAD']; ?>
                                         </td>
                                         <td class="px-4 py-2">
-                                         <?php echo $row['DATEUPLOAD']; ?> <!--<span class="block text-xs text-gray-600">3:24 PM</span> -->
+                                            <?php 
+                                            $old_date_timestamp = strtotime($row['DATEUPLOAD']);
+                                            $date = date('Y/m/d', $old_date_timestamp);
+                                            echo $date;
+                                            ?>
+                                            <span class="block text-xs text-gray-600">
+                                                <?php 
+                                                $time = date('g:i A', $old_date_timestamp);
+                                                echo $time 
+                                                ?>
+                                            </span>
                                         </td>
 
                                         <td class="px-4 py-2">
@@ -214,7 +224,17 @@ include '../php/header.php'
                                         <?php echo $row['NameUpload']; ?>
                                         </td>
                                         <td class="px-4 py-2">
-                                        <?php echo $row['dateUpload']; ?>
+                                            <?php 
+                                            $old_date_timestamp = strtotime($row['dateUpload']);
+                                            $date = date('Y/m/d', $old_date_timestamp);
+                                            echo $date;
+                                            ?>
+                                            <span class="block text-xs text-gray-600">
+                                                <?php 
+                                                $time = date('g:i A', $old_date_timestamp);
+                                                echo $time 
+                                                ?>
+                                            </span>
                                         </td>
                                         <td class="px-4 py-2">
                                             
@@ -250,16 +270,6 @@ include '../php/header.php'
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script>
     $(document).ready( function () {
-        // $('#syllabusListTable').DataTable({
-        // "ordering": false,
-        // "lengthChange": false,
-        // "info": false
-        // });
-        // $('#syllabusPendingTable').DataTable({
-        // "ordering": false,
-        // "lengthChange": false,
-        // "info": false
-        // });
         $('.syllabusTable').DataTable({
         "ordering": false,
         "lengthChange": false,
@@ -267,6 +277,5 @@ include '../php/header.php'
         });
     } );
 </script>
-<!-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script> -->
 <script src="../src/js/jquery.dataTables.js"></script>
 </body>

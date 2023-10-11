@@ -64,7 +64,40 @@ $(document).ready( function () {
         $("#editSubject-modal").removeClass("hidden");
     });
 
+    $(".edit-user").click(function () {
+        var userId = $(this).data("id");
+        var userTupvId = $(this).data("tupvid");
+        var userName = $(this).data("username");
+        var userPass = $(this).data("userpass");
+        var userFname = $(this).data("userfname");
+        var userDept = $(this).data("userdept");
+        var userType = $(this).data("usertype");
 
+        // Populate the modal fields with the data
+        $("#edituserid").val(userId);
+        $("#editusertupvid").val(userTupvId);
+        $("#edituseruname").val(userName);
+        $("#edituserpass").val(userPass);
+        $("#edituserfname").val(userFname);
+        $("#edituserdept").val(userDept);
+        $("#editusertype").val(userType);
+
+        // Show the edit modal
+        $("#editUser-modal").removeClass("hidden");
+    });
+
+    // $("#confirm-password").on('keyup', function() {
+    //     var password = $("#password").val();
+    //     var confirmPassword = $(this).val();
+
+    //     if (password === confirmPassword) {
+    //         // Passwords match, hide the error message
+    //         $("#password-match-error").addClass("hidden");
+    //     } else {
+    //         // Passwords do not match, show the error message
+    //         $("#password-match-error").removeClass("hidden");
+    //     }
+    // });
 
 
 

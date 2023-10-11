@@ -71,6 +71,36 @@ if(isset($_POST['insertsubject']))
     }
 }
 
+if(isset($_POST['insertuser']))
+{
+    $ufn = $_POST['userFullName'];
+    $utupvid = $_POST['userTupvId'];
+    $udept = $_POST['userDept'];
+    $uun = $_POST['userUName'];
+    $upass = $_POST['userPass'];
+    $utype = $_POST['usertype'];
+
+    // Prepare the SQL statement
+    $sql = "INSERT INTO accounts_tbl (tupv_id, username, password, full_name, department, type) VALUES (:tupvid, :username, :password, :fullname, :department, :type)";
+    $stmt = $conn->prepare($sql);
+    
+    // Bind parameters
+    $stmt->bindParam(':tupvid', $utupvid);
+    $stmt->bindParam(':username', $uun);
+    $stmt->bindParam(':password', $upass);
+    $stmt->bindParam(':fullname', $ufn);
+    $stmt->bindParam(':department', $udept);
+    $stmt->bindParam(':type', $utype);
+    
+    // Execute the query
+    if ($stmt->execute()) {
+        $_SESSION['user_added'] = true;
+        header("Location: ../ADMIN/settings.php");
+    } else {
+        echo '<script> alert("Data Not Saved"); </script>';
+    }
+}
+
 
 // CHECKER dashboard.
 // accept

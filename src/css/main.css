@@ -1270,6 +1270,10 @@ html {
   margin-top: auto !important;
 }
 
+.mt-4 {
+  margin-top: 1rem !important;
+}
+
 .block {
   display: block !important;
 }
@@ -1308,6 +1312,10 @@ html {
 
 .h-2\.5 {
   height: 0.625rem !important;
+}
+
+.h-24 {
+  height: 6rem !important;
 }
 
 .h-3 {
@@ -1362,6 +1370,18 @@ html {
   height: 100vh !important;
 }
 
+.h-64 {
+  height: 16rem !important;
+}
+
+.h-16 {
+  height: 4rem !important;
+}
+
+.h-20 {
+  height: 5rem !important;
+}
+
 .max-h-full {
   max-height: 100% !important;
 }
@@ -1392,6 +1412,10 @@ html {
 
 .w-2\.5 {
   width: 0.625rem !important;
+}
+
+.w-24 {
+  width: 6rem !important;
 }
 
 .w-3 {
@@ -1448,6 +1472,14 @@ html {
 
 .w-full {
   width: 100% !important;
+}
+
+.w-16 {
+  width: 4rem !important;
+}
+
+.w-20 {
+  width: 5rem !important;
 }
 
 .min-w-0 {
@@ -1554,6 +1586,10 @@ html {
 
 .flex-wrap {
   flex-wrap: wrap !important;
+}
+
+.content-end {
+  align-content: flex-end !important;
 }
 
 .content-stretch {
@@ -1704,6 +1740,10 @@ html {
   border-width: 0px !important;
 }
 
+.border-2 {
+  border-width: 2px !important;
+}
+
 .border-b {
   border-bottom-width: 1px !important;
 }
@@ -1722,6 +1762,14 @@ html {
 
 .border-t-4 {
   border-top-width: 4px !important;
+}
+
+.border-t-2 {
+  border-top-width: 2px !important;
+}
+
+.border-dashed {
+  border-style: dashed !important;
 }
 
 .border-blue-600 {
@@ -1967,6 +2015,14 @@ html {
   padding-top: 1rem !important;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem !important;
+}
+
+.pt-5 {
+  padding-top: 1.25rem !important;
+}
+
 .text-left {
   text-align: left !important;
 }
@@ -2141,6 +2197,21 @@ html {
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(240 82 82 / var(--tw-text-opacity)) !important;
+}
+
+.text-gray-800 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(31 41 55 / var(--tw-text-opacity)) !important;
+}
+
+.text-light-200 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(217 217 217 / var(--tw-text-opacity)) !important;
+}
+
 .underline {
   text-decoration-line: underline !important;
 }
@@ -2153,6 +2224,16 @@ html {
 .placeholder-gray-400::placeholder {
   --tw-placeholder-opacity: 1 !important;
   color: rgb(156 163 175 / var(--tw-placeholder-opacity)) !important;
+}
+
+.placeholder-gray-200::-moz-placeholder {
+  --tw-placeholder-opacity: 1 !important;
+  color: rgb(229 231 235 / var(--tw-placeholder-opacity)) !important;
+}
+
+.placeholder-gray-200::placeholder {
+  --tw-placeholder-opacity: 1 !important;
+  color: rgb(229 231 235 / var(--tw-placeholder-opacity)) !important;
 }
 
 .opacity-0 {
@@ -2214,6 +2295,16 @@ html {
 
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
+.placeholder\:text-gray-200::-moz-placeholder {
+  --tw-text-opacity: 1 !important;
+  color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
+}
+
+.placeholder\:text-gray-200::placeholder {
+  --tw-text-opacity: 1 !important;
+  color: rgb(229 231 235 / var(--tw-text-opacity)) !important;
 }
 
 .hover\:border-gray-300:hover {
@@ -2524,6 +2615,11 @@ html {
   color: rgb(156 163 175 / var(--tw-placeholder-opacity)) !important;
 }
 
+:is(.dark .dark\:hover\:border-gray-500:hover) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity)) !important;
+}
+
 :is(.dark .dark\:hover\:bg-blue-700:hover) {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(26 86 219 / var(--tw-bg-opacity)) !important;
@@ -2590,6 +2686,22 @@ html {
 }
 
 @media (min-width: 640px) {
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2 !important;
+  }
+
+  .sm\:col-span-1 {
+    grid-column: span 1 / span 1 !important;
+  }
+
+  .sm\:col-span-3 {
+    grid-column: span 3 / span 3 !important;
+  }
+
+  .sm\:col-span-4 {
+    grid-column: span 4 / span 4 !important;
+  }
+
   .sm\:ml-64 {
     margin-left: 16rem !important;
   }
@@ -2601,6 +2713,26 @@ html {
   .sm\:translate-x-0 {
     --tw-translate-x: 0px !important;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .sm\:gap-6 {
+    gap: 1.5rem !important;
+  }
+
+  .sm\:gap-4 {
+    gap: 1rem !important;
+  }
+
+  .sm\:gap-2 {
+    gap: 0.5rem !important;
   }
 }
 
