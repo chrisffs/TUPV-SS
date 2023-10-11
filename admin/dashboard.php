@@ -1,6 +1,7 @@
 <?php 
 include '../php/conn.php';
 include '../php/session.php';
+include '../php/TIMEAGO.PHP';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -366,6 +367,9 @@ include '../php/header.php'
                   $stmt = $conn->prepare($sql);
                   $stmt->execute();
                   $data = $stmt->fetchAll();
+
+   
+                 
                ?>
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
                    <!-- START -->
@@ -376,7 +380,9 @@ include '../php/header.php'
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">  <?php echo $row['NameUpload']; ?> </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark ">  <?php echo $row['NameUpload']; ?> </span>•<span class="text-gray-400 italic">  
+                                 <?php echo getTimeAgo($row['dateUpload']); ?>
+                                 </span></h4>
                               </div>
                               <div class="items-center gap-2 text-main inline-block hover:underline hover:underline-offset-4">
                                  <div class="flex items-center gap-2">
@@ -398,17 +404,25 @@ include '../php/header.php'
                            </div>
                         </div>
                         <div class="invisible group-hover/main:visible w-1/12 flex gap-2 flex-col justify-center items-center">
-                              <a href="../php/accept.syllabus.php?ID=<?php echo $row['ID'];?>" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700">
+                           <!-- ACCEPT -->
+                           <form method="POST" action="../php/insert.php">
+                              <input type="hidden" name="syllabusid" value="<?php echo $row['ID']; ?>">
+                              <button name = "accept" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700">
                                  <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                                  </svg>
-                              </a>
+                              </button>
+                           </form>
 
+
+                        <!-- DECLINE -->
                               <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
                                  <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                  </svg>
                               </a>
+
+                             
                         </div>
                      </div>
                   </li>
