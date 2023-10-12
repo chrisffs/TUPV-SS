@@ -102,9 +102,9 @@ if(isset($_POST['insertuser']))
 }
 
 
-// CHECKER dashboard.
+// CHECKER syllabus dashboard.
 // accept
-if (isset($_POST['accept']) || isset($_POST['accept1']) ) {
+if (isset($_POST['accept']) || isset($_POST['accept1'])) {
     $syllabusid = $_POST['syllabusid'];
 
     // Retrieve the row from syllabuschecker_tbl
@@ -117,26 +117,42 @@ if (isset($_POST['accept']) || isset($_POST['accept1']) ) {
 
     if ($result) {
         // Insert the row into syllabus_tbl
-        $sql_insert = "INSERT INTO syllabus_tbl (NAMEUPLOAD, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
-        $stmt_insert = $conn->prepare($sql_insert);
+        $sql_insert_syllabus = "INSERT INTO syllabus_tbl (NAMEUPLOAD, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
+        $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
 
-        if ($stmt_insert) {
-            $stmt_insert->bindParam(':NameUpload', $result['NameUpload']);
-            $stmt_insert->bindParam(':subj', $result['subj']);
-            $stmt_insert->bindParam(':subjCode', $result['subjCode']);
-            $stmt_insert->bindParam(':term', $result['term']);
-            $stmt_insert->bindParam(':year', $result['year']);
-            $stmt_insert->bindParam(':file', $result['file']);
-            $stmt_insert->bindParam(':fileLoc', $result['fileLoc']);
-            $stmt_insert->bindParam(':dateUpload', $result['dateUpload']);
+        // Define variables for actlog_tbl
+        $syllabus = "Syllabus";
+        $accepted = "Accepted";
+        $module = "Module";
 
-            if ($stmt_insert->execute()) {
+        // Insert into actlog_tbl
+        $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES (:syllabus, :dateUpload, :accepted, :module, :NameUpload, :file)";
+        $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
+
+        if ($stmt_insert_syllabus && $stmt_insert_actlog) {
+            $stmt_insert_syllabus->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_syllabus->bindParam(':subj', $result['subj']);
+            $stmt_insert_syllabus->bindParam(':subjCode', $result['subjCode']);
+            $stmt_insert_syllabus->bindParam(':term', $result['term']);
+            $stmt_insert_syllabus->bindParam(':year', $result['year']);
+            $stmt_insert_syllabus->bindParam(':file', $result['file']);
+            $stmt_insert_syllabus->bindParam(':fileLoc', $result['fileLoc']);
+            $stmt_insert_syllabus->bindParam(':dateUpload', $result['dateUpload']);
+
+            $stmt_insert_actlog->bindParam(':syllabus', $syllabus);
+            $stmt_insert_actlog->bindParam(':dateUpload', $result['dateUpload']);
+            $stmt_insert_actlog->bindParam(':accepted', $accepted);
+            $stmt_insert_actlog->bindParam(':module', $module);
+            $stmt_insert_actlog->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_actlog->bindParam(':file', $result['file']);
+
+            if ($stmt_insert_syllabus->execute() && $stmt_insert_actlog->execute()) {
                 // Delete the row from syllabuschecker_tbl
                 $sql_delete = "DELETE FROM syllabuschecker_tbl WHERE ID = :syllabusid";
                 $stmt_delete = $conn->prepare($sql_delete);
                 $stmt_delete->bindParam(':syllabusid', $syllabusid, PDO::PARAM_INT);
- 
-                if ($stmt_delete->execute() ) {
+
+                if ($stmt_delete->execute()) {
                     if (isset($_POST['accept'])) {
                         header("Location: ../ADMIN/dashboard.php");
                     } elseif (isset($_POST['accept1'])) {
@@ -146,7 +162,7 @@ if (isset($_POST['accept']) || isset($_POST['accept1']) ) {
                     echo "Error deleting from syllabuschecker_tbl: " . $stmt_delete->errorInfo()[2];
                 }
             } else {
-                echo "Error inserting into syllabus_tbl: " . $stmt_insert->errorInfo()[2];
+                echo "Error inserting into syllabus_tbl or actlog_tbl.";
             }
         } else {
             echo "Error preparing the insert statement: " . $conn->errorInfo()[2];
@@ -174,6 +190,15 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
         $sql_insert = "INSERT INTO declinedsyllabus_tbl  (NameUpload, subj, subjCode, term, year, file, fileLoc, dateUpload) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
         $stmt_insert = $conn->prepare($sql_insert);
 
+          // Define variables for actlog_tbl
+          $syllabus = "Syllabus";
+          $decline = "Declined";
+          $module = "Module";
+  
+          // Insert into actlog_tbl
+          $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES (:syllabus, :dateUpload, :decline, :module, :NameUpload, :file)";
+          $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
+
         if ($stmt_insert) {
             $stmt_insert->bindParam(':NameUpload', $result['NameUpload']);
             $stmt_insert->bindParam(':subj', $result['subj']);
@@ -184,7 +209,16 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
             $stmt_insert->bindParam(':fileLoc', $result['fileLoc']);
             $stmt_insert->bindParam(':dateUpload', $result['dateUpload']);
 
-            if ($stmt_insert->execute()) {
+
+            $stmt_insert_actlog->bindParam(':syllabus', $syllabus);
+            $stmt_insert_actlog->bindParam(':dateUpload', $result['dateUpload']);
+            $stmt_insert_actlog->bindParam(':decline', $decline);
+            $stmt_insert_actlog->bindParam(':module', $module);
+            $stmt_insert_actlog->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_actlog->bindParam(':file', $result['file']);
+
+
+            if ($stmt_insert->execute() && $stmt_insert_actlog->execute()) {
                 // Delete the row from syllabuschecker_tbl
                 $sql_delete = "DELETE FROM syllabuschecker_tbl WHERE ID = :syllabusidec";
                 $stmt_delete = $conn->prepare($sql_delete);
