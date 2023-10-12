@@ -28,7 +28,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="addDepartment-modal" type="submit" name="insertdpt" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add Department</button>
+                <button type="submit" name="insertdpt" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add Department</button>
                 <button data-modal-hide="addDepartment-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
             </div>
             </form>
@@ -159,7 +159,7 @@
                         </div>
                         <div class="sm:col-span-3">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload Profile Picture</label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple required>
                         </div>
                         <div class="sm:col-span-4">
                             <label for="userFullName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
@@ -177,8 +177,8 @@
                                 $data = $stmt->fetchAll();
                             ?>
                             <label for="userDept" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-                            <select id="userDept" name= "userDept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled hidden value="N/A">Choose a Department</option>
+                            <select id="userDept" name= "userDept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                <option selected disabled hidden value="">Choose a Department</option>
                                 <?php foreach ($data as $row): ?>
                                 <option value="<?php echo $row['acronym']; ?>"> <?php echo $row['acronym']; ?></option>
                                 <?php endforeach; ?>
@@ -205,7 +205,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button form="addUserForm" data-modal-hide="addUser-modal" type="submit" name="insertuser" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add User</button>
+                <button form="addUserForm" type="submit" name="insertuser" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add User</button>
 
                 <button data-modal-hide="addUser-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
             </div>

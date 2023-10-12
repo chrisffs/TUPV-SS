@@ -63,11 +63,25 @@ include '../php/header.php'
 
         ?>
         <div id="myTabContent">
+            <?php 
+            include "../php/modal.syllabus.php";
+            ?>
             <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="list" role="tabpanel" aria-labelledby="list-tab">
                 <div>
-                    <div class="mb-6">
-                        <h1 class="leading-tight tracking-tight text-2xl font-bold">Files List</h1>
-                        <h2 class="text-sm font-medium">Total number of Files: <span class="text-main"><?php echo $qty23; ?></span></h2>
+                    <div class="mb-6 flex justify-between">
+                        <div>
+                            <h1 class="leading-tight tracking-tight text-2xl font-bold">Files List</h1>
+                            <h2 class="text-sm font-medium">Total number of Files: <span class="text-main"><?php echo $qty23; ?></span></h2>
+                        </div>
+                        <div>
+                            <button data-modal-target="uploadFileSyllabus-modal" data-modal-toggle="uploadFileSyllabus-modal" type="button" class="flex gap-2 text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                Upload File 
+                                <svg class="w-[16px] h-[16px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3m-5.5 0V1.07M5.5 5l4-4 4 4"/>
+                                </svg>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div>
                         <div class="relative overflow-x-auto">
@@ -240,10 +254,10 @@ include '../php/header.php'
                                             
                                             <div class="inline-block mr-2">
                                              <!-- ACCEPT -->
-                                                 <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
-                                                 <input type="hidden" name="syllabusid" value="<?php echo $row['ID']; ?>">
+                                            <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
+                                                <input type="hidden" name="syllabusid" value="<?php echo $row['ID']; ?>">
                                                 <button name="accept1" class="font-medium text-blue-600 dark:text-blue-500            hover:underline">Accept</button>
-                                    </form>
+                                            </form>
                                             </div>
 
 
