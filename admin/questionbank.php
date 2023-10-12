@@ -99,7 +99,7 @@ include '../php/header.php'
                            <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
                               <a data-modal-target="question-modal" data-modal-toggle="question-modal" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer question-show" type="button"
                               data-id="<?php echo $row['ID']; ?>"
-                              data-course="<?php echo $row['Course']; ?>" 
+                          
                               data-year="<?php echo $row['Year']; ?>" 
                               data-subj="<?php echo $row['Subject']; ?>"
                               data-term="<?php echo $row['Term']; ?>"

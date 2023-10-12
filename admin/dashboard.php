@@ -144,31 +144,38 @@ include '../php/header.php'
          <div class="flex flex-col col-span-2 row-span-1 bg-light p-6 border border-light-200 rounded-lg h-50">
             <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Pending Questions</h2>
             <div class="mb-4">
+
+                      <?php
+                     $sql = "SELECT * FROM qbchecker_tbl ORDER BY time_uploaded DESC LIMIT 5";
+                     $stmt = $conn->prepare($sql);
+                     $stmt->execute();
+                     $data = $stmt->fetchAll();
+                     ?>
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
                   <!-- START -->
+                  <?php foreach ($data as $row): ?>
                   <li>
                      <div class="group/main cursor-default p-4 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="w-11/12 flex gap-2 text-gray-600 dark:text-gray-400">
                            <div class="grow">
                               <div class="flex align-center mb-1">
                                  <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
+                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark"><?= $row['uploadedby']; ?>   </span>•<span class="text-gray-400 italic">   <?php echo getTimeAgo($row['time_uploaded']); ?></span></h4>
                               </div>
                               
-                              <h4 class="text-dark text-sm font-medium">What is the main component of the Earth's atmosphere?</h4>
+                              <h4 class="text-dark text-sm font-medium"><?= $row['Question']; ?></h4>
                               <div class="flex text-sm justify-between">
-                                 <h4 class="text-dark">a. Nitrogen</h4>
-                                 <h4 class="text-dark">b. Oxygen</h4>
-                                 <h4 class="text-dark">c. Carbon Dioxide</h4>
-                                 <h4 class="text-dark">d. Helium</h4>
+                                 <h4 class="text-dark">A. <?= $row['A']; ?></h4>
+                                 <h4 class="text-dark">B. <?= $row['B']; ?></h4>
+                                 <h4 class="text-dark">C. <?= $row['C']; ?></h4>
+                                 <h4 class="text-dark">D. <?= $row['D']; ?></h4>
                               </div>
                               <div class="mt-2 flex flex-wrap gap-2">
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Bachelor of Science in Mechanical Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Engineering Subject</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">3rd Year</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Prelim</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">1st Semester</div>   
+                               
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?= $row['Subject']; ?></div>
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?= $row['Year']; ?></div>
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?= $row['Term']; ?></div>
+                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"><?= $row['Semester']; ?></div>   
                               </div>
                            </div>
                         </div>
@@ -188,48 +195,11 @@ include '../php/header.php'
                      </div>
                   </li>
 
+                  <?php endforeach; ?>
+
 
                   <!-- END -->
-                  <li>
-                     <div class="group/main cursor-default p-4 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="w-11/12 flex gap-2 text-gray-600 dark:text-gray-400">
-                           <div class="grow">
-                              <div class="flex align-center mb-1">
-                                 <img src="../src/img/profile_image.jpg" class="rounded-full h-4 w-4 mr-2" alt="" srcset="">
-                                 <h4 class="text-main text-xs font-medium mb-1"><span class="text-dark">John Doe    </span>•<span class="text-gray-400 italic">    1 minute ago</span></h4>
-                              </div>
-                              
-                              <h4 class="text-dark text-sm font-medium">What is the main component of the Earth's atmosphere?</h4>
-                              <div class="flex text-sm justify-between">
-                                 <h4 class="text-dark">a. Nitrogen</h4>
-                                 <h4 class="text-dark">b. Oxygen</h4>
-                                 <h4 class="text-dark">c. Carbon Dioxide</h4>
-                                 <h4 class="text-dark">d. Helium</h4>
-                              </div>
-                              <div class="mt-2 flex flex-wrap gap-2">
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">College of Bachelor of Science in Mechanical Engineering</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Engineering Subject</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">3rd Year</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Prelim</div>
-                                 <div class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">1st Semester</div>   
-                              </div>
-                           </div>
-                        </div>
-                        <div class="invisible group-hover/main:visible w-1/12 flex gap-2 flex-col justify-center items-center">
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
-                              <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                              </svg>
-                           </a>
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
-                              <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                              </svg>
-                           </a>
-                        </div>
-                     </div>
-                  </li>
+                
                </ol>
             </div>
             <div class="self-end mt-auto mx-0 text-end">
@@ -257,6 +227,11 @@ include '../php/header.php'
                ?>
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
                    <!-- START -->
+                   <?php if (count($data) === 0): ?>
+                     <div class="flex justify-center items-center h-32">
+                     <p class="text-gray-500">No pending right now</p>
+                  </div>
+               <?php else: ?>
                    <?php foreach ($data as $row): ?>
                   <li>
                      <div class="group/main cursor-default px-4 py-3 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -313,6 +288,7 @@ include '../php/header.php'
                      </div>
                   </li>
                   <?php endforeach; ?>
+                  <?php endif; ?>
                <!-- END -->
                   
                </ol>
