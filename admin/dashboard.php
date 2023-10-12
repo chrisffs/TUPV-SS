@@ -25,7 +25,8 @@ include '../php/header.php'
 <div class="p-2 sm:ml-64 relative">
    <div class="p-4 mt-14">
       <div class="mb-10">
-         <h1 class="text-4xl font-bold text-light">Hello Admin!</h1>
+         <h1 class="text-4xl font-bold text-light">Hello, <?php echo $_SESSION['full_name']?>!</h1>
+         <h5 class="text-light text-xl"><?php echo $_SESSION['tupv_id']?></h5>
          <h4 class="text-light text-xl">Welcome Back!</h4>
       </div>
       <div class="grid grid-cols-4 gap-4 mb-6">
@@ -449,7 +450,7 @@ include '../php/header.php'
                </ol>
             </div>
             <div class="self-end mt-auto mx-0 text-end ">
-               <a href="#" class="inline-flex items-center font-medium text-main hover:text-red-800">
+               <a href="../ADMIN/syllabus.php" class="inline-flex items-center font-medium text-main hover:text-red-800">
                   View more
                   <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
