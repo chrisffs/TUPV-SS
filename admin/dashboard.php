@@ -121,9 +121,7 @@ include '../php/header.php'
                                 <h4 class="text-gray-500 text-sm truncate"><?= $row['content']; ?></h4>
                             </div>
                         </div>
-                        <div class="invisible group-hover/main:visible w-1/6 flex justify-end items-center">
-                            <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">Undo</a>
-                        </div>
+                      
                     </div>
                 </li>
             <?php endforeach; ?>
