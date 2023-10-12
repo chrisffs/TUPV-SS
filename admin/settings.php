@@ -148,7 +148,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Courses <span class="text-main">(<?php echo $qtys; ?>)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addSubject-modal" data-modal-toggle="addSubject-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
                                     + Add new Course
                                 </a>
                             </div>
@@ -233,7 +233,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Subjects <span class="text-main">(<?php echo $qty2; ?>)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a href="#" data-modal-target="addSubject-modal" data-modal-toggle="addSubject-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
                                     + Add new Subject
                                 </a>
                             </div>
@@ -281,7 +281,6 @@ include '../php/header.php'
                                         </div>
                                     </td>
                                 </tr>
-                                
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -315,12 +314,33 @@ include '../php/header.php'
                         
                     </div>
                 </div>
-                <!-- USER SETTINGS STARTS HERE -->
+
+                <!-- USER SETTINGS STARTS HERE -->   
                 <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="usersettings" role="tabpanel" aria-labelledby="usersettings-tab">
+                    <?php 
+                        $sql = "SELECT * FROM accounts_tbl WHERE type = 'user'";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $data = $stmt->fetchAll();
+                        
+                        // Users Count
+                        $sql = "SELECT COUNT(tupv_id)`tupv_id` FROM accounts_tbl WHERE type = 'user'";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                        
+                        if ($result) {
+                            $qty3 = $result['tupv_id'];
+                        } else {
+                            $qty3 = 0; // Handle the case when no rows are returned
+                        }
+
+                        
+                    ?>
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
                             <div>
-                                <h1 class="leading-tight tracking-tight text-lg font-medium">Users <span class="text-main">(103)</span></h1>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Users <span class="text-main">(<?php echo $qty3; ?>)</span></h1>
                             </div>
                             <div>
                                 <a href="#" data-modal-target="addUser-modal" data-modal-toggle="addUser-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
@@ -329,6 +349,7 @@ include '../php/header.php'
                                 
                             </div>
                         </div>
+                        
                         <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -359,244 +380,138 @@ include '../php/header.php'
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($data as $row): ?>
                                 <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
                                     <td class="px-2 py-2">
                                         <div class=" h-6 w-6">
                                             <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
                                         </div>
-                                        
                                     </td>
                                     <td class="px-4 py-2">
-                                        TUPV-2296
+                                        <?php echo $row['tupv_id']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        TUPV-2296
+                                        <?php echo $row['username']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        **********
+                                        <?php echo $row['password']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        John Doe
+                                        <?php echo $row['full_name']; ?>
                                     </td>
                                     <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
+                                        <?php echo $row['department']; ?>
                                     </th>
                                     <td class="px-4 py-2">
-                                        User
+                                        <?php echo $row['type']; ?>
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <a href="#" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
+                                            data-id="<?php echo $row['ID']; ?>"
+                                            data-tupvid="<?php echo $row['tupv_id']; ?>" 
+                                            data-username="<?php echo $row['username']; ?>" 
+                                            data-userpass="<?php echo $row['password']; ?>"
+                                            data-userfname="<?php echo $row['full_name']; ?>"
+                                            data-userdept="<?php echo $row['department']; ?>"
+                                            data-usertype="<?php echo $row['type']; ?>">
+                                                Edit
+                                            </a>
                                         </div>
                                         <div class="inline-block">
                                             <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
                                         </div>
                                     </td>
                                 </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                        <div class="flex justify-between mb-6">
+                            <div>
+                                <h1 class="leading-tight tracking-tight text-lg font-medium">Admin <span class="text-main">(2)</span></h1>
+                            </div>
+                            <div>
+                                <a href="#" data-modal-target="addUser-modal" data-modal-toggle="addUser-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                    + Add new Admin
+                                </a>
+                            </div>
+                        </div> 
+                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                       Pic
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        TUPV ID
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        USERNAME
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        PASSWORD
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        FULLNAME
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        DEPARTMENT
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        TYPE
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
+                                        ACTIONS
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data as $row): ?>
                                 <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
                                     <td class="px-2 py-2">
                                         <div class=" h-6 w-6">
                                             <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
                                         </div>
-                                        
                                     </td>
                                     <td class="px-4 py-2">
-                                        TUPV-2296
+                                        <?php echo $row['tupv_id']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        TUPV-2296
+                                        <?php echo $row['username']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        **********
+                                        <?php echo $row['password']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        John Doe
+                                        <?php echo $row['full_name']; ?>
                                     </td>
                                     <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
+                                        <?php echo $row['department']; ?>
                                     </th>
                                     <td class="px-4 py-2">
-                                        User
+                                        <?php echo $row['type']; ?>
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <a href="#" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
+                                            data-id="<?php echo $row['ID']; ?>"
+                                            data-tupvid="<?php echo $row['tupv_id']; ?>" 
+                                            data-username="<?php echo $row['username']; ?>" 
+                                            data-userpass="<?php echo $row['password']; ?>"
+                                            data-userfname="<?php echo $row['full_name']; ?>"
+                                            data-userdept="<?php echo $row['department']; ?>"
+                                            data-usertype="<?php echo $row['type']; ?>">
+                                                Edit
+                                            </a>
                                         </div>
                                         <div class="inline-block">
                                             <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
-                                    <td class="px-2 py-2">
-                                        <div class=" h-6 w-6">
-                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
-                                        </div>
-                                        
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        **********
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        John Doe
-                                    </td>
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        User
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
-                                    <td class="px-2 py-2">
-                                        <div class=" h-6 w-6">
-                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
-                                        </div>
-                                        
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        **********
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        John Doe
-                                    </td>
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        User
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
-                                    <td class="px-2 py-2">
-                                        <div class=" h-6 w-6">
-                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
-                                        </div>
-                                        
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        **********
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        John Doe
-                                    </td>
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        User
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
-                                    <td class="px-2 py-2">
-                                        <div class=" h-6 w-6">
-                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
-                                        </div>
-                                        
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        **********
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        John Doe
-                                    </td>
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        User
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
-                                    <td class="px-2 py-2">
-                                        <div class=" h-6 w-6">
-                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
-                                        </div>
-                                        
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        TUPV-2296
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        **********
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        John Doe
-                                    </td>
-                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                                        College of Automation and Control Engineering
-                                    </th>
-                                    <td class="px-4 py-2">
-                                        User
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a href="#" class="font-normal text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        </div>
-                                        <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

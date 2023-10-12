@@ -79,6 +79,39 @@ if(isset($_POST['updateSubject'])) {
     $stmt->closeCursor();
 }
 
+if(isset($_POST['updateUser'])) {
+    $userid = $_POST['edituserid']; // Assuming you have an input field for department ID
+    $userfname = $_POST['edituserfname'];
+    $usertupvid = $_POST['editusertupvid'];
+    $userdept = $_POST['edituserdept'];
+    $username = $_POST['edituseruname'];
+    $userpass = $_POST['edituserpass'];
+    $usertype = $_POST['editusertype'];
+
+    // Prepare and execute the SQL query to update the department
+    $sql = "UPDATE accounts_tbl SET tupv_id = :editusertupvid, username = :edituseruname, password = :edituserpass, full_name = :edituserfname, department = :edituserdept, type = :editusertype WHERE ID = :edituserid";
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $stmt->bindParam(':edituserid', $userid);
+    $stmt->bindParam(':edituserfname', $userfname);
+    $stmt->bindParam(':editusertupvid', $usertupvid);
+    $stmt->bindParam(':edituserdept', $userdept);
+    $stmt->bindParam(':edituseruname', $username);
+    $stmt->bindParam(':edituserpass', $userpass);
+    $stmt->bindParam(':editusertype', $usertype);
+    
+    if ($stmt->execute()) {
+        // Redirect back to the page where you came from
+        header("Location: ../admin/settings.php");
+        exit();
+    } else {
+        echo "Error updating Subject: " . $stmt->errorInfo()[2];
+    }
+    
+    $stmt->closeCursor();
+}
+
 
 
 $conn = null; // Close the PDO connection
