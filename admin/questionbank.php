@@ -1,5 +1,7 @@
 <?php 
-include '../php/session.php'
+include '../php/conn.php';
+include '../php/session.php';
+Include '../php/TIMEAGO.PHP';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,14 +34,27 @@ include '../php/header.php'
                </li>
             </ul>
          </div>
+            
          <div id="myTabContent">
             <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="lists" role="tabpanel" aria-labelledby="lists-tab">
+               <?php
+                  $sql = "SELECT COUNT(id)`id` FROM questionbank_tbl";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->execute();
+                  $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                  
+                  if ($result) {
+                     $qtyqb = $result['id'];
+                  } else {
+                     $qtyqb = 0; // Handle the case when no rows are returned
+                  }
+               ?>
                <div class="mb-6">
                   <h1 class="leading-tight tracking-tight text-2xl font-bold">Questions List</h1>
-                  <h2 class="text-sm font-medium">Total number of Questions: <span class="text-main">1245</span></h2>
+                  <h2 class="text-sm font-medium">Total number of Questions: <span class="text-main"><?php echo $qtyqb; ?></span></h2>
                </div>
                <div class="relative overflow-x-auto">
-                  <table id="qBankListTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <table id="" class="qBankListTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                            <th scope="col" class="px-4 py-2 font-medium">
@@ -69,62 +84,64 @@ include '../php/header.php'
                         </tr>
                      </thead>
                      <tbody>
+                        <?php 
+                           $sql = "SELECT * FROM questionbank_tbl";
+                           $stmt = $conn->prepare($sql);
+                           $stmt->execute();
+                           $data = $stmt->fetchAll();   
+                           
+                           foreach ($data as $row): 
+                        ?>
                         <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                           <?php 
+                           include "../php/modal.questionbank.php"
+                           ?>
                            <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
-                              <a data-modal-target="small-modal" data-modal-toggle="small-modal" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer" type="button">
+                              <a data-modal-target="question-modal" data-modal-toggle="question-modal" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer question-show" type="button"
+                              data-id="<?php echo $row['ID']; ?>"
+                              data-course="<?php echo $row['Course']; ?>" 
+                              data-year="<?php echo $row['Year']; ?>" 
+                              data-subj="<?php echo $row['Subject']; ?>"
+                              data-term="<?php echo $row['Term']; ?>"
+                              data-sem="<?php echo $row['Semester']; ?>"
+                              data-upby="<?php echo $row['uploadedby']; ?>"
+                              data-dateup="<?php echo $row['time_uploaded']; ?>"
+                              data-question="<?php echo $row['Question']; ?>"
+                              data-a="<?php echo $row['A']; ?>"
+                              data-b="<?php echo $row['B']; ?>"
+                              data-c="<?php echo $row['C']; ?>"
+                              data-d="<?php echo $row['D']; ?>"
+                              data-ans="<?php echo $row['Answer']; ?>">
                                  Question
                               </a>
                            </th>
-                           <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                 <div class="relative w-full max-w-md max-h-full">
-                                    <!-- Modal content -->
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                          <!-- Modal header -->
-                                          <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                                             <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                                                Small modal
-                                             </h3>
-                                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="small-modal">
-                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                </svg>
-                                                <span class="sr-only">Close modal</span>
-                                             </button>
-                                          </div>
-                                          <!-- Modal body -->
-                                          <div class="p-6 space-y-6">
-                                             <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                                             </p>
-                                             <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                                             </p>
-                                          </div>
-                                          <!-- Modal footer -->
-                                          <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                             <button data-modal-hide="small-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                                             <button data-modal-hide="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
-                                          </div>
-                                    </div>
-                                 </div>
-                           </div>
                            <td class="px-4 py-2">
-                              Engineering Economics
+                              <?php echo $row['Subject']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              3rd
+                              <?php echo $row['Year']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              2nd
+                              <?php echo $row['Semester']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              Midterm
+                              <?php echo $row['Term']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              John Doe
+                              <?php echo $row['uploadedby']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
+                              <?php 
+                              $old_date_timestamp = strtotime($row['time_uploaded']);
+                              $date = date('Y/m/d', $old_date_timestamp);
+                              echo $date;
+                              ?>
+                              <span class="block text-xs text-gray-600">
+                                 <?php 
+                                 $time = date('g:i A', $old_date_timestamp);
+                                 echo $time 
+                                 ?>
+                              </span>
                            </td>
                            <td class="px-4 py-2">
                               <div class="inline-block">
@@ -132,6 +149,7 @@ include '../php/header.php'
                               </div>
                            </td>
                         </tr>
+                        <?php endforeach ?>
                      </tbody>
                   </table>
                </div>
@@ -178,39 +196,6 @@ include '../php/header.php'
                                  Question
                               </a>
                            </th>
-                           <div id="small-modal1" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                 <div class="relative w-full max-w-md max-h-full">
-                                    <!-- Modal content -->
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                          <!-- Modal header -->
-                                          <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                                             <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                                                Small modal
-                                             </h3>
-                                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="small-modal">
-                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                </svg>
-                                                <span class="sr-only">Close modal</span>
-                                             </button>
-                                          </div>
-                                          <!-- Modal body -->
-                                          <div class="p-6 space-y-6">
-                                             <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                                             </p>
-                                             <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                                             </p>
-                                          </div>
-                                          <!-- Modal footer -->
-                                          <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                             <button data-modal-hide="small-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                                             <button data-modal-hide="small-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
-                                          </div>
-                                    </div>
-                                 </div>
-                           </div>
                            <td class="px-4 py-2">
                               Engineering Economics
                            </td>
@@ -244,24 +229,14 @@ include '../php/header.php'
                   </table>
                </div>   
             </div>
+
          </div>
+
+         
       </div>
    </div>
 </div>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
-<script>
-$(document).ready( function () {
-   $('#qBankListTable').DataTable({
-      "ordering": false,
-      "lengthChange": false,
-      "info": false
-   });
-   $('#qBankPendingTable').DataTable({
-      "ordering": false,
-      "lengthChange": false,
-      "info": false
-   });
-} );
-</script>
+<script src="../src/js/questionbank.js"></script>
 <script src="../src/js/jquery.dataTables.js"></script>
 </body>

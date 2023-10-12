@@ -28,18 +28,18 @@ include '../php/header.php'
                     <button class="inline-block p-4 border-b-2 rounded-t-lg aria-selected:border-main aria-selected:text-main" id="list-tab" data-tabs-target="#list" type="button" role="tab" aria-controls="list" aria-selected="false">Syllabus List</button>
                </li>
 
-               <?php
-               $sql = "SELECT COUNT(ID)`ID` FROM syllabuschecker_tbl";
-                  $stmt = $conn->prepare($sql);
-                  $stmt->execute();
-                  $result = $stmt->fetch(); // Use fetch instead of fetchAll
-                  
-                  if ($result) {
-                      $qty25 = $result['ID'];
-                  } else {
-                      $qty25 = 0; // Handle the case when no rows are returned
-                  }
-                  ?>
+                <?php
+                $sql = "SELECT COUNT(ID)`ID` FROM syllabuschecker_tbl";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                
+                if ($result) {
+                    $qty25 = $result['ID'];
+                } else {
+                    $qty25 = 0; // Handle the case when no rows are returned
+                }
+                ?>
                <li class="mr-2" role="presentation">
                     <button class="relative inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 aria-selected:border-main aria-selected:text-main" id="pending-tab" data-tabs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">
                     Pending

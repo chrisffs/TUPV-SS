@@ -34,7 +34,9 @@ $(document).ready( function () {
 
 
     // FOR COURSE EDIT 
-    $(".edit-course").click(function () {
+    // $(".edit-course").click(function () {
+    // Use event delegation to open the edit modal
+    $('.settingsTable').on('click', '.edit-course', function() {
         var courseId = $(this).data("id");
         var courseName = $(this).data("crsname");
         var courseAcronym = $(this).data("acronym");
@@ -47,6 +49,7 @@ $(document).ready( function () {
         $("#editcrsdept").val(courseDept);
         // Show the edit modal
         $("#editCourses-modal").removeClass("hidden");
+        $("#editCourses-modal").addClass("flex");
     });
 
     // FOR SUBJECT EDIT

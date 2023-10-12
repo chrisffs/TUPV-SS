@@ -219,6 +219,7 @@
 
 <!-- MODAL FOR EDIT DEPARTMENT -->
 <div id="editDepartment-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -259,8 +260,10 @@
 
 <!-- MODAL FOR EDIT COURSE -->
 <div id="editCourses-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
+        <div class="fixed inset-0  bg-gray-700 opacity-75 "></div>
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between py-5 mx-5 border-b rounded-t dark:border-gray-600">

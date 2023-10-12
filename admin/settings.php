@@ -66,7 +66,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Departments <span class="text-main">(<?php echo $qty; ?>)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addDepartment-modal" data-modal-toggle="addDepartment-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a type="button" data-modal-target="addDepartment-modal" data-modal-toggle="addDepartment-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer">
                                     + Add new Department
                                 </a>
                             </div>
@@ -148,7 +148,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Courses <span class="text-main">(<?php echo $qtys; ?>)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a type="button" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer">
                                     + Add new Course
                                 </a>
                             </div>
@@ -184,7 +184,7 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" data-modal-target="editCourses-modal" data-modal-toggle="editCourses-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-course" 
+                                            <a type="button" data-modal-target="editCourses-modal" data-modal-toggle="editCourses-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-course" 
                                             data-id="<?php echo $row['id']; ?>" 
                                             data-crsname="<?php echo $row['courseName']; ?>" 
                                             data-acronym="<?php echo $row['acro']; ?>"
@@ -233,7 +233,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Subjects <span class="text-main">(<?php echo $qty2; ?>)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addSubject-modal" data-modal-toggle="addSubject-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a type="button" data-modal-target="addSubject-modal" data-modal-toggle="addSubject-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" >
                                     + Add new Subject
                                 </a>
                             </div>
@@ -269,7 +269,7 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" data-modal-target="editSubject-modal" data-modal-toggle="editSubject-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-subject" 
+                                            <a type="button" data-modal-target="editSubject-modal" data-modal-toggle="editSubject-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-subject" 
                                             data-id="<?php echo $row['id']; ?>" 
                                             data-sbjname="<?php echo $row['subjectName']; ?>" 
                                             data-sbjcode="<?php echo $row['subjCode']; ?>">
@@ -293,7 +293,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">School Year</h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a type="button" data-modal-target="addCourse-modal" data-modal-toggle="addCourse-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer">
                                     Update
                                 </a>
                             </div>
@@ -343,7 +343,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Users <span class="text-main">(<?php echo $qty3; ?>)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addUser-modal" data-modal-toggle="addUser-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a type="button" data-modal-target="addUser-modal" data-modal-toggle="addUser-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer">
                                     + Add new User
                                 </a>
                                 
@@ -407,7 +407,7 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
+                                            <a type="button" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
                                             data-id="<?php echo $row['ID']; ?>"
                                             data-tupvid="<?php echo $row['tupv_id']; ?>" 
                                             data-username="<?php echo $row['username']; ?>" 
@@ -433,7 +433,7 @@ include '../php/header.php'
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Admin <span class="text-main">(2)</span></h1>
                             </div>
                             <div>
-                                <a href="#" data-modal-target="addUser-modal" data-modal-toggle="addUser-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer" type="button">
+                                <a type="button" data-modal-target="addUser-modal" data-modal-toggle="addUser-modal" class="text-main text-sm dark:text-red-500 hover:underline cursor-pointer">
                                     + Add new Admin
                                 </a>
                             </div>
@@ -495,7 +495,7 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block mr-2">
-                                            <a href="#" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
+                                            <a type="button" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
                                             data-id="<?php echo $row['ID']; ?>"
                                             data-tupvid="<?php echo $row['tupv_id']; ?>" 
                                             data-username="<?php echo $row['username']; ?>" 
