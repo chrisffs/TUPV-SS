@@ -68,7 +68,7 @@ include '../php/header.php'
          <div class="col-span-2 flex items-center bg-light p-6 border border-light-200 rounded-lg">
             <div class="bg-light-100 p-4 text-center rounded-lg me-6">
                <h1 class="font-bold text-main text-3xl">24</h1>
-               <h3 class="text-dark text-sm text-secondary">September</h3>
+               <h3 class="text-sm text-secondary">September</h3>
             </div>
             <div>
                <h3 class="text-sm text-secondary">Upcoming Events</h3>
