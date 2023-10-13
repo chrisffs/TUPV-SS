@@ -60,7 +60,19 @@ include '../php/header.php'
                </svg>
             </div>
             <div>
-               <h1 class="text-2xl font-bold text-dark">1024</h1>
+            <?php
+               $sql = "SELECT COUNT(ID)`id` FROM questionbank_tbl";
+               $stmt = $conn->prepare($sql);
+               $stmt->execute();
+               $result = $stmt->fetch(); // Use fetch instead of fetchAll
+
+               if ($result) {
+                  $qtyqb = $result['id'];
+               } else {
+                  $qtyqb = 0; // Handle the case when no rows are returned
+               }
+               ?>
+               <h1 class="text-2xl font-bold text-dark"><?php echo $qtyqb;?></h1>
                <h3 class="text-sm text-secondary">Questions Made</h3>
             </div>
          </div>

@@ -18,7 +18,8 @@ if(isset($_POST['insertdpt']))
     
     // Execute the query
     if ($stmt->execute()) {
-        $_SESSION['department_added'] = true;
+        $_SESSION['settingsinsert_message'] = $dptn . "(". $acr .")" . " has Added Successfully";
+        $_SESSION['settingsinsert_messagecolor'] = "green";
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
@@ -42,7 +43,8 @@ if(isset($_POST['insertcourse']))
     
     // Execute the query
     if ($stmt->execute()) {
-        $_SESSION['course_added'] = true;
+        $_SESSION['settingsinsert_message'] = $cn . "(". $ac1 .")" . " has Added Successfully";
+        $_SESSION['settingsinsert_messagecolor'] = "green";
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
@@ -64,7 +66,8 @@ if(isset($_POST['insertsubject']))
     
     // Execute the query
     if ($stmt->execute()) {
-        $_SESSION['subject_added'] = true;
+        $_SESSION['settingsinsert_message'] = $sn . "(". $sc .")" . " has Added Successfully";
+        $_SESSION['settingsinsert_messagecolor'] = "green";
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
@@ -94,7 +97,8 @@ if(isset($_POST['insertuser']))
     
     // Execute the query
     if ($stmt->execute()) {
-        $_SESSION['user_added'] = true;
+        $_SESSION['settingsinsert_message'] = $ufn . " has Added Successfully";
+        $_SESSION['settingsinsert_messagecolor'] = "green";
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
@@ -245,7 +249,6 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
 }
 
 
-
-
+//ADDING FILE
 
 ?>

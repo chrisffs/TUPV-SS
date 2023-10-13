@@ -10,22 +10,40 @@ if(isset($_POST['insertfile'])) {
 if ($_FILES["file"]["error"] !== UPLOAD_ERR_OK) {
     switch ($_FILES["file"]["error"]) {
         case UPLOAD_ERR_PARTIAL;
-            exit("File only partially uploaded");
+            $_SESSION['uploadfile_message'] = "File only partially uploaded";
+            header('location: ../admin/syllabus.php');
+            $_SESSION['uploadfile_messagecolor'] = "red";
+            exit();
             break;
         case UPLOAD_ERR_NO_FILE:
-            exit("No file was uploaded");
+            $_SESSION['uploadfile_message'] = "No file was uploaded";
+            header('location: ../admin/syllabus.php');
+            $_SESSION['uploadfile_messagecolor'] = "red";
+            exit();
             break;
         case UPLOAD_ERR_EXTENSION:
-            exit("File upload stopped by a PHP Extension");
+            $_SESSION['uploadfile_message'] = "File upload stopped by a PHP Extension";
+            header('location: ../admin/syllabus.php');
+            $_SESSION['uploadfile_messagecolor'] = "red";
+            exit();
             break;
         case UPLOAD_ERR_NO_TMP_DIR:
-            exit("Temporary folder not found");
+            $_SESSION['uploadfile_message'] = "Temporary folder not found";
+            header('location: ../admin/syllabus.php');
+            $_SESSION['uploadfile_messagecolor'] = "red";
+            exit();
             break;
         case UPLOAD_ERR_CANT_WRITE:
-            exit("Failed to write file");
+            $_SESSION['uploadfile_message'] = "Failed to write file";
+            header('location: ../admin/syllabus.php');
+            $_SESSION['uploadfile_messagecolor'] = "red";
+            exit();
             break;
         default:
-            exit("Unknown upload error");
+            $_SESSION['uploadfile_message'] = "Unknown upload error";
+            header('location: ../admin/syllabus.php');
+            $_SESSION['uploadfile_messagecolor'] = "red";
+            exit();
             break;
     }
 }
@@ -40,10 +58,19 @@ if ($_FILES["file"]["error"] !== UPLOAD_ERR_OK) {
 $mime_types = ["application/pdf", "application/vnd.openxmlformats-officedocument.presentationml.presentation"];
 // Verifying if the file is in pdf, docx, ppt
 if (! in_array($_FILES["file"]["type"], $mime_types)) {
-    // exit("Invalid file type");
     
-    $_SESSION['invalid_filetype'] = true;
+    $_SESSION['uploadfile_message'] = "Invalid file type";
+    $_SESSION['uploadfile_messagecolor'] = "red";
     header('location: ../admin/syllabus.php');
+    exit();
+}
+
+// For Maximum file size
+if ($_FILES["file"]["size"] > 10485760) {
+    $_SESSION['uploadfile_message'] = "File exceeds max(10MB)";
+    $_SESSION['uploadfile_messagecolor'] = "red";
+    header('location: ../admin/syllabus.php');
+    exit();
 }
 
 $pathinfo = pathinfo($_FILES["file"]["name"]);
@@ -64,29 +91,46 @@ while (file_exists($destination)) {
     $i++;
 }
 if (! move_uploaded_file($_FILES["file"]["tmp_name"], $destination)) {
-    exit("Can't move uploaded file");
+    $_SESSION['uploadfile_message'] = "Can't move uploaded file";
+    $_SESSION['uploadfile_messagecolor'] = "red";
+    header('location: ../admin/syllabus.php');
+    exit();
 }
-
-// For Maximum file size
-if ($_FILES["file"]["size"] > 10485760) {
-    exit("File exceeds max(10MB)");
-}
-
-    $dept = $_POST['department'];
-    $course = $_POST['course'];
-    $year = $_POST['year'];
-    $semester = $_POST['semester'];
-    $term = $_POST['term'];
-    $subject = $_POST['subject'];
-    $subject_code = $_POST['subject_code'];
-    $week_no = $_POST['week_no'];
-    $uploadedBy = $_SESSION['full_name'];
+    $fileyear = $_POST['fileYear'];
+    $fileterm = $_POST['fileTerm'];
+    $filesubject = $_POST['fileSubject'];
+    $subjectcode = $_POST['subjectCode'];
+    $uploadedBy = $_SESSION['full_name']."(".$_SESSION['type'].")";
     $fname = $filename;
-    $fileloc = realpath("../db/uploaded_files/" . $filename);
-    $date_uploaded = $d = date("Y-m-d");
+    $fileloc = realpath("../files/syllabusfiles/" . $filename);
+    $date_uploaded = $d = date("Y-m-d H:i:s");
+    
+    // Prepare the SQL statement
+    $sql = "INSERT INTO syllabus_tbl (NAMEUPLOAD, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC) VALUES (:uploadername, :subject, :subject_code, :term, :year, :filename, :filelocation)";
 
-
-//     $query = "INSERT INTO syllabusdb (DEPT, COURSE, YEAR, SEMESTER, TERM, SUBJECT_NAME, SUBJECT_CODE, WEEK_NO, UB, FILENAME, FILELOC, DATE_UPLOADED ) VALUES ('$dept', '$course', ' $year', '$semester', '$term', '$subject', '$subject_code' , '$week_no', '$uploadedBy', '$fname', '$fileloc', '$date_uploaded')";
+    $stmt = $conn->prepare($sql);
+    
+    // Bind parameters
+    $stmt->bindParam(':uploadername', $uploadedBy);
+    $stmt->bindParam(':subject', $filesubject);
+    $stmt->bindParam(':subject_code', $subjectcode);
+    $stmt->bindParam(':term', $fileterm);
+    $stmt->bindParam(':year', $fileyear);
+    $stmt->bindParam(':filename', $fname);
+    $stmt->bindParam(':filelocation', $fileloc);
+    // $stmt->bindParam(':dateuploaded', $date_uploaded);
+    
+    // Execute the query
+    if ($stmt->execute()) {
+        $_SESSION['uploadfile_message'] = "File upload Success";
+        $_SESSION['uploadfile_messagecolor'] = "green";
+        header('location: ../admin/syllabus.php');
+    } else {
+        $_SESSION['uploadfile_message'] = "File upload Failed";
+        $_SESSION['uploadfile_messagecolor'] = "red";
+        header('location: ../admin/syllabus.php');
+        exit();
+    }
 
 //     $query_run = mysqli_query($conn, $query);
 //     if($query_run) { 
@@ -100,7 +144,7 @@ if ($_FILES["file"]["size"] > 10485760) {
 //         exit(0); 
 //     }
 
-
+header('location: ../admin/syllabus.php');
 }
 // print_r($_FILES);
 ?>

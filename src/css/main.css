@@ -1454,16 +1454,20 @@ html {
   width: 100% !important;
 }
 
+.w-12 {
+  width: 3rem !important;
+}
+
 .min-w-0 {
   min-width: 0px !important;
 }
 
-.max-w-md {
-  max-width: 28rem !important;
-}
-
 .max-w-lg {
   max-width: 32rem !important;
+}
+
+.max-w-md {
+  max-width: 28rem !important;
 }
 
 .flex-1 {
@@ -1777,6 +1781,11 @@ html {
   border-color: rgb(217 217 217 / var(--tw-border-opacity)) !important;
 }
 
+.border-red-300 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(248 180 180 / var(--tw-border-opacity)) !important;
+}
+
 .border-transparent {
   border-color: transparent !important;
 }
@@ -1846,6 +1855,11 @@ html {
   background-color: rgb(251 213 213 / var(--tw-bg-opacity)) !important;
 }
 
+.bg-red-50 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(253 242 242 / var(--tw-bg-opacity)) !important;
+}
+
 .bg-red-700 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(200 30 30 / var(--tw-bg-opacity)) !important;
@@ -1902,12 +1916,12 @@ html {
   padding: 1rem !important;
 }
 
-.p-6 {
-  padding: 1.5rem !important;
-}
-
 .p-5 {
   padding: 1.25rem !important;
+}
+
+.p-6 {
+  padding: 1.5rem !important;
 }
 
 .px-2 {
@@ -2298,6 +2312,11 @@ html {
   background-color: rgb(217 217 217 / var(--tw-bg-opacity)) !important;
 }
 
+.hover\:bg-red-200:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(251 213 213 / var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-red-800:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(155 28 28 / var(--tw-bg-opacity)) !important;
@@ -2410,6 +2429,11 @@ html {
   --tw-ring-color: rgb(248 180 180 / var(--tw-ring-opacity)) !important;
 }
 
+.focus\:ring-red-400:focus {
+  --tw-ring-opacity: 1 !important;
+  --tw-ring-color: rgb(249 128 128 / var(--tw-ring-opacity)) !important;
+}
+
 .group\/main:hover .group-hover\/main\:visible {
   visibility: visible !important;
 }
@@ -2462,6 +2486,11 @@ html {
 :is(.dark .dark\:border-green-800) {
   --tw-border-opacity: 1 !important;
   border-color: rgb(3 84 63 / var(--tw-border-opacity)) !important;
+}
+
+:is(.dark .dark\:border-red-800) {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(155 28 28 / var(--tw-border-opacity)) !important;
 }
 
 :is(.dark .dark\:border-transparent) {
@@ -2546,6 +2575,11 @@ html {
   color: rgb(248 180 180 / var(--tw-text-opacity)) !important;
 }
 
+:is(.dark .dark\:text-red-400) {
+  --tw-text-opacity: 1 !important;
+  color: rgb(249 128 128 / var(--tw-text-opacity)) !important;
+}
+
 :is(.dark .dark\:text-red-500) {
   --tw-text-opacity: 1 !important;
   color: rgb(240 82 82 / var(--tw-text-opacity)) !important;
@@ -2621,6 +2655,11 @@ html {
   --tw-ring-color: rgb(63 131 248 / var(--tw-ring-opacity)) !important;
 }
 
+:is(.dark .dark\:focus\:ring-blue-800:focus) {
+  --tw-ring-opacity: 1 !important;
+  --tw-ring-color: rgb(30 66 159 / var(--tw-ring-opacity)) !important;
+}
+
 :is(.dark .dark\:focus\:ring-gray-600:focus) {
   --tw-ring-opacity: 1 !important;
   --tw-ring-color: rgb(75 85 99 / var(--tw-ring-opacity)) !important;
@@ -2629,16 +2668,6 @@ html {
 :is(.dark .dark\:focus\:ring-red-800:focus) {
   --tw-ring-opacity: 1 !important;
   --tw-ring-color: rgb(155 28 28 / var(--tw-ring-opacity)) !important;
-}
-
-:is(.dark .dark\:focus\:ring-red-900:focus) {
-  --tw-ring-opacity: 1 !important;
-  --tw-ring-color: rgb(119 29 29 / var(--tw-ring-opacity)) !important;
-}
-
-:is(.dark .dark\:focus\:ring-blue-800:focus) {
-  --tw-ring-opacity: 1 !important;
-  --tw-ring-color: rgb(30 66 159 / var(--tw-ring-opacity)) !important;
 }
 
 @media (min-width: 640px) {
@@ -2671,12 +2700,12 @@ html {
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
   }
 
-  .sm\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  }
-
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   }
 }
 

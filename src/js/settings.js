@@ -14,7 +14,7 @@ $(document).ready( function () {
 
 
     setTimeout(function() {
-        $(".success").addClass("hidden"); // Add the 'hidden' class to hide the element
+        $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
     }, 3000);
 
     // FOR DEPARTMENT EDIT

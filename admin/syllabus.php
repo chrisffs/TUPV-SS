@@ -20,7 +20,6 @@ $page = 'syllabus';
 include '../php/header.php' 
 ?>
 <div class="p-2 sm:ml-64 relative">
-    
    <div class="p-4 mt-14">
    <?php 
     include "../php/success.insert.syllabus.php"
@@ -122,9 +121,10 @@ include '../php/header.php'
                                         $data = $stmt->fetchAll();     
                                     ?>
                                     <?php foreach ($data as $row): ?>
-                                         <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
-                                            <a class="text-main hover:underline hover:underline-offset-4" href="../files/ECON-Learning-Content.pdf" target="_blank">ECON-Learning-Content.pdf</a>
+                                    <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row" class="px-4 py-2 font-medium dark:text-white">
+                                            <a class="text-main hover:underline hover:underline-offset-4" href="../files/syllabusfiles/<?php echo $row['FILES']; ?>" target="_blank"><?php echo $row['FILES']; ?></a>
+                                            
                                         </th>
                                         <td class="px-4 py-2">
                                         <?php echo $row['SUBJECTS']; ?>
@@ -291,14 +291,18 @@ include '../php/header.php'
         $('.syllabusTable').DataTable({
         "ordering": false,
         "lengthChange": false,
-        "info": false
+        "info": false,
+        // columnDefs: [ {
+        //     targets: 0,
+        //     render: DataTable.render.ellipsis( 40, true )
+        // } ]
         });
 
-        $('#subject').change(function () {
+        $('#fileSubject').change(function () {
             const selectedSubject = $(this).val();
             const subjectCodeDropdown = $('#subjectCode');
 
-            subjectCodeDropdown.html('<option selected disabled hidden value="">Loading...</option>');
+            // subjectCodeDropdown.html('<option selected disabled hidden value="">Loading...</option>');
 
             // Convert the PHP subject data to a JavaScript object
             const subjectCodeData = <?php echo json_encode($subjects); ?>;
@@ -306,16 +310,16 @@ include '../php/header.php'
             const selectedSubjectCode = subjectCodeData.find(subject => subject.subjectName === selectedSubject);
 
             if (selectedSubjectCode) {
-                subjectCodeDropdown.html('');
-                subjectCodeDropdown.append($('<option>', {
-                    value: selectedSubjectCode.subjCode,
-                    text: selectedSubjectCode.subjCode
-                }));
+                subjectCodeDropdown.val(selectedSubjectCode.subjCode);
             } else {
-                subjectCodeDropdown.html('<option selected disabled hidden value="">No subject code found</option>');
+                subjectCodeDropdown.val('No subject code found');
             }
         });
+        setTimeout(function() {
+        $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
+        }, 3000);
     });
 </script>
 <script src="../src/js/jquery.dataTables.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.13.6/dataRender/ellipsis.js"></script>
 </body>

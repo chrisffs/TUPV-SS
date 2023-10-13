@@ -21,47 +21,48 @@
             <!-- Modal body -->
             <div class="p-6 space-y-6">
                 <form id="uploadFileForm" method="post" action="../php/fileupload.admin.syllabus.php" enctype="multipart/form-data">
-                    <div class="grid gap-2 sm:grid-cols-2 content-end">
+                    <div class="grid gap-2 sm:grid-cols-4 content-end">
                         <div class="sm:col-span-2">
-                            <label for="" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
-                            <select id="fileterm" name= "fileterm" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <label for="fileYear" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
+                            <select id="fileYear" name= "fileYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                 <option selected disabled hidden value="">Choose Year</option>
-                                <option value="1st Year">1st Year</option>
-                                <option value="2nd Year">2nd Year</option>
-                                <option value="3rd Year">3rd Year</option>
-                                <option value="4th Year">4th Year</option>
+                                <option value="1st">1st</option>
+                                <option value="2nd">2nd</option>
+                                <option value="3rd">3rd</option>
+                                <option value="4th">4th</option>
                             </select>
                         </div>
                         <div class="sm:col-span-2">
-                            <label for="" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Term</label>
-                            <select id="fileterm" name= "fileterm" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <label for="fileTerm" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Term</label>
+                            <select id="fileTerm" name= "fileTerm" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                 <option selected disabled hidden value="">Choose Term</option>
                                 <option value="Prelim">Prelim</option>
                                 <option value="Midterm">Midterm</option>
                                 <option value="Endterm">Endterm</option>
                             </select>
                         </div>
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-3">
                             <?php
                                 $sql = "SELECT * FROM subject_tbl";
                                 $stmt = $conn->prepare($sql);
                                 $stmt->execute();
                                 $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             ?>
-                            <label for="subject" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject</label>
-                            <select id="subject" name="subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <label for="fileSubject" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject</label>
+                            <select id="fileSubject" name="fileSubject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                 <option selected disabled hidden value="">Choose the Subject</option>
                                 <?php foreach ($subjects as $row): ?>
                                     <option value="<?php echo $row['subjectName']; ?>"><?php echo $row['subjectName']; ?></option>
                                 <?php endforeach; ?>
                             </select>   
-
-                            <label for="subjectCode" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject Code</label>
-                            <select id="subjectCode" disabled name="subjectCode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                                <option selected disabled hidden value="">Select a Subject first</option>
-                            </select>
                         </div>
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-1">
+                            <label for="subjectCode" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject Code</label>
+                            <input type="text" id="subjectCode" name="subjectCode" readonly class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                <!-- <option selected disabled hidden value="">Select a Subject first</option>
+                            </input> -->
+                        </div>
+                        <div class="sm:col-span-4">
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload File</label>
                             <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" name="file" required>
                         </div>
@@ -73,7 +74,6 @@
                 <button form="uploadFileForm" type="submit" value="Submit" name="insertfile" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">Submit</button>
 
                 <button data-modal-hide="uploadFileSyllabus-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
-                
             </div>
         </div>
     </div>
