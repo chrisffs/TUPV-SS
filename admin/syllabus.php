@@ -20,7 +20,11 @@ $page = 'syllabus';
 include '../php/header.php' 
 ?>
 <div class="p-2 sm:ml-64 relative">
+    
    <div class="p-4 mt-14">
+   <?php 
+    include "../php/success.insert.syllabus.php"
+    ?>
       <div class="bg-light border border-light-200 rounded-lg h-full px-4 pb-4 pt-2">
         <div class="border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
@@ -289,7 +293,29 @@ include '../php/header.php'
         "lengthChange": false,
         "info": false
         });
-    } );
+
+        $('#subject').change(function () {
+            const selectedSubject = $(this).val();
+            const subjectCodeDropdown = $('#subjectCode');
+
+            subjectCodeDropdown.html('<option selected disabled hidden value="">Loading...</option>');
+
+            // Convert the PHP subject data to a JavaScript object
+            const subjectCodeData = <?php echo json_encode($subjects); ?>;
+
+            const selectedSubjectCode = subjectCodeData.find(subject => subject.subjectName === selectedSubject);
+
+            if (selectedSubjectCode) {
+                subjectCodeDropdown.html('');
+                subjectCodeDropdown.append($('<option>', {
+                    value: selectedSubjectCode.subjCode,
+                    text: selectedSubjectCode.subjCode
+                }));
+            } else {
+                subjectCodeDropdown.html('<option selected disabled hidden value="">No subject code found</option>');
+            }
+        });
+    });
 </script>
 <script src="../src/js/jquery.dataTables.js"></script>
 </body>
