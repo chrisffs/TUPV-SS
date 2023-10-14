@@ -9,7 +9,7 @@ $(document).ready( function () {
     "ordering": false,
     "lengthChange": false,
     "info": false,
-    "paging": false,
+    // "paging": false,
     });
 
 
@@ -18,7 +18,8 @@ $(document).ready( function () {
     }, 3000);
 
     // FOR DEPARTMENT EDIT
-    $(".edit-department").click(function () {
+    // $(".edit-department").click(function () {
+    $('.settingsTable').on('click', '.edit-department', function() {
         var departmentId = $(this).data("id");
         var departmentName = $(this).data("dptname");
         var departmentAcronym = $(this).data("acronym");
@@ -30,6 +31,7 @@ $(document).ready( function () {
 
         // Show the edit modal
         $("#editDepartment-modal").removeClass("hidden");
+        // $("#editDepartment-modal").addClass("flex");
     });
 
 
@@ -49,11 +51,12 @@ $(document).ready( function () {
         $("#editcrsdept").val(courseDept);
         // Show the edit modal
         $("#editCourses-modal").removeClass("hidden");
-        $("#editCourses-modal").addClass("flex");
+        // $("#editCourses-modal").addClass("flex");
     });
 
     // FOR SUBJECT EDIT
-    $(".edit-subject").click(function () {
+    // $(".edit-subject").click(function () {
+    $('.settingsTable').on('click', '.edit-subject', function() {
         var subjectId = $(this).data("id");
         var subjectName = $(this).data("sbjname");
         var subjectCode = $(this).data("sbjcode");
@@ -69,6 +72,7 @@ $(document).ready( function () {
 
     $(".edit-user").click(function () {
         var userId = $(this).data("id");
+        var userPic = $(this).data("userpic");
         var userTupvId = $(this).data("tupvid");
         var userName = $(this).data("username");
         var userPass = $(this).data("userpass");
@@ -78,13 +82,15 @@ $(document).ready( function () {
 
         // Populate the modal fields with the data
         $("#edituserid").val(userId);
+        $("#user-profilepic").attr("src", "../files/userpics/" + userPic);
+        $("#userprofilepic").val(userPic);
         $("#editusertupvid").val(userTupvId);
         $("#edituseruname").val(userName);
         $("#edituserpass").val(userPass);
         $("#edituserfname").val(userFname);
         $("#edituserdept").val(userDept);
         $("#editusertype").val(userType);
-
+        
         // Show the edit modal
         $("#editUser-modal").removeClass("hidden");
     });

@@ -76,6 +76,130 @@ if(isset($_POST['insertsubject']))
 
 if(isset($_POST['insertuser']))
 {
+    if ($_FILES["user_pic"]["error"] === UPLOAD_ERR_NO_FILE) {
+        // No file was uploaded; use the default file
+        $filename = "default.jpg"; // Set the default filename
+        $userpic = $filename;
+        $userpicloc = realpath("../files/userpics/" . $filename);
+        $ufn = $_POST['userFullName'];
+        $utupvid = $_POST['userTupvId'];
+        $udept = $_POST['userDept'];
+        $uun = $_POST['userUName'];
+        $upass = $_POST['userPass'];
+        $utype = $_POST['usertype'];
+
+        // Prepare the SQL statement
+        $sql = "INSERT INTO accounts_tbl (tupv_id, username, password, full_name, department, type, user_picture, userpic_fileloc) VALUES (:tupvid, :username, :password, :fullname, :department, :type, :picture, :piclocation)";
+        $stmt = $conn->prepare($sql);
+        
+        // Bind parameters
+        $stmt->bindParam(':tupvid', $utupvid);
+        $stmt->bindParam(':username', $uun);
+        $stmt->bindParam(':password', $upass);
+        $stmt->bindParam(':fullname', $ufn);
+        $stmt->bindParam(':department', $udept);
+        $stmt->bindParam(':type', $utype);
+        $stmt->bindParam(':picture', $userpic);
+        $stmt->bindParam(':piclocation', $userpicloc);
+        
+        // Execute the query
+        if ($stmt->execute()) {
+            $_SESSION['settingsinsert_message'] = $ufn . "(". $utype .")"." has Added Successfully";
+            $_SESSION['settingsinsert_messagecolor'] = "green";
+            header("Location: ../ADMIN/settings.php");
+        } else {
+            echo '<script> alert("Data Not Saved"); </script>';
+        }
+    } elseif ($_FILES["user_pic"]["error"] !== UPLOAD_ERR_OK) {
+        // Handle other file upload errors
+        switch ($_FILES["user_pic"]["error"]) {
+            case UPLOAD_ERR_PARTIAL:
+                $_SESSION['settingsinsert_message'] = "File only partially uploaded";
+                header('location: ../admin/settings.php');
+                $_SESSION['settingsinsert_messagecolor'] = "red";
+                exit();
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                $_SESSION['settingsinsert_message'] = "File upload stopped by a PHP Extension";
+                header('location: ../admin/settings.php');
+                $_SESSION['settingsinsert_messagecolor'] = "red";
+                exit();
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                $_SESSION['settingsinsert_message'] = "Temporary folder not found";
+                header('location: ../admin/settings.php');
+                $_SESSION['settingsinsert_messagecolor'] = "red";
+                exit();
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                $_SESSION['settingsinsert_message'] = "Failed to write file";
+                header('location: ../admin/settings.php');
+                $_SESSION['settingsinsert_messagecolor'] = "red";
+                exit();
+                break;
+            default:
+                $_SESSION['settingsinsert_message'] = "Unknown upload error";
+                header('location: ../admin/settings.php');
+                $_SESSION['settingsinsert_messagecolor'] = "red";
+                exit();
+                break;
+        }
+    } else {
+    // checking the file info
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mime_type = $finfo->file($_FILES["user_pic"]["tmp_name"]);
+
+    // exit($mime_type); 
+    $mime_types = [
+    'image/jpeg',  // JPEG images
+    'image/png',   // PNG images
+    'image/gif',   // GIF images
+    'image/bmp',   // BMP images
+    'image/webp',  // WebP images
+    'image/svg+xml',  // SVG images
+    // Add more MIME types as needed
+    ];
+
+    if (! in_array($_FILES["user_pic"]["type"], $mime_types)) {
+        $_SESSION['settingsinsert_message'] = "Invalid file type";
+        $_SESSION['settingsinsert_messagecolor'] = "red";
+        header('location: ../admin/settings.php');
+        exit();
+    }
+    // For Maximum file size
+    if ($_FILES["user_pic"]["size"] > 10485670) {
+        $_SESSION['settingsinsert_message'] = "File exceeds max(10MB)";
+        $_SESSION['settingsinsert_messagecolor'] = "red";
+        header('location: ../admin/settings.php');
+        exit();
+    }
+
+    $pathinfo = pathinfo($_FILES["user_pic"]["name"]);
+    $base = $pathinfo["filename"];
+    $base = preg_replace("/[^\w-]/", "_", $base);
+    $filename = $base . "." . $pathinfo["extension"];
+    
+    // Transfering file to a folder
+    $filename = $_FILES["user_pic"]["name"];
+    $destination = __DIR__ . "/../files/userpics/" . $filename;
+
+    $i = 1;
+
+    while (file_exists($destination)) {
+        $filename = $base . "($i)." . $pathinfo["extension"];
+        $destination = __DIR__ . "/../files/userpics/" . $filename;
+        $i++;
+    }
+
+    if (! move_uploaded_file($_FILES["user_pic"]["tmp_name"], $destination)) {
+        $_SESSION['settingsinsert_message'] = "Can't move uploaded file";
+        $_SESSION['settingsinsert_messagecolor'] = "red";
+        header('location: ../admin/settings.php');
+        exit();
+    }
+
+    $userpic = $filename;
+    $userpicloc = realpath("../files/userpics/" . $filename);
     $ufn = $_POST['userFullName'];
     $utupvid = $_POST['userTupvId'];
     $udept = $_POST['userDept'];
@@ -84,7 +208,7 @@ if(isset($_POST['insertuser']))
     $utype = $_POST['usertype'];
 
     // Prepare the SQL statement
-    $sql = "INSERT INTO accounts_tbl (tupv_id, username, password, full_name, department, type) VALUES (:tupvid, :username, :password, :fullname, :department, :type)";
+    $sql = "INSERT INTO accounts_tbl (tupv_id, username, password, full_name, department, type, user_picture, userpic_fileloc) VALUES (:tupvid, :username, :password, :fullname, :department, :type, :picture, :piclocation)";
     $stmt = $conn->prepare($sql);
     
     // Bind parameters
@@ -94,14 +218,17 @@ if(isset($_POST['insertuser']))
     $stmt->bindParam(':fullname', $ufn);
     $stmt->bindParam(':department', $udept);
     $stmt->bindParam(':type', $utype);
+    $stmt->bindParam(':picture', $userpic);
+    $stmt->bindParam(':piclocation', $userpicloc);
     
     // Execute the query
     if ($stmt->execute()) {
-        $_SESSION['settingsinsert_message'] = $ufn . " has Added Successfully";
+        $_SESSION['settingsinsert_message'] = $ufn . "(". $utype .")"." has Added Successfully";
         $_SESSION['settingsinsert_messagecolor'] = "green";
         header("Location: ../ADMIN/settings.php");
     } else {
         echo '<script> alert("Data Not Saved"); </script>';
+    }
     }
 }
 

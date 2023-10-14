@@ -7,8 +7,9 @@ include '../php/conn.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/img/tupvlogo.png">
     <link rel="stylesheet" href="../src/css/main.css">
-    <title>Document</title>
+    <title>Settings | TUPV Syllabus System</title>
     <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -40,7 +41,7 @@ include '../php/header.php'
                 </ul>
             </div>
             <div id="myTabContent">
-                <!-- ACCOUNT SETTINGS STARTS HERE -->
+                <!-- SYSTEM SETTINGS STARTS HERE -->
                 <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="campussettings" role="tabpanel" aria-labelledby="campussettings-tab">
                     <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
@@ -75,7 +76,7 @@ include '../php/header.php'
                         
                         <!-- ================= DEPARTMENT ======================== -->
                         <!-- table for department -->
-                        <table id="settingsTable" class=" pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table id="" class="settingsTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                          
                             <tr>
@@ -318,13 +319,13 @@ include '../php/header.php'
                 <!-- USER SETTINGS STARTS HERE -->   
                 <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="usersettings" role="tabpanel" aria-labelledby="usersettings-tab">
                     <?php 
-                        $sql = "SELECT * FROM accounts_tbl WHERE type = 'user'";
+                        $sql = "SELECT * FROM accounts_tbl";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $data = $stmt->fetchAll();
                         
                         // Users Count
-                        $sql = "SELECT COUNT(tupv_id)`tupv_id` FROM accounts_tbl WHERE type = 'user'";
+                        $sql = "SELECT COUNT(tupv_id)`tupv_id` FROM accounts_tbl";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $result = $stmt->fetch(); // Use fetch instead of fetchAll
@@ -384,7 +385,7 @@ include '../php/header.php'
                                 <tr class="bg-white border-b border-light-200 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-900">
                                     <td class="px-2 py-2">
                                         <div class=" h-6 w-6">
-                                            <img src="../src/img/profile_image.jpg" class="rounded-full h-6 w-6" alt="" srcset="">
+                                            <img src="../files/userpics/<?php echo $row['user_picture']; ?>" class="rounded-full h-6 w-6 object-cover" alt="" srcset="">
                                         </div>
                                     </td>
                                     <td class="px-4 py-2">
@@ -409,6 +410,7 @@ include '../php/header.php'
                                         <div class="inline-block mr-2">
                                             <a type="button" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
                                             data-id="<?php echo $row['ID']; ?>"
+                                            data-userpic="<?php echo $row['user_picture']; ?>"
                                             data-tupvid="<?php echo $row['tupv_id']; ?>" 
                                             data-username="<?php echo $row['username']; ?>" 
                                             data-userpass="<?php echo $row['password']; ?>"
@@ -419,7 +421,7 @@ include '../php/header.php'
                                             </a>
                                         </div>
                                         <div class="inline-block">
-                                            <a href="#" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
+                                            <a href="../php/delete.php?id=<?php echo $row['ID']; ?>&deluser=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -427,7 +429,7 @@ include '../php/header.php'
                             </tbody>
                         </table>
                     </div>
-                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                    <!-- <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
                             <div>
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">Admin <span class="text-main">(2)</span></h1>
@@ -514,7 +516,7 @@ include '../php/header.php'
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
                 </div>
                 <?php 
                 include "../php/modal.settings.php"

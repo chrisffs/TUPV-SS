@@ -17,21 +17,21 @@
             </div>
                 <!-- Modal body -->
             <div class="modal-body p-6 space-y-6">
-            <form method="post" action="../php/insert.php">
+                <form id="addDepartment-form" method="post" action="../php/insert.php">
                     <!-- Input fields will be added dynamically here -->
                     <label for="dptname" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Department Name</label>
-                    <input type="text" name="dptname" id="dptname" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="dptname" id="dptname" required placeholder="Enter Department Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <label for="acronym" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Department Acronym</label>
-                    <input type="text" name="acronym" id="acronym" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                
+                    <input type="text" name="acronym" id="acronym" required placeholder="Enter Department Acronym eg. COET" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                </form>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button type="submit" name="insertdpt" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add Department</button>
+                <button form="addDepartment-form" type="submit" name="insertdpt" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add Department</button>
                 <button data-modal-hide="addDepartment-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
             </div>
-            </form>
+            
         </div>
     </div>
 </div>
@@ -55,24 +55,22 @@
             </div>
                 <!-- Modal body -->
             <div class="modal-body p-6 space-y-6">
-                <form id="createForm" method="post" action="../php/insert.php">
+                <form id="addSubject-form" method="post" action="../php/insert.php">
                        <!-- Input fields will be added dynamically here -->
-                       <label for="subjectName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject Name</label>
-                    <input type="text" name="subjectName" id="subjectName" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <label for="subjectName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject Name</label>
+                    <input type="text" name="subjectName" id="subjectName" required placeholder="Enter Subject Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <label for="subjCode" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Subject Code</label>
-                    <input type="text" name="subjCode" id="subjCode" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                
-                
+                    <input type="text" name="subjCode" id="subjCode" required placeholder="Enter Subject Code eg. COMP-123" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                </form>
             </div>
             <!-- Modal footer -->
-            <div form="createForm" class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <input  data-modal-hide="addSubject-modal" type="submit" name="insertsubject" value="Add Subject" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">
-
+            <div class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button form="addSubject-form" data-modal-hide="addSubject-modal" type="submit" name="insertsubject" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add Subject</button>
 
                 <button data-modal-hide="addSubject-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
             </div>
-            </form>
+            
         </div>
     </div>
 </div>
@@ -96,12 +94,12 @@
             </div>
                 <!-- Modal body -->
             <div class="modal-body p-6 space-y-6">
-                <form id="createForm" method="post" action="../php/insert.php">
+                <form id="addCourse-form" method="post" action="../php/insert.php">
                     <label for="courseName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Course Name</label>
-                    <input type="text" name="courseName" id="courseName" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="courseName" id="courseName" required placeholder="Enter Course Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <label for="acro" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Course Acronym</label>
-                    <input type="text" name="acro" id="acro" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="acro" id="acro" required placeholder="Enter Course Acronym eg. BSET" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     
                     <?php
                           $sql = "SELECT * FROM departmenttbl";
@@ -111,22 +109,19 @@
                     ?>
                     <label for="acronym" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Select Department</label>
                     <select id="acronym" name= "acronym" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected disabled hidden value="N/A">Choose a Department</option>
+                    <option selected disabled hidden value="">Choose a Department</option>
                     <?php foreach ($data as $row): ?>
                     <option value="<?php echo $row['acronym']; ?>"> <?php echo $row['acronym']; ?></option>
                     <?php endforeach; ?>
-        
                     </select>
-
-                
+                </form>
             </div>
             <!-- Modal footer -->
-            <div form="createForm" class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <input  data-modal-hide="addCourse-modal" type="submit" name="insertcourse" value="Add Course" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">
+            <div class="flex items-center py-6 mx-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button form="addCourse-form" data-modal-hide="addCourse-modal" type="submit" name="insertcourse" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Add Course</button>
 
                 <button data-modal-hide="addCourse-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
             </div>
-            </form>
         </div>
     </div>
 </div>
@@ -150,7 +145,7 @@
             </div>
                 <!-- Modal body -->
             <div class="modal-body p-6 space-y-6">
-                <form id="addUserForm" method="post" action="../php/insert.php">
+                <form id="addUserForm" method="post" action="../php/insert.php" enctype="multipart/form-data">
                     <div class="grid gap-2 sm:grid-cols-4 content-end">
                         <div class="sm:col-span-1">
                             <div class="w-20 h-20">
@@ -158,8 +153,8 @@
                             </div>
                         </div>
                         <div class="sm:col-span-3">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload Profile Picture</label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple required>
+                            <label for="user_pic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload Profile Picture</label>
+                            <input name="user_pic" id="user_pic" value="default.jpg" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file">
                         </div>
                         <div class="sm:col-span-4">
                             <label for="userFullName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
@@ -222,6 +217,7 @@
     
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
+        <div class="fixed inset-0 bg-gray-600 opacity-75" data-modal-hide="editDepartment-modal"></div>
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between py-5 mx-5 border-b rounded-t dark:border-gray-600">
@@ -239,7 +235,7 @@
             <div class="modal-body p-6 space-y-6">
                 <form id="editCrsForm" method="post" action="../php/edit.setting.php">
                     <!-- Input fields will be added dynamically here -->
-                    <input type="hidden" name="editdeptid" id="editdeptid" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <input type="text" name="editdeptid" id="editdeptid" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <label for="editdptname" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Department Name</label>
                     <input type="text" name="editdptname" id="editdptname" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -263,7 +259,7 @@
     
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
-        <div class="fixed inset-0  bg-gray-700 opacity-75 "></div>
+        <div class="fixed inset-0 bg-gray-600 opacity-75" data-modal-hide="editCourses-modal"></div>
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between py-5 mx-5 border-b rounded-t dark:border-gray-600">
@@ -319,6 +315,7 @@
 <div id="editSubject-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
+        <div class="fixed inset-0 bg-gray-600 opacity-75" data-modal-hide="editSubject-modal"></div>
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between py-5 mx-5 border-b rounded-t dark:border-gray-600">
@@ -358,6 +355,7 @@
 <div id="editUser-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
         <!-- Modal content -->
+        <div class="fixed inset-0 bg-gray-600 opacity-75" data-modal-hide="editUser-modal"></div>
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between py-5 mx-5 border-b rounded-t dark:border-gray-600">
@@ -373,16 +371,18 @@
             </div>
                 <!-- Modal body -->
             <div class="modal-body p-6 space-y-6">
-                <form id="editUserForm" method="post" action="../php/edit.setting.php">
+                <form id="editUserForm" method="post" action="../php/edit.setting.php" enctype="multipart/form-data">
                     <div class="grid gap-2 sm:grid-cols-4 content-end">
                         <div class="sm:col-span-1">
-                            <div class="w-20 h-20">
-                                <img class="w-20 h-20 mb-3 rounded-full" src="../src/img/profile_image.jpg" alt="Bonnie image"/>
+                            <div class="w-20 h-20 border rounded">
+                                <img id="user-profilepic" class="w-20 h-20 mb-3 rounded object-cover" src="" alt="Bonnie image"/>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload Profile Picture</label>
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="change_userprofile">Change Profile Picture</label>
+                            <input type="hidden" readonly name="userprofilepic" id="userprofilepic" required placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+                            <input name="change_userpic" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="change_userprofile" type="file">
                         </div>
                         <div class="sm:col-span-4">
                             <label for="edituserfname" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>

@@ -2,36 +2,31 @@
 // Include your database configuration file here
 include 'conn.php';
 
-// Get id from URL
-$id = $_GET['id'];
+// // Get id from URL
+// $id = $_GET['id'];
 
-// Create delete query
-$query = "DELETE FROM departmenttbl WHERE id = :id";
+// // Create delete query
+// $query = "DELETE FROM departmenttbl WHERE id = :id";
 
-try {
-    // Prepare the query
-    $stmt = $conn->prepare($query);
+// try {
+//     // Prepare the query
+//     $stmt = $conn->prepare($query);
 
-    // Bind parameters
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+//     // Bind parameters
+//     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-    // Execute the query
-    if ($stmt->execute()) {
-        echo "Record deleted successfully";
-    } else {
-        echo "Error deleting record: " . $stmt->errorInfo()[2];
-    }
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
+//     // Execute the query
+//     if ($stmt->execute()) {
+//         echo "Record deleted successfully";
+//     } else {
+//         echo "Error deleting record: " . $stmt->errorInfo()[2];
+//     }
+// } catch (PDOException $e) {
+//     echo "Error: " . $e->getMessage();
+// }
 
-// Redirect back to the main page
-header("Location: ../ADMIN/settings.php");
-
-
-
-
-
+// // Redirect back to the main page
+// header("Location: ../ADMIN/settings.php");
 
 // subject delete
 // Get id from URL
@@ -157,5 +152,33 @@ if (isset($_GET['delcourse'])){
         // Redirect back to the main page
         header("Location: ../ADMIN/syllabus.php");
         
+    }
+
+// DELETE USER | SETTINGS
+    if (isset($_GET['deluser'])){
+        $id = $_GET['id'];
+        
+        // Create delete query
+        $query = "DELETE FROM accounts_tbl WHERE id = :id";
+        
+        try {
+            // Prepare the query
+            $stmt = $conn->prepare($query);
+        
+            // Bind parameters
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        
+            // Execute the query
+            if ($stmt->execute()) {
+                echo "Record deleted successfully";
+            } else {
+                echo "Error deleting record: " . $stmt->errorInfo()[2];
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
+        
+        // Redirect back to the main page
+        header("Location: ../ADMIN/settings.php");
+    }
 ?>

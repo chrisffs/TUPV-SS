@@ -46,7 +46,7 @@ if (isset($_POST['login'])) {
 
     if ($result) {
         $_SESSION['ID'] = $result['ID'];
-        $_SESSION['id_number'] = $result['id_number'];
+        $_SESSION['profile_pic'] = $result['user_picture'];
         $_SESSION['tupv_id'] = $result['tupv_id'];
         $_SESSION['username'] = $result['username'];
         $_SESSION['password'] = $result['password'];

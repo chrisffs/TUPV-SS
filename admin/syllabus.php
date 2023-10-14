@@ -8,8 +8,9 @@ Include '../php/TIMEAGO.PHP'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/img/tupvlogo.png">
     <link rel="stylesheet" href="../src/css/main.css">
-    <title>Document</title>
+    <title>Syllabus | TUPV Syllabus System</title>
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" /> -->
     <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>

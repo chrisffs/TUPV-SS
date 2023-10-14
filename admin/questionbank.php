@@ -8,10 +8,11 @@ Include '../php/TIMEAGO.PHP';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../src/img/tupvlogo.png">
     <link rel="stylesheet" href="../src/css/main.css">
     <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <title>Document</title>
+    <title>Question Bank | TUPV Syllabus System</title>
 </head>
 <body class="bg-light-100">
 <?php 
@@ -106,13 +107,13 @@ include '../php/header.php'
                               data-sem="<?php echo $row['Semester']; ?>"
                               data-upby="<?php echo $row['uploadedby']; ?>"
                               data-dateup="<?php echo $row['time_uploaded']; ?>"
-                              data-question="<?php echo $row['Question']; ?>"
-                              data-a="<?php echo $row['A']; ?>"
-                              data-b="<?php echo $row['B']; ?>"
-                              data-c="<?php echo $row['C']; ?>"
-                              data-d="<?php echo $row['D']; ?>"
+                              data-question="<?php echo htmlspecialchars($row['Question']); ?>"
+                              data-a="<?php echo htmlspecialchars($row['A']); ?>"
+                              data-b="<?php echo htmlspecialchars($row['B']); ?>"
+                              data-c="<?php echo htmlspecialchars($row['C']); ?>"
+                              data-d="<?php echo htmlspecialchars($row['D']); ?>"
                               data-ans="<?php echo $row['Answer']; ?>">
-                                 Question
+                                 View Question
                               </a>
                            </th>
                            <td class="px-4 py-2">
