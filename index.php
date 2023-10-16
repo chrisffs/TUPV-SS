@@ -34,9 +34,6 @@
                             <div class="me-2 w-[80px]">
                                 <img src="src/img/sslogo.png" class="object-cover" alt="" srcset="">
                             </div>
-                            <div class="w-[80px]">
-                                <h1 class="text-main font-medium">ADMIN</h1>
-                            </div>
                         </div>
                         <div class="mb-8">
                             <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary md:text-2xl dark:text-white">User Login</h1>

@@ -210,7 +210,7 @@ include '../php/header.php'
 
                      <!-- DECLINE QB CHECKER -->
                      <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to decline this?');">
-                     <input type="hidden" name="qbiddec" value="<?php echo $row['ID']; ?>">
+                     <input type="hidden" name="qbiddec" value="<?php echo $row['id']; ?>">
                            <button name = "declineqb" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
                               <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>

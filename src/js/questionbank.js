@@ -35,7 +35,7 @@ $(document).ready( function () {
     });
 
     // FOR SHOWING CHECKER QUESTION
-    $('.qBankPendingTable').on('click', '.question-showchecker', function() {
+    $('#qBankPendingTable').on('click', '.question-showchecker', function() {
         var idchecker = $(this).data("idchecker");
         var questionchecker = $(this).data("questionchecker");
         var achecker = $(this).data("achecker");

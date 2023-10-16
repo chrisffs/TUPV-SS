@@ -27,10 +27,22 @@ include '../php/header.php'
                <li class="mr-2" role="presentation">
                      <button class="inline-block p-4 border-b-2 rounded-t-lg aria-selected:border-main aria-selected:text-main" id="lists-tab" data-tabs-target="#lists" type="button" role="tab" aria-controls="lists" aria-selected="false">Questions List</button>
                </li>
+               <?php
+                  $sql = "SELECT COUNT(id)`id` FROM qbchecker_tbl";
+                  $stmt = $conn->prepare($sql);
+                  $stmt->execute();
+                  $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                  
+                  if ($result) {
+                     $qtyqbc1 = $result['id'];
+                  } else {
+                     $qtyqbc1 = 0; // Handle the case when no rows are returned
+                  }
+               ?>
                <li class="mr-2" role="presentation">
                      <button class="relative inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 aria-selected:border-main aria-selected:text-main" id="pending-tab" data-tabs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">
                         Pending
-                        <span class="bg-red-200 text-xs font-medium text-red-800 text-center p-1 leading-none rounded-full px-2 dark:bg-blue-900 dark:text-blue-200 ml-1">99+</span>
+                        <span class="bg-red-200 text-xs font-medium text-red-800 text-center p-1 leading-none rounded-full px-2 dark:bg-blue-900 dark:text-blue-200 ml-1 <?php if($qtyqbc1 == 0) {echo 'hidden';}?>"><?php echo $qtyqbc1; ?></span>
                      </button>
                </li>
             </ul>
@@ -86,7 +98,7 @@ include '../php/header.php'
                      </thead>
                      <tbody>
                         <?php 
-                           $sql = "SELECT * FROM questionbank_tbl";
+                           $sql = "SELECT * FROM questionbank_tbl ORDER BY id DESC";
                            $stmt = $conn->prepare($sql);
                            $stmt->execute();
                            $data = $stmt->fetchAll();   
@@ -94,9 +106,7 @@ include '../php/header.php'
                            foreach ($data as $row): 
                         ?>
                         <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                           <?php 
-                           include "../php/modal.questionbank.php"
-                           ?>
+                           
                            <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
                               <a data-modal-target="question-modal" data-modal-toggle="question-modal" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer question-show" type="button"
                               data-id="<?php echo $row['ID']; ?>"
@@ -159,10 +169,21 @@ include '../php/header.php'
 
             <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                <div class="mb-6">
-
+                  <?php
+                     $sql = "SELECT COUNT(id)`id` FROM qbchecker_tbl";
+                     $stmt = $conn->prepare($sql);
+                     $stmt->execute();
+                     $result = $stmt->fetch(); // Use fetch instead of fetchAll
+                     
+                     if ($result) {
+                        $qtyqbc = $result['id'];
+                     } else {
+                        $qtyqbc = 0; // Handle the case when no rows are returned
+                     }
+                  ?>
           
                   <h1 class="leading-tight tracking-tight text-2xl font-bold">Pending List</h1>
-                  <h2 class="text-sm font-medium">Total number of Pending Questions: <span class="text-main">1245</span></h2>
+                  <h2 class="text-sm font-medium">Total number of Pending Questions: <span class="text-main"><?php echo $qtyqbc;?></span></h2>
                </div>
                <div class="relative overflow-x-auto">
                   <table id="qBankPendingTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -200,9 +221,9 @@ include '../php/header.php'
                            $sql = "SELECT * FROM qbchecker_tbl";
                            $stmt = $conn->prepare($sql);
                            $stmt->execute();
-                           $data = $stmt->fetchAll();   
+                           $data1 = $stmt->fetchAll();   
                            
-                           foreach ($data as $row):
+                           foreach ($data1 as $row):
                         ?> 
                         <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                            <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
@@ -254,7 +275,9 @@ include '../php/header.php'
                   </table>
                </div>   
             </div>
-
+            <?php 
+            include "../php/modal.questionbank.php"
+            ?>
          </div>
 
          
