@@ -8,9 +8,8 @@ include '../php/TIMEAGO.PHP';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../src/img/tupvlogo.png">
     <link rel="stylesheet" href="../src/css/main.css">
-    <title>Dashboard | TUPV Syllabus System</title>
+    <title>Document</title>
 </head>
 <body class="bg-light-100">
 
@@ -62,18 +61,18 @@ include '../php/header.php'
             </div>
             <div>
             <?php
-               $sql = "SELECT COUNT(ID)`id` FROM questionbank_tbl";
+               $sql = "SELECT COUNT(ID)`ID` FROM questionbank_tbl";
                $stmt = $conn->prepare($sql);
                $stmt->execute();
                $result = $stmt->fetch(); // Use fetch instead of fetchAll
 
                if ($result) {
-                  $qtyqb = $result['id'];
+                  $qty232 = $result['ID'];
                } else {
-                  $qtyqb = 0; // Handle the case when no rows are returned
+                  $qty232 = 0; // Handle the case when no rows are returned
                }
                ?>
-               <h1 class="text-2xl font-bold text-dark"><?php echo $qtyqb;?></h1>
+               <h1 class="text-2xl font-bold text-dark"><?php echo $qty232; ?></h1>
                <h3 class="text-sm text-secondary">Questions Made</h3>
             </div>
          </div>
@@ -165,7 +164,11 @@ include '../php/header.php'
                      $data = $stmt->fetchAll();
                      ?>
                <ol class="divide-y divider-gray-200 dark:divide-gray-700">
-                  <!-- START -->
+                  <!-- START -->  <?php if (count($data) === 0): ?>
+                     <div class="flex justify-center items-center h-32">
+                     <p class="text-gray-500">No pending right now</p>
+                  </div>
+               <?php else: ?>
                   <?php foreach ($data as $row): ?>
                   <li>
                      <div class="group/main cursor-default p-4 flex align-center hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -192,23 +195,35 @@ include '../php/header.php'
                               </div>
                            </div>
                         </div>
+
+
+                        <!-- ACCEPT QB CHECKER -->
                         <div class="invisible group-hover/main:visible w-1/12 flex gap-2 flex-col justify-center items-center">
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
+                        <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
+                        <input type="hidden" name="qbid" value="<?php echo $row['id']; ?>">
+                           <button name = "acceptqb" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
                               <svg class="w-5 h-5 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                               </svg>
-                           </a>
-                           <a class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
+                           </button>
+                     </form>
+
+                     <!-- DECLINE QB CHECKER -->
+                     <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to decline this?');">
+                     <input type="hidden" name="qbiddec" value="<?php echo $row['ID']; ?>">
+                           <button name = "declineqb" class="text-sm font-medium text-main p-1.5 hover:bg-light-200 rounded-lg dark:text-blue-500 dark:hover:bg-gray-700" href="#">
                               <svg class="w-5 h-5 text-secondary dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                               </svg>
-                           </a>
+                           </button>
+                  </form>
                            
                         </div>
                      </div>
                   </li>
 
                   <?php endforeach; ?>
+                  <?php endif; ?>
 
 
                   <!-- END -->
@@ -262,7 +277,7 @@ include '../php/header.php'
                                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M6 1v4a1 1 0 0 1-1 1H1m14-4v16a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2Z"/>
                                     </svg>
                                     <!-- FILE LOCATION -->
-                                    <a class="" href="../files/ECON-Learning-Content.pdf" target="_blank"><?php echo $row['file']; ?></a>
+                                    <a class="" href="../files/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
                                  </div>
                               </div>
                               <div class="mt-2 flex flex-wrap gap-2">

@@ -33,4 +33,28 @@ $(document).ready( function () {
         $("#question-modal").addClass("flex");
         $("#question-modal").removeClass("hidden");
     });
+
+    // FOR SHOWING CHECKER QUESTION
+    $('.qBankPendingTable').on('click', '.question-showchecker', function() {
+        var idchecker = $(this).data("idchecker");
+        var questionchecker = $(this).data("questionchecker");
+        var achecker = $(this).data("achecker");
+        var bchecker = $(this).data("bchecker");
+        var cchecker = $(this).data("cchecker");
+        var dchecker = $(this).data("dchecker");
+        var anschecker = $(this).data("anschecker");
+
+        // Populate the modal fields with the data
+        $("#IDchecker").text(idchecker);
+        $("#questionchecker").text(questionchecker);
+        $("#achecker").text(achecker);
+        $("#bchecker").text(bchecker);
+        $("#cchecker").text(cchecker);
+        $("#dchecker").text(dchecker);
+        $("#anschecker").text(anschecker);
+        // Show the edit modal
+        $("#question-modalchecker").addClass("flex");
+        $("#question-modalchecker").removeClass("hidden");
+        
+    });
 });

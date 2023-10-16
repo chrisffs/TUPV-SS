@@ -155,14 +155,19 @@ include '../php/header.php'
                   </table>
                </div>
             </div>
+
+
             <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                <div class="mb-6">
+
+          
                   <h1 class="leading-tight tracking-tight text-2xl font-bold">Pending List</h1>
                   <h2 class="text-sm font-medium">Total number of Pending Questions: <span class="text-main">1245</span></h2>
                </div>
                <div class="relative overflow-x-auto">
                   <table id="qBankPendingTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                       
                         <tr>
                            <th scope="col" class="px-4 py-2 font-medium">
                               Question <span class="text-main normal-case">(Click)</span>
@@ -191,34 +196,52 @@ include '../php/header.php'
                         </tr>
                      </thead>
                      <tbody>
+                     <?php 
+                           $sql = "SELECT * FROM qbchecker_tbl";
+                           $stmt = $conn->prepare($sql);
+                           $stmt->execute();
+                           $data = $stmt->fetchAll();   
+                           
+                           foreach ($data as $row):
+                        ?> 
                         <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                            <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
-                              <a data-modal-target="small-modal1" data-modal-toggle="small-modal" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer" type="button">
-                                 Question
-                              </a>
+                           <a data-modal-target="question-modalchecker" data-modal-toggle="question-modalchecker" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer question-showchecker" type="button"
+                              data-idchecker="<?php echo $row['id']; ?>"
+                              data-questionchecker="<?php echo htmlspecialchars($row['Question']); ?>"
+                              data-achecker="<?php echo htmlspecialchars($row['A']); ?>"
+                              data-bchecker="<?php echo htmlspecialchars($row['B']); ?>"
+                              data-cchecker="<?php echo htmlspecialchars($row['C']); ?>"
+                              data-dchecker="<?php echo htmlspecialchars($row['D']); ?>"
+                              data-anschecker="<?php echo $row['Answer']; ?>">
+                                 View Question <span class="text-main normal-case">(Click)</span>
+                              </a> 
                            </th>
                            <td class="px-4 py-2">
-                              Engineering Economics
+                           <?php echo $row['Subject']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              3rd
+                           <?php echo $row['Year']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              2nd
+                           <?php echo $row['Semester']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              Midterm
+                           <?php echo $row['Term']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              John Doe
+                           <?php echo $row['uploadedby']; ?>
                            </td>
                            <td class="px-4 py-2">
-                              2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
+                           <?php echo $row['time_uploaded']; ?>
                            </td>
                            <td class="px-4 py-2">
                               <div class="inline-block">
                                  <div class="inline-block mr-2">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</a>
+                                 <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
+                              <input type="hidden" name="qbid" value="<?php echo $row['id']; ?>">
+                                    <button name = "acceptqb1" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</button>
+                           </form>
                                  </div>
                                  <div class="inline-block">
                                     <a href="#" class="font-medium text-main dark:text-blue-500 hover:underline">Decline</a>
@@ -226,6 +249,7 @@ include '../php/header.php'
                               </div>
                            </td>
                         </tr>
+                        <?php endforeach ?>
                      </tbody>
                   </table>
                </div>   
