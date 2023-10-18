@@ -155,7 +155,7 @@ if(isset($_POST['updateUser'])) {
     $usertupvid = $_POST['editusertupvid'];
     $userdept = $_POST['edituserdept'];
     $username = $_POST['edituseruname'];
-    $userpass = $_POST['edituserpass'];
+    $userpass = password_hash($_POST['edituserpass'], PASSWORD_DEFAULT);
     $usertype = $_POST['editusertype'];
 
     // Prepare and execute the SQL query to update the department

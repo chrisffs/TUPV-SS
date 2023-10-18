@@ -45,12 +45,12 @@
                             <form id="login-form" action="php/user_login.php" method="post">
                                 <div class="mb-2.5">
                                     <label for="username" class="block mb-2 text-sm text-secondary">Username</label>
-                                    <input type="text" id="username" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" name="tupv_id" placeholder="TUPV-23-1234" required>
+                                    <input type="text" id="username" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" name="tupv_id" placeholder="TUPV-23-1234" required <?php if(isset($_SESSION['pre-filled-username'])) echo 'value="' . $_SESSION['pre-filled-username'] . '"'; unset($_SESSION['pre-filled-username'])?>>
                                 </div>
                                 <div class="mb-6">
-                                    <label for="password" class="block mb-2 text-sm text-secondary ">Password</label>
+                                    <label for="password" class="block mb-2 text-sm text-secondary">Password</label>
                                     <input type="password" id="password" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" placeholder="••••••••" name="password" required>
-                                    <h6 class="text-xs text-main italic mt-1.5">
+                                    <h6 class="text-xs text-red-500 italic mt-1.5">
                                         <?php 
                                         if(isset($_SESSION['invalid'])){
                                             $invalid = $_SESSION['invalid'];
