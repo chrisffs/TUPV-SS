@@ -12,11 +12,13 @@
     ?>
     <title>Login | TUPV Syllabus System</title>
 </head>
-<body class="bg-light-100"> 
+<body class=""> 
     <div class="h-screen flex items-center justify-center">
-        <div class="bg-light border border-light-200 p-8 rounded-lg">
+        <div class="p-8"> 
+        <!-- bg-light border border-light-200 rounded-lg  -->
             <div class="flex items-center">
-                <div class="w-1/2 py-6 px-16 border-r-2 border-light-200">
+                <div class="w-1/2 py-6 px-16 border-light-200">
+                <!-- border-r-2  -->
                     <div class="mb-10">
                         <img src="src/img/user-landingpage-pic.png" class="object-cover h-auto max-w-full w-[650px]" alt="">
                     </div>
@@ -40,7 +42,7 @@
                             <!-- <h3 class="text-sm text-secondary">Log in with your admin cridentials</h3> -->
                         </div>
                         <div>
-                            <form id="login-form" action="../php/admin_login.php" method="post">
+                            <form id="login-form" action="php/user_login.php" method="post">
                                 <div class="mb-2.5">
                                     <label for="username" class="block mb-2 text-sm text-secondary">Username</label>
                                     <input type="text" id="username" class="bg-gray-50 border border-light-200 text-dark text-sm rounded-lg block w-full p-2.5 focus:outline-0 focus:ring-2 focus:ring-blue placeholder-gray-400" name="tupv_id" placeholder="TUPV-23-1234" required>
