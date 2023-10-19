@@ -262,10 +262,13 @@ include '../php/header.php'
                                  <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
                               <input type="hidden" name="qbid" value="<?php echo $row['id']; ?>">
                                     <button name = "acceptqb1" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</button>
-                           </form>
+                           </form>         
                                  </div>
                                  <div class="inline-block">
-                                    <a href="#" class="font-medium text-main dark:text-blue-500 hover:underline">Decline</a>
+                                 <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to decline this?');">
+                               <input type="hidden" name="qbiddec" value="<?php echo $row['id']; ?>">
+                                    <button name = "declineqb1"  class="font-medium text-main dark:text-blue-500 hover:underline">Decline</button>
+                               </form>
                                  </div>
                               </div>
                            </td>

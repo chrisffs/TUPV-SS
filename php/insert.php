@@ -389,6 +389,83 @@ if (isset($_POST['acceptqb']) || isset($_POST['acceptqb1'])) {
 
 
 
+// decline qb checker
+
+// decline
+
+if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
+    $qbcheckerid = $_POST['qbiddec'];
+
+  
+    $sql_select = "SELECT * FROM qbchecker_tbl WHERE id = :qbiddec";
+    $stmt_select = $conn->prepare($sql_select);
+    $stmt_select->bindParam(':qbiddec', $qbcheckerid, PDO::PARAM_INT);
+    $stmt_select->execute();
+
+    $result = $stmt_select->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        
+        $sql_insert = "INSERT INTO qbdecline_tbl  (uploadedby, time_uploaded, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer, :Subject, :Year, :Term, :Semester)";
+        $stmt_insert = $conn->prepare($sql_insert);
+
+         
+          $Question = "Question Bank";
+          $decline = "Declined";
+          $qb = "Question";
+  
+      
+          $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES (:qb, :time_uploaded, :decline, :module, :uploadedby, :Question)";
+          $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
+
+        if ($stmt_insert) {
+            $stmt_insert->bindParam(':uploadedby', $result['uploadedby']);
+            $stmt_insert->bindParam(':time_uploaded', $result['time_uploaded']);
+            $stmt_insert->bindParam(':Question', $result['Question']);
+            $stmt_insert->bindParam(':A', $result['A']);
+            $stmt_insert->bindParam(':B', $result['B']);
+            $stmt_insert->bindParam(':C', $result['C']);
+            $stmt_insert->bindParam(':D', $result['D']);
+            $stmt_insert->bindParam(':Answer', $result['Answer']);
+            $stmt_insert->bindParam(':Subject', $result['Subject']);
+            $stmt_insert->bindParam(':Year', $result['Year']);
+            $stmt_insert->bindParam(':Term', $result['Term']);
+            $stmt_insert->bindParam(':Semester', $result['Semester']);
+
+
+            $stmt_insert_actlog->bindParam(':qb', $Question);
+            $stmt_insert_actlog->bindParam(':time_uploaded', $result['time_uploaded']);
+            $stmt_insert_actlog->bindParam(':decline', $decline);
+            $stmt_insert_actlog->bindParam(':module', $qb);
+            $stmt_insert_actlog->bindParam(':uploadedby', $result['uploadedby']);
+            $stmt_insert_actlog->bindParam(':Question', $result['Question']);
+
+
+            if ($stmt_insert->execute() && $stmt_insert_actlog->execute()) {
+                // Delete the row from syllabuschecker_tbl
+                $sql_delete = "DELETE FROM qbchecker_tbl WHERE id = :qbiddec";
+                $stmt_delete = $conn->prepare($sql_delete);
+                $stmt_delete->bindParam(':qbiddec', $qbcheckerid, PDO::PARAM_INT);
+ 
+                if ($stmt_delete->execute()) {
+                    if (isset($_POST['declineqb'])) {
+                        header("Location: ../ADMIN/dashboard.php");
+                    } elseif (isset($_POST['declineqb1'])) {
+                        header("Location: ../ADMIN/questionbank.php");
+                    }
+                } else {
+                    echo "Error deleting from syllabuschecker_tbl: " . $stmt_delete->errorInfo()[2];
+                }
+            } else {
+                echo "Error inserting into syllabus_tbl: " . $stmt_insert->errorInfo()[2];
+            }
+        } else {
+            echo "Error preparing the insert statement: " . $conn->errorInfo()[2];
+        }
+    } else {
+        echo "Row not found in syllabuschecker_tbl";
+    }
+}
 
 
 
@@ -466,6 +543,9 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
         echo "Row not found in syllabuschecker_tbl";
     }
 }
+
+
+
 
 
 //ADDING FILE
