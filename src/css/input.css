@@ -6,4 +6,7 @@
     html {
         font-family: 'Inter', sans-serif;
     }
+    .custom-gradient {
+        background: linear-gradient(#C4203C 50%, #FFFFFF 50%) no-repeat !important;
+    }
 }
