@@ -11,6 +11,12 @@ $(document).ready( function () {
         "info": false
     });
 
+    $('#qBankPendingTableDEC').DataTable({
+        "ordering": false,
+        "lengthChange": false,
+        "info": false
+    });
+
     // FOR SHOWING QUESTION
     $('.qBankListTable').on('click', '.question-show', function() {
         var id = $(this).data("id");
@@ -20,7 +26,7 @@ $(document).ready( function () {
         var c = $(this).data("c");
         var d = $(this).data("d");
         var ans = $(this).data("ans");
-
+        console.log(question);
         // Populate the modal fields with the data
         $("#ID").text(id);
         $("#question").text(question);
@@ -57,4 +63,32 @@ $(document).ready( function () {
         $("#question-modalchecker").removeClass("hidden");
         
     });
+
+
+
+
+
+    // // FOR SHOWING CHECKER QUESTION DECLINED
+    // $('#qBankPendingTableDEC').on('click', '.question-showcheckerDEC', function() {
+    //     var idcheckerDEC = $(this).data("idcheckerDEC");
+    //     var questioncheckerDEC = $(this).data("questioncheckerDEC");
+    //     var acheckerDEC = $(this).data("acheckerDEC");
+    //     var bcheckerDEC = $(this).data("bcheckerDEC");
+    //     var ccheckerDEC = $(this).data("ccheckerDEC");
+    //     var dcheckerDEC = $(this).data("dcheckerDEC");
+    //     var anscheckerDEC = $(this).data("anscheckerDEC");
+        
+    //     // Populate the modal fields with the data
+    //     $("#IDcheckerDEC").text(idcheckerDEC);
+    //     $("#questioncheckerDEC").text(questioncheckerDEC);
+    //     $("#acheckerDEC").text(acheckerDEC);
+    //     $("#bcheckerDEC").text(bcheckerDEC);
+    //     $("#ccheckerDEC").text(ccheckerDEC);
+    //     $("#dcheckerDEC").text(dcheckerDEC);
+    //     $("#anscheckerDEC").text(anscheckerDEC);
+    //     // Show the edit modal
+    //     $("#question-modalcheckerDEC").addClass("flex");
+    //     $("#question-modalcheckerDEC").removeClass("hidden");
+        
+    // });
 });

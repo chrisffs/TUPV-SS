@@ -231,7 +231,7 @@ include '../php/header.php'
                </ol>
             </div>
             <div class="self-end mt-auto mx-0 text-end">
-               <a href="#" class="inline-flex items-center font-medium text-main hover:text-red-800">
+               <a href="../ADMIN/questionbank.php" class="inline-flex items-center font-medium text-main hover:text-red-800">
                   View more
                   <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>

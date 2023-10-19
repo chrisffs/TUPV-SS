@@ -291,3 +291,4 @@ include '../php/header.php'
 <script src="../src/js/questionbank.js"></script>
 <script src="../src/js/jquery.dataTables.js"></script>
 </body>
+</html>

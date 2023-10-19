@@ -24,17 +24,16 @@ include '../php/header.php'
         <div class="bg-light border border-light-200 rounded-lg h-full p-4">
             <div class="mb-6">
                 <h1 class="text-2xl font-semibold">Archive</h1>
-                <h6 class="text-gray-600 leading-tight tracking-tight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim quasi dignissimos blanditiis quaerat tempora.</h6>
+                <!-- <h6 class="text-gray-600 leading-tight tracking-tight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim quasi dignissimos blanditiis quaerat tempora.</h6> -->
             </div>
             <div class="border-b border-gray-200 dark:border-gray-700">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                     <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 rounded-t-lg aria-selected:border-main aria-selected:text-main" id="list-tab" data-tabs-target="#list" type="button" role="tab" aria-controls="list" aria-selected="false">Syllabus List</button>
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg aria-selected:border-main aria-selected:text-main" id="list-tab" data-tabs-target="#list" type="button" role="tab" aria-controls="list" aria-selected="false">Questions (Declined)</button>
                     </li>
                     <li class="mr-2" role="presentation">
                         <button class="relative inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 aria-selected:border-main aria-selected:text-main" id="pending-tab" data-tabs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="false">
-                        Pending
-                        <span class="bg-red-200 text-xs font-medium text-red-800 text-center p-1 leading-none rounded-full px-2 dark:bg-blue-900 dark:text-blue-200 ml-1">99+</span>
+                            Syllabus (Declined)
                         </button>
                     </li>
                 </ul>
@@ -42,7 +41,108 @@ include '../php/header.php'
             <div id="myTabContent">
                 <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="list" role="tabpanel" aria-labelledby="list-tab">
                     <div class="relative overflow-x-auto">
-                        <table id="" class="syllabusTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="archiveTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                <th scope="col" class="px-4 py-2 font-medium">
+                                Date Archived
+                                </th>
+                                <th scope="col" class="px-4 py-2 font-medium">
+                                Question <span class="text-main normal-case">(Click)</span>
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Subject
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Year
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Sem
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Term
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Uploaded by
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Date Uploaded
+                           </th>
+                           <th scope="col" class="px-4 py-2 font-medium">
+                              Action
+                           </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-900">
+                            <?php 
+                           $sql = "SELECT * FROM qbdecline_tbl";
+                           $stmt = $conn->prepare($sql);
+                           $stmt->execute();
+                           $data1 = $stmt->fetchAll();   
+                           
+                           foreach ($data1 as $row):
+                        ?> 
+                        <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-4 py-2">
+                           <?php echo $row['archiveDate']; ?>
+                           </td>
+                           <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
+                           
+                              <a data-modal-target="question-modalcheckerDEC" data-modal-toggle="question-modalcheckerDEC" class="text-main underline dark:text-red-500 hover:no-underline cursor-pointer question-showchecker" type="button"
+                              data-id="<?php echo $row['id']; ?>"
+                              data-question="<?php echo htmlspecialchars($row['Question']); ?>"
+                              data-a="<?php echo htmlspecialchars($row['A']); ?>"
+                              data-b="<?php echo htmlspecialchars($row['B']); ?>"
+                              data-c="<?php echo htmlspecialchars($row['C']); ?>"
+                              data-d="<?php echo htmlspecialchars($row['D']); ?>"
+                              data-ans="<?php echo $row['Answer']; ?>">
+                                 View Question
+                              </a>
+                           </th>
+                           <td class="px-4 py-2">
+                           <?php echo $row['Subject']; ?>
+                           </td>
+                           <td class="px-4 py-2">
+                           <?php echo $row['Year']; ?>
+                           </td>
+                           <td class="px-4 py-2">
+                           <?php echo $row['Term']; ?>
+                           </td>
+                           <td class="px-4 py-2">
+                           <?php echo $row['Semester']; ?>
+                           </td>
+                           <td class="px-4 py-2">
+                           <?php echo $row['uploadedby']; ?>
+                           </td>
+                           <td class="px-4 py-2">
+                           <?php echo $row['time_uploaded']; ?>
+                           </td>
+                           <td class="px-4 py-2">
+                              <div class="inline-block">
+                                 <div class="inline-block mr-2">
+                                 <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
+                              <input type="hidden" name="qbid" value="<?php echo $row['id']; ?>">
+                                    <button name = "acceptqb1" class="font-medium text-main dark:text-blue-500 hover:underline">Restore</button>
+                           </form>         
+                                 </div>
+                              
+                              </div>
+                           </td>
+                        </tr>
+                        <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+
+            
+
+                <!-- SYLLABUS START -->
+
+                <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                <div class="relative overflow-x-auto">
+                        <table id="qBankPendingTable" class="syllabusTable pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 py-2 font-medium">
@@ -75,30 +175,38 @@ include '../php/header.php'
                                 </tr>
                             </thead>
                             <tbody class="text-gray-900">
+                            <?php 
+                           $sql = "SELECT * FROM declinedsyllabus_tbl";
+                           $stmt = $conn->prepare($sql);
+                           $stmt->execute();
+                           $data1 = $stmt->fetchAll();   
+                           
+                           foreach ($data1 as $row):
+                        ?> 
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="px-4 py-2">
-                                        2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
+                                    <?php echo $row['archiveDate']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        <a class="text-main hover:underline hover:underline-offset-4" href="../files/ECON-Learning-Content.pdf" target="_blank">filename.pdf</a>
+                                        <a class="text-main hover:underline hover:underline-offset-4" href="../files/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
                                     </td>
                                     <th scope="row" class="px-4 py-2 font-normal  whitespace-nowrap dark:text-white">
-                                        Robotics and Intelligent Control Systems Engineering 1
+                                    <?php echo $row['subj']; ?>
                                     </th>
                                     <td class="px-4 py-2">
-                                        FN-123
+                                    <?php echo $row['subjCode']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        Prelim
+                                        <?php echo $row['term']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        2nd
+                                        <?php echo $row['year']; ?>
                                     </td>
                                     <td class="px-4 py-2">
-                                        John Doe	
+                                    <?php echo $row['NameUpload']; ?>	
                                     </td>
                                     <td class="px-4 py-2">
-                                        2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
+                                    <?php echo $row['dateUpload']; ?>
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block">
@@ -106,30 +214,21 @@ include '../php/header.php'
                                         </div>
                                     </td>
                                 </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="hidden pt-4 rounded-lg dark:bg-gray-800" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-                    2
-                </div>
+                <?php 
+                include "../php/modal.archive.php"
+                ?>
             </div>
-            <div>
-                
-            </div>
+            
         </div>
     </div>
 </div>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
-<script>
-    $(document).ready( function () {
-        $('.syllabusTable').DataTable({
-        "ordering": false,
-        "lengthChange": false,
-        "info": false
-        });
-    } );
-</script>
+<script src="../src/js/archive.js"></script>
 <script src="../src/js/jquery.dataTables.js"></script>
 </body>
 </html>
