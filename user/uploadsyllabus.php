@@ -1,3 +1,6 @@
+<?php 
+include '../php/user_session.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/main.css">
     <link rel="icon" href="../src/img/tupvlogo.png">
-    <title>Exam Maker | TUPV Syllabus System</title>
+    <title>Upload Syllabus | TUPV Syllabus System</title>
 </head>
 <body>
 <?php 

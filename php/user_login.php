@@ -31,14 +31,14 @@ if (isset($_POST['login'])) {
             exit();
         } else {
             // Incorrect password
-            $_SESSION['invalid'] = "Invalid password for username '$username_in'";
+            $_SESSION['invalid'] = "Wrong password.";
             $_SESSION['pre-filled-username'] = $username_in;
             header("Location: ../"); // Make sure this path is correct
             exit();
         }
     } else {
         // User not found
-        $_SESSION['invalid'] = "Username '$username_in' not found";
+        $_SESSION['invalid'] = "Username is invalid.";
         $_SESSION['pre-filled-username'] = "";
         header("Location: ../"); // Make sure this path is correct
         exit();

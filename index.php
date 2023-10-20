@@ -13,13 +13,13 @@
     <title>Login | TUPV Syllabus System</title>
 </head>
 <body class=""> 
-    <div class="h-screen flex items-center justify-center">
-        <div class="p-8"> 
-        <!-- bg-light border border-light-200 rounded-lg  -->
-            <div class="flex items-center">
-                <div class="w-1/2 py-6 px-16 border-light-200">
+    <div class="h-screen flex items-center justify-center ">
+        <div class="md:p-8 grow md:grow-0"> 
+            <!-- bg-light border border-light-200 rounded-lg  -->
+            <div class="flex flex-col-reverse md:flex-row items-center">
+                <div class="w-full md:w-1/2 py-6 lg:px-16 md:px-8 border-light-200">
                 <!-- border-r-2  -->
-                    <div class="mb-10">
+                    <div class="hidden md:block mb-10">
                         <img src="src/img/user-landingpage-pic.png" class="object-cover h-auto max-w-full w-[650px]" alt="">
                     </div>
                     <div class="text-center">
@@ -27,7 +27,7 @@
                         <h4>Contact the admin via email at <span class="block text-main font-bold">admin@example.com</span></h4>
                     </div>
                 </div>
-                <div class="w-1/2 p-6 px-16">
+                <div class="w-full md:w-1/2 p-6 lg:px-16 md:px-8">
                     <div class="">
                         <div class="flex justify-center items-center mb-10">
                             <div class="me-2 w-[50px]">
