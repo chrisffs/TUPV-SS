@@ -280,11 +280,11 @@
                         </div>
                     </div>
                     <!-- Modal footer -->
-                    <div class="flex items-center justify-between p-4 md:p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <div class="flex items-center">
+                    <div class="flex items-center justify-end p-4 md:p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <!-- <div class="flex items-center">
                             <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="link-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Don't show again.</label>
-                        </div>
+                        </div> -->
                         <button data-modal-hide="extralarge-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
                         
                     </div>
