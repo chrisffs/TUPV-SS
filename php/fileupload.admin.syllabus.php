@@ -100,7 +100,7 @@ if (! move_uploaded_file($_FILES["file"]["tmp_name"], $destination)) {
     $fileterm = $_POST['fileTerm'];
     $filesubject = $_POST['fileSubject'];
     $subjectcode = $_POST['subjectCode'];
-    $uploadedBy = $_SESSION['full_name']."(".$_SESSION['type'].")";
+    $uploadedBy = $_SESSION['full_name'];
     $fname = $filename;
     $fileloc = realpath("../files/syllabusfiles/" . $filename);
     $date_uploaded = $d = date("Y-m-d H:i:s");

@@ -13,7 +13,7 @@
                     <span class="sr-only">Toggle sidebar</span>
                 </button> -->
                 <a href="#" class="flex">
-                    <img src="../src/img/sslogo.png" class="w-10 object-cover" alt="Syllabus System Logo" />
+                    <img src="../../../src/img/sslogo.png" class="w-10 object-cover" alt="Syllabus System Logo" />
                 </a>    
             </div>
             <div class="flex items-center md:order-2">
@@ -41,7 +41,7 @@
                     <div>
                         <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                             <div class="flex-shrink-0">
-                            <img class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
+                            <img class="w-11 h-11 rounded-full" src="../../../files/userpics/default.jpg" alt="Bonnie Green avatar">
                             <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-primary-700 dark:border-gray-700">
                                 <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18"><path d="M15.977.783A1 1 0 0 0 15 0H3a1 1 0 0 0-.977.783L.2 9h4.239a2.99 2.99 0 0 1 2.742 1.8 1.977 1.977 0 0 0 3.638 0A2.99 2.99 0 0 1 13.561 9H17.8L15.977.783ZM6 2h6a1 1 0 1 1 0 2H6a1 1 0 0 1 0-2Zm7 5H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Z"/><path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z"/></svg>
                             </div>
@@ -53,7 +53,7 @@
                         </a>
                         <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                             <div class="flex-shrink-0">
-                            <img class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
+                            <img class="w-11 h-11 rounded-full" src="../../../files/userpics/default.jpg" alt="Jese Leos avatar">
                             <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-gray-900 rounded-full border border-white dark:border-gray-700">
                                 <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18"><path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z"/></svg>
                             </div>
@@ -65,7 +65,7 @@
                         </a>
                         <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                             <div class="flex-shrink-0">
-                            <img class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Joseph McFall avatar">
+                            <img class="w-11 h-11 rounded-full" src="../../../files/userpics/default.jpg" alt="Joseph McFall avatar">
                             <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-red-600 rounded-full border border-white dark:border-gray-700">
                                 <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18"> <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z"/> </svg>                      
                             </div>
@@ -77,7 +77,7 @@
                         </a>
                         <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                             <div class="flex-shrink-0">
-                            <img class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Roberta Casas image">
+                            <img class="w-11 h-11 rounded-full" src="../../../files/userpics/default.jpg" alt="Roberta Casas image">
                             <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-400 rounded-full border border-white dark:border-gray-700">
                                 <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18"><path d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"/></svg>
                             </div>
@@ -89,7 +89,7 @@
                         </a>
                         <a href="#" class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-600">
                             <div class="flex-shrink-0">
-                            <img class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Robert image">
+                            <img class="w-11 h-11 rounded-full" src="../../../files/userpics/default.jpg" alt="Robert image">
                             <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-purple-500 rounded-full border border-white dark:border-gray-700">
                                 <svg class="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14"><path d="M11 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm8.585 1.189a.994.994 0 0 0-.9-.138l-2.965.983a1 1 0 0 0-.685.949v8a1 1 0 0 0 .675.946l2.965 1.02a1.013 1.013 0 0 0 1.032-.242A1 1 0 0 0 20 12V2a1 1 0 0 0-.415-.811Z"/></svg>
                             </div>
@@ -125,13 +125,13 @@
                         Apps
                     </div>
                     <div class="grid grid-cols-3 gap-4 p-4">
-                        <a href="../user/" class="block p-4 text-center rounded-lg <?php if($page=='syllabus'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
+                        <a href="../../../user/" class="block p-4 text-center rounded-lg <?php if($page=='syllabus'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
                             <svg class="mx-auto mb-2 w-5 h-5 group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                                 <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
                             </svg>
                             <div class="text-sm font-medium text-gray-900 dark:text-white">Syllabus</div>
                         </a>
-                        <a href="../user/exammaker.php" class="block p-4 text-center rounded-lg <?php if($page=='exammaker'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
+                        <a href="../../../user/exammaker.php" class="block p-4 text-center rounded-lg <?php if($page=='exammaker'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
                             <svg class="mx-auto mb-2 w-5 h-5 group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
                                 <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>
@@ -139,21 +139,21 @@
                             </svg>
                             <div class="text-sm font-medium text-gray-900 dark:text-white">Exam Maker</div>
                         </a>
-                        <a href="../user/examchecker.php" class="block p-4 text-center rounded-lg <?php if($page=='examchecker'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
+                        <a href="../../../user/examchecker.php" class="block p-4 text-center rounded-lg <?php if($page=='examchecker'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
                             <svg class="mx-auto mb-2 w-5 h-5 group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                                 <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
                                 <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-2.359 10.707-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L7 12.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
                             </svg>                 
                             <div class="text-sm font-medium text-gray-900 dark:text-white">Exam Checker</div>
                         </a>
-                        <a href="../user/uploadsyllabus.php" class="block p-4 text-center rounded-lg <?php if($page=='uploadsyllabus'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
+                        <a href="../../../user/uploadsyllabus.php" class="block p-4 text-center rounded-lg <?php if($page=='uploadsyllabus'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">
                             <svg class="mx-auto mb-2 w-5 h-5 group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="m14.707 4.793-4-4a1 1 0 0 0-1.416 0l-4 4a1 1 0 1 0 1.416 1.414L9 3.914V12.5a1 1 0 0 0 2 0V3.914l2.293 2.293a1 1 0 0 0 1.414-1.414Z"/>
                                 <path d="M18 12h-5v.5a3 3 0 0 1-6 0V12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
                             </svg>                    
                             <div class="text-sm font-medium text-gray-900 dark:text-white">Upload Module</div>
                         </a>
-                        <a href="../user/questionbank.php" class="block p-4 text-center rounded-lg <?php if($page=='questionbank'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">     
+                        <a href="../../../user/questionbank.php" class="block p-4 text-center rounded-lg <?php if($page=='questionbank'){echo 'bg-gray-100 text-gray-500';} else {echo 'hover:bg-gray-100 text-gray-400';}?> hover:bg-gray-100 group">     
                             <svg class="mx-auto mb-2 w-5 h-5 group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
                             </svg>              
@@ -163,7 +163,7 @@
                             <svg class="mx-auto mb-2 w-5 h-5 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M18 7.5h-.423l-.452-1.09.3-.3a1.5 1.5 0 0 0 0-2.121L16.01 2.575a1.5 1.5 0 0 0-2.121 0l-.3.3-1.089-.452V2A1.5 1.5 0 0 0 11 .5H9A1.5 1.5 0 0 0 7.5 2v.423l-1.09.452-.3-.3a1.5 1.5 0 0 0-2.121 0L2.576 3.99a1.5 1.5 0 0 0 0 2.121l.3.3L2.423 7.5H2A1.5 1.5 0 0 0 .5 9v2A1.5 1.5 0 0 0 2 12.5h.423l.452 1.09-.3.3a1.5 1.5 0 0 0 0 2.121l1.415 1.413a1.5 1.5 0 0 0 2.121 0l.3-.3 1.09.452V18A1.5 1.5 0 0 0 9 19.5h2a1.5 1.5 0 0 0 1.5-1.5v-.423l1.09-.452.3.3a1.5 1.5 0 0 0 2.121 0l1.415-1.414a1.5 1.5 0 0 0 0-2.121l-.3-.3.452-1.09H18a1.5 1.5 0 0 0 1.5-1.5V9A1.5 1.5 0 0 0 18 7.5Zm-8 6a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z"/></svg>
                             <div class="text-sm font-medium text-gray-900 dark:text-white">Settings</div>
                         </a>
-                        <a href="../php/user_logout.php" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
+                        <a href="../../../php/user_logout.php" class="block p-4 text-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 group">
                             <svg class="mx-auto mb-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3"/></svg>
                             <div class="text-sm font-medium text-gray-900 dark:text-white">Logout</div>
                         </a>
@@ -172,7 +172,7 @@
                 <button type="button" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
                     <div class="rounded-full">
-                        <img class="w-10 h-10 object-cover rounded-full" src="../files/userpics/<?php echo $_SESSION['profile_pic']?>" alt="user photo">
+                        <img class="w-10 h-10 object-cover rounded-full" src="../../../files/userpics/<?php echo $_SESSION['profile_pic']?>" alt="user photo">
                     </div>
                 </button>
                 <!-- Dropdown menu -->
@@ -214,14 +214,14 @@
                     </ul>
                     <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                         <li>
-                            <a href="../php/user_logout.php" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                            <a href="../../../php/user_logout.php" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
                         </li>
                     </ul>
                 </div>
             </div>
             
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-                <img src="../src/img/tupvlogo.png" class="w-10" alt="Syllabus System Logo" />
+                <img src="../../../src/img/tupvlogo.png" class="w-10" alt="Syllabus System Logo" />
             </div>
         </div>
         <!-- Button for Extra Large Modal | dont delete -->
@@ -250,7 +250,7 @@
                     <div class="p-4 md:p-6 grid grid-cols-1 md:grid-cols-3 gap-y-2 md:gap-x-4 bg-main md:custom-gradient">
                         <div class="bg-light border rounded-lg p-4 md:p-6 lg:p-10 flex flex-row items-center gap-x-2 md:gap-0 md:flex-col">
                             <div class="w-1/3 md:w-40 lg:w-60 mx-auto">
-                                <img class="w-60" src="../src/img/syllabus_modal-pic.png" alt="" srcset="">
+                                <img class="w-60" src="../../../src/img/syllabus_modal-pic.png" alt="" srcset="">
                             </div>
                             <div class="w-2/3 md:w-full text-center md:mt-4">
                                 <h1 class="font-bold text-medium lg:text-xl">Syllabus</h1>
@@ -260,7 +260,7 @@
                         </div>
                         <div class="bg-light border rounded-lg p-4 md:p-6 lg:p-10 flex flex-row items-center gap-x-2 md:gap-0 md:flex-col">
                             <div class="w-1/3 md:w-40 lg:w-60 mx-auto">
-                                <img class="w-60" src="../src/img/exam_modal-pic.png" alt="" srcset="">
+                                <img class="w-60" src="../../../src/img/exam_modal-pic.png" alt="" srcset="">
                             </div>
                             <div class="w-2/3 md:w-full text-center md:mt-4">
                                 <h1 class="font-bold text-medium lg:text-xl">Exam Maker and Checker</h1>
@@ -270,7 +270,7 @@
                         </div>
                         <div class="bg-light border rounded-lg p-4 md:p-6 lg:p-10 flex flex-row items-center gap-x-2 md:gap-0 md:flex-col">
                             <div class="w-1/3 md:w-40 lg:w-60 mx-auto">
-                                <img class="w-60" src="../src/img/upload_modal-pic.png" alt="" srcset="">
+                                <img class="w-60" src="../../../src/img/upload_modal-pic.png" alt="" srcset="">
                             </div>
                             <div class="w-2/3 md:w-full text-center md:mt-4">
                                 <h1 class="font-bold text-medium lg:text-xl">Submit Module and Question</h1>
@@ -280,12 +280,13 @@
                         </div>
                     </div>
                     <!-- Modal footer -->
-                    <div class="flex items-center justify-end p-4 md:p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <!-- <div class="flex items-center">
+                    <div class="flex items-center justify-between p-4 md:p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <div class="flex items-center">
                             <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="link-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Don't show again.</label>
-                        </div> -->
+                        </div>
                         <button data-modal-hide="extralarge-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
+                        
                     </div>
                 </div>
             </div>
@@ -295,7 +296,7 @@
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 font-medium">
                 <li>
-                    <a href="../user/" data-tooltip-target="tooltip-syllabus" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='syllabus'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
+                    <a href="../../../user/" data-tooltip-target="tooltip-syllabus" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='syllabus'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
                         <svg class="w-5 h-5 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                             <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
                         </svg>
@@ -306,7 +307,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../user/exammaker.php" data-tooltip-target="tooltip-exammaker" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='exammaker'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
+                    <a href="../../../user/exammaker.php" data-tooltip-target="tooltip-exammaker" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='exammaker'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
                         <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"/>
                             <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"/>
@@ -319,7 +320,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../user/examchecker.php" data-tooltip-target="tooltip-examchecker" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='examchecker'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
+                    <a href="../../../user/examchecker.php" data-tooltip-target="tooltip-examchecker" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='examchecker'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
                         <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                             <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
                             <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-2.359 10.707-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L7 12.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
@@ -331,7 +332,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../user/uploadsyllabus.php" data-tooltip-target="tooltip-uploadsyllabus" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='uploadsyllabus'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
+                    <a href="../../../user/uploadsyllabus.php" data-tooltip-target="tooltip-uploadsyllabus" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='uploadsyllabus'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
                         <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="m14.707 4.793-4-4a1 1 0 0 0-1.416 0l-4 4a1 1 0 1 0 1.416 1.414L9 3.914V12.5a1 1 0 0 0 2 0V3.914l2.293 2.293a1 1 0 0 0 1.414-1.414Z"/>
                             <path d="M18 12h-5v.5a3 3 0 0 1-6 0V12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
@@ -343,7 +344,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../user/questionbank.php" data-tooltip-target="tooltip-questionbank" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='questionbank'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
+                    <a href="../../../user/questionbank.php" data-tooltip-target="tooltip-questionbank" data-tooltip-placement="left" class="flex items-center justify-center p-2 <?php if($page=='questionbank'){echo 'text-main bg-red-100';} else {echo 'hover:bg-gray-100 text-gray-500';}?> rounded-lg dark:text-white group">
                         <svg class="flex-shrink-0 w-5 h-5 transition duration-75" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
                         </svg>

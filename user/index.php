@@ -9,7 +9,7 @@ include '../php/user_session.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/main.css">
     <link rel="icon" href="../src/img/tupvlogo.png">
-    <title>Syllabus | TUPV Syllabus System<</title>
+    <title>Syllabus | TUPV Syllabus System</title>
 </head>
 <body class="">
     
@@ -20,7 +20,9 @@ include "../php/user_header.php";
 <main class="sm:ml-[64px] sm:ml-6 p-4 md:p-6 mt-[60px]">
     <div class="block space-y-2 sm:flex items-center justify-between pb-4 border-b"> 
       <div>
-        <h1 class="font-semibold text-lg sm:text-2xl">Syllabus <span class="text-gray-500">></span> Subjects</h1>
+          <a href="./" class="font-semibold text-lg sm:text-2xl">
+              Subjects
+          </a>
       </div>
       <div>
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>

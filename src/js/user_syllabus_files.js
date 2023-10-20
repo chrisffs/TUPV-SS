@@ -1,35 +1,34 @@
 $(document).ready(function() {
-    // Hide the button initially
-    // var modalButton = $('[data-modal-toggle="extralarge-modal"]');
-    // // modalButton.hide();
-  
-    // // Use setTimeout to trigger a click event after 2 seconds
-    // setTimeout(function() {
-    //   modalButton.click();
-    // }, 1300);
+    $(".clickable").on("click", function() {
+        var link = $(this).data("href");
+        if (link) {
+            window.open(link, "_blank"); // Use "_blank" to open in a new tab or window
+        }
+    });
 
     var filter = $('#filter');
-    var menuContainer = $('#folders');
+    var menuContainer = $('#files');
 
     filter.on('keyup', searchMenu);
 
     function searchMenu(e) {
         var typedText = e.target.value.toLowerCase();
-        var menuItems = menuContainer.find('a');
+        var menuItems = menuContainer.find('tr');
         
         menuItems.each(function() {
             var menuItem = $(this);
             var menuNames = menuItem.find('h1, h2');
             var showMenuItem = false;
-
+            
             menuNames.each(function() {
                 var menuName = $(this).text().toLowerCase();
                 if (menuName.indexOf(typedText) !== -1) {
                     showMenuItem = true;
                 }
             })
+            // console.log(menuItem);
             if (showMenuItem) {
-                menuItem.addClass('block');
+                menuItem.addClass('table-row');
                 menuItem.removeClass('hidden');
             } else {
                 menuItem.addClass('hidden');
