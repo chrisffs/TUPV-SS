@@ -31,7 +31,7 @@ $(document).ready( function () {
 
         // Show the edit modal
         $("#editDepartment-modal").removeClass("hidden");
-        // $("#editDepartment-modal").addClass("flex");
+        $("#editDepartment-modal").addClass("flex");
     });
 
 
@@ -51,7 +51,7 @@ $(document).ready( function () {
         $("#editcrsdept").val(courseDept);
         // Show the edit modal
         $("#editCourses-modal").removeClass("hidden");
-        // $("#editCourses-modal").addClass("flex");
+        $("#editCourses-modal").addClass("flex");
     });
 
     // FOR SUBJECT EDIT
@@ -68,14 +68,12 @@ $(document).ready( function () {
 
         // Show the edit modal
         $("#editSubject-modal").removeClass("hidden");
+        $("#editSubject-modal").addClass("flex");
     });
-
-    $(".edit-user").click(function () {
+    $('.settingsTable').on('click', '.edit-userDetails', function() {
         var userId = $(this).data("id");
         var userPic = $(this).data("userpic");
         var userTupvId = $(this).data("tupvid");
-        var userName = $(this).data("username");
-        var userPass = $(this).data("userpass");
         var userFname = $(this).data("userfname");
         var userDept = $(this).data("userdept");
         var userType = $(this).data("usertype");
@@ -85,28 +83,53 @@ $(document).ready( function () {
         $("#user-profilepic").attr("src", "../files/userpics/" + userPic);
         $("#userprofilepic").val(userPic);
         $("#editusertupvid").val(userTupvId);
-        $("#edituseruname").val(userName);
-        $("#edituserpass").val(userPass);
         $("#edituserfname").val(userFname);
         $("#edituserdept").val(userDept);
         $("#editusertype").val(userType);
         
         // Show the edit modal
-        $("#editUser-modal").removeClass("hidden");
+        $("#editUserDetails-modal").removeClass("hidden");
+        $("#editUserDetails-modal").addClass("flex");
+    });
+    $('.settingsTable').on('click', '.edit-userAccount', function() {
+        var userId = $(this).data("id");
+        var userName = $(this).data("username");
+        var userFname = $(this).data("userfname");
+
+        // Populate the modal fields with the data
+        $("#editaccuserid").val(userId);
+        $("#edituseruname").val(userName);
+        $("#edituseraccfname").text(userFname);
+
+        // Show the edit modal
+        $("#editUserAccount-modal").removeClass("hidden");
+        $("#editUserAccount-modal").addClass("flex");
     });
 
-    // $("#confirm-password").on('keyup', function() {
-    //     var password = $("#password").val();
-    //     var confirmPassword = $(this).val();
-
-    //     if (password === confirmPassword) {
-    //         // Passwords match, hide the error message
-    //         $("#password-match-error").addClass("hidden");
-    //     } else {
-    //         // Passwords do not match, show the error message
-    //         $("#password-match-error").removeClass("hidden");
-    //     }
-    // });
+    $("#confirm-password").on('keyup', function() {
+        var password = $("#edituserpass").val();
+        var confirmPassword = $(this).val();
+        console.log(confirmPassword);
+        if (password === confirmPassword) {
+            // Passwords match, hide the error message
+            $("#password-match-error").addClass("hidden");
+        } else {
+            // Passwords do not match, show the error message
+            $("#password-match-error").removeClass("hidden");
+        }
+    });
+    $("#confirm-password2").on('keyup', function() {
+        var password = $("#userPass").val();
+        var confirmPassword = $(this).val();
+        console.log(confirmPassword);
+        if (password === confirmPassword) {
+            // Passwords match, hide the error message
+            $("#password-match-error").addClass("hidden");
+        } else {
+            // Passwords do not match, show the error message
+            $("#password-match-error").removeClass("hidden");
+        }
+    });
 
 
 

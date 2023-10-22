@@ -61,7 +61,7 @@ $DEPT = basename(dirname(__FILE__));
                 </thead>
                 <tbody id="files">
                     <?php 
-                        $sql = "SELECT s.FILES, s.NAMEUPLOAD, s.DATEUPLOAD, a.user_picture FROM syllabus_tbl s INNER JOIN accounts_tbl a ON s.NAMEUPLOAD = a.full_name WHERE s.CODE = '$DEPT'";
+                        $sql = "SELECT s.FILES, a.full_name, s.DATEUPLOAD, a.user_picture FROM syllabus_tbl s INNER JOIN accounts_tbl a ON s.USERUPLOADID = a.ID WHERE s.CODE = '$DEPT' ORDER BY s.FILES ASC";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $data = $stmt->fetchAll();
@@ -86,7 +86,7 @@ $DEPT = basename(dirname(__FILE__));
                                         <img class="rounded-full w-4 h-4 object-cover" src="../../../files/userpics/<?php echo $row['user_picture'];?>" alt="">
                                     </div>
                                     <div>
-                                        <h2><?php echo $row['NAMEUPLOAD'];?></h2>
+                                        <h2><?php echo $row['full_name'];?></h2>
                                     </div> 
                                 </div> 
                                 <div>
@@ -110,7 +110,7 @@ $DEPT = basename(dirname(__FILE__));
                                     <img class="rounded-full w-6 h-6 object-cover" src="../../../files/userpics/<?php echo $row['user_picture'];?>" alt="">
                                 </div>
                                 <div>
-                                    <h2><?php echo $row['NAMEUPLOAD'];?></h2>
+                                    <h2><?php echo $row['full_name'];?></h2>
                                 </div> 
                             </div> 
                         </td>

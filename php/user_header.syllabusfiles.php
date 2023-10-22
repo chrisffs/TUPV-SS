@@ -169,17 +169,25 @@
                         </a>
                     </div>
                 </div>
+                <?php 
+                    $sql = "SELECT * FROM `accounts_tbl` WHERE id = {$_SESSION['ID']}";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $data = $stmt->fetchAll();
+
+                    foreach ($data as $row):
+                ?>
                 <button type="button" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
                     <div class="rounded-full">
-                        <img class="w-10 h-10 object-cover rounded-full" src="../../../files/userpics/<?php echo $_SESSION['profile_pic']?>" alt="user photo">
+                        <img class="w-10 h-10 object-cover rounded-full" src="../../../files/userpics/<?php echo $row['user_picture']?>" alt="user photo">
                     </div>
                 </button>
                 <!-- Dropdown menu -->
                 <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
                     <div class="py-3 px-4">
-                        <span class="block text-sm font-semibold text-gray-900 dark:text-white"><?php echo $_SESSION['full_name'];?></span>
-                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"><?php echo $_SESSION['tupv_id'];?></span>
+                        <span class="block text-sm font-semibold text-gray-900 dark:text-white"><?php echo $row['full_name']?></span>
+                        <span class="block text-sm text-gray-500 truncate dark:text-gray-400"><?php echo $row['tupv_id']?></span>
                     </div>
                     <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
                         <li>
@@ -218,6 +226,9 @@
                         </li>
                     </ul>
                 </div>
+                <?php 
+                    endforeach; 
+                ?>
             </div>
             
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">

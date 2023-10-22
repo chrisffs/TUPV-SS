@@ -79,7 +79,7 @@ if(isset($_POST['updateSubject'])) {
     $stmt->closeCursor();
 }
 
-if(isset($_POST['updateUser'])) {
+if(isset($_POST['updateUserDetails'])) {
 
     if ($_FILES["change_userpic"]["error"] === UPLOAD_ERR_NO_FILE) {
         $filename = $_POST['userprofilepic'];
@@ -154,12 +154,12 @@ if(isset($_POST['updateUser'])) {
     $userfname = $_POST['edituserfname'];
     $usertupvid = $_POST['editusertupvid'];
     $userdept = $_POST['edituserdept'];
-    $username = $_POST['edituseruname'];
-    $userpass = password_hash($_POST['edituserpass'], PASSWORD_DEFAULT);
+    // $username = $_POST['edituseruname'];
+    // $userpass = password_hash($_POST['edituserpass'], PASSWORD_DEFAULT);
     $usertype = $_POST['editusertype'];
 
     // Prepare and execute the SQL query to update the department
-    $sql = "UPDATE accounts_tbl SET tupv_id = :editusertupvid, username = :edituseruname, password = :edituserpass, full_name = :edituserfname, department = :edituserdept, type = :editusertype, user_picture = :picture, userpic_fileloc = :piclocation WHERE ID = :edituserid";
+    $sql = "UPDATE accounts_tbl SET tupv_id = :editusertupvid, full_name = :edituserfname, department = :edituserdept, type = :editusertype, user_picture = :picture, userpic_fileloc = :piclocation WHERE ID = :edituserid";
     $stmt = $conn->prepare($sql);
 
     // Bind parameters
@@ -167,8 +167,6 @@ if(isset($_POST['updateUser'])) {
     $stmt->bindParam(':edituserfname', $userfname);
     $stmt->bindParam(':editusertupvid', $usertupvid);
     $stmt->bindParam(':edituserdept', $userdept);
-    $stmt->bindParam(':edituseruname', $username);
-    $stmt->bindParam(':edituserpass', $userpass);
     $stmt->bindParam(':editusertype', $usertype);
     $stmt->bindParam(':picture', $userpic);
     $stmt->bindParam(':piclocation', $userpicloc);
@@ -178,12 +176,36 @@ if(isset($_POST['updateUser'])) {
         header("Location: ../admin/settings.php");
         exit();
     } else {
-        echo "Error updating Subject: " . $stmt->errorInfo()[2];
+        echo "Error updating User Details: " . $stmt->errorInfo()[2];
     }
     
     $stmt->closeCursor();
 }
 
+if(isset($_POST['updateUserAccount'])) {
+    $userid = $_POST['editaccuserid'];
+    $username = $_POST['edituseruname'];
+    $userpass = password_hash($_POST['edituserpass'], PASSWORD_DEFAULT);
+
+    // Prepare and execute the SQL query to update the department
+    $sql = "UPDATE accounts_tbl SET username = :edituseruname, password = :edituserpass WHERE ID = :editaccuserid";
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $stmt->bindParam(':editaccuserid', $userid);
+    $stmt->bindParam(':edituseruname', $username);
+    $stmt->bindParam(':edituserpass', $userpass);
+
+    if ($stmt->execute()) {
+        // Redirect back to the page where you came from
+        header("Location: ../admin/settings.php");
+        exit();
+    } else {
+        echo "Error updating User Account: " . $stmt->errorInfo()[2];
+    }
+    
+    $stmt->closeCursor();
+}
 
 
 $conn = null; // Close the PDO connection

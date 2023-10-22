@@ -1,4 +1,5 @@
 <?php 
+include '../php/conn.php';
 include '../php/user_session.php';
 ?>
 <!DOCTYPE html>

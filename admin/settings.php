@@ -363,9 +363,9 @@ include '../php/header.php'
                                     <th scope="col" class="px-4 py-2 font-medium">
                                         USERNAME
                                     </th>
-                                    <th scope="col" class="px-4 py-2 font-medium">
+                                    <!-- <th scope="col" class="px-4 py-2 font-medium">
                                         PASSWORD
-                                    </th>
+                                    </th> -->
                                     <th scope="col" class="px-4 py-2 font-medium">
                                         FULLNAME
                                     </th>
@@ -394,9 +394,7 @@ include '../php/header.php'
                                     <td class="px-4 py-2">
                                         <?php echo $row['username']; ?>
                                     </td>
-                                    <td class="px-4 py-2">
-                                        <?php echo $row['password']; ?>
-                                    </td>
+                                    
                                     <td class="px-4 py-2">
                                         <?php echo $row['full_name']; ?>
                                     </td>
@@ -406,23 +404,29 @@ include '../php/header.php'
                                     <td class="px-4 py-2">
                                         <?php echo $row['type']; ?>
                                     </td>
-                                    <td class="px-4 py-2">
-                                        <div class="inline-block mr-2">
-                                            <a type="button" data-modal-target="editUser-modal" data-modal-toggle="editUser-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-user" 
+                                    <td class="px-4 py-2 flex items-center gap-2">
+                                        <div class="inline-block mr-2 flex flex-col">
+                                            <a type="button" data-modal-target="editUserDetails-modal" data-modal-toggle="editUserDetails-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-userDetails" 
                                             data-id="<?php echo $row['ID']; ?>"
                                             data-userpic="<?php echo $row['user_picture']; ?>"
-                                            data-tupvid="<?php echo $row['tupv_id']; ?>" 
-                                            data-username="<?php echo $row['username']; ?>" 
-                                            data-userpass="<?php echo $row['password']; ?>"
+                                            data-tupvid="<?php echo $row['tupv_id']; ?>"  
                                             data-userfname="<?php echo $row['full_name']; ?>"
                                             data-userdept="<?php echo $row['department']; ?>"
                                             data-usertype="<?php echo $row['type']; ?>">
-                                                Edit
+                                                Edit details
+                                            </a>
+                                            <a type="button" data-modal-target="editUserAccount-modal" data-modal-toggle="editUserAccount-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-userAccount" 
+                                            data-id="<?php echo $row['ID']; ?>"
+                                            data-userfname="<?php echo $row['full_name']; ?>" 
+                                            data-username="<?php echo $row['username']; ?>" 
+                                            data-userpass="<?php echo $row['password']; ?>">
+                                                Edit account
                                             </a>
                                         </div>
                                         <div class="inline-block">
                                             <a href="../php/delete.php?id=<?php echo $row['ID']; ?>&deluser=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-normal text-main dark:text-blue-500 hover:underline">Remove</a>
                                         </div>
+                                        
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
