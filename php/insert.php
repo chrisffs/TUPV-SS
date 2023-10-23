@@ -252,7 +252,7 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
 
     if ($result) {
         // Insert the row into syllabus_tbl
-        $sql_insert_syllabus = "INSERT INTO syllabus_tbl (NAMEUPLOAD, USERUPLOADID, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :uploaderId ,:subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
+        $sql_insert_syllabus = "INSERT INTO syllabus_tbl (NAMEUPLOAD, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
         $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
 
         // Define variables for actlog_tbl
@@ -266,7 +266,6 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
 
         if ($stmt_insert_syllabus && $stmt_insert_actlog) {
             $stmt_insert_syllabus->bindParam(':NameUpload', $result['NameUpload']);
-            $stmt_insert_syllabus->bindParam(':uploaderId', $result['uploaderId']);
             $stmt_insert_syllabus->bindParam(':subj', $result['subj']);
             $stmt_insert_syllabus->bindParam(':subjCode', $result['subjCode']);
             $stmt_insert_syllabus->bindParam(':term', $result['term']);
@@ -411,7 +410,7 @@ if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
 
     if ($result) {
         
-        $sql_insert = "INSERT INTO qbdecline_tbl  (archiveData, uploadedby, time_uploaded, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:timea :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer, :Subject, :Year, :Term, :Semester)";
+        $sql_insert = "INSERT INTO qbdecline_tbl  (archiveDate, uploadedby, time_uploaded, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:timea, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer, :Subject, :Year, :Term, :Semester)";
         $stmt_insert = $conn->prepare($sql_insert);
 
          
@@ -555,6 +554,64 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
 
 
 
-//ADDING FILE
+//resotre
+
+
+if (isset($_POST['restoreqb'])) {
+    $syllabusid = $_POST['resqbid'];
+
+    // Retrieve the row from qbchecker_tbl
+    $sql_select = "SELECT * FROM qbdecline_tbl WHERE id = :resqbid";
+    $stmt_select = $conn->prepare($sql_select);
+    $stmt_select->bindParam(':resqbid', $syllabusid, PDO::PARAM_INT);
+    $stmt_select->execute();
+
+    $result = $stmt_select->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        // Insert the row into qbchecker_tbl
+        $sql_insert_syllabus = "INSERT INTO qbchecker_tbl (Year, Subject, Term, Semester, uploadedby, time_uploaded, Question, A, B, C, D, Answer) VALUES (:Year, :Subject, :Term, :Semester, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer)";
+        $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
+
+        if ($stmt_insert_syllabus) {
+            $stmt_insert_syllabus->bindParam(':Year', $result['Year']);
+            $stmt_insert_syllabus->bindParam(':Subject', $result['Subject']);
+            $stmt_insert_syllabus->bindParam(':Term', $result['Term']);
+            $stmt_insert_syllabus->bindParam(':Semester', $result['Semester']);
+            $stmt_insert_syllabus->bindParam(':uploadedby', $result['uploadedby']);
+            $stmt_insert_syllabus->bindParam(':time_uploaded', $result['time_uploaded']);
+            $stmt_insert_syllabus->bindParam(':Question', $result['Question']);
+            $stmt_insert_syllabus->bindParam(':A', $result['A']);
+            $stmt_insert_syllabus->bindParam(':B', $result['B']);
+            $stmt_insert_syllabus->bindParam(':C', $result['C']);
+            $stmt_insert_syllabus->bindParam(':D', $result['D']);
+            $stmt_insert_syllabus->bindParam(':Answer', $result['Answer']);
+        
+            if ($stmt_insert_syllabus->execute()) {
+                // Delete the row from qbchecker_tbl
+                $sql_delete = "DELETE FROM qbchecker_tbl WHERE id = :resqbid";
+                $stmt_delete = $conn->prepare($sql_delete);
+                $stmt_delete->bindParam(':resqbid', $syllabusid, PDO::PARAM_INT);
+
+                if ($stmt_delete->execute()) {
+                    if (isset($_POST['restoreqb'])) {
+                        header("Location: ../ADMIN/dashboard.php");
+                    } 
+                } else {
+                    echo "Error deleting from qbchecker_tbl: " . $stmt_delete->errorInfo()[2];
+                }
+            } else {
+                echo "Error inserting into qbchecker_tbl.";
+            }
+        } else {
+            echo "Error preparing the insert statement: " . $conn->errorInfo()[2];
+        }
+    } else {
+        echo "Row not found in qbchecker_tbl";
+    }
+}
+
+
+
 
 ?>

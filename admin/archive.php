@@ -82,7 +82,7 @@ include '../php/header.php'
                            
                            foreach ($data1 as $row):
                         ?> 
-                        <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <tr class="bg-white  border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-4 py-2">
                            <?php echo $row['archiveDate']; ?>
                            </td>
@@ -120,9 +120,9 @@ include '../php/header.php'
                            <td class="px-4 py-2">
                               <div class="inline-block">
                                  <div class="inline-block mr-2">
-                                 <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
-                              <input type="hidden" name="qbid" value="<?php echo $row['id']; ?>">
-                                    <button name = "acceptqb1" class="font-medium text-main dark:text-blue-500 hover:underline">Restore</button>
+                                 <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Restore this?');">
+                              <input type="hidden" name="resqbid" value="<?php echo $row['id']; ?>">
+                                    <button name = "restoreqb" class="font-medium text-main dark:text-blue-500 hover:underline">Restore</button>
                            </form>         
                                  </div>
                               
@@ -183,14 +183,14 @@ include '../php/header.php'
                            
                            foreach ($data1 as $row):
                         ?> 
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <tr class="bg-white border-b  dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="px-4 py-2">
                                     <?php echo $row['archiveDate']; ?>
                                     </td>
-                                    <td class="px-4 py-2">
-                                        <a class="text-main hover:underline hover:underline-offset-4" href="../files/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
+                                    <td class="px-4 py-2 whitespace-wrap">
+                                        <a class="text-main hover:underline hover:underline-offset-4 " href="../files/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
                                     </td>
-                                    <th scope="row" class="px-4 py-2 font-normal  whitespace-nowrap dark:text-white">
+                                    <th scope="row" class="px-4 py-2 font-normal  whitespace-wrap dark:text-white">
                                     <?php echo $row['subj']; ?>
                                     </th>
                                     <td class="px-4 py-2">
