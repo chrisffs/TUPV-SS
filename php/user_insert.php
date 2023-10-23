@@ -7,41 +7,41 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 if(isset($_POST['insertfile'])) {
 // Finding out the error for the file upload
-if ($_FILES["file"]["error"] !== UPLOAD_ERR_OK) {
-    switch ($_FILES["file"]["error"]) {
+if ($_FILES["fileupload_user"]["error"] !== UPLOAD_ERR_OK) {
+    switch ($_FILES["fileupload_user"]["error"]) {
         case UPLOAD_ERR_PARTIAL;
             $_SESSION['useruploadfile_message'] = "File only partially uploaded";
-            header('location: ../admin/syllabus.php');
+            header('location: ../user/uploadsyllabus.php');
             $_SESSION['useruploadfile_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_NO_FILE:
             $_SESSION['useruploadfile_message'] = "No file was uploaded";
-            header('location: ../admin/syllabus.php');
+            header('location: ../user/uploadsyllabus.php');
             $_SESSION['useruploadfile_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_EXTENSION:
             $_SESSION['useruploadfile_message'] = "File upload stopped by a PHP Extension";
-            header('location: ../admin/syllabus.php');
+            header('location: ../user/uploadsyllabus.php');
             $_SESSION['useruploadfile_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_NO_TMP_DIR:
             $_SESSION['useruploadfile_message'] = "Temporary folder not found";
-            header('location: ../admin/syllabus.php');
+            header('location: ../user/uploadsyllabus.php');
             $_SESSION['useruploadfile_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_CANT_WRITE:
             $_SESSION['useruploadfile_message'] = "Failed to write file";
-            header('location: ../admin/syllabus.php');
+            header('location: ../user/uploadsyllabus.php');
             $_SESSION['useruploadfile_messagecolor'] = "red";
             exit();
             break;
         default:
             $_SESSION['useruploadfile_message'] = "Unknown upload error";
-            header('location: ../admin/syllabus.php');
+            header('location: ../user/uploadsyllabus.php');
             $_SESSION['useruploadfile_messagecolor'] = "red";
             exit();
             break;
@@ -57,29 +57,29 @@ if ($_FILES["file"]["error"] !== UPLOAD_ERR_OK) {
 // // Allowed file types array
 $mime_types = ["application/pdf", "application/vnd.openxmlformats-officedocument.presentationml.presentation"];
 // Verifying if the file is in pdf, docx, ppt
-if (! in_array($_FILES["file"]["type"], $mime_types)) {
+if (! in_array($_FILES["fileupload_user"]["type"], $mime_types)) {
     
     $_SESSION['useruploadfile_message'] = "Invalid file type";
     $_SESSION['useruploadfile_messagecolor'] = "red";
-    header('location: ../admin/syllabus.php');
+    header('location: ../user/uploadsyllabus.php');
     exit();
 }
 
 // For Maximum file size
-if ($_FILES["file"]["size"] > 10485760) {
+if ($_FILES["fileupload_user"]["size"] > 10485760) {
     $_SESSION['useruploadfile_message'] = "File exceeds max(10MB)";
     $_SESSION['useruploadfile_messagecolor'] = "red";
-    header('location: ../admin/syllabus.php');
+    header('location: ../user/uploadsyllabus.php');
     exit();
 }
 
-$pathinfo = pathinfo($_FILES["file"]["name"]);
+$pathinfo = pathinfo($_FILES["fileupload_user"]["name"]);
 $base = $pathinfo["filename"];
 $base = preg_replace("/[^\w-]/", "_", $base);
 $filename = $base . "." . $pathinfo["extension"];
 
 // Transfering file to a folder
-$filename = $_FILES["file"]["name"];
+$filename = $_FILES["fileupload_user"]["name"];
 $destination = __DIR__ . "/../files/syllabusfiles/" . $filename;
 
 $i = 1;
@@ -90,16 +90,16 @@ while (file_exists($destination)) {
 
     $i++;
 }
-if (! move_uploaded_file($_FILES["file"]["tmp_name"], $destination)) {
+if (! move_uploaded_file($_FILES["fileupload_user"]["tmp_name"], $destination)) {
     $_SESSION['useruploadfile_message'] = "Can't move uploaded file";
     $_SESSION['useruploadfile_messagecolor'] = "red";
-    header('location: ../admin/syllabus.php');
+    header('location: ../user/uploadsyllabus.php');
     exit();
 }
-    $fileyear = $_POST['fileYear'];
-    $fileterm = $_POST['fileTerm'];
-    $filesubject = $_POST['fileSubject'];
-    $subjectcode = $_POST['subjectCode'];
+    $fileyear = $_POST['file_year-user'];
+    $fileterm = $_POST['file_term-user'];
+    $filesubject = $_POST['file_subject-user'];
+    $subjectcode = $_POST['file_subjCode-user'];
     $uploadedBy = $_SESSION['full_name'];
     $uploadedById = $_SESSION['ID'];
     $fname = $filename;
@@ -107,7 +107,7 @@ if (! move_uploaded_file($_FILES["file"]["tmp_name"], $destination)) {
     $date_uploaded = $d = date("Y-m-d H:i:s");
     
     // Prepare the SQL statement
-    $sql = "INSERT INTO syllabus_tbl (NAMEUPLOAD, USERUPLOADID, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC) VALUES (:uploadername, :uploaderid, :subject, :subject_code, :term, :year, :filename, :filelocation)";
+    $sql = "INSERT INTO syllabuschecker_tbl (NameUpload, uploaderId, subj, subjCode, term, year, file, fileLoc) VALUES (:uploadername, :uploaderid, :subject, :subject_code, :term, :year, :filename, :filelocation)";
 
     $stmt = $conn->prepare($sql);
     
@@ -126,11 +126,11 @@ if (! move_uploaded_file($_FILES["file"]["tmp_name"], $destination)) {
     if ($stmt->execute()) {
         $_SESSION['useruploadfile_message'] = "File upload Success";
         $_SESSION['useruploadfile_messagecolor'] = "green";
-        header('location: ../admin/syllabus.php');
+        header('location: ../user/uploadsyllabus.php');
     } else {
         $_SESSION['useruploadfile_message'] = "File upload Failed";
         $_SESSION['useruploadfile_messagecolor'] = "red";
-        header('location: ../admin/syllabus.php');
+        header('location: ../user/uploadsyllabus.php');
         exit();
     }
 
@@ -146,7 +146,7 @@ if (! move_uploaded_file($_FILES["file"]["tmp_name"], $destination)) {
 //         exit(0); 
 //     }
 
-header('location: ../admin/syllabus.php');
+header('location: ../user/uploadsyllabus.php');
 }
 // print_r($_FILES);
 ?>

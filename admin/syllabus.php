@@ -116,7 +116,7 @@ include '../php/header.php'
                                 <tbody>
 
                                 <?php 
-                                        $sql = "SELECT * FROM syllabus_tbl  ";
+                                        $sql = "SELECT s.id, s.FILES, s.SUBJECTS, s.TERM, s.DATEUPLOAD, a.full_name FROM syllabus_tbl s INNER JOIN accounts_tbl a ON s.USERUPLOADID = a.ID ORDER BY s.DATEUPLOAD DESC";
                                         $stmt = $conn->prepare($sql);
                                         $stmt->execute();
                                         $data = $stmt->fetchAll();     
@@ -135,7 +135,7 @@ include '../php/header.php'
                                         <?php echo $row['TERM']; ?>
                                         </td>
                                         <td class="px-4 py-2">
-                                        <?php echo $row['NAMEUPLOAD']; ?>
+                                        <?php echo $row['full_name']; ?>
                                         </td>
                                         <td class="px-4 py-2">
                                             <?php 
@@ -216,7 +216,7 @@ include '../php/header.php'
                 
                                 </thead>
                                 <?php 
-                                        $sql = "SELECT * FROM syllabuschecker_tbl  ";
+                                        $sql = "SELECT s.ID, s.file, s.subj, s.subjCode, s.term, s.year, s.dateUpload, a.full_name, a.ID as 'userID' FROM syllabuschecker_tbl s INNER JOIN accounts_tbl a ON s.uploaderId = a.ID ORDER BY s.file ASC";
                                         $stmt = $conn->prepare($sql);
                                         $stmt->execute();
                                         $data = $stmt->fetchAll();     
@@ -225,7 +225,7 @@ include '../php/header.php'
                                 <tbody>
                                     <tr class="bg-white border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
-                                            <a class="text-main hover:underline hover:underline-offset-4" href="../files/ECON-Learning-Content.pdf" target="_blank"><?php echo $row['file']; ?></a>
+                                            <a class="text-main hover:underline hover:underline-offset-4" href="../files/syllabusfiles/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
                                         </th>
                                         <td class="px-4 py-2">
                                         <?php echo $row['subj']; ?>
@@ -240,7 +240,7 @@ include '../php/header.php'
                                         <?php echo $row['year']; ?>
                                         </td>
                                         <td class="px-4 py-2">
-                                        <?php echo $row['NameUpload']; ?>
+                                        <?php echo $row['full_name']; ?>
                                         </td>
                                         <td class="px-4 py-2">
                                             <?php 
@@ -261,6 +261,7 @@ include '../php/header.php'
                                              <!-- ACCEPT -->
                                             <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Accept this?');">
                                                 <input type="hidden" name="syllabusid" value="<?php echo $row['ID']; ?>">
+                                                <!-- <input type="text" name="userid" value="<?php echo $row['userID']; ?>"> -->
                                                 <button name="accept1" class="font-medium text-blue-600 dark:text-blue-500            hover:underline">Accept</button>
                                             </form>
                                             </div>
@@ -269,7 +270,8 @@ include '../php/header.php'
                                             <!-- DECLINE -->
                                             <div class="inline-block">
                                             <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to decline this?');">
-                                            <input type="hidden" name="syllabusidec" value="<?php echo $row['ID']; ?>">
+                                                <input type="hidden" name="syllabusidec" value="<?php echo $row['ID']; ?>">
+                                                <!-- <input type="text" name="useriddec" value="<?php echo $row['userID']; ?>"> -->
                                                 <button name = "decline1" href="#" class="font-medium text-main dark:text-blue-500 hover:underline">Decline</button>
                                             </form>
                                             </div>

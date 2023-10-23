@@ -109,20 +109,21 @@ $(document).ready( function () {
     $("#confirm-password").on('keyup', function() {
         var password = $("#edituserpass").val();
         var confirmPassword = $(this).val();
+        console.log(password);
         console.log(confirmPassword);
         if (password === confirmPassword) {
             // Passwords match, hide the error message
-            $("#password-match-error").addClass("hidden");
+            $("#password-match-error-edit").addClass("hidden");
         } else {
             // Passwords do not match, show the error message
-            $("#password-match-error").removeClass("hidden");
+            $("#password-match-error-edit").removeClass("hidden");
         }
     });
     $("#confirm-password2").on('keyup', function() {
-        var password = $("#userPass").val();
-        var confirmPassword = $(this).val();
-        console.log(confirmPassword);
-        if (password === confirmPassword) {
+        var password2 = $("#userPass").val();
+        var confirmPassword2 = $(this).val();
+        console.log(confirmPassword2);
+        if (password2 === confirmPassword2) {
             // Passwords match, hide the error message
             $("#password-match-error").addClass("hidden");
         } else {

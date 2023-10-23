@@ -484,7 +484,7 @@
                         <div class="sm:col-span-4">
                             <label for="confirm-password" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
                             <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <p id="password-match-error" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
+                            <p id="password-match-error-edit" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
                         </div>
                     </div>
                 </form> 
