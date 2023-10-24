@@ -52,7 +52,7 @@ $SUBJCODE = basename(dirname(__FILE__));
                             <p class="block md:hidden">Files</p>
                         </th>
                         <th scope="col" class="hidden md:table-cell font-medium px-4 py-3">
-                            Uploader
+                            Uploaded By
                         </th>
                         <th scope="col" class="hidden md:table-cell font-medium px-4 py-3">
                             Date Uploaded
@@ -69,7 +69,14 @@ $SUBJCODE = basename(dirname(__FILE__));
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $data = $stmt->fetchAll();
-
+                        
+                        if (count($data) == 0) {
+                            ?> 
+                            <tr class="bg-white border-b">
+                                <td colspan="3" class="px-4 py-2 text-sm font-normal text-center ">No files Uploaded</td>
+                            </tr>
+                            <?php
+                        } else {
                         foreach ($data as $row):
                     ?>
                     <tr data-href="../../../files/syllabusfiles/<?php echo $row['FILES'];?>" class="clickable text-gray-600 cursor-pointer bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -87,7 +94,7 @@ $SUBJCODE = basename(dirname(__FILE__));
                             <div class="md:hidden text-xs flex justify-between mt-2">
                                 <div class="flex gap-2 items-center">
                                     <div class="w-4 h-4">
-                                        <img class="rounded-full w-4 h-4 object-cover" src="../../../files/userpics/<?php echo ($row['user_picture'] ? $row['user_picture'] : '');?>" alt="">
+                                        <img class="rounded-full w-4 h-4 object-cover" src="../../../files/userpics/<?php echo ($row['user_picture'] ? $row['user_picture'] : 'default.jpg');?>" alt="">
                                     </div>
                                     <div>
                                         <?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?>
@@ -134,6 +141,7 @@ $SUBJCODE = basename(dirname(__FILE__));
                     </tr>
                     <?php 
                         endforeach; 
+                    }
                     ?>
                 </tbody>
                 

@@ -103,7 +103,16 @@ include "../php/user_header.php";
                             $stmt->execute();
                             $subjects1 = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         ?>
-                        <?php foreach ($subjects1 as $row): ?>
+                        <?php 
+                        if (count($subjects1) == 0) {
+                            ?> 
+                            <li class="py-3 sm:py-4 px-4 text-center text-gray-500">
+                                <h1>No Pending Files.</h1>
+                            </li>
+                            <?php
+                        } else {
+                        foreach ($subjects1 as $row): 
+                        ?>
                         <li class="py-3 sm:py-4 px-4 hover:bg-gray-100">
                             <a href="../files/syllabusfiles/<?php echo $row['file'];?>" target="_blank">
                                 <div class="flex items-center space-x-4">
@@ -128,7 +137,7 @@ include "../php/user_header.php";
                                 </div>
                             </a>
                         </li>
-                        <?php endforeach; ?>
+                        <?php endforeach; }?>
 
                     </ul>
                 </div>
