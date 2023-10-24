@@ -144,7 +144,6 @@ $SUBJCODE = basename(dirname(__FILE__));
                     }
                     ?>
                 </tbody>
-                
             </table>
         </div>
     </div>
