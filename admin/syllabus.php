@@ -116,7 +116,7 @@ include '../php/header.php'
                                 <tbody>
 
                                 <?php 
-                                        $sql = "SELECT s.id, s.FILES, s.SUBJECTS, s.TERM, s.DATEUPLOAD, a.full_name FROM syllabus_tbl s INNER JOIN accounts_tbl a ON s.USERUPLOADID = a.ID ORDER BY s.DATEUPLOAD DESC";
+                                        $sql = "SELECT s.id, s.FILES, s.SUBJECTS, s.TERM, a.full_name, s.NAMEUPLOAD, s.DATEUPLOAD, a.user_picture FROM syllabus_tbl s LEFT JOIN accounts_tbl a ON s.USERUPLOADID = a.ID ORDER BY s.DATEUPLOAD DESC;";
                                         $stmt = $conn->prepare($sql);
                                         $stmt->execute();
                                         $data = $stmt->fetchAll();     
@@ -135,7 +135,7 @@ include '../php/header.php'
                                         <?php echo $row['TERM']; ?>
                                         </td>
                                         <td class="px-4 py-2">
-                                        <?php echo $row['full_name']; ?>
+                                        <?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?>
                                         </td>
                                         <td class="px-4 py-2">
                                             <?php 
@@ -216,7 +216,7 @@ include '../php/header.php'
                 
                                 </thead>
                                 <?php 
-                                        $sql = "SELECT s.ID, s.file, s.subj, s.subjCode, s.term, s.year, s.dateUpload, a.full_name, a.ID as 'userID' FROM syllabuschecker_tbl s INNER JOIN accounts_tbl a ON s.uploaderId = a.ID ORDER BY s.file ASC";
+                                        $sql = "SELECT s.ID, s.file, s.subj, s.subjCode, s.term, s.year, s.dateUpload, a.full_name, a.ID as 'userID' FROM syllabuschecker_tbl s INNER JOIN accounts_tbl a ON s.uploaderId = a.ID ORDER BY s.DATEUPLOAD DESC";
                                         $stmt = $conn->prepare($sql);
                                         $stmt->execute();
                                         $data = $stmt->fetchAll();     

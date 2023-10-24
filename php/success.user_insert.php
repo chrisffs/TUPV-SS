@@ -7,7 +7,7 @@ if (isset($_SESSION['useruploadfile_message'])) {
         </svg>
         <span class="sr-only">Info</span>
         <div class="ml-3 text-sm font-medium">
-            A simple info alert with an <a href="#" class="font-semibold underline hover:no-underline">example link</a>. Give it a click if you like.
+            <?php echo $_SESSION['useruploadfile_message'] ?>
         </div>
         <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-<?php echo $_SESSION['useruploadfile_messagecolor'] ?>-50 text-<?php echo $_SESSION['useruploadfile_messagecolor'] ?>-500 rounded-lg focus:ring-2 focus:ring-<?php echo $_SESSION['useruploadfile_messagecolor'] ?>-400 p-1.5 hover:bg-<?php echo $_SESSION['useruploadfile_messagecolor'] ?>-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-<?php echo $_SESSION['useruploadfile_messagecolor'] ?>-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
             <span class="sr-only">Close</span>

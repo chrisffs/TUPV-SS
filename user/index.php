@@ -39,6 +39,7 @@ include "../php/user_header.php";
   <div id="folders" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6 mt-6">
     <?php 
       $sql = "SELECT s.subjectName, s.subjCode, COUNT(u.SUBJECTS) AS file_count FROM subject_tbl s LEFT JOIN syllabus_tbl u ON s.subjectName = u.SUBJECTS GROUP BY s.subjectName ORDER BY s.subjectName ASC";
+      
       $stmt = $conn->prepare($sql);
       $stmt->execute();
       $data = $stmt->fetchAll();  
