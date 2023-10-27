@@ -6,16 +6,16 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit("POST request method required");
 }
 if(isset($_POST['insert_questions'])) {
-    $numQuestions = intval($_POST['question_card_count']);
-    echo $numQuestions;
+    $numQuestions = $_POST['no_of_questions'];
 
-    $sql = "INSERT INTO qbchecker_tbl (uploadedby, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:uploadername, :question, :a, :b, :c, :d, :answer, :subject, :year, :term, :sem)";
+    $sql = "INSERT INTO qbchecker_tbl (uploaderId, uploadedby, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:uploaderid, :uploadername, :question, :a, :b, :c, :d, :answer, :subject, :year, :term, :sem)";
     $stmt = $conn->prepare($sql);
 
     // Loop through each question
     for ($i = 1; $i <= $numQuestions; $i++) {
         // Get the values for each question
-        $uploadername = $_SESSION['full_name']; // You need to set this value
+        $uploadername = $_SESSION['full_name'];
+        $uploaderId = $_SESSION['ID']; // You need to set this value
         $qb_subject = $_POST['qbank_subject-user'.$i] ;
         $qb_year = $_POST['qbank_year-user'.$i];
         $qb_term = $_POST['qbank_term-user'.$i];
@@ -29,6 +29,7 @@ if(isset($_POST['insert_questions'])) {
 
         // Bind the parameters
         $stmt->bindParam(':uploadername', $uploadername);
+        $stmt->bindParam(':uploaderid', $uploaderId);
         $stmt->bindParam(':question', $qb_question);
         $stmt->bindParam(':a', $qb_a);
         $stmt->bindParam(':b', $qb_b);
@@ -44,13 +45,15 @@ if(isset($_POST['insert_questions'])) {
         if ($stmt->execute()) {
             echo "Data for question $i inserted successfully!<br>";
             header("Location: ../user/questionbank.php");
-            $_SESSION['useruploadquestion_message'] = "Successfully added ". $numQuestions . " question/s";
-            $_SESSION['useruploadquestion_messagecolor'] = "green";
+            $_SESSION['useralert_message'] = "Successfully added ". $numQuestions . " question/s";
+            $_SESSION['useralert_messagecolor'] = "green";
         } else {
             echo "Error for question $i: " . $stmt->errorInfo() . "<br>";
-            $_SESSION['useruploadquestion_message'] = "Failed to add". $numQuestions . "question/s. Please Try Again.";
-            $_SESSION['useruploadquestion_messagecolor'] = "red";
+            header("Location: ../user/questionbank.php");
+            $_SESSION['useralert_message'] = "Failed to add". $numQuestions . "question/s. Please Try Again.";
+            $_SESSION['useralert_messagecolor'] = "red";
         }
     }
 };
+header("Location: ../user/questionbank.php");
 ?>

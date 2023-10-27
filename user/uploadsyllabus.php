@@ -18,7 +18,7 @@ include "../php/user_header.php";
 ?>
 <main class="sm:ml-[64px] sm:ml-6 p-4 lg:p-6 mt-[60px]">
     <div class="flex flex-col md:flex-row md:divide-x">
-        <div class="p-0 md:pr-4 lg:pr-6 md:w-2/3  h-full">
+        <div class="p-0 md:pr-4 lg:pr-6 md:w-2/3 h-full">
             <form id="addUserForm" method="post" action="../php/user_insert.php" enctype="multipart/form-data" class="border rounded-lg p-4 lg:p-6">
                 <?php 
                 include "../php/success.user_insert.php";
@@ -149,6 +149,10 @@ include "../php/user_header.php";
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>
 $(document).ready( function () {
+    setTimeout(function() {
+        $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
+    }, 3000);
+    
     $('#file_subject-user').change(function () {
         const selectedSubject = $(this).val();
         const subjectCodeDropdown = $('#file_subjCode-user');

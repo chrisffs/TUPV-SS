@@ -10,39 +10,39 @@ if(isset($_POST['insertfile'])) {
 if ($_FILES["fileupload_user"]["error"] !== UPLOAD_ERR_OK) {
     switch ($_FILES["fileupload_user"]["error"]) {
         case UPLOAD_ERR_PARTIAL;
-            $_SESSION['useruploadfile_message'] = "File only partially uploaded";
+            $_SESSION['useralert_message'] = "File only partially uploaded";
             header('location: ../user/uploadsyllabus.php');
-            $_SESSION['useruploadfile_messagecolor'] = "red";
+            $_SESSION['useralert_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_NO_FILE:
-            $_SESSION['useruploadfile_message'] = "No file was uploaded";
+            $_SESSION['useralert_message'] = "No file was uploaded";
             header('location: ../user/uploadsyllabus.php');
-            $_SESSION['useruploadfile_messagecolor'] = "red";
+            $_SESSION['useralert_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_EXTENSION:
-            $_SESSION['useruploadfile_message'] = "File upload stopped by a PHP Extension";
+            $_SESSION['useralert_message'] = "File upload stopped by a PHP Extension";
             header('location: ../user/uploadsyllabus.php');
-            $_SESSION['useruploadfile_messagecolor'] = "red";
+            $_SESSION['useralert_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_NO_TMP_DIR:
-            $_SESSION['useruploadfile_message'] = "Temporary folder not found";
+            $_SESSION['useralert_message'] = "Temporary folder not found";
             header('location: ../user/uploadsyllabus.php');
-            $_SESSION['useruploadfile_messagecolor'] = "red";
+            $_SESSION['useralert_messagecolor'] = "red";
             exit();
             break;
         case UPLOAD_ERR_CANT_WRITE:
-            $_SESSION['useruploadfile_message'] = "Failed to write file";
+            $_SESSION['useralert_message'] = "Failed to write file";
             header('location: ../user/uploadsyllabus.php');
-            $_SESSION['useruploadfile_messagecolor'] = "red";
+            $_SESSION['useralert_messagecolor'] = "red";
             exit();
             break;
         default:
-            $_SESSION['useruploadfile_message'] = "Unknown upload error";
+            $_SESSION['useralert_message'] = "Unknown upload error";
             header('location: ../user/uploadsyllabus.php');
-            $_SESSION['useruploadfile_messagecolor'] = "red";
+            $_SESSION['useralert_messagecolor'] = "red";
             exit();
             break;
     }
@@ -59,16 +59,16 @@ $mime_types = ["application/pdf", "application/vnd.openxmlformats-officedocument
 // Verifying if the file is in pdf, docx, ppt
 if (! in_array($_FILES["fileupload_user"]["type"], $mime_types)) {
     
-    $_SESSION['useruploadfile_message'] = "Invalid file type";
-    $_SESSION['useruploadfile_messagecolor'] = "red";
+    $_SESSION['useralert_message'] = "Invalid file type";
+    $_SESSION['useralert_messagecolor'] = "red";
     header('location: ../user/uploadsyllabus.php');
     exit();
 }
 
 // For Maximum file size
 if ($_FILES["fileupload_user"]["size"] > 10485760) {
-    $_SESSION['useruploadfile_message'] = "File exceeds max(10MB)";
-    $_SESSION['useruploadfile_messagecolor'] = "red";
+    $_SESSION['useralert_message'] = "File exceeds max(10MB)";
+    $_SESSION['useralert_messagecolor'] = "red";
     header('location: ../user/uploadsyllabus.php');
     exit();
 }
@@ -91,8 +91,8 @@ while (file_exists($destination)) {
     $i++;
 }
 if (! move_uploaded_file($_FILES["fileupload_user"]["tmp_name"], $destination)) {
-    $_SESSION['useruploadfile_message'] = "Can't move uploaded file";
-    $_SESSION['useruploadfile_messagecolor'] = "red";
+    $_SESSION['useralert_message'] = "Can't move uploaded file";
+    $_SESSION['useralert_messagecolor'] = "red";
     header('location: ../user/uploadsyllabus.php');
     exit();
 }
@@ -124,12 +124,12 @@ if (! move_uploaded_file($_FILES["fileupload_user"]["tmp_name"], $destination)) 
     
     // Execute the query
     if ($stmt->execute()) {
-        $_SESSION['useruploadfile_message'] = "File upload Success";
-        $_SESSION['useruploadfile_messagecolor'] = "green";
+        $_SESSION['useralert_message'] = "File upload Success";
+        $_SESSION['useralert_messagecolor'] = "green";
         header('location: ../user/uploadsyllabus.php');
     } else {
-        $_SESSION['useruploadfile_message'] = "File upload Failed";
-        $_SESSION['useruploadfile_messagecolor'] = "red";
+        $_SESSION['useralert_message'] = "File upload Failed";
+        $_SESSION['useralert_messagecolor'] = "red";
         header('location: ../user/uploadsyllabus.php');
         exit();
     }
