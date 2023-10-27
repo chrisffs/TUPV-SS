@@ -40,17 +40,17 @@ include "../php/user_header.php";
                 <div class="mb-4 md:mb-6 bg-white flex flex-col lg:flex-row justify-between">
                     <div class="w-full text-lg md:text-xl font-semibold text-left text-gray-900">
                         Submit Questions using excel.
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">You can easily upload multiple-choice questions and other related details using <span class="text-green-600 font-semibold italic">Excel</span>. First, you'll need to download our <a href="../files/excel/questionbank_excel_template.xlsx" class="text-green-600 underline hover:no-underline">Excel template</a>. This template is specifically designed to make the question submission process as seamless as possible.</p>
+                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">You can easily upload multiple-choice questions and other related details using <span class="text-green-600 font-semibold italic">Excel</span>. First, you'll need to download our <a href="../files/excel/questionbank_excelfile_template.xlsx" class="text-green-600 underline hover:no-underline">Excel template</a>. This template is specifically designed to make the question submission process as seamless as possible.</p>
                     </div>
                 </div>
-                <form action="" method="post" enctype="multipart/form-data" class="">
+                <form action="../php/user_insert-excel.php" method="post" enctype="multipart/form-data" class="">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Excel file here</label>
                     <div class="flex items-center gap-2">
                         <div class="grow">
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" type="file" required>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" name="excel" type="file" required>
                         </div>
                         <div class="">
-                            <button type="submit" class="whitespace-nowrap focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit Excel file</button>
+                            <button type="submit" name="submit_excel" class="whitespace-nowrap focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit Excel file</button>
                         </div>
                     </div>
                 </form>
