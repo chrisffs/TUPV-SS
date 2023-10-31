@@ -17,22 +17,8 @@ $page = 'questionbank';
 include "../php/user_header.php";
 ?>
 <main class="sm:ml-[64px] sm:ml-6 p-4 md:p-6 mt-[60px]">
-    <div class="pb-4 border-b">
-        <div>
-            <h1 class="font-semibold md:font-bold text-2xl">Question Bank.</h1>
-        </div>
-        <!-- <div class="mt-2 md:mt-0 inline-block">
-            <a href="../files/excel/questionbank_excel_template.xlsx" type="button" class="md:ml-auto text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center flex justify-center items-center gap-2">
-                <h1>Download Excel file Template</h1>
-                <svg class="w-[16px] h-[16px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
-                    <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
-                </svg>
-            </a>
-        </div> -->
-    </div>
     <div class="flex flex-col md:flex-row divide-y md:divide-x md:divide-y-0">
-        <div class="p-0 md:pr-4 md:w-2/3 h-full pt-4 md:pt-6">
+        <div class="p-0 md:pr-4 md:w-2/3 h-full md:pt-4">
             <?php 
             include "../php/success.user_insert.php";
             ?>
@@ -40,17 +26,64 @@ include "../php/user_header.php";
                 <div class="mb-4 md:mb-6 bg-white flex flex-col lg:flex-row justify-between">
                     <div class="w-full text-lg md:text-xl font-semibold text-left text-gray-900">
                         Submit Questions using excel.
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">You can easily upload multiple-choice questions and other related details using <span class="text-green-600 font-semibold italic">Excel</span>. First, you'll need to download our <a href="../files/excel/questionbank_excelfile_template.xlsx" class="text-green-600 underline hover:no-underline">Excel template</a>. This template is specifically designed to make the question submission process as seamless as possible.</p>
+                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">You can easily upload multiple-choice questions and other related details using <span class="text-green-600 font-semibold italic">Excel</span>. You can download our <a href="../files/excel/questionbank_file_template.xlsx" class="text-green-600 underline hover:no-underline">Excel template</a>. This template is specifically designed to make the question submission process as seamless as possible.</p>
                     </div>
                 </div>
                 <form action="../php/user_insert-excel.php" method="post" enctype="multipart/form-data" class="">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Excel file here</label>
-                    <div class="flex items-center gap-2">
-                        <div class="grow">
-                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" name="excel" type="file" required>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="col-span-3">
+                            <?php
+                                $sql = "SELECT * FROM subject_tbl ORDER BY subjectName ASC";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            ?>
+                            <label for="excel_file_subj" class="block my-2 text-sm font-medium text-gray-900">Subject</label>
+                            <select id="excel_file_subj" name="excel_file_subj" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <option selected disabled hidden value="">Choose the Subject</option>
+                                <?php foreach ($subjects as $row): ?>
+                                    <option value="<?php echo $row['subjectName']; ?>"><?php echo $row['subjectName']; ?></option>
+                                <?php endforeach; ?>
+                            </select> 
                         </div>
-                        <div class="">
-                            <button type="submit" name="submit_excel" class="whitespace-nowrap focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit Excel file</button>
+                        <div class="col-span-1">
+                            <label for="excel_file_year" class="block my-2 text-sm font-medium text-gray-900">Year</label>
+                            <select id="excel_file_year" name="excel_file_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <option selected disabled hidden value="">Choose Year</option>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="excel_file_term" class="block my-2 text-sm font-medium text-gray-900">Term</label>
+                            <select id="excel_file_term" name="excel_file_term" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <option selected disabled hidden value="">Choose Term</option>
+                                <option value="Prelim">Prelim</option>
+                                <option value="Midterm">Midterm</option>
+                                <option value="Endterm">Endterm</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="excel_file_sem" class="block my-2 text-sm font-medium text-gray-900">Semester</label>
+                            <select id="excel_file_sem" name="excel_file_sem" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <option selected disabled hidden value="">Choose Semester</option>
+                                <option value="1st Semester">1st Semester</option>
+                                <option value="2nd Semester">2nd Semester</option>
+                                <option value="3rd Semester">3rd Semester</option>
+                            </select>
+                        </div>
+                        <div class="col-span-3">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Excel file here</label>
+                            <div class="flex items-center gap-2">
+                                <div class="grow">
+                                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" name="excel" type="file" required>
+                                </div>
+                                <div class="">
+                                    <button type="submit" name="submit_excel" class="whitespace-nowrap focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit Excel file</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -69,7 +102,7 @@ include "../php/user_header.php";
                             <input id="no_of_cards" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required>
                         </div>
                         <div class="">
-                            <button id="no_of_cards-btn" type="button" class="whitespace-nowrap focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5">
+                            <button id="no_of_cards-btn" type="button" class="whitespace-nowrap focus:outline-none text-white bg-main hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                                 </svg>
@@ -104,7 +137,7 @@ include "../php/user_header.php";
                 </button>
             </div>
         </div>
-        <aside class="py-6 pl-4 lg:pl-6 md:w-1/3">
+        <aside class="py-4 pl-4 lg:pl-6 md:w-1/3">
             <div class="h-full">
                 <div class="mb-4">
                     <h1 class="text-xl font-semibold">Pending</h1>
@@ -298,157 +331,3 @@ $(document).ready(function() {
 </script>
 </body>
 </html>
-<!-- <script>
-    $(document).ready(function() {
-        var card_counter = 1;
-        $(".add-question-btn").click(function() {
-        let subj =`qbank_subject-user|${card_counter}`
-        let year=`qbank_year-user|${card_counter}`
-        let term =`qbank_term-user|${card_counter}`
-        let sem =`qbank_sem-user|${card_counter}`
-        let quest =`qbank_question-user|${card_counter}`
-        let a =`choice_a-user|${card_counter}`
-        let b =`choice_b-user|${card_counter}`
-        let c =`choice_c-user|${card_counter}`
-        let d =`choice_d-user|${card_counter}`
-        let ans =`qb_answer-user|${card_counter}`
-        const addQuestionButton = $(".add-question-btn");
-
-        let form = `
-        <div class="question-card p-4 border rounded-lg">
-            <div class="grid grid-cols-3 gap-2">
-                <div class="col-start-3 flex justify-end">
-                    <button type="button" id="remove-question-card" class="remove-question-card ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#toast-success" aria-label="Close">
-                        <span class="sr-only">Close</span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="col-span-3">
-                    <?php
-                        $sql = "SELECT * FROM subject_tbl ORDER BY subjectName ASC";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-                        $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    ?>
-                    <label for="${subj}" class="block my-2 text-sm font-medium text-gray-900">Subject</label>
-                    <select id="${subj}" name="${subj}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option selected disabled hidden value="">Choose the Subject</option>
-                        <?php foreach ($subjects as $row): ?>
-                            <option value="<?php echo $row['subjectName']; ?>"><?php echo $row['subjectName']; ?></option>
-                        <?php endforeach; ?>
-                    </select> 
-                </div>
-                <div class="col-span-1">
-                    <label for="${year}" class="block my-2 text-sm font-medium text-gray-900">Year</label>
-                    <select id="${year}" name="${year}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option selected disabled hidden value="">Choose Year</option>
-                        <option value="1st Year">1st Year</option>
-                        <option value="2nd Year">2nd Year</option>
-                        <option value="3rd Year">3rd Year</option>
-                        <option value="4th Year">4th Year</option>
-                    </select>
-                </div>
-                <div class="col-span-1">
-                    <label for="${term}" class="block my-2 text-sm font-medium text-gray-900">Term</label>
-                    <select id="${term}" name="${term}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option selected disabled hidden value="">Choose Term</option>
-                        <option value="Prelim">Prelim</option>
-                        <option value="Midterm">Midterm</option>
-                        <option value="Endterm">Endterm</option>
-                    </select>
-                </div>
-                <div class="col-span-1">
-                    <label for="${sem}" class="block my-2 text-sm font-medium text-gray-900">Semester</label>
-                    <select id="${sem}" name="${sem}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                        <option selected disabled hidden value="">Choose Semester</option>
-                        <option value="1st Semester">1st Semester</option>
-                        <option value="2nd Semester">2nd Semester</option>
-                        <option value="3rd Semester">3rd Semester</option>
-                    </select>
-                </div>
-                <div class="col-span-3">
-                    <label for="${quest}" class="block mb-2 text-sm font-medium text-gray-900">Question</label>
-                    <textarea id="${quest}" rows="4" name="${quest}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write the question here..."></textarea>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
-                            <h1 class="font-semibold">A.</h1>
-                        </span>
-                        <input type="text" id="${a}" name="${a}" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" placeholder="Type Choice A here..." required>
-                    </div>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
-                            <h1 class="font-semibold">B.</h1>
-                        </span>
-                        <input type="text" id="${b}" name="${b}" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" placeholder="Type Choice B here..." required>
-                    </div>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
-                            <h1 class="font-semibold">C.</h1>
-                        </span>
-                        <input type="text" id="${c}" name="${c}" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" placeholder="Type Choice C here..." required>
-                    </div>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
-                            <h1 class="font-semibold">D.</h1>
-                        </span>
-                        <input type="text" id="${d}" name="${d}" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" placeholder="Type Choice D here..." required>
-                    </div>
-                </div>
-                <div class="col-span-3">
-                    <div class="flex">
-                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
-                            <h1 class="font-semibold">Answer</h1>
-                        </span>
-                        <input type="text" id="${ans}" name="${ans}" class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5" placeholder="Type the Answer here..." required>
-                    </div>
-                </div>
-            </div>
-        </div>`
-        addQuestionButton.before(form);
-
-        card_counter += 1;
-
-        var removeBtn = $(".remove-question-card");
-        removeBtn.each(function() {
-            $(this).click(function() {
-            // Remove the parent question card
-            // console.log($(this).closest(".question-card"));
-            $(this).closest(".question-card").remove();
-            
-            });
-        })
-        
-        $(".submitQuestionbtn").click(function() {
-            var iArray = []
-            // Update the names and ids of input and select elements
-            $(".question-card").find("textarea").each(function() {
-                const currentName = $(this).attr("name");
-                var nameArray = currentName.split('|')
-                iArray.push(nameArray[1]);
-            });
-            
-            console.log(iArray);
-            // Send the array to PHP using AJAX
-            $.ajax({
-                type: "POST",
-                url: "../php/insert_qbank.php", // PHP script to handle the array
-                data: { myArray: JSON.stringify(iArray) }, // Pass the array as "myArray"
-                success: function(response) {
-                    // alert(response); // Display the response from PHP
-                }
-            });
-        });
-    });
-    
-});
-</script> -->

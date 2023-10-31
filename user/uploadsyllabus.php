@@ -138,7 +138,6 @@ include "../php/user_header.php";
                             </a>
                         </li>
                         <?php endforeach; }?>
-
                     </ul>
                 </div>
             </div>
@@ -182,24 +181,24 @@ $(document).ready( function () {
         handleFileUpload(file);
     });
 
-    // Drag and drop events for the file container
-    $('#fileupload-container').on('dragover', function (e) {
-        e.preventDefault();
-        $(this).addClass('bg-gray-200'); // Add visual indication for drag over
-    });
+    // // Drag and drop events for the file container
+    // $('#fileupload-container').on('dragover', function (e) {
+    //     e.preventDefault();
+    //     $(this).addClass('bg-gray-200'); // Add visual indication for drag over
+    // });
 
-    $('#fileupload-container').on('dragleave', function (e) {
-        e.preventDefault();
-        $(this).removeClass('bg-gray-200'); // Remove visual indication when drag leaves
-    });
+    // $('#fileupload-container').on('dragleave', function (e) {
+    //     e.preventDefault();
+    //     $(this).removeClass('bg-gray-200'); // Remove visual indication when drag leaves
+    // });
 
-    $('#fileupload-container').on('drop', function (e) {
-        e.preventDefault();
-        $(this).removeClass('bg-gray-200'); // Remove visual indication
-        var file = e.originalEvent.dataTransfer.files[0]; // Get the dropped file
-        handleFileUpload(file);
-        console.log(file);
-    });
+    // $('#fileupload-container').on('drop', function (e) {
+    //     e.preventDefault();
+    //     $(this).removeClass('bg-gray-200'); // Remove visual indication
+    //     var file = e.originalEvent.dataTransfer.files[0]; // Get the dropped file
+    //     handleFileUpload(file);
+    //     console.log(file);
+    // });
 });
 </script>
 </body>

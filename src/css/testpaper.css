@@ -1,0 +1,51 @@
+@media print {
+    #print-btn {
+        display: none;
+    }
+    .print-hide {
+        display: none;
+    }
+    #testpaper-container, #answersheet-container, .pagebreak {
+        display: block !important;
+    }
+}
+
+@media print {
+    .pagebreak {
+        clear: both;
+        page-break-after: always;
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas: 'oneTotwenty twentyoneToforty fortyoneTofifty';
+    grid-gap: 20px;
+    /* padding: 10px; */
+}
+
+.oneTotwenty {
+    grid-area: oneTotwenty;
+
+}
+.twentyoneToforty {
+    grid-area: twentyoneToforty;
+
+}
+.fortyoneTofifty {
+    grid-area: fortyoneTofifty;
+}
+
+.circles:first-child > div:last-child {
+    border-top: 2px solid black;
+}
+.circles:first-child > div {
+    padding-top: 1rem !important;
+}
+
+.circles:last-child > div:last-child {
+    border-bottom: 2px solid black;
+}
+.circles:last-child > div {
+    padding-bottom: 1rem !important;
+}

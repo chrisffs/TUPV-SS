@@ -45,12 +45,12 @@ if(isset($_POST['insert_questions'])) {
         if ($stmt->execute()) {
             echo "Data for question $i inserted successfully!<br>";
             header("Location: ../user/questionbank.php");
-            $_SESSION['useralert_message'] = "Successfully added ". $numQuestions . " question/s";
+            $_SESSION['useralert_message'] = "Successfully added ". $numQuestions . " questions. ";
             $_SESSION['useralert_messagecolor'] = "green";
         } else {
             echo "Error for question $i: " . $stmt->errorInfo() . "<br>";
             header("Location: ../user/questionbank.php");
-            $_SESSION['useralert_message'] = "Failed to add". $numQuestions . "question/s. Please Try Again.";
+            $_SESSION['useralert_message'] = "Failed to add". $numQuestions . "questions. Please Try Again.";
             $_SESSION['useralert_messagecolor'] = "red";
         }
     }

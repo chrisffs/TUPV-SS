@@ -11,6 +11,10 @@ if(isset($_POST['submit_excel']))
 {
     $fileName = $_FILES['excel']['name'];
     $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    $filesubj = $_POST['excel_file_subj'];
+    $fileyear = $_POST['excel_file_year'];
+    $fileterm = $_POST['excel_file_term'];
+    $filesem = $_POST['excel_file_sem'];
 
     $allowed_ext = ['xls','csv','xlsx'];
 
@@ -31,16 +35,16 @@ if(isset($_POST['submit_excel']))
             {
                 $uploadername = $_SESSION['full_name'];
                 $uploaderId = $_SESSION['ID']; // You need to set this value
-                $qb_subject = $row['0'];
-                $qb_year = $row['1'];
-                $qb_term = $row['2'];
-                $qb_sem = $row['3'];
-                $qb_question = $row['4'];
-                $qb_a = $row['5'];
-                $qb_b = $row['6'];
-                $qb_c = $row['7'];
-                $qb_d = $row['8'];
-                $qb_ans = $row['9'];
+                $qb_subject = $filesubj;
+                $qb_year = $fileyear;
+                $qb_term = $fileterm;
+                $qb_sem = $filesem;
+                $qb_question = $row['0'];
+                $qb_a = $row['1'];
+                $qb_b = $row['2'];
+                $qb_c = $row['3'];
+                $qb_d = $row['4'];
+                $qb_ans = $row['5'];
 
                 // Bind the parameters
                 $stmt->bindParam(':uploadername', $uploadername);

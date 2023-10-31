@@ -18,7 +18,7 @@
             </div>
             <div class="flex items-center md:order-2">
                 <!-- Button for Extra Large Modal | dont delete -->
-                <button data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100" type="button">
+                <button data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" class="p-2 mr-1 text-main rounded-lg hover:text-red-900 hover:bg-red-100" type="button">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                     </svg>
