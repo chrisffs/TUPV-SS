@@ -7,7 +7,8 @@ Include '../php/TIMEAGO.PHP'
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Admin Activity Log | TUPV Syllabus System</title>
     <link rel="stylesheet" href="../src/css/main.css">
     <link rel="stylesheet" href="../src/css/jquery.dataTables.css">
