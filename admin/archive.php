@@ -84,7 +84,17 @@ include '../php/header.php'
                         ?> 
                         <tr class="bg-white  border-b dark:bg-gray-800 text-gray-900 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="px-4 py-2">
-                           <?php echo $row['archiveDate']; ?>
+                           <?php 
+                                $old_date_timestamp2 = strtotime($row['archiveDate']);
+                                $date2 = date('Y/m/d', $old_date_timestamp2);
+                                echo $date2;
+                                ?>
+                                <span class="block text-xs text-gray-600">
+                                    <?php 
+                                    $time2 = date('g:i A', $old_date_timestamp2);
+                                    echo $time2 
+                                    ?>
+                                </span>
                            </td>
                            <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
                            
@@ -115,7 +125,17 @@ include '../php/header.php'
                            <?php echo $row['uploadedby']; ?>
                            </td>
                            <td class="px-4 py-2">
-                           <?php echo $row['time_uploaded']; ?>
+                           <?php 
+                                $old_date_timestamp1 = strtotime($row['time_uploaded']);
+                                $date1 = date('Y/m/d', $old_date_timestamp1);
+                                echo $date1;
+                                ?>
+                                <span class="block text-xs text-gray-600">
+                                    <?php 
+                                    $time1 = date('g:i A', $old_date_timestamp1);
+                                    echo $time1 
+                                    ?>
+                                </span>
                            </td>
                            <td class="px-4 py-2">
                               <div class="inline-block">
@@ -185,7 +205,17 @@ include '../php/header.php'
                         ?> 
                                 <tr class="bg-white border-b  dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="px-4 py-2">
-                                    <?php echo $row['archiveDate']; ?>
+                                    <?php 
+                                        $old_date_timestamp3 = strtotime($row['archiveDate']);
+                                        $date3 = date('Y/m/d', $old_date_timestamp3);
+                                        echo $date3;
+                                        ?>
+                                        <span class="block text-xs text-gray-600">
+                                            <?php 
+                                            $time3 = date('g:i A', $old_date_timestamp3);
+                                            echo $time3 
+                                            ?>
+                                        </span>
                                     </td>
                                     <td class="px-4 py-2 whitespace-wrap">
                                         <a class="text-main hover:underline hover:underline-offset-4 " href="../files/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
@@ -206,7 +236,17 @@ include '../php/header.php'
                                     <?php echo $row['NameUpload']; ?>	
                                     </td>
                                     <td class="px-4 py-2">
-                                    <?php echo $row['dateUpload']; ?>
+                                    <?php 
+                                        $old_date_timestamp4 = strtotime($row['dateUpload']);
+                                        $date4 = date('Y/m/d', $old_date_timestamp4);
+                                        echo $date4;
+                                        ?>
+                                        <span class="block text-xs text-gray-600">
+                                            <?php 
+                                            $time4 = date('g:i A', $old_date_timestamp4);
+                                            echo $time4 
+                                            ?>
+                                        </span>
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block">

@@ -252,7 +252,7 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
 
     if ($result) {
         // Insert the row into syllabus_tbl
-        $sql_insert_syllabus = "INSERT INTO syllabus_tbl (NAMEUPLOAD, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
+        $sql_insert_syllabus = "INSERT INTO syllabus_tbl (NAMEUPLOAD, USERUPLOADID, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :uploaderId, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
         $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
     
         // Define variables for actlog_tbl
@@ -266,6 +266,7 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
     
         if ($stmt_insert_syllabus && $stmt_insert_actlog) {
             $stmt_insert_syllabus->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_syllabus->bindParam(':uploaderId', $result['uploaderId']);
             $stmt_insert_syllabus->bindParam(':subj', $result['subj']);
             $stmt_insert_syllabus->bindParam(':subjCode', $result['subjCode']);
             $stmt_insert_syllabus->bindParam(':term', $result['term']);
