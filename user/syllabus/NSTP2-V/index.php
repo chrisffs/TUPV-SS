@@ -15,7 +15,7 @@ include '../../../php/user_session.syllabusfiles.php';
 <?php 
 $page = 'syllabus';
 include "../../../php/user_header.syllabusfiles.php";
-$DEPT = basename(dirname(__FILE__));
+$SUBJCODE = basename(dirname(__FILE__));
 ?>
 <main class="sm:ml-[64px] sm:ml-6 p-4 md:p-6 mt-[60px]">
     <div class="block space-y-2 sm:flex items-center justify-between pb-4 border-b"> 
@@ -27,7 +27,7 @@ $DEPT = basename(dirname(__FILE__));
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
         </svg>
         <a href="./" class="font-semibold text-lg sm:text-2xl">
-            <?php echo $DEPT; ?>
+            <?php echo $SUBJCODE; ?>
         </a>
       </div>
       <div>
@@ -52,7 +52,7 @@ $DEPT = basename(dirname(__FILE__));
                             <p class="block md:hidden">Files</p>
                         </th>
                         <th scope="col" class="hidden md:table-cell font-medium px-4 py-3">
-                            Uploader
+                            Uploaded By
                         </th>
                         <th scope="col" class="hidden md:table-cell font-medium px-4 py-3">
                             Date Uploaded
@@ -61,11 +61,22 @@ $DEPT = basename(dirname(__FILE__));
                 </thead>
                 <tbody id="files">
                     <?php 
-                        $sql = "SELECT s.FILES, s.NAMEUPLOAD, s.DATEUPLOAD, a.user_picture FROM syllabus_tbl s INNER JOIN accounts_tbl a ON s.USERUPLOADID = a.ID WHERE s.CODE = '$DEPT' ORDER BY s.FILES ASC";
+                        $sql = "SELECT s.FILES, a.full_name, s.NAMEUPLOAD, s.DATEUPLOAD, a.user_picture
+                        FROM syllabus_tbl s
+                        LEFT JOIN accounts_tbl a ON s.USERUPLOADID = a.ID
+                        WHERE s.CODE = '$SUBJCODE'
+                        ORDER BY s.FILES ASC";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $data = $stmt->fetchAll();
-
+                        
+                        if (count($data) == 0) {
+                            ?> 
+                            <tr class="bg-white border-b">
+                                <td colspan="3" class="px-4 py-2 text-sm font-normal text-center ">No files Uploaded</td>
+                            </tr>
+                            <?php
+                        } else {
                         foreach ($data as $row):
                     ?>
                     <tr data-href="../../../files/syllabusfiles/<?php echo $row['FILES'];?>" class="clickable text-gray-600 cursor-pointer bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -83,10 +94,10 @@ $DEPT = basename(dirname(__FILE__));
                             <div class="md:hidden text-xs flex justify-between mt-2">
                                 <div class="flex gap-2 items-center">
                                     <div class="w-4 h-4">
-                                        <img class="rounded-full w-4 h-4 object-cover" src="../../../files/userpics/<?php echo $row['user_picture'];?>" alt="">
+                                        <img class="rounded-full w-4 h-4 object-cover" src="../../../files/userpics/<?php echo ($row['user_picture'] ? $row['user_picture'] : 'default.jpg');?>" alt="">
                                     </div>
                                     <div>
-                                        <h2><?php echo $row['NAMEUPLOAD'];?></h2>
+                                        <?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?>
                                     </div> 
                                 </div> 
                                 <div>
@@ -107,10 +118,10 @@ $DEPT = basename(dirname(__FILE__));
                         <td class="px-4 py-2 hidden md:table-cell">
                             <div class="flex gap-2 items-center">
                                 <div class="w-6 h-6">
-                                    <img class="rounded-full w-6 h-6 object-cover" src="../../../files/userpics/<?php echo $row['user_picture'];?>" alt="">
+                                    <img class="rounded-full w-6 h-6 object-cover" src="../../../files/userpics/<?php echo ($row['user_picture'] ? $row['user_picture'] : 'default.jpg');?>" alt="">
                                 </div>
                                 <div>
-                                    <h2><?php echo $row['NAMEUPLOAD'];?></h2>
+                                    <?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?>
                                 </div> 
                             </div> 
                         </td>
@@ -130,6 +141,7 @@ $DEPT = basename(dirname(__FILE__));
                     </tr>
                     <?php 
                         endforeach; 
+                    }
                     ?>
                 </tbody>
             </table>
