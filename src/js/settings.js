@@ -11,7 +11,11 @@ $(document).ready( function () {
     "info": false,
     // "paging": false,
     });
-
+    
+    $('#userTupvId').on('input', function() {
+        // Synchronize the value with the 'userUName' input
+        $('#userUName').val($(this).val());
+    });
 
     setTimeout(function() {
         $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
