@@ -9,7 +9,7 @@ include '../php/TIMEAGO.PHP';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/css/main.css">
-    <title>Document</title>
+    <title>Dashboard | TUP-SS</title>
 </head>
 <body class="bg-light-100">
 
@@ -100,7 +100,7 @@ include '../php/header.php'
       <div class="grid grid-cols-3 grid-rows-2 gap-4 content-stretch">
          <div class="col-span-1 row-span-2">
          <?php
-         $sql = "SELECT * FROM actlog_tbl ORDER BY upload_time DESC LIMIT 5";
+         $sql = "SELECT * FROM activitylog_tbl ORDER BY upload_time DESC LIMIT 9";
          $stmt = $conn->prepare($sql);
          $stmt->execute();
          $data = $stmt->fetchAll();
@@ -119,8 +119,27 @@ include '../php/header.php'
                     $activityType = $row['type'];
                     if ($activityType === "Question") {
                         $imageSrc = '<svg class="w-6 h-6 text-main dark-text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/></svg>';
+                        
                     } elseif ($activityType === "Syllabus") {
-                        $imageSrc = '<svg class="w-6 h-6 text-main dark-text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20"><path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/></svg>';
+                        $imageSrc = '<svg class="w-6 h-6 text-main dark-text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20"><path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/></svg>'; 
+                    }
+                    elseif ($activityType === "Unarchived Syllabus") {
+                       $imageSrc = '<svg class="w-6 h-6 text-main  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 15"><path d="M1 13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H1v7Zm5.293-3.707a1 1 0 0 1 1.414 0L8 9.586V8a1 1 0 0 1 2 0v1.586l.293-.293a1 1 0 0 1 1.414 1.414l-2 2a1 1 0 0 1-1.416 0l-2-2a1 1 0 0 1 .002-1.414ZM17 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1Z"/>
+                     </svg>';
+
+                     }
+                     elseif ($activityType === "Unarchived Question") {
+                        $imageSrc = '<svg class="w-6 h-6 text-main  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 15"><path d="M1 13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H1v7Zm5.293-3.707a1 1 0 0 1 1.414 0L8 9.586V8a1 1 0 0 1 2 0v1.586l.293-.293a1 1 0 0 1 1.414 1.414l-2 2a1 1 0 0 1-1.416 0l-2-2a1 1 0 0 1 .002-1.414ZM17 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1Z"/>
+                      </svg>';
+ 
+                     }
+
+                     
+                     elseif ($activityType === "Trash") {
+                        $imageSrc = '<svg class="w-6 h-6 text-main dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
+                      </svg>';
+  
                     } else {
                         $imageSrc = '<svg class="w-6 h-6 text-main dark-text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20"><path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/> <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/></svg>';
                     }
@@ -130,7 +149,7 @@ include '../php/header.php'
                             <div class="min-w-0">
                                 <h4 class="text-main text-xs font-medium mb-1"><span><?= $row['type']; ?>   </span>•<span class="text-gray-400 italic"> <?php echo getTimeAgo($row['upload_time']); ?></span></h4>
                                 <h4 class="text-dark text-sm font-medium"><?= $row['choice']; ?> <span class="text-main italic"><?= $row['type_content']; ?></span> Submitted by <span class="font-semibold text-dark"><?= $row['upload_name']; ?></span> </h4>
-                                <h4 class="text-gray-500 text-sm truncate"><?= $row['content']; ?></h4>
+                                <h4 class="text-gray-500 text-sm truncate"><?= $row['type_content']; ?></h4>
                             </div>
                         </div>
                       
@@ -144,7 +163,7 @@ include '../php/header.php'
                   <!-- END ------------------------------------------ -->
                </div>
                <div class="mt-auto mx-0 text-end">
-                  <a href="#" class="inline-flex items-center font-medium text-main hover:text-red-800">
+                  <a href="../ADMIN/activitylog.php" class="inline-flex items-center font-medium text-main hover:text-red-800">
                      View more
                      <svg class="w-2.5 h-2.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -158,7 +177,7 @@ include '../php/header.php'
             <div class="mb-4">
 
                       <?php
-                     $sql = "SELECT * FROM qbchecker_tbl ORDER BY time_uploaded DESC LIMIT 5";
+                     $sql = "SELECT * FROM qbchecker_tbl ORDER BY time_uploaded DESC LIMIT 3";
                      $stmt = $conn->prepare($sql);
                      $stmt->execute();
                      $data = $stmt->fetchAll();
@@ -245,7 +264,7 @@ include '../php/header.php'
             <h2 class="leading-tight tracking-tight font-semibold text-dark mb-4">Pending Modules</h2>
             <div class="mb-4">
                <?php 
-                  $sql = "SELECT * FROM syllabuschecker_tbl  ";
+                  $sql = "SELECT * FROM syllabuschecker_tbl  ORDER BY dateUpload DESC LIMIT 3";
                   $stmt = $conn->prepare($sql);
                   $stmt->execute();
                   $data = $stmt->fetchAll();

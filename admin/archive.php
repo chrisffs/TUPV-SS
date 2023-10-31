@@ -210,7 +210,10 @@ include '../php/header.php'
                                     </td>
                                     <td class="px-4 py-2">
                                         <div class="inline-block">
-                                            <a href="#" class="font-medium text-main dark:text-blue-500 hover:underline">Restore</a>
+                                        <form method="POST" action="../php/insert.php" onsubmit="return confirm('Are you sure you want to Restore this?');">
+                                    <input type="hidden" name="ressysid" value="<?php echo $row['ID']; ?>">
+                                            <button name = "restoresys" class="font-medium text-main dark:text-blue-500 hover:underline">Restore</button>
+                                        </form>
                                         </div>
                                     </td>
                                 </tr>

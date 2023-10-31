@@ -10,10 +10,10 @@
          </button>
         <div class="mx-2 flex">
             <div class="me-2">
-                <img src="../src/img/tupvlogo.png" class="h-8 object-cover" alt="" srcset="">
+                <img src="../src/img/tupvlogo.png" class="h-9 object-cover" alt="" srcset="">
             </div>
             <div>
-                <img src="../src/img/sslogo.png" class="h-8 object-cover" alt="" srcset="">
+                <img src="../src/img/sslogo.png" class="h-9 object-cover" alt="" srcset="">
             </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
               </div>
               <ul class="py-1" role="none">
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-secondary hover:bg-light-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-light" role="menuitem">Activity Log</a>
+                  <a href="activitylog.php" class="block px-4 py-2 text-sm text-secondary hover:bg-light-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-light" role="menuitem">Activity Log</a>
                 </li>
                 <li>
                   <a href="settings.php" class="block px-4 py-2 text-sm text-secondary hover:bg-light-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-light" role="menuitem">Settings</a>

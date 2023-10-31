@@ -3,7 +3,7 @@ include './conn.php'; // Include the database connection script
 include '../php/TIMEAGO.PHP';
 session_start(); // Start a PHP session
 
-
+date_default_timezone_set('Asia/Manila');
 $currentTimestamp = time(); // This returns the current Unix timestamp
 $formattedTimestamp = date("Y-m-d H:i:s", $currentTimestamp);
 
@@ -237,7 +237,7 @@ if(isset($_POST['insertuser']))
 }
 
 
-// CHECKER syllabus dashboard.
+// CHECKER syllabus .
 // accept
 if (isset($_POST['accept']) || isset($_POST['accept1'])) {
     $syllabusid = $_POST['syllabusid'];
@@ -254,16 +254,16 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
         // Insert the row into syllabus_tbl
         $sql_insert_syllabus = "INSERT INTO syllabus_tbl (NAMEUPLOAD, SUBJECTS, CODE, TERM, YEARS, FILES, FILELOC, DATEUPLOAD) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
         $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
-
+    
         // Define variables for actlog_tbl
         $syllabus = "Syllabus";
         $accepted = "Accepted";
         $module = "Module";
-
+    
         // Insert into actlog_tbl
-        $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES (:syllabus, :dateUpload, :accepted, :module, :NameUpload, :file)";
+        $sql_insert_actlog = "INSERT INTO activitylog_tbl (type, upload_time, choice, type_content, upload_name, subj, subjCode, terms, years, file, fileLoc) VALUES (:syllabus, :dateUpload, :accepted, :module, :NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc)";
         $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
-
+    
         if ($stmt_insert_syllabus && $stmt_insert_actlog) {
             $stmt_insert_syllabus->bindParam(':NameUpload', $result['NameUpload']);
             $stmt_insert_syllabus->bindParam(':subj', $result['subj']);
@@ -273,20 +273,25 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
             $stmt_insert_syllabus->bindParam(':file', $result['file']);
             $stmt_insert_syllabus->bindParam(':fileLoc', $result['fileLoc']);
             $stmt_insert_syllabus->bindParam(':dateUpload', $result['dateUpload']);
-
+    
             $stmt_insert_actlog->bindParam(':syllabus', $syllabus);
-            $stmt_insert_actlog->bindParam(':dateUpload', $result['dateUpload']);
+            $stmt_insert_actlog->bindParam(':dateUpload', $formattedTimestamp);
             $stmt_insert_actlog->bindParam(':accepted', $accepted);
             $stmt_insert_actlog->bindParam(':module', $module);
             $stmt_insert_actlog->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_actlog->bindParam(':subj', $result['subj']);
+            $stmt_insert_actlog->bindParam(':subjCode', $result['subjCode']);
+            $stmt_insert_actlog->bindParam(':term', $result['term']);
+            $stmt_insert_actlog->bindParam(':year', $result['year']);
             $stmt_insert_actlog->bindParam(':file', $result['file']);
-
+            $stmt_insert_actlog->bindParam(':fileLoc', $result['fileLoc']);
+    
             if ($stmt_insert_syllabus->execute() && $stmt_insert_actlog->execute()) {
                 // Delete the row from syllabuschecker_tbl
                 $sql_delete = "DELETE FROM syllabuschecker_tbl WHERE ID = :syllabusid";
                 $stmt_delete = $conn->prepare($sql_delete);
-                $stmt_delete->bindParam(':syllabusid', $syllabusid, PDO::PARAM_INT);
-
+                $stmt_delete->bindParam(':syllabusid', $result['ID'], PDO::PARAM_INT); // Assuming 'ID' is the correct column name
+    
                 if ($stmt_delete->execute()) {
                     if (isset($_POST['accept'])) {
                         header("Location: ../ADMIN/dashboard.php");
@@ -306,6 +311,8 @@ if (isset($_POST['accept']) || isset($_POST['accept1'])) {
         echo "Row not found in syllabuschecker_tbl";
     }
 }
+
+
 
 // ACCEPT QB CHECKER
 
@@ -332,7 +339,7 @@ if (isset($_POST['acceptqb']) || isset($_POST['acceptqb1'])) {
         $module = "Question Bank";
 
         // Insert into actlog_tbl
-        $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES (:syllabus, :time_uploaded, :accepted, :module, :uploadedby, :Question)";
+        $sql_insert_actlog = "INSERT INTO activitylog_tbl (type, upload_time, choice, type_content, upload_name, yearqb, subjqb, termqb, semesterqb, questionqb,  A, B, C, D, Answers) VALUES (:syllabus, :upload_time, :accepted, :module, :upload_name, :yearqb, :subjqb, :termqb, :semesterqb, :questionqb,  :A, :B, :C, :D, :Answers)";
         $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
 
         if ($stmt_insert_syllabus && $stmt_insert_actlog) {
@@ -350,11 +357,21 @@ if (isset($_POST['acceptqb']) || isset($_POST['acceptqb1'])) {
             $stmt_insert_syllabus->bindParam(':Answer', $result['Answer']);
         
             $stmt_insert_actlog->bindParam(':syllabus', $syllabus);
-            $stmt_insert_actlog->bindParam(':time_uploaded', $result['time_uploaded']);
+            $stmt_insert_actlog->bindParam(':upload_time', $formattedTimestamp);
             $stmt_insert_actlog->bindParam(':accepted', $accepted);
             $stmt_insert_actlog->bindParam(':module', $module);
-            $stmt_insert_actlog->bindParam(':uploadedby', $result['uploadedby']);
-            $stmt_insert_actlog->bindParam(':Question', $result['Question']);
+            $stmt_insert_actlog->bindParam(':upload_name', $result['uploadedby']);
+            $stmt_insert_actlog->bindParam(':yearqb', $result['Year']);
+            $stmt_insert_actlog->bindParam(':subjqb', $result['Subject']);
+            $stmt_insert_actlog->bindParam(':termqb', $result['Term']);
+            $stmt_insert_actlog->bindParam(':semesterqb', $result['Semester']);
+            $stmt_insert_actlog->bindParam(':questionqb', $result['Question']);
+            $stmt_insert_actlog->bindParam(':A', $result['A']);
+            $stmt_insert_actlog->bindParam(':B', $result['B']);
+            $stmt_insert_actlog->bindParam(':C', $result['C']);
+            $stmt_insert_actlog->bindParam(':D', $result['D']);
+            $stmt_insert_actlog->bindParam(':Answers', $result['Answer']);
+         
         
             if ($stmt_insert_syllabus->execute() && $stmt_insert_actlog->execute()) {
                 // Delete the row from syllabuschecker_tbl
@@ -419,7 +436,7 @@ if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
           $Question = "Question";
   
       
-          $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES (:qb, :time_uploaded, :decline, :module, :uploadedby, :Question)";
+           $sql_insert_actlog = "INSERT INTO activitylog_tbl (type, upload_time, choice, type_content, upload_name, yearqb, subjqb, termqb, semesterqb, questionqb,  A, B, C, D, Answers) VALUES (:qb, :upload_time, :decline, :Question, :upload_name, :yearqb, :subjqb, :termqb, :semesterqb, :questionqb,  :A, :B, :C, :D, :Answers)";
           $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
 
         if ($stmt_insert) {
@@ -439,11 +456,20 @@ if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
 
 
             $stmt_insert_actlog->bindParam(':qb', $Question);
-            $stmt_insert_actlog->bindParam(':time_uploaded', $result['time_uploaded']);
+            $stmt_insert_actlog->bindParam(':upload_time', $formattedTimestamp);
             $stmt_insert_actlog->bindParam(':decline', $decline);
-            $stmt_insert_actlog->bindParam(':module', $qb);
-            $stmt_insert_actlog->bindParam(':uploadedby', $result['uploadedby']);
-            $stmt_insert_actlog->bindParam(':Question', $result['Question']);
+            $stmt_insert_actlog->bindParam(':Question', $qb);
+            $stmt_insert_actlog->bindParam(':upload_name', $result['uploadedby']);
+            $stmt_insert_actlog->bindParam(':yearqb', $result['Year']);
+            $stmt_insert_actlog->bindParam(':subjqb', $result['Subject']);
+            $stmt_insert_actlog->bindParam(':termqb', $result['Term']);
+            $stmt_insert_actlog->bindParam(':semesterqb', $result['Semester']);
+            $stmt_insert_actlog->bindParam(':questionqb', $result['Question']);
+            $stmt_insert_actlog->bindParam(':A', $result['A']);
+            $stmt_insert_actlog->bindParam(':B', $result['B']);
+            $stmt_insert_actlog->bindParam(':C', $result['C']);
+            $stmt_insert_actlog->bindParam(':D', $result['D']);
+            $stmt_insert_actlog->bindParam(':Answers', $result['Answer']);
 
 
             if ($stmt_insert->execute() && $stmt_insert_actlog->execute()) {
@@ -477,7 +503,7 @@ if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
 
 
 
-// decline
+// decline syllabus
 
 if (isset($_POST['decline']) || isset($_POST['decline1'])) {
     $syllabusid = $_POST['syllabusidec'];
@@ -501,7 +527,7 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
           $module = "Module";
   
           // Insert into actlog_tbl
-          $sql_insert_actlog = "INSERT INTO actlog_tbl (type, upload_time, choice, type_content, upload_name, content) VALUES ( :syllabus, :dateUpload, :decline, :module, :NameUpload, :file)";
+          $sql_insert_actlog = "INSERT INTO activitylog_tbl (type, upload_time, choice, type_content, upload_name, subj, subjCode, terms, years, file, fileLoc) VALUES (:syllabus, :dateUpload, :decline, :module, :NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc)";
           $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
 
         if ($stmt_insert) {
@@ -517,11 +543,16 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
 
 
             $stmt_insert_actlog->bindParam(':syllabus', $syllabus);
-            $stmt_insert_actlog->bindParam(':dateUpload', $result['dateUpload']);
+            $stmt_insert_actlog->bindParam(':dateUpload', $formattedTimestamp);
             $stmt_insert_actlog->bindParam(':decline', $decline);
             $stmt_insert_actlog->bindParam(':module', $module);
             $stmt_insert_actlog->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_actlog->bindParam(':subj', $result['subj']);
+            $stmt_insert_actlog->bindParam(':subjCode', $result['subjCode']);
+            $stmt_insert_actlog->bindParam(':term', $result['term']);
+            $stmt_insert_actlog->bindParam(':year', $result['year']);
             $stmt_insert_actlog->bindParam(':file', $result['file']);
+            $stmt_insert_actlog->bindParam(':fileLoc', $result['fileLoc']);
 
 
             if ($stmt_insert->execute() && $stmt_insert_actlog->execute()) {
@@ -554,7 +585,7 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
 
 
 
-//resotre
+//resotre QUESTION BANK ARCHIVE
 
 
 if (isset($_POST['restoreqb'])) {
@@ -573,29 +604,134 @@ if (isset($_POST['restoreqb'])) {
         $sql_insert_syllabus = "INSERT INTO qbchecker_tbl (Year, Subject, Term, Semester, uploadedby, time_uploaded, Question, A, B, C, D, Answer) VALUES (:Year, :Subject, :Term, :Semester, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer)";
         $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
 
+        
+          // Define variables for actlog_tbl
+          $type = "Unarchived Question";
+          $ua = "Unarchived";
+          $module = "Question Bank";
+  
+          // Insert into actlog_tbl
+          $sql_insert_actlog = "INSERT INTO activitylog_tbl (type, upload_time, choice, type_content, upload_name, yearqb, subjqb, termqb, semesterqb, questionqb,  A, B, C, D, Answers) VALUES (:type, :upload_time, :ua, :module, :upload_name, :yearqb, :subjqb, :termqb, :semesterqb, :questionqb,  :A, :B, :C, :D, :Answers)";
+          $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
+
         if ($stmt_insert_syllabus) {
             $stmt_insert_syllabus->bindParam(':Year', $result['Year']);
             $stmt_insert_syllabus->bindParam(':Subject', $result['Subject']);
             $stmt_insert_syllabus->bindParam(':Term', $result['Term']);
             $stmt_insert_syllabus->bindParam(':Semester', $result['Semester']);
             $stmt_insert_syllabus->bindParam(':uploadedby', $result['uploadedby']);
-            $stmt_insert_syllabus->bindParam(':time_uploaded', $result['time_uploaded']);
+            $stmt_insert_syllabus->bindParam(':time_uploaded', $formattedTimestamp);
             $stmt_insert_syllabus->bindParam(':Question', $result['Question']);
             $stmt_insert_syllabus->bindParam(':A', $result['A']);
             $stmt_insert_syllabus->bindParam(':B', $result['B']);
             $stmt_insert_syllabus->bindParam(':C', $result['C']);
             $stmt_insert_syllabus->bindParam(':D', $result['D']);
             $stmt_insert_syllabus->bindParam(':Answer', $result['Answer']);
+
+
+            $stmt_insert_actlog->bindParam(':type', $type);
+            $stmt_insert_actlog->bindParam(':upload_time', $formattedTimestamp);
+            $stmt_insert_actlog->bindParam(':ua', $ua);
+            $stmt_insert_actlog->bindParam(':module', $module);
+            $stmt_insert_actlog->bindParam(':upload_name', $result['uploadedby']);
+            $stmt_insert_actlog->bindParam(':yearqb', $result['Year']);
+            $stmt_insert_actlog->bindParam(':subjqb', $result['Subject']);
+            $stmt_insert_actlog->bindParam(':termqb', $result['Term']);
+            $stmt_insert_actlog->bindParam(':semesterqb', $result['Semester']);
+            $stmt_insert_actlog->bindParam(':questionqb', $result['Question']);
+            $stmt_insert_actlog->bindParam(':A', $result['A']);
+            $stmt_insert_actlog->bindParam(':B', $result['B']);
+            $stmt_insert_actlog->bindParam(':C', $result['C']);
+            $stmt_insert_actlog->bindParam(':D', $result['D']);
+            $stmt_insert_actlog->bindParam(':Answers', $result['Answer']);
         
-            if ($stmt_insert_syllabus->execute()) {
+            if ($stmt_insert_syllabus->execute() && $stmt_insert_actlog->execute()) {
                 // Delete the row from qbchecker_tbl
-                $sql_delete = "DELETE FROM qbchecker_tbl WHERE id = :resqbid";
+                $sql_delete = "DELETE FROM qbdecline_tbl WHERE id = :resqbid";
                 $stmt_delete = $conn->prepare($sql_delete);
                 $stmt_delete->bindParam(':resqbid', $syllabusid, PDO::PARAM_INT);
 
                 if ($stmt_delete->execute()) {
                     if (isset($_POST['restoreqb'])) {
-                        header("Location: ../ADMIN/dashboard.php");
+                        header("Location: ../ADMIN/archive.php");
+                    } 
+                } else {
+                    echo "Error deleting from qbchecker_tbl: " . $stmt_delete->errorInfo()[2];
+                }
+            } else {
+                echo "Error inserting into qbchecker_tbl.";
+            }
+        } else {
+            echo "Error preparing the insert statement: " . $conn->errorInfo()[2];
+        }
+    } else {
+        echo "Row not found in qbchecker_tbl";
+    }
+}
+
+
+
+
+// RESTORE SYLLABUS ARCHIVE
+if (isset($_POST['restoresys'])) {
+    $syllabusid = $_POST['ressysid'];
+
+    // Retrieve the row from qbchecker_tbl
+    $sql_select = "SELECT * FROM declinedsyllabus_tbl WHERE ID = :ressysid";
+    $stmt_select = $conn->prepare($sql_select);
+    $stmt_select->bindParam(':ressysid', $syllabusid, PDO::PARAM_INT);
+    $stmt_select->execute();
+
+    $result = $stmt_select->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        // Insert the row into qbchecker_tbl
+        $sql_insert_syllabus = "INSERT INTO syllabuschecker_tbl (NameUpload, subj, subjCode, term, year, file, fileLoc, dateUpload) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
+        $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
+
+
+         // Define variables for actlog_tbl
+         $type = "Unarchived Syllabus";
+         $ua = "Unarchived";
+         $module = "Module";
+ 
+         // Insert into actlog_tbl
+         $sql_insert_actlog = "INSERT INTO activitylog_tbl (type, upload_time, choice, type_content, upload_name, subj, subjCode, terms, years, file, fileLoc) VALUES (:type, :dateUpload, :ua, :module, :NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc)";
+          $stmt_insert_actlog = $conn->prepare($sql_insert_actlog);
+
+        if ($stmt_insert_syllabus) {
+            $stmt_insert_syllabus->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_syllabus->bindParam(':subj', $result['subj']);
+            $stmt_insert_syllabus->bindParam(':subjCode', $result['subjCode']);
+            $stmt_insert_syllabus->bindParam(':term', $result['term']);
+            $stmt_insert_syllabus->bindParam(':year', $result['year']);
+            $stmt_insert_syllabus->bindParam(':file', $result['file']);
+            $stmt_insert_syllabus->bindParam(':fileLoc', $result['fileLoc']);
+            $stmt_insert_syllabus->bindParam(':dateUpload', $formattedTimestamp);
+
+            
+            $stmt_insert_actlog->bindParam(':type', $type);
+            $stmt_insert_actlog->bindParam(':dateUpload', $formattedTimestamp);
+            $stmt_insert_actlog->bindParam(':ua', $ua);
+            $stmt_insert_actlog->bindParam(':module', $module);
+            $stmt_insert_actlog->bindParam(':NameUpload', $result['NameUpload']);
+            $stmt_insert_actlog->bindParam(':subj', $result['subj']);
+            $stmt_insert_actlog->bindParam(':subjCode', $result['subjCode']);
+            $stmt_insert_actlog->bindParam(':term', $result['term']);
+            $stmt_insert_actlog->bindParam(':year', $result['year']);
+            $stmt_insert_actlog->bindParam(':file', $result['file']);
+            $stmt_insert_actlog->bindParam(':fileLoc', $result['fileLoc']);
+         
+        
+            if ($stmt_insert_syllabus->execute() && $stmt_insert_actlog->execute()) {
+                // Delete the row from qbchecker_tbl
+                $sql_delete = "DELETE FROM declinedsyllabus_tbl WHERE ID = :ressysid";
+                $stmt_delete = $conn->prepare($sql_delete);
+                $stmt_delete->bindParam(':ressysid', $syllabusid, PDO::PARAM_INT);
+
+                if ($stmt_delete->execute()) {
+                    if (isset($_POST['restoresys'])) {
+                        header("Location: ../ADMIN/archive.php");
                     } 
                 } else {
                     echo "Error deleting from qbchecker_tbl: " . $stmt_delete->errorInfo()[2];
