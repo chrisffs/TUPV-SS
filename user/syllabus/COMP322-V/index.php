@@ -97,7 +97,7 @@ $SUBJCODE = basename(dirname(__FILE__));
                                         <img class="rounded-full w-4 h-4 object-cover" src="../../../files/userpics/<?php echo ($row['user_picture'] ? $row['user_picture'] : 'default.jpg');?>" alt="">
                                     </div>
                                     <div>
-                                        <?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?>
+                                        <h2><?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?></h2>
                                     </div> 
                                 </div> 
                                 <div>
@@ -121,7 +121,7 @@ $SUBJCODE = basename(dirname(__FILE__));
                                     <img class="rounded-full w-6 h-6 object-cover" src="../../../files/userpics/<?php echo ($row['user_picture'] ? $row['user_picture'] : 'default.jpg');?>" alt="">
                                 </div>
                                 <div>
-                                    <?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?>
+                                    <h2><?php if($row['full_name'] == null) {echo $row['NAMEUPLOAD'];} else {echo $row['full_name'];}?></h2>
                                 </div> 
                             </div> 
                         </td>

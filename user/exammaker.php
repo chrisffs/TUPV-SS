@@ -35,57 +35,74 @@ include "../php/user_header.php";
                 <h1 class="text-xl font-semibold">Pending</h1>
                 <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor a culpa inventore quod molestiae repellendus quos odit cupiditate officia. Saepe laborum odit a consequuntur quod, nam repudiandae magnam ducimus illum.</p>
             </div>
-            <form id="exam_generate-form" action="exammaker.php" method="post">
-                <div class="grid grid-cols-2 gap-4 border-b pb-4">
-                    <div class="col-span-2">
-                        <?php
-                        $sql = "SELECT * FROM subject_tbl ORDER BY subjectName ASC";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-                        $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        ?>
-                        <label for="exam_subj" class="block my-2 text-sm font-medium text-gray-900">Subject</label>
-                        <select id="exam_subj" name="exam_subj" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            <option selected disabled hidden value="">Choose the Subject</option>
-                            <?php foreach ($subjects as $row): ?>
-                                <option value="<?php echo $row['subjectName']; ?>"><?php echo $row['subjectName']; ?></option>
-                            <?php endforeach; ?>
-                        </select> 
-                    </div>
-                    <div class="col-span-1">
-                        <label for="exam_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
-                        <select id="exam_year" name="exam_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            <option selected disabled hidden value="">Choose the Year</option>
-                            <option value="1st Year">1st Year</option>
-                            <option value="2nd Year">2nd Year</option>
-                            <option value="3rd Year">3rd Year</option>
-                            <option value="4th Year">4th Year</option>
-                        </select>
-                    </div>
-                    <div class="col-span-1">
-                        <label for="exam_term" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Term</label>
-                        <select id="exam_term" name="exam_term" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            <option selected disabled hidden value="">Choose the Term</option>
-                            <option value="Prelim">Prelim</option>
-                            <option value="Midterm">Midterm</option>
-                            <option value="Endterm">Endterm</option>
-                        </select>
-                    </div>
-                    <div class="col-span-2">
-                        <label for="exam_semester" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semester</label>
-                        <select id="exam_semester" name="exam_semester" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            <option selected disabled hidden value="">Choose the Semester</option>
-                            <option value="1st Semester">1st Semester</option>
-                            <option value="2nd Semester">2nd Semester</option>
-                            <option value="3rd Semester">3rd Semester</option>
-                        </select>
-                    </div>
-                    <div class="col-span-2">
-                        <label for="exam_no_of_items" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. of Items</label>
-                        <input id="exam_no_of_items" name="exam_no_of_items" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">      
-                    </div>
-                </div>
-            </form>
+
+
+
+
+
+ <!-- CONSTRUCTION SITE ===================================================================================================================================-->
+ <?php
+// Select distinct values for Year
+$sqlYear = "SELECT DISTINCT Year FROM questionbank_tbl";
+$stmtYear = $conn->prepare($sqlYear);
+$stmtYear->execute();
+$years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
+
+?>
+<form id="exam_generate-form" action="exammaker.php" method="post">
+    <div class="grid grid-cols-2 gap-4 border-b pb-4">
+        <div class="col-span-2">
+            <div class="col-span-1">
+                <label for="exam_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
+                <select id="exam_year" name="exam_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                    <option selected disabled hidden value="">Choose the Year</option>
+                    <?php foreach ($years as $year): ?>
+                        <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <label for="exam_subj" class="block my-2 text-sm font-medium text-gray-900">Subject</label>
+            <select id="exam_subj" name="exam_subj" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <option selected disabled hidden value="">Choose the Subject</option>
+            </select> 
+        </div>
+
+        <div class="col-span-2">
+            <label for="exam_term" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Term</label>
+            <select id="exam_term" name="exam_term" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <option selected disabled hidden value="">Choose the Term</option>
+            </select>
+        </div>
+        <div class="col-span-2">
+            <label for="exam_semester" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Semester</label>
+            <select id="exam_semester" name="exam_semester" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <option selected disabled hidden value="">Choose the Semester</option>
+            </select>
+        </div>
+        <div class="col-span-2">
+    <label for="content_count" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Content Count</label>
+        <div id="content_count" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5">
+                    <h4 id="content_count"></h4>
+        </div>
+    </div>
+
+        <div class="col-span-2">
+            <label for="exam_no_of_items" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. of Items</label>
+            <input id="exam_no_of_items" name="exam_no_of_items" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">
+        </div>
+    </div>
+</form>
+
+
+
+
+ <!-- CONSTRUCTION SITE===================================================================================================================================== -->
+
+
+
+
+
             <div class="mt-4">
                 <button form="exam_generate-form" type="submit" name="generate_exam" class="focus:outline-none text-white bg-main hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm ml-auto px-5 py-2.5 group flex items-center gap-2 text-start">
                     <div>
@@ -276,7 +293,7 @@ include "../php/user_header.php";
     </div>
 </section>
 <div class="pagebreak hidden"></div>
-<section id="answersheet-container" class="">
+<section id="answersheet-container" class="hidden">
     <header class="text-xs mb-4">
         <div class="grid grid-cols-9">
             <div class="col-span-1">
@@ -409,6 +426,103 @@ include "../php/user_header.php";
         $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
     }, 3000);
     })
+
+
+
+
+    $('#exam_year').change(function () {
+        var selectedYear = $(this).val();
+
+        // Send an AJAX request to get available subjects for the selected year
+        $.ajax({
+             type: 'POST',
+                url: './getcontent.php',
+                data: { year: selectedYear },
+                success: function (data) {
+                    // Update the Subject dropdown with available options
+                    $('#exam_subj').html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('AJAX Error:', textStatus, errorThrown);
+                }
+        });
+    });
+
+
+    
+    $('#exam_subj').change(function () {
+        var selectedSubj = $(this).val();
+
+        // Send an AJAX request to get available subjects for the selected year
+        $.ajax({
+             type: 'POST',
+                url: './getcontent.php',
+                data: { subject: selectedSubj },
+                success: function (data) {
+                    // Update the Subject dropdown with available options
+                    $('#exam_term').html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('AJAX Error:', textStatus, errorThrown);
+                }
+        });
+    });
+
+
+
+    $('#exam_term').change(function () {
+        var selectedTerm = $(this).val();
+
+        // Send an AJAX request to get available subjects for the selected year
+        $.ajax({
+             type: 'POST',
+                url: './getcontent.php',
+                data: { term: selectedTerm },
+                success: function (data) {
+                    // Update the Subject dropdown with available options
+                    $('#exam_semester').html(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('AJAX Error:', textStatus, errorThrown);
+                }
+        });
+    });
+
+
+
+    $('#exam_year, #exam_subj, #exam_term, #exam_semester').change(function () {
+    var selectedYear = $('#exam_year').val();
+    var selectedSubject = $('#exam_subj').val();
+    var selectedTerm = $('#exam_term').val();
+    var selectedSemester = $('#exam_semester').val();
+
+    // Send an AJAX request to get the content count for the selected values
+    $.ajax({
+        type: 'POST',
+        url: './getcontent.php',
+        data: {
+            year: selectedYear,
+            subject: selectedSubject,
+            term: selectedTerm,
+            semester: selectedSemester
+        },
+        dataType: 'json',
+        success: function (data) {
+        // Display the content count in the content_count div
+        var contentCount = data.count;
+        $('#content_count').text(contentCount + ' items');
+    },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('AJAX Error:', textStatus, errorThrown);
+        }
+    });
+});
+
+
+
 </script>
+
+
+
 </body>
 </html>
