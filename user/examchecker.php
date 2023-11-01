@@ -20,16 +20,14 @@ include "../php/user_header.php";
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>
-// $(document).ready(function() {
-//   // Hide the button initially
-//   var modalButton = $('[data-modal-toggle="extralarge-modal"]');
-//   modalButton.hide();
-
-//   // Use setTimeout to trigger a click event after 2 seconds
-//   setTimeout(function() {
-//     modalButton.click();
-//   }, 1300); // 2000 milliseconds = 2 seconds
-// });
+$(document).ready(function() {
+    $('.text-truncate').each(function() {
+        const text = $(this).text();
+        const truncated = text.split(' ').slice(0, 5).join(' '); // Get the first 20 words
+        $(this).text(truncated + '...'); // Display truncated text with ellipsis
+    });
+    
+});
 </script>
 </body>
 </html>

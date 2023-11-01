@@ -435,6 +435,11 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         setTimeout(function() {
         $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
     }, 3000);
+    $('.text-truncate').each(function() {
+        const text = $(this).text();
+        const truncated = text.split(' ').slice(0, 5).join(' '); // Get the first 20 words
+        $(this).text(truncated + '...'); // Display truncated text with ellipsis
+    });
     })
 
 
