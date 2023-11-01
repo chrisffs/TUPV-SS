@@ -28,7 +28,7 @@ include "../php/user_header.php";
         <?php foreach ($data1 as $row1): 
             if(  $row1['type'] == 'Module') {
                 ?>
-                <a href="#" id="notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b cursor-auto">
+                <a href="#<?php echo $row1['ID']?>" id="notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b cursor-auto">
                     <div class="flex-shrink-0">
                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-blue-500 dark:border-gray-700">
@@ -109,7 +109,7 @@ include "../php/user_header.php";
                 <?php
             } else if ( $row1['type'] == 'Question') {
                 ?>
-                <a href="" id="notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b cursor-auto">
+                <a href="#<?php echo $row1['ID']?>" id="notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b cursor-auto">
                     <div class="flex-shrink-0">
                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-500 rounded-full border border-white dark:border-gray-700">
