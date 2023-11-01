@@ -12,11 +12,12 @@
                     <svg class="w-[18px] h-[18px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/></svg>
                     <span class="sr-only">Toggle sidebar</span>
                 </button> -->
-                <a href="#" class="flex">
+                <a href="./" class="flex">
                     <img src="../src/img/sslogo.png" class="w-10 object-cover" alt="Syllabus System Logo" />
                 </a>    
             </div>
             <div class="flex items-center md:order-2">
+                
                 <!-- Button for Extra Large Modal | dont delete -->
                 <button data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" class="p-2 mr-1 text-main rounded-lg hover:text-red-900 hover:bg-red-100" type="button">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -24,23 +25,18 @@
                     </svg>
                 </button>
                 <!-- Notifications -->
-                <button type="button" data-tooltip-target="tooltip-notifications" data-tooltip-placement="bottom" data-dropdown-toggle="notification-dropdown" class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                <button type="button" data-tooltip-target="tooltip-notifications" data-tooltip-placement="bottom" data-dropdown-toggle="notification-dropdown" class="<?php if($page=='notifications'){echo 'hidden';} else {echo '';}?> p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                     <span class="sr-only">View notifications</span>
                     <!-- Bell icon -->
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20"><path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z"/></svg>
                 </button>
-                <!-- <div id="tooltip-notifications" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                    Notifications
-                    <div class="tooltip-arrow" data-popper-arrow></div>
-                </div> -->
                 <!-- Dropdown menu -->
-                <?php 
-                    $sql1 = "( SELECT uploaderId, uploadedby, time_uploaded, Question, 'Accepted' AS status, 'Question' AS type FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT uploaderId, uploadedby, time_uploaded, Question, 'Declined' AS status, 'Question' AS type FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT USERUPLOADID, NAMEUPLOAD, DATEUPLOAD, FILES, 'Accepted' AS status, 'Module' AS type FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) UNION ALL ( SELECT uploaderId, NameUpload, dateUpload, file, 'Declined' AS status, 'Module' AS type FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) ORDER BY time_uploaded DESC LIMIT 8;";
-                    $stmt1 = $conn->prepare($sql1);
-                    $stmt1->execute();
-                    $data1 = $stmt1->fetchAll();
-                ?>
-                <!-- ( SELECT uploaderId, uploadedby, time_uploaded, Question, 'Accepted' AS status, 'Question' AS type FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT uploaderId, uploadedby, time_uploaded, Question, 'Declined' AS status, 'Question' AS type FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT USERUPLOADID, NAMEUPLOAD, DATEUPLOAD, FILES, 'Accepted' AS status, 'Module' AS type FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) UNION ALL ( SELECT uploaderId, NameUpload, dateUpload, file, 'Declined' AS status, 'Module' AS type FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) ORDER BY time_uploaded DESC; -->
+                    <?php 
+                        $sql1 = "( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Accepted' AS status, 'Question' AS type FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Declined' AS status, 'Question' AS type FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, USERUPLOADID, NAMEUPLOAD, DATEUPLOAD, FILES, 'Accepted' AS status, 'Module' AS type FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, NameUpload, dateUpload, file, 'Declined' AS status, 'Module' AS type FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) ORDER BY time_uploaded DESC LIMIT 8;";
+                        $stmt1 = $conn->prepare($sql1);
+                        $stmt1->execute();
+                        $data1 = $stmt1->fetchAll();
+                    ?>
                 <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg" id="notification-dropdown">
                     <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         Notifications
@@ -49,7 +45,7 @@
                         <?php foreach ($data1 as $row1): 
                             if(  $row1['type'] == 'Module') {
                                 ?>
-                                <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+                                <a href="notifications.php#notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                                     <div class="flex-shrink-0">
                                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
                                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-blue-500 dark:border-gray-700">
@@ -95,7 +91,7 @@
                                 <?php
                             } else if ( $row1['type'] == 'Question') {
                                 ?>
-                                <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+                                <a href="notifications.php#notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                                     <div class="flex-shrink-0">
                                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
                                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-500 rounded-full border border-white dark:border-gray-700">
@@ -143,65 +139,9 @@
                             ?>
                        
                         <?php endforeach; ?>
-                        <!-- <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
-                            <div class="flex-shrink-0">
-                                <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
-                                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-blue-500 dark:border-gray-700">
-                                    <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 17V2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M5 15V1m8 18v-4"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="pl-3 w-full">
-                                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">Accepted aploaded Module <span class="font-semibold text-gray-900 dark:text-white">Document.pdf</span></div>
-                                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">a few moments ago</div>
-                            </div>
-                        </a> -->
-                        <!-- <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
-                            <div class="flex-shrink-0">
-                                <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
-                                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-blue-500 dark:border-gray-700">
-                                    <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 17V2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M5 15V1m8 18v-4"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="pl-3 w-full">
-                                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">Declined uploaded Module <span class="font-semibold text-gray-900 dark:text-white">Document.pdf</span></div>
-                                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">a few moments ago</div>
-                            </div>
-                        </a>
-                        <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
-                            <div class="flex-shrink-0">
-                                <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
-                                <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-500 rounded-full border border-white dark:border-gray-700">
-                                    <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="pl-3 w-full">
-                                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">Accepted submitted question <span class="font-medium text-gray-900 dark:text-white">"What data type is used to store a single character in many programming languages?"</span></div>
-                                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">10 minutes ago</div>
-                            </div>
-                        </a>
-                        <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
-                            <div class="flex-shrink-0">
-                            <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
-                            <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-500 rounded-full border border-white dark:border-gray-700">
-                                <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                </svg>
-                            </div>
-                            </div>
-                            <div class="pl-3 w-full">
-                                <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">Declined submitted question <span class="font-medium text-gray-900 dark:text-white">"What data type is used to store a single character in many programming languages?"</span></div>
-                                <div class="text-xs font-medium text-primary-700 dark:text-primary-400">10 minutes ago</div>
-                            </div>
-                        </a> -->
                         
                     </div>
-                    <a href="#" class="block py-2 text-base font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline">
+                    <a href="notifications.php" class="block py-2 text-base font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline">
                         <div class="inline-flex items-center ">
                         <svg aria-hidden="true" class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
                         View all

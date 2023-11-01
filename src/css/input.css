@@ -9,4 +9,8 @@
     .custom-gradient {
         background: linear-gradient(#C4203C 50%, #FFFFFF 50%) no-repeat !important;
     }
+    [id]:target {
+        padding-top: 24rem; /* Simulate padding effect */
+        display: block;
+    }
 }
