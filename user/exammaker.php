@@ -80,12 +80,12 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
                 <option selected disabled hidden value="">Choose the Semester</option>
             </select>
         </div>
-        <div class="col-span-2">
-    <label for="content_count" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Content Count</label>
-        <div id="content_count" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5">
-                    <h4 id="content_count"></h4>
-        </div>
-    </div>
+
+                        <div class="col-span-1"> 
+                            <h4 class="text-xs text-secondary">Available Questions:</h4>
+                            <h4  class="text-s text-main" id="content_count">0</h4>
+                        </div>
+                       
 
         <div class="col-span-2">
             <label for="exam_no_of_items" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. of Items</label>
@@ -93,6 +93,14 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         </div>
     </div>
 </form>
+
+<!-- <div class="col-span-2">
+
+<label for="content_count" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Content Count</label>
+    <div id="content_count" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5">
+                
+    </div>
+</div> -->
 
 
 
@@ -418,6 +426,8 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>
+
+
     $(document).ready(function (){
         $('#print-btn').click(function(){
         window.print();
@@ -431,92 +441,129 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
 
 
     $('#exam_year').change(function () {
-        var selectedYear = $(this).val();
+    var selectedYear = $(this).val();
 
-        // Send an AJAX request to get available subjects for the selected year
-        $.ajax({
-             type: 'POST',
-                url: './getcontent.php',
-                data: { year: selectedYear },
-                success: function (data) {
-                    // Update the Subject dropdown with available options
-                    $('#exam_subj').html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('AJAX Error:', textStatus, errorThrown);
-                }
-        });
-    });
-
-
-    
-    $('#exam_subj').change(function () {
-        var selectedSubj = $(this).val();
-
-        // Send an AJAX request to get available subjects for the selected year
-        $.ajax({
-             type: 'POST',
-                url: './getcontent.php',
-                data: { subject: selectedSubj },
-                success: function (data) {
-                    // Update the Subject dropdown with available options
-                    $('#exam_term').html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('AJAX Error:', textStatus, errorThrown);
-                }
-        });
-    });
-
-
-
-    $('#exam_term').change(function () {
-        var selectedTerm = $(this).val();
-
-        // Send an AJAX request to get available subjects for the selected year
-        $.ajax({
-             type: 'POST',
-                url: './getcontent.php',
-                data: { term: selectedTerm },
-                success: function (data) {
-                    // Update the Subject dropdown with available options
-                    $('#exam_semester').html(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('AJAX Error:', textStatus, errorThrown);
-                }
-        });
-    });
-
-
-
-    $('#exam_year, #exam_subj, #exam_term, #exam_semester').change(function () {
-    var selectedYear = $('#exam_year').val();
-    var selectedSubject = $('#exam_subj').val();
-    var selectedTerm = $('#exam_term').val();
-    var selectedSemester = $('#exam_semester').val();
-
-    // Send an AJAX request to get the content count for the selected values
+    // Send an AJAX request to get available subjects for the selected year
     $.ajax({
         type: 'POST',
         url: './getcontent.php',
-        data: {
-            year: selectedYear,
-            subject: selectedSubject,
-            term: selectedTerm,
-            semester: selectedSemester
-        },
-        dataType: 'json',
+        data: { year: selectedYear, action: 'populate' },
         success: function (data) {
-        // Display the content count in the content_count div
-        var contentCount = data.count;
-        $('#content_count').text(contentCount + ' items');
-    },
+            // Update the Subject dropdown with available options
+            $('#exam_subj').html(data);
+        },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('AJAX Error:', textStatus, errorThrown);
         }
     });
 });
+
+$('#exam_subj').change(function () {
+    var selectedSubj = $(this).val();
+
+    // Send an AJAX request to get available terms for the selected subject
+    $.ajax({
+        type: 'POST',
+        url: './getcontent.php',
+        data: { subject: selectedSubj, action: 'populate' },
+        success: function (data) {
+            // Update the Term dropdown with available options
+            $('#exam_term').html(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('AJAX Error:', textStatus, errorThrown);
+        }
+    });
+});
+
+$('#exam_term').change(function () {
+    var selectedTerm = $(this).val();
+
+    // Send an AJAX request to get available semesters for the selected term
+    $.ajax({
+        type: 'POST',
+        url: './getcontent.php',
+        data: { term: selectedTerm, action: 'populate' },
+        success: function (data) {
+            // Update the Semester dropdown with available options
+            $('#exam_semester').html(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('AJAX Error:', textStatus, errorThrown);
+        }
+    });
+});
+
+
+
+$('#exam_semester').change(function () {
+    var selectedYear = $('#exam_year').val();
+    var selectedSubj = $('#exam_subj').val();
+    var selectedTerm = $('#exam_term').val();
+    var selectedSemester = $(this).val();
+
+    // Send an AJAX request to get the count for the selected semester
+    $.ajax({
+        type: 'POST',
+        url: './getcontent.php',
+        data: { 
+            year: selectedYear,
+            subject: selectedSubj,
+            term: selectedTerm,
+            sem: selectedSemester,
+            action: 'count'
+        },
+        success: function (data) {
+            // Clear the existing content and update the h4 element with the count
+            $('#content_count').html(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log('AJAX Error:', textStatus, errorThrown);
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+// // Function to update the content count based on selected filters
+// function updateContentCount() {
+//     var selectedYear = $('#exam_year').val();
+//     var selectedSubj = $('#exam_subj').val();
+//     var selectedTerm = $('#exam_term').val();
+//     var selectedSemester = $('#exam_semester').val();
+
+//     // Send an AJAX request to get the content count
+//     $.ajax({
+//         type: 'POST',
+//         url: './getcontent.php',
+//         data: {
+//             year: selectedYear,
+//             subject: selectedSubj,
+//             term: selectedTerm,
+//             semester: selectedSemester
+//         },
+//         success: function (data) {
+//             // Update the content count in the h4 element
+//             $('#content_count').text(data);
+//         },
+//         error: function (jqXHR, textStatus, errorThrown) {
+//             console.log('AJAX Error:', textStatus, errorThrown);
+//         }
+//     });
+// }
+
+// // Attach change event handlers to all dropdowns
+// $('#exam_year, #exam_subj, #exam_term, #exam_semester').change(updateContentCount);
+
+// // Initial call to populate content count
+// updateContentCount();
+
 
 
 
