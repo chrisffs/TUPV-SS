@@ -13,7 +13,7 @@
                     <span class="sr-only">Toggle sidebar</span>
                 </button> -->
                 <a href="#" class="flex">
-                    <img src="../../../src/img/sslogo.png" class="w-10 object-cover" alt="Syllabus System Logo" />
+                    <img src="../../../src/img/sslogo.png" class="w-16 object-cover" alt="Syllabus System Logo" />
                 </a>    
             </div>
             <div class="flex items-center md:order-2">

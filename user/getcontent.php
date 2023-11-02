@@ -10,7 +10,7 @@ if ($action === 'count' && isset($_POST['sem']) && isset($_POST['term']) && isse
     $selectedSubject = $_POST['subject'];
 
     // SQL query to fetch count of distinct questions for the selected semester
-    $sql = "SELECT COUNT(DISTINCT Question) AS QuestionCount FROM questionbank_tbl WHERE Year = :year AND Subject = :subject AND Term = :term AND Semester = :sem";
+    $sql = "SELECT COUNT(DISTINCT ID) AS QuestionCount FROM questionbank_tbl WHERE Year = :year AND Subject = :subject AND Term = :term AND Semester = :sem";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':sem', $selectedSem, PDO::PARAM_STR);
     $stmt->bindParam(':year', $selectedYear, PDO::PARAM_STR);

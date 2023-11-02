@@ -133,24 +133,7 @@ include '../php/headerActlog2.php'
                     </div>
                 </div>
 
-                <div class="col-start-3 col-end-3">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center mr-8 p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:outline-none dark:text-whitedark:bg-gray-800 dark:hover:bg-gray-700"  type="button"> 
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                    </svg>
-                    </button>
-
-                    <!-- Dropdown menu -->
-                    <div id="dropdownDotsHorizontal" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-                        <li>
-                            <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delactlog=true" onclick="return confirm('Are you sure you want to delete this Activity?');"class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                        </li>
-                       
-                        </ul>
-                        
-                    </div>
-                    </div>
+              
                 </div>
                 <!-- <h4  class="text-dark text-sm font-medium"> <span class="text-secondary italic">Answer: </span><?= $content['Answers']; ?> </h4>
                  -->
@@ -201,24 +184,7 @@ include '../php/headerActlog2.php'
                             </div>
                         </div>
                     </div>
-                    <div class="col-start-3 col-end-3">
-                    <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center mr-8 p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:outline-none dark:text-whitedark:bg-gray-800 dark:hover:bg-gray-700"  type="button"> 
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-                    </svg>
-                    </button>
-
-                    <!-- Dropdown menu -->
-                    <div id="dropdownDotsHorizontal" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-                        <li>
-                            <a href="../php/delete.php?id=<?php echo $row['id']; ?>&delactlog2=true" onclick="return confirm('Are you sure you want to delete this Activity?');"class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                        </li>
-                       
-                        </ul>
-                        
-                    </div>
-                    </div>
+               
                 </div>
 
 
