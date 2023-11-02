@@ -151,7 +151,11 @@ $(document).ready( function () {
     setTimeout(function() {
         $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
     }, 3000);
-    
+    $('.text-truncate').each(function() {
+        const text = $(this).text();
+        const truncated = text.split(' ').slice(0, 5).join(' '); // Get the first 20 words
+        $(this).text(truncated + '...'); // Display truncated text with ellipsis
+    });
     $('#file_subject-user').change(function () {
         const selectedSubject = $(this).val();
         const subjectCodeDropdown = $('#file_subjCode-user');

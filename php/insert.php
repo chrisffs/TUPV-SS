@@ -331,7 +331,7 @@ if (isset($_POST['acceptqb']) || isset($_POST['acceptqb1'])) {
 
     if ($result) {
         // Insert the row into syllabus_tbl
-        $sql_insert_syllabus = "INSERT INTO questionbank_tbl (Year, Subject, Term, Semester, uploadedby, time_uploaded, Question, A, B, C, D, Answer) VALUES (:Year, :Subject, :Term, :Semester, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer)";
+        $sql_insert_syllabus = "INSERT INTO questionbank_tbl (Year, Subject, Term, Semester, uploaderId, uploadedby, time_uploaded, Question, A, B, C, D, Answer) VALUES (:Year, :Subject, :Term, :Semester, :uploaderid, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer)";
         $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
 
         // Define variables for actlog_tbl
@@ -348,6 +348,7 @@ if (isset($_POST['acceptqb']) || isset($_POST['acceptqb1'])) {
             $stmt_insert_syllabus->bindParam(':Subject', $result['Subject']);
             $stmt_insert_syllabus->bindParam(':Term', $result['Term']);
             $stmt_insert_syllabus->bindParam(':Semester', $result['Semester']);
+            $stmt_insert_syllabus->bindParam(':uploaderid', $result['uploaderId']);
             $stmt_insert_syllabus->bindParam(':uploadedby', $result['uploadedby']);
             $stmt_insert_syllabus->bindParam(':time_uploaded', $result['time_uploaded']);
             $stmt_insert_syllabus->bindParam(':Question', $result['Question']);
@@ -428,7 +429,7 @@ if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
 
     if ($result) {
         
-        $sql_insert = "INSERT INTO qbdecline_tbl  (archiveDate, uploadedby, time_uploaded, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:timea, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer, :Subject, :Year, :Term, :Semester)";
+        $sql_insert = "INSERT INTO qbdecline_tbl  (archiveDate, uploaderId, uploadedby, time_uploaded, Question, A, B, C, D, Answer, Subject, Year, Term, Semester) VALUES (:timea, :uploaderid, :uploadedby, :time_uploaded, :Question, :A, :B, :C, :D, :Answer, :Subject, :Year, :Term, :Semester)";
         $stmt_insert = $conn->prepare($sql_insert);
 
          
@@ -443,6 +444,7 @@ if (isset($_POST['declineqb']) || isset($_POST['declineqb1'])) {
         if ($stmt_insert) {
             $stmt_insert->bindParam(':timea', $formattedTimestamp);
             $stmt_insert->bindParam(':uploadedby', $result['uploadedby']);
+            $stmt_insert->bindParam(':uploaderid', $result['uploaderId']);
             $stmt_insert->bindParam(':time_uploaded', $result['time_uploaded']);
             $stmt_insert->bindParam(':Question', $result['Question']);
             $stmt_insert->bindParam(':A', $result['A']);
@@ -519,7 +521,7 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
 
     if ($result) {
         // Insert the row into declinedsyllabus_tbl 
-        $sql_insert = "INSERT INTO declinedsyllabus_tbl  (archiveDate, NameUpload, subj, subjCode, term, year, file, fileLoc, dateUpload) VALUES (:timea, :NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
+        $sql_insert = "INSERT INTO declinedsyllabus_tbl  (archiveDate, uploaderId, NameUpload, subj, subjCode, term, year, file, fileLoc, dateUpload) VALUES (:timea, :uploaderid, :NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
         $stmt_insert = $conn->prepare($sql_insert);
 
           // Define variables for actlog_tbl
@@ -533,6 +535,7 @@ if (isset($_POST['decline']) || isset($_POST['decline1'])) {
 
         if ($stmt_insert) {
             $stmt_insert->bindParam(':timea', $formattedTimestamp);
+            $stmt_insert->bindParam(':uploaderid', $result['uploaderId']);
             $stmt_insert->bindParam(':NameUpload', $result['NameUpload']);
             $stmt_insert->bindParam(':subj', $result['subj']);
             $stmt_insert->bindParam(':subjCode', $result['subjCode']);
