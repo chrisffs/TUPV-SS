@@ -16,8 +16,13 @@
                     <img src="../src/img/sslogo.png" class="w-10 object-cover" alt="Syllabus System Logo" />
                 </a>    
             </div>
+            <?php 
+                $sql1 = "( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Accepted' AS status, 'Question' AS type FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Declined' AS status, 'Question' AS type FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, USERUPLOADID, NAMEUPLOAD, DATEUPLOAD, FILES, 'Accepted' AS status, 'Module' AS type FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, NameUpload, dateUpload, file, 'Declined' AS status, 'Module' AS type FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) ORDER BY time_uploaded DESC LIMIT 6;";
+                $stmt1 = $conn->prepare($sql1);
+                $stmt1->execute();
+                $data1 = $stmt1->fetchAll();
+            ?>
             <div class="flex items-center md:order-2">
-                
                 <!-- Button for Extra Large Modal | dont delete -->
                 <button data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" class="p-2 mr-1 text-main rounded-lg hover:text-red-900 hover:bg-red-100" type="button">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -25,27 +30,24 @@
                     </svg>
                 </button>
                 <!-- Notifications -->
-                <button type="button" data-tooltip-target="tooltip-notifications" data-tooltip-placement="bottom" data-dropdown-toggle="notification-dropdown" class="<?php if($page=='notifications'){echo 'hidden';} else {echo '';}?> p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                <button id="notif_btn" type="button" data-tooltip-target="tooltip-notifications" data-tooltip-placement="bottom" data-dropdown-toggle="notification-dropdown" class="<?php if($page=='notifications'){echo 'hidden';} else {echo '';}?> relative p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                     <span class="sr-only">View notifications</span>
                     <!-- Bell icon -->
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20"><path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z"/></svg>
+                    <span class="bg-main text-white rounded-full px-1 absolute -top-1 -right-1 text-xs"></span>
                 </button>
                 <!-- Dropdown menu -->
-                    <?php 
-                        $sql1 = "( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Accepted' AS status, 'Question' AS type FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Declined' AS status, 'Question' AS type FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, USERUPLOADID, NAMEUPLOAD, DATEUPLOAD, FILES, 'Accepted' AS status, 'Module' AS type FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, NameUpload, dateUpload, file, 'Declined' AS status, 'Module' AS type FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) ORDER BY time_uploaded DESC LIMIT 8;";
-                        $stmt1 = $conn->prepare($sql1);
-                        $stmt1->execute();
-                        $data1 = $stmt1->fetchAll();
-                    ?>
+                    
                 <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg" id="notification-dropdown">
                     <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        Notifications
+                        Notifications 
+                        
                     </div>
-                    <div>
+                    <div id="notification_list">
                         <?php foreach ($data1 as $row1): 
                             if(  $row1['type'] == 'Module') {
                                 ?>
-                                <a href="notifications.php#notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+                                <a id="<?php echo $row1['ID']?>" href="notifications.php#notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                                     <div class="flex-shrink-0">
                                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
                                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-blue-500 dark:border-gray-700">
@@ -91,7 +93,7 @@
                                 <?php
                             } else if ( $row1['type'] == 'Question') {
                                 ?>
-                                <a href="notifications.php#notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+                                <a id="<?php echo $row1['ID']?>" href="notifications.php#notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                                     <div class="flex-shrink-0">
                                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
                                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-500 rounded-full border border-white dark:border-gray-700">

@@ -7,6 +7,8 @@ $(document).ready(function() {
     // setTimeout(function() {
     //   modalButton.click();
     // }, 1300);
+    
+    
     $('.text-truncate').each(function() {
         const text = $(this).text();
         const truncated = text.split(' ').slice(0, 5).join(' '); // Get the first 20 words

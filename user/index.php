@@ -2,6 +2,7 @@
 include '../php/conn.php';
 include '../php/user_session.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -105,6 +106,10 @@ include "../php/user_header.php";
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../src/js/user_syllabus.js"></script>
+<script>
+$(document).ready(function() {
+})
+</script>
 </body>
 </html>
 

@@ -24,11 +24,14 @@ include "../php/user_header.php";
     $data1 = $stmt1->fetchAll();
 ?>
 <section class="container mx-auto">
-    <div>
+    <div class="mt-6">
+        <div class="border-b pb-4 mb-4 ">
+            <h1 class="text-xl font-semibold">Notifications</h1>
+        </div>
         <?php foreach ($data1 as $row1): 
             if(  $row1['type'] == 'Module') {
                 ?>
-                <a href="#<?php echo $row1['ID']?>" id="notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b cursor-auto">
+                <div id="notification_<?php echo $row1['ID']?>" class="target:ring-2 target:rounded-lg flex py-3 px-4 border-b">
                     <div class="flex-shrink-0">
                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Bonnie Green avatar">
                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 rounded-full border border-white bg-blue-500 dark:border-gray-700">
@@ -68,11 +71,11 @@ include "../php/user_header.php";
                                 echo $months . " month" . ($months > 1 ? "s" : "") . " ago";
                             }
                         ?>
-                        
+                        <!-- <a href="" ></a> -->
                         </div>
                         <div class="mt-4">
-                            <object data="../files/syllabusfiles/<?php echo $row1['Question']?>" type="application/pdf" width="100%" height="500px">
-                                <p>Unable to display PDF file. <a class="underline text-blue-700" href="../files/syllabusfiles/<?php echo $row1['Question']?>">Download</a> instead.</p>
+                            <object class="h-[500px] w-full border rounded-lg flex justify-center items-center" data="../files/syllabusfiles/<?php echo $row1['Question']?>" type="application/pdf">
+                                <p class="p-6 italic text-center">Unable to display PDF file. <a class="underline text-blue-700" target="_blank" href="../files/syllabusfiles/<?php echo $row1['Question']?>">Download</a> instead.</p>
                             </object>
                         </div>
                         <?php 
@@ -105,11 +108,11 @@ include "../php/user_header.php";
                             </div>
                         <?php endforeach; }?>
                     </div>
-                </a>
+                </div>
                 <?php
             } else if ( $row1['type'] == 'Question') {
                 ?>
-                <a href="#<?php echo $row1['ID']?>" id="notification_<?php echo $row1['ID']?>" class="flex py-3 px-4 border-b cursor-auto">
+                <div id="notification_<?php echo $row1['ID']?>" class="target:ring-2 target:rounded-lg flex py-3 px-4 border-b">
                     <div class="flex-shrink-0">
                         <img title="Admin" class="w-11 h-11 rounded-full" src="../files/userpics/default.jpg" alt="Jese Leos avatar">
                         <div class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-green-500 rounded-full border border-white dark:border-gray-700">
@@ -159,8 +162,8 @@ include "../php/user_header.php";
                         ?>
                         <?php foreach ($data1 as $row2): ?>
                             <div class="mt-2">
-                                <div class="p-6 space-y-2 border rounded-lg mb-2">
-                                    <p class="text-base leading-relaxed font-medium text-gray-900 dark:text-gray-400">
+                                <div class="p-4 md:p-6 space-y-2 border rounded-lg mb-2 text-sm md:text-base hover:shadow-md">
+                                    <p class="leading-relaxed font-medium text-gray-900 dark:text-gray-400">
                                     <?php echo $row2['Question']?>
                                     </p>
                                     <ol class="text-gray-600">
@@ -171,10 +174,10 @@ include "../php/user_header.php";
                                     </ol>
                                     <p>Answer: <span><?php echo $row2['Answer']?></span></p>
                                 </div>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Year']?></span>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Subject']?></span>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Term']?></span>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Semester']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Year']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Subject']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Term']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Semester']?></span>
                             </div>
                         <?php endforeach; } else ?>
 
@@ -187,8 +190,8 @@ include "../php/user_header.php";
                         ?>
                         <?php foreach ($data1 as $row2): ?>
                             <div class="mt-2">
-                                <div class="p-6 space-y-2 border rounded-lg mb-2">
-                                    <p class="text-base leading-relaxed font-medium text-gray-900 dark:text-gray-400">
+                                <div class="p-4 md:p-6 space-y-2 border rounded-lg mb-2 text-sm md:text-base hover:shadow-md">
+                                    <p class="leading-relaxed font-medium text-gray-900 dark:text-gray-400">
                                     <?php echo $row2['Question']?>
                                     </p>
                                     <ol class="text-gray-600">
@@ -199,14 +202,14 @@ include "../php/user_header.php";
                                     </ol>
                                     <p>Answer: <span><?php echo $row2['Answer']?></span></p>
                                 </div>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Year']?></span>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Subject']?></span>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Term']?></span>
-                                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Semester']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Year']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Subject']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Term']?></span>
+                                <span class="bg-blue-100 text-blue-800 text-xs md:text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"><?php echo $row2['Semester']?></span>
                             </div>
                         <?php endforeach; }?>
                     </div>
-                </a>
+                </div>
                 <?php
             }
             ?>
@@ -218,6 +221,19 @@ include "../php/user_header.php";
 </main>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<!-- <script src="../src/js/user_syllabus.js"></script> -->
+<script>
+$(document).ready(function() {
+  // Check if the hash exists in the URL
+  if(window.location.hash) {
+    var target = $(window.location.hash);
+    if(target.length) {
+      $('html, body').animate({
+        scrollTop: target.offset().top - ($(window).height() - target.outerHeight()) / 2
+      }, 10);
+    }
+  }
+  
+});
+</script>
 </body>
 </html>
