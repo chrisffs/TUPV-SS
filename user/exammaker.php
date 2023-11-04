@@ -21,19 +21,14 @@ include "../php/user_header.php";
 </div>
 
 <main class="print-hide sm:ml-[64px] p-4 md:p-6 sm:ml-6 mt-[60px] relative">
-    <!-- <div class="pb-4 border-b"> 
-        <h1 class="font-semibold text-lg sm:text-2xl">
-            Exam Generator
-        </h1>
-    </div> -->
     <?php 
         include "../php/success.user_insert.php";
     ?>
     <div class="flex flex-col lg:flex-row lg:divide-x">
         <aside class="lg:w-1/3 pr-4 py-4">
             <div class="mb-4">
-                <h1 class="text-xl font-semibold">Pending</h1>
-                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor a culpa inventore quod molestiae repellendus quos odit cupiditate officia. Saepe laborum odit a consequuntur quod, nam repudiandae magnam ducimus illum.</p>
+                <h1 class="text-xl font-semibold">Exam Maker</h1>
+                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Generate a paper for the exam.</p>
             </div>
 
 

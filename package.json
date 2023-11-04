@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "flowbite": "^1.8.1",
+    "html-pdf": "^3.0.1",
     "jquery": "^3.7.1"
   }
 }
