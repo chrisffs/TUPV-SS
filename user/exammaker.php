@@ -1,6 +1,20 @@
 <?php 
 include '../php/conn.php';
 include '../php/user_session.php';
+
+
+
+function generateRandomString($length = 6) {
+    $characters = 'A1B2C3D4EF5GH6IJ7KL8MN9OP0QRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +110,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
 
 
 
-            <div class="mt-4">
+<div class="mt-4">
                 <button form="exam_generate-form" type="submit" name="generate_exam" class="focus:outline-none text-white bg-main hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm ml-auto px-5 py-2.5 group flex items-center gap-2 text-start">
                     <div>
                         Generate Exam Questions
@@ -107,12 +121,31 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
                 </button>
 
             </div>
+
+
+
+            <!-- <div class="fixed right-6 bottom-6">
+        
+        <button type="submit"  id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+            </svg>
+        </button>
+  
+    <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        Print Exam
+        <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+</div> -->
         </aside>
         <div class="grow h-[88vh] overflow-auto overflow-x-hidden lg:w-2/3">
             <h1 class="text-xl font-semibold p-4 sticky">Questions</h1>
             <div class="p-4 h-full flex flex-col gap-2">
                 <?php 
+
                 if(isset($_POST['generate_exam'])) {
+                    $UC =  generateRandomString();
                     $noq = $_POST['exam_no_of_items'];
                     $sub = $_POST['exam_subj'];
                     $year = $_POST['exam_year'];
@@ -144,6 +177,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
                         foreach ($questions as $row):
                         ?>
                         <div class="bg-light grid grid-cols-4 text-xs border p-4 gap-x-2 rounded-lg relative">
+                          
                             <div class="col-span-4">
                                 <h1><?php echo $i ?>.) <?php echo $row['Question']; ?></h1>
                             </div>
@@ -163,29 +197,49 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
                         <?php 
                         $i++;
                         endforeach;
+
+
+                        
                     }
                     ?>
-                    <?php
-                ?>   
+              
             </div>    
         </div>
     </div>
+
+
+    
+
+   
+
+
+<form id="insertForm" action="../php/user_print.php" method="post">
     <div class="fixed right-6 bottom-6">
-        <form action="../php/user_print.php" method="post">
-            <button type="submit" id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
-                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
-                    <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
-                </svg>
-            </button>
-        </form>
-        <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-            Print Exam
-            <div class="tooltip-arrow" data-popper-arrow></div>
-        </div>
+        
+        <button type="submit"  id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+            </svg>
+        </button>
+  
+    <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        Print Exam
+        <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
+</div>
+   
+    
 </main>
+
+
+
 <section id="testpaper-container" class="hidden">
+
+
+
+
+
     <header class="text-xs mb-4">
         <div class="grid grid-cols-9">
             <div class="col-span-1">
@@ -199,63 +253,31 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
                 <div>
                     <h3>OFFICE OF THE COLLEGE DEAN</h3>
                 </div>
+                <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
+               
+           
                 <div>
-                    <h3 class="uppercase font-bold"><?php echo $term ?> Exam</h3>
+                    <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                    <input type="hidden" name = "term"  value = "<?php echo $term ?>">
                 </div>
                 <div>
-                    <h3 class="uppercase font-bold underline"><?php echo $sub ?></h3>
+                    <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                    <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
                 </div>
                 <div>
-                    <h3 class="uppercase font-bold underline"><?php echo $sem ?>, 2023-2024</h3>
+                    <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
+                    <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
                 </div>
             </div>
             <div class="col-span-1"></div>
         </div>
-        <!-- <div class="text-sm flex flex-col gap-3">
-            <div class="grid grid-cols-4 gap-2">
-                <div class="col-span-3 flex">
-                    <p class="whitespace-nowrap">Name:</p>
-                    <div class="w-full border-b border-black relative">
-                        <div class="relative top-[1rem] text-[10px]">
-                            <div class="grid grid-cols-7">
-                                <div class="col-span-3">Last Name</div>
-                                <div class="col-span-3">First Name</div>
-                                <div class="col-span-1">M.I</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-1 flex">
-                    <p class="whitespace-nowrap">Yr. & Sec.</p>
-                    <div class="w-full border-b border-black relative">
-                    </div>
-                </div>
-                <div class="col-span-1 flex gap-2">
-                    <p>Score</p>
-                    <div class="relative">
-                        <div class="top-[-3.7rem] absolute w-20 h-20 border-2 border-black"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-5 gap-2">
-                <div class="col-span-2 flex">
-                    <p class="whitespace-nowrap">Instructor:</p>
-                    <div class="w-full border-b border-black">
-                    </div>
-                </div>
-                <div class="col-span-2 flex">
-                    <p class="whitespace-nowrap">Proctor:</p>
-                    <div class="w-full border-b border-black">
-                    </div>
-                </div>
-                <div class="col-span-1 flex gap-2">
-                    <p>Date:</p>
-                    <div class="w-full border-b border-black">
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </header>
+
+       
+
+
+
+
     <div>
         <h1 class="text-center text-sm font-bold mb-6">QUESTIONAIRE</h1>
         <?php 
@@ -264,27 +286,96 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         ?>
         <div class="grid grid-cols-4 text-xs relative my-2">
             <div class="col-span-4">
+       
+            <input type="hidden" name = "ans"  value = "<?php echo $row['Answer']; ?>">
+            <input type="hidden" name = "ID"  value = "<?php echo $row['ID']; ?>">
+            <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
+
                 <h1><?php echo $i ?>.) <?php echo $row['Question']; ?></h1>
+                <input type="hidden" name = "Question"  value = "<?php echo $row['Question']; ?>">
             </div>
             <div class="col-span-4">
                 <span>A.</span> <?php echo $row['A']; ?>
+                 <input type="hidden" name = "A"  value = "<?php echo $row['A']; ?>">
             </div>
             <div class="col-span-4">
                 <span>B.</span> <?php echo $row['B']; ?>
+                 <input type="hidden" name = "B"  value = "<?php echo $row['B']; ?>">
             </div>
             <div class="col-span-4">
                 <span>C.</span> <?php echo $row['C']; ?>
+                 <input type="hidden" name = "C"  value = "<?php echo $row['C']; ?>">
             </div>
             <div class="col-span-4">
                 <span>D.</span> <?php echo $row['D']; ?>
+                 <input type="hidden" name = "D"  value = "<?php echo $row['D']; ?>">
             </div>
         </div>     
         <?php 
         $i++;
         endforeach;
+
+// bugged
+
+    $combined_answer = "";
+
+        foreach ($questions as $row) {
+            
+            $question = $row['Question'];
+            $answer = $row['Answer'];
+            $optionA = $row['A'];
+            $optionB = $row['B'];
+            $optionC = $row['C'];
+            $optionD = $row['D'];
+
+
+            $conversion = array("A" => "1", "B" => "2", "C" => "3", "D" => "4");
+            $converted_answer = strtr($answer, $conversion);
+            $combined_answer .= $converted_answer . ", ";
+    
+            // Prepare the SQL statement
+            $stmt = $conn->prepare("INSERT INTO generatedquestions_tbl (Question, A, B, C, D,  Answer, UniqueCode) VALUES (:question, :optionA, :optionB, :optionC, :optionD, :answer, :UC)");
+    
+            // Bind the parameters
+            $stmt->bindParam(':question', $question);
+            $stmt->bindParam(':optionA', $optionA);
+            $stmt->bindParam(':optionB', $optionB);
+            $stmt->bindParam(':optionC', $optionC);
+            $stmt->bindParam(':optionD', $optionD);
+            $stmt->bindParam(':answer', $answer);
+            $stmt->bindParam(':UC', $UC);
+            
+
+    
+            // Execute the statement
+            $stmt->execute();
+
+          
+        }
+
+        $combined_answer = rtrim($combined_answer, ', ');
+
+        $stmt2 = $conn->prepare("INSERT INTO answers_tbl (ans, uc) VALUES (:options, :UC)");
+
+        $stmt2->bindParam(':options', $combined_answer);
+        $stmt2->bindParam(':UC', $UC);
+
+        $stmt2->execute();
+    
+
+
+
+       
+        
         ?>
     </div>
-</section>
+
+    </form>
+
+
+  
+</section
+
 <div class="pagebreak hidden"></div>
 <section id="answersheet-container" class="hidden">
     <header class="text-xs mb-4">
@@ -399,6 +490,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         </div>
     </div>
 </section>
+
 <?php 
 } else {
     ?>
@@ -408,24 +500,45 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
     <?php
 }
 ?>
+
+
+
+
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>
 
 
-    $(document).ready(function (){
-        $('#print-btn').click(function(){
-        window.print();
+$(document).ready(function () {
+    $('#print-btn').click(function () {
+        // Send an AJAX request to your PHP script to insert data into the database
+        $.ajax({
+            url: '../php/user_print.php',
+            type: 'POST',
+            data: $('#insertForm').serialize(),
+            success: function (response) {
+                // Handle the response, e.g., show an alert or redirect to another page
+                alert(response);
+            },
+            error: function () {
+                alert('An error occurred while sending data to the server.');
+            }
         });
-        setTimeout(function() {
+
+        // Trigger the print action
+        window.print();
+    });
+
+    setTimeout(function () {
         $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
     }, 3000);
-    $('.text-truncate').each(function() {
+
+    $('.text-truncate').each(function () {
         const text = $(this).text();
         const truncated = text.split(' ').slice(0, 5).join(' '); // Get the first 20 words
         $(this).text(truncated + '...'); // Display truncated text with ellipsis
     });
-    })
+});
 
 
 
@@ -512,7 +625,6 @@ $('#exam_semester').change(function () {
         }
     });
 });
-
 
 
 
