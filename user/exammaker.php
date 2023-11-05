@@ -315,9 +315,9 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         $i++;
         endforeach;
 
-// bugged
+        // bugged
 
-    $combined_answer = "";
+        $combined_answer = "";
 
         foreach ($questions as $row) {
             
@@ -370,11 +370,11 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         ?>
     </div>
 
-    </form>
+</form>
 
 
   
-</section
+    </section>
 
 <div class="pagebreak hidden"></div>
 <section id="answersheet-container" class="hidden">
