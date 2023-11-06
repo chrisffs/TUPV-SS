@@ -23,26 +23,35 @@ include "../php/user_header.php";
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="col-span-1 flex flex-col gap-4">
+              <?php
+              $sql = "SELECT * FROM `accounts_tbl` INNER JOIN departmenttbl ON accounts_tbl.department = departmenttbl.acronym WHERE accounts_tbl.ID = {$_SESSION['ID']} ";
+              
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $data = $stmt->fetchAll();
+              
+              foreach ($data as $row):
+              ?>
               <div class="bg-light border rounded-lg flex flex-col gap-4 p-8">
-                <div class="w-32 h-32 rounded-lg">
-                    <img src="../files/userpics/jong_xinaa(1).png" class="object-cover w-full rounded-lg" alt="" srcset="">
+                <div class="">
+                    <img src="../files/userpics/<?php echo $row['user_picture']; ?>" class="object-cover w-32 h-32 rounded-lg" alt="" srcset="">
                 </div>
                 <div class="">
-                    <h1 class="text-xl font-semibold">John Doe</h1>
+                    <h1 class="text-xl font-semibold"><?php echo $row['full_name']; ?></h1>
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                             <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
                         </svg>
-                        <h1 class="text-sm text-gray-600">TUPV-12-1234</h1>
+                        <h1 class="text-sm text-gray-600"><?php echo $row['tupv_id']; ?></h1>
                     </div>
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
                             <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
                             <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z"/>
                         </svg>
-                        <h1 class="text-sm text-gray-600">College of Engineering Technology</h1>
+                        <h1 class="text-sm text-gray-600"><?php echo $row['dptname']; ?></h1>
                     </div>
                 </div>
                 
@@ -59,23 +68,57 @@ include "../php/user_header.php";
                     <p>09123456789</p>
                 </div>
               </div>
+              <?php endforeach; ?>
               <div class="w-full bg-white rounded-lg border dark:bg-gray-800 p-4 md:p-6">
                 <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
-                  <div class="grid grid-cols-3 gap-3 mb-2">
+                  <div class="grid grid-cols-3 gap-3">
                     <dl class="bg-teal-50 dark:bg-gray-600 rounded-lg flex flex-col items-center justify-center h-[78px]">
-                      <dt class="w-8 h-8 rounded-full bg-teal-100 dark:bg-gray-500 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center justify-center mb-1">23</dt>
+                      <dt class="w-8 h-8 rounded-full bg-teal-100 dark:bg-gray-500 text-teal-600 dark:text-teal-300 text-sm font-medium flex items-center justify-center mb-1">
+                      <?php
+                      $sql = "SELECT SUM(upload_count) AS total_count FROM ( SELECT COUNT(*) AS upload_count FROM qbchecker_tbl WHERE uploaderId = {$_SESSION['ID']} UNION ALL SELECT COUNT(*) AS upload_count FROM syllabuschecker_tbl WHERE uploaderId = {$_SESSION['ID']} ) AS combined_counts";
+                      
+                      $stmt = $conn->prepare($sql);
+                      $stmt->execute();
+                      $data = $stmt->fetchAll();
+                      
+                      foreach ($data as $row):
+                      echo $row['total_count'];
+                      endforeach; ?>
+                      </dt>
                       <dd class="text-teal-600 dark:text-teal-300 text-sm font-medium">Pendings</dd>
                     </dl>
                     <dl class="bg-orange-50 dark:bg-gray-600 rounded-lg flex flex-col items-center justify-center h-[78px]">
-                      <dt class="w-8 h-8 rounded-full bg-orange-100 dark:bg-gray-500 text-orange-600 dark:text-orange-300 text-sm font-medium flex items-center justify-center mb-1">12</dt>
+                      <dt class="w-8 h-8 rounded-full bg-orange-100 dark:bg-gray-500 text-orange-600 dark:text-orange-300 text-sm font-medium flex items-center justify-center mb-1">
+                      <?php
+                      $sql = "SELECT SUM(upload_count) AS total_count FROM ( SELECT COUNT(*) AS upload_count FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} UNION ALL SELECT COUNT(*) AS upload_count FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) AS combined_counts;";
+                      
+                      $stmt = $conn->prepare($sql);
+                      $stmt->execute();
+                      $data = $stmt->fetchAll();
+                      
+                      foreach ($data as $row):
+                      echo $row['total_count'];
+                      endforeach; ?>
+                      </dt>
                       <dd class="text-orange-600 dark:text-orange-300 text-sm font-medium">Declined</dd>
                     </dl>
                     <dl class="bg-blue-50 dark:bg-gray-600 rounded-lg flex flex-col items-center justify-center h-[78px]">
-                      <dt class="w-8 h-8 rounded-full bg-blue-100 dark:bg-gray-500 text-blue-600 dark:text-blue-300 text-sm font-medium flex items-center justify-center mb-1">64</dt>
+                      <dt class="w-8 h-8 rounded-full bg-blue-100 dark:bg-gray-500 text-blue-600 dark:text-blue-300 text-sm font-medium flex items-center justify-center mb-1">
+                      <?php
+                      $sql = "SELECT SUM(upload_count) AS total_count FROM ( SELECT COUNT(*) AS upload_count FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} UNION ALL SELECT COUNT(*) AS upload_count FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) AS combined_counts;";
+                      
+                      $stmt = $conn->prepare($sql);
+                      $stmt->execute();
+                      $data = $stmt->fetchAll();
+                      
+                      foreach ($data as $row):
+                      echo $row['total_count'];
+                      endforeach; ?>
+                      </dt>
                       <dd class="text-blue-600 dark:text-blue-300 text-sm font-medium">Accepted</dd>
                     </dl>
                   </div>
-                  <button data-collapse-toggle="more-details" type="button" class="hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center">Show more details <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <!-- <button data-collapse-toggle="more-details" type="button" class="hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center">Show more details <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
                   </button>
@@ -96,7 +139,7 @@ include "../php/user_header.php";
                       <dt class="text-gray-500 dark:text-gray-400 text-sm font-normal">Next meeting:</dt>
                       <dd class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-1 rounded-md dark:bg-gray-600 dark:text-gray-300">Thursday</dd>
                     </dl>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="w-full">
                   <div class="flex justify-between mb-4">
@@ -197,7 +240,97 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
 
   // ApexCharts options and config
   window.addEventListener("load", function() {
+    // let syllabus_options = {
+    //   chart: {
+    //     height: "100%",
+    //     maxWidth: "100%",
+    //     type: "area",
+    //     fontFamily: "Inter, sans-serif",
+    //     dropShadow: {
+    //       enabled: false,
+    //     },
+    //     toolbar: {
+    //       show: false,
+    //     },
+    //   },
+    //   tooltip: {
+    //     enabled: true,
+    //     x: {
+    //       show: false,
+    //     },
+    //   },
+    //   fill: {
+    //     type: "gradient",
+    //     gradient: {
+    //       opacityFrom: 0.55,
+    //       opacityTo: 0,
+    //       shade: "#C4203C",
+    //       gradientToColors: ["#C4203C"],
+    //     },
+    //   },
+    //   dataLabels: {
+    //     enabled: false,
+    //   },
+    //   stroke: {
+    //     width: 6,
+    //   },
+    //   grid: {
+    //     show: false,
+    //     strokeDashArray: 4,
+    //     padding: {
+    //       left: 2,
+    //       right: 2,
+    //       top: 0
+    //     },
+    //   },
+    //   series: [
+    //     {
+    //       name: "Syllabus Uploads",
+    //       data: [8, , , , ,],
+    //       color: "#C4203C",
+    //     }
+    //   ],
+    //   xaxis: {
+    //     categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+    //     labels: {
+    //       show: false,
+    //     },
+    //     axisBorder: {
+    //       show: false,
+    //     },
+    //     axisTicks: {
+    //       show: false,
+    //     },
+    //   },
+    //   yaxis: {
+    //     show: false,
+    //   },
+    // }
     let syllabus_options = {
+      // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
+      dataLabels: {
+        enabled: true,
+        // offsetX: 10,
+        style: {
+          cssClass: 'text-xs text-white font-medium'
+        },
+      },
+      grid: {
+        show: false,
+        strokeDashArray: 4,
+        padding: {
+          left: 16,
+          right: 16,
+          top: -26
+        },
+      },
+      series: [
+        {
+          name: "Syllabus Uploads",
+          data: [150, 141, 145, 152, 135, 125],
+          color: "#1A56DB",
+        },
+      ],
       chart: {
         height: "100%",
         maxWidth: "100%",
@@ -216,37 +349,21 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
           show: false,
         },
       },
+      legend: {
+        show: true
+      },
       fill: {
         type: "gradient",
         gradient: {
           opacityFrom: 0.55,
           opacityTo: 0,
-          shade: "#C4203C",
-          gradientToColors: ["#C4203C"],
+          shade: "#1C64F2",
+          gradientToColors: ["#1C64F2"],
         },
-      },
-      dataLabels: {
-        enabled: false,
       },
       stroke: {
         width: 6,
       },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 2,
-          right: 2,
-          top: 0
-        },
-      },
-      series: [
-        {
-          name: "Syllabus Uploads",
-          data: [8, 1, 2, 1, 0, 5],
-          color: "#C4203C",
-        }
-      ],
       xaxis: {
         categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
         labels: {
@@ -261,12 +378,20 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
       },
       yaxis: {
         show: false,
+        labels: {
+          formatter: function (value) {
+            return value;
+          }
+        }
       },
     }
+    // syllabus_options.series[0].data = data;
+    console.log(syllabus_options.series[0].data);
     if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
       const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
       chart.render();
     }
+    
 
     let qbank_options = {
       chart: {
