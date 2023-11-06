@@ -1,5 +1,6 @@
 <?php 
-include '../php/session.php'
+include '../php/session.php';
+include '../php/conn.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,22 @@ include '../php/session.php'
 <body class="bg-light-100">
 <?php 
 $page = 'examgenerator';
-include '../php/header.php' 
+include '../php/header.php';
+
+
+
+
+$sql = "SELECT COUNT(id)`id` FROM exammaker_tbl";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetch(); // Use fetch instead of fetchAll
+
+if ($result) {
+   $qty232 = $result['id'];
+} else {
+   $qty232 = 0; // Handle the case when no rows are returned
+}
+
 ?>
 
 <div class="p-2 sm:ml-64 relative">
@@ -23,9 +39,21 @@ include '../php/header.php'
       <div class="bg-light border border-light-200 rounded-lg h-full p-4">
          <div class="mb-6">
             <h1 class="leading-tight tracking-tight text-2xl font-bold">Exam Generator History</h1>
-            <h2 class="text-sm font-medium">Total number of Files: <span class="text-main">204</span></h2>
+            <h2 class="text-sm font-medium">Total number of Files: <span class="text-main"><?php echo  $qty232 ?></span></h2>
          </div>
          <div>
+            <?php
+             $sql = "SELECT *
+             FROM exammaker_tbl
+             INNER JOIN generatedquestions_tbl
+             ON exammaker_tbl.uniquecode = generatedquestions_tbl.UniqueCode;
+             ";
+             $stmt = $conn->prepare($sql);
+             $stmt->execute();
+             $data1 = $stmt->fetchAll()
+
+
+            ?>
             <table id="examGenListTable" class="pt-3 mb-3 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
@@ -40,9 +68,6 @@ include '../php/header.php'
                         Subject
                      </th>
                      <th scope="col" class="px-4 py-2 font-medium">
-                        Year
-                     </th>
-                     <th scope="col" class="px-4 py-2 font-medium">
                         Sem
                      </th>
                      <th scope="col" class="px-4 py-2 font-medium">
@@ -54,35 +79,46 @@ include '../php/header.php'
                      <th scope="col" class="px-4 py-2 font-medium">
                         Exam Code
                      </th>
+
+               
+               
                   </tr>
                </thead>
                <tbody class="text-gray-900">
-                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+               <?php foreach ($data1 as $row): ?>
+                  <tr class="bg-white border-b dark:bg-gray-800 cursor-pointer dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
+                     <a href="http://" class = "hover:bg-gray-600 cursor-pointer">
+
                      <td class="px-4 py-2">
-                        2023/10/03 <span class="block text-xs text-gray-600">3:24 PM</span>
+                     <?php echo $row['dateUpload']; ?>
                      </td>
                      <td class="px-4 py-2">
-                        John Doe
+                     <?php echo $row['uploader']; ?>
                      </td>
                      <th scope="row" class="px-4 py-2 font-normal  whitespace-nowrap dark:text-white">
-                        Robotics and Intelligent Control Systems Engineering 1
+                     <?php echo $row['Subj']; ?>
                      </th>
+
                      <td class="px-4 py-2">
-                        3rd
+                     <?php echo $row['Semester']; ?>
                      </td>
                      <td class="px-4 py-2">
-                        2nd
+                     <?php echo $row['Term']; ?>
                      </td>
                      <td class="px-4 py-2">
-                        Midterm
+                     <?php echo $row['items']; ?>
                      </td>
-                     <td class="px-4 py-2">
-                        50
+                     <td class="px-4 py-2 text-blue-600">
+                     <?php echo $row['uniquecode']; ?>
                      </td>
-                     <td class="px-4 py-2">
-                        P4Mth'25rQyB
-                     </td>
+
+            
+
+                     </a>
                   </tr>
+
+                  <?php endforeach; ?>
                </tbody>
             </table>
          </div>
