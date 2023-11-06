@@ -10,6 +10,9 @@ if(isset($_POST['print_btn'])) {
 
 
 
+
+
+
 if(isset($_POST['print_btn']))
 {
     $S = $_POST['sub'];

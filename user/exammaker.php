@@ -518,7 +518,7 @@ $(document).ready(function () {
             data: $('#insertForm').serialize(),
             success: function (response) {
                 // Handle the response, e.g., show an alert or redirect to another page
-                alert(response);
+             
             },
             error: function () {
                 alert('An error occurred while sending data to the server.');

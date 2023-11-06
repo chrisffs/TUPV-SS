@@ -43,11 +43,7 @@ if ($result) {
          </div>
          <div>
             <?php
-             $sql = "SELECT *
-             FROM exammaker_tbl
-             INNER JOIN generatedquestions_tbl
-             ON exammaker_tbl.uniquecode = generatedquestions_tbl.UniqueCode;
-             ";
+             $sql = "SELECT * FROM exammaker_tbl";
              $stmt = $conn->prepare($sql);
              $stmt->execute();
              $data1 = $stmt->fetchAll()
@@ -87,9 +83,14 @@ if ($result) {
                <tbody class="text-gray-900">
 
                <?php foreach ($data1 as $row): ?>
-                  <tr class="bg-white border-b dark:bg-gray-800 cursor-pointer dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
-                     <a href="http://" class = "hover:bg-gray-600 cursor-pointer">
+                  
+                  <tr onclick="redirectToExamPrint('<?php echo $row['uniquecode']; ?>', '<?php echo $row['Term']; ?>', '<?php echo $row['Subj']; ?>', '<?php echo $row['Semester']; ?>')" class="bg-white border-b dark:bg-gray-800 cursor-pointer dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
 
+                  <input type="hidden" name="uniquecode" value="<?php echo $row['uniquecode']; ?>">
+                  <input type="hidden" name="Term" value="<?php echo $row['Term']; ?>">
+                  <input type="hidden" name="Subj" value="<?php echo $row['Subj']; ?>">
+                  <input type="hidden" name="Semester" value="<?php echo $row['Semester']; ?>">
+                 
                      <td class="px-4 py-2">
                      <?php echo $row['dateUpload']; ?>
                      </td>
@@ -112,12 +113,8 @@ if ($result) {
                      <td class="px-4 py-2 text-blue-600">
                      <?php echo $row['uniquecode']; ?>
                      </td>
-
-            
-
-                     </a>
                   </tr>
-
+          
                   <?php endforeach; ?>
                </tbody>
             </table>
@@ -134,6 +131,11 @@ $(document).ready( function () {
       "info": false
    });
 } );
+
+function redirectToExamPrint(uniquecode, term, subj, semester) {
+    // Redirect to examprint.php with the data
+    window.location.href = `./Examprint.php?uniquecode=${uniquecode}&Term=${term}&Subj=${subj}&Semester=${semester}`;
+}
 </script>
 <script src="../src/js/jquery.dataTables.js"></script>
 </body>

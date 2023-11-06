@@ -2,18 +2,16 @@
 include '../php/conn.php';
 
 $uniquecode = isset($_GET['uniquecode']) ? $_GET['uniquecode'] : '';
-
-
-
-$stmt = $conn->prepare('SELECT * FROM exammaker_tbl INNER JOIN generatedquestions_tbl ON exammaker_tbl.uniquecode = generatedquestions_tbl.UniqueCode WHERE exammaker_tbl.uniquecode = ?');
+$term = isset($_GET['Term']) ? $_GET['Term'] : '';
+$sub = isset($_GET['Subj']) ? $_GET['Subj'] : '';
+$sem = isset($_GET['Semester']) ? $_GET['Semester'] : '';
+$stmt = $conn->prepare('SELECT * FROM generatedquestions_tbl WHERE UniqueCode = ?');
 $stmt->execute([$uniquecode]);
-$row = $stmt->fetch();
+$questions = $stmt->fetchAll();
 
 
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +25,9 @@ $row = $stmt->fetch();
 </head>
 <body>
     
+<main>
+
+</main>
 
 <section id="testpaper-container">
 
@@ -67,7 +68,6 @@ $row = $stmt->fetch();
 
 
 
-
     <div>
         <h1 class="text-center text-sm font-bold mb-6">QUESTIONAIRE</h1>
         <?php 
@@ -78,7 +78,6 @@ $row = $stmt->fetch();
             <div class="col-span-4">
        
             <input type="hidden" name = "ans"  value = "<?php echo $row['Answer']; ?>">
-            <input type="hidden" name = "ID"  value = "<?php echo $row['ID']; ?>">
             <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
 
                 <h1><?php echo $i ?>.) <?php echo $row['Question']; ?></h1>
@@ -107,11 +106,10 @@ $row = $stmt->fetch();
         ?>
     </div>
 
-    </form>
 
 
   
-</section
+    </section>
 
 <div class="pagebreak hidden"></div>
 <section id="answersheet-container" >
@@ -228,7 +226,50 @@ $row = $stmt->fetch();
     </div>
 </section>
 
+<form id="insertFormAdmin" action="./admin_print.php" method="post">
+    <div class="fixed right-6 bottom-6">
+        
+    <button type="submit" id="print_btnAdmin" name="print_btnAdmin" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
+
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+            </svg>
+        </button>
+  
+    <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        Print Exam
+        <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+</div>
+</form>
+
+
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#print_btnAdmin').click(function () {
+        // Send an AJAX request to your PHP script to insert data into the database
+        $.ajax({
+            url: './admin_print.php',
+            type: 'POST',
+            data: $('#insertFormAdmin').serialize(),
+            success: function (response) {
+             
+          
+            },
+            error: function () {
+                alert('An error occurred while sending data to the server.');
+            }
+        });
+
+        window.print();
+    });
+
+});
+
+
+</script>
 </body>
 </html>
