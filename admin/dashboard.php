@@ -80,7 +80,7 @@ include '../php/header.php'
             </div>
          </div>
          
-         <div class="col-span-2 flex items-center bg-light p-6 border border-light-200 rounded-lg">
+         <!-- <div class="col-span-2 flex items-center bg-light p-6 border border-light-200 rounded-lg">
             <div class="bg-light-100 p-4 text-center rounded-lg me-6">
                <h1 class="font-bold text-main text-3xl">24</h1>
                <h3 class="text-sm text-secondary">September</h3>
@@ -89,7 +89,7 @@ include '../php/header.php'
                <h3 class="text-sm text-secondary">Upcoming Events</h3>
                <h1 class="text-2xl font-bold text-dark">Prelim Examination</h1>
             </div>
-         </div>
+         </div> -->
       </div>
       <div class="grid grid-cols-3 gap-4">
          <div class="col-span-1">
