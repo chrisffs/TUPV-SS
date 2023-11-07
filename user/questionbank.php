@@ -99,7 +99,7 @@ include "../php/user_header.php";
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="">No of Questions</label>
                     <div class="flex items-center gap-2">
                         <div class="min-w-0">
-                            <input id="no_of_cards" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required>
+                            <input id="no_of_cards" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" min="0" required>
                         </div>
                         <div class="">
                             <button id="no_of_cards-btn" type="button" class="whitespace-nowrap focus:outline-none text-white bg-main hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5">

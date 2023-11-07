@@ -228,6 +228,7 @@ include "../php/user_header.php";
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/apexcharts/dist/apexcharts.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../src/js/profile_chart.js"></script>
 <script>
 const results = [232, 23]; // Assuming the array represents [wins, losses]
 
@@ -306,91 +307,91 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
     //     show: false,
     //   },
     // }
-    let syllabus_options = {
-      // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
-      dataLabels: {
-        enabled: true,
-        // offsetX: 10,
-        style: {
-          cssClass: 'text-xs text-white font-medium'
-        },
-      },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 16,
-          right: 16,
-          top: -26
-        },
-      },
-      series: [
-        {
-          name: "Syllabus Uploads",
-          data: [150, 141, 145, 152, 135, 125],
-          color: "#1A56DB",
-        },
-      ],
-      chart: {
-        height: "100%",
-        maxWidth: "100%",
-        type: "area",
-        fontFamily: "Inter, sans-serif",
-        dropShadow: {
-          enabled: false,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      tooltip: {
-        enabled: true,
-        x: {
-          show: false,
-        },
-      },
-      legend: {
-        show: true
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          opacityFrom: 0.55,
-          opacityTo: 0,
-          shade: "#1C64F2",
-          gradientToColors: ["#1C64F2"],
-        },
-      },
-      stroke: {
-        width: 6,
-      },
-      xaxis: {
-        categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-        labels: {
-          show: false,
-        },
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-      },
-      yaxis: {
-        show: false,
-        labels: {
-          formatter: function (value) {
-            return value;
-          }
-        }
-      },
-    }
-    // syllabus_options.series[0].data = data;
-    console.log(syllabus_options.series[0].data);
-    if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
-      const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
-      chart.render();
-    }
+    // let syllabus_options = {
+    //   // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
+    //   dataLabels: {
+    //     enabled: true,
+    //     // offsetX: 10,
+    //     style: {
+    //       cssClass: 'text-xs text-white font-medium'
+    //     },
+    //   },
+    //   grid: {
+    //     show: false,
+    //     strokeDashArray: 4,
+    //     padding: {
+    //       left: 16,
+    //       right: 16,
+    //       top: -26
+    //     },
+    //   },
+    //   series: [
+    //     {
+    //       name: "Syllabus Uploads",
+    //       data: [150, 141, 145, 152, 135, 125],
+    //       color: "#1A56DB",
+    //     },
+    //   ],
+    //   chart: {
+    //     height: "100%",
+    //     maxWidth: "100%",
+    //     type: "area",
+    //     fontFamily: "Inter, sans-serif",
+    //     dropShadow: {
+    //       enabled: false,
+    //     },
+    //     toolbar: {
+    //       show: false,
+    //     },
+    //   },
+    //   tooltip: {
+    //     enabled: true,
+    //     x: {
+    //       show: false,
+    //     },
+    //   },
+    //   legend: {
+    //     show: true
+    //   },
+    //   fill: {
+    //     type: "gradient",
+    //     gradient: {
+    //       opacityFrom: 0.55,
+    //       opacityTo: 0,
+    //       shade: "#1C64F2",
+    //       gradientToColors: ["#1C64F2"],
+    //     },
+    //   },
+    //   stroke: {
+    //     width: 6,
+    //   },
+    //   xaxis: {
+    //     categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+    //     labels: {
+    //       show: false,
+    //     },
+    //     axisBorder: {
+    //       show: false,
+    //     },
+    //     axisTicks: {
+    //       show: false,
+    //     },
+    //   },
+    //   yaxis: {
+    //     show: false,
+    //     labels: {
+    //       formatter: function (value) {
+    //         return value;
+    //       }
+    //     }
+    //   },
+    // }
+    // // syllabus_options.series[0].data = data;
+    // console.log(syllabus_options.series[0].data);
+    // if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
+    //   const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
+    //   chart.render();
+    // }
     
 
     let qbank_options = {
