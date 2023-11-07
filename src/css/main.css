@@ -3027,6 +3027,11 @@ html {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity)) !important;
 }
 
+.hover\:bg-gray-600:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-green-200:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(188 240 218 / var(--tw-bg-opacity)) !important;
