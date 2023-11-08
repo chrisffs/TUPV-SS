@@ -25,9 +25,9 @@ $questions = $stmt->fetchAll();
 </head>
 <body>
     
-<main>
+<main class="container mx-auto">
 
-</main>
+
 
 <section id="testpaper-container">
 
@@ -109,7 +109,7 @@ $questions = $stmt->fetchAll();
 
 
   
-    </section>
+</section>
 
 <div class="pagebreak hidden"></div>
 <section id="answersheet-container" >
@@ -226,24 +226,24 @@ $questions = $stmt->fetchAll();
     </div>
 </section>
 
-<form id="insertFormAdmin" action="./admin_print.php" method="post">
+<form id="insertFormAdmin" action="./admin_print.php" method="post" class="print-hide">
     <div class="fixed right-6 bottom-6">
-        
-    <button type="submit" id="print_btnAdmin" name="print_btnAdmin" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
+            
+        <button type="submit" id="print_btnAdmin" name="print_btnAdmin" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
 
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
-                <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
-            </svg>
-        </button>
-  
-    <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-        Print Exam
-        <div class="tooltip-arrow" data-popper-arrow></div>
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                    <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+                </svg>
+            </button>
+
+        <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Print Exam
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
     </div>
-</div>
 </form>
-
+</main>
 
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
