@@ -377,7 +377,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
     </section>
 
 <div class="pagebreak hidden"></div>
-<section id="answersheet-container" class="hidden">
+<section id="answersheet-container" class="">
     <header class="text-xs mb-4">
         <div class="grid grid-cols-9">
             <div class="col-span-1">
@@ -451,6 +451,85 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
     <div>
         <div class="">
             <h1 class="text-center text-sm font-bold">ANSWERSHEET</h1>
+            <div class="flex justify-center">
+                <div class="grid grid-cols-1 mt-2">
+                    <?php 
+                    $i = 1;
+                    $totalQuestions = count($questions);
+                    // echo '<div class="col-span-1">'; // Open the initial col-span-1 div
+                    foreach ($questions as $row):
+                    ?>
+                    <div class="grid grid-cols-3 text-xs content-center circles">
+                        <div class="col-span-1 pt-1 flex items-center justify-end">
+                            <h1><?php echo $i ?>.)</h1>
+                        </div>
+                        <div class="col-span-2 flex mx-2 pt-1 border-black border-x-2 w-full justify-center gap-1">
+                            <div class="">
+                                <div class="w-4 h-4 rounded-full border border-black"></div>
+                            </div>
+                            <div class="">
+                                <div class="w-4 h-4 rounded-full border border-black"></div>
+                            </div>
+                            <div class="">
+                                <div class="w-4 h-4 rounded-full border border-black"></div>
+                            </div>
+                            <div class="">
+                                <div class="w-4 h-4 rounded-full border border-black"></div>
+                            </div>
+                        </div>
+                    </div>     
+                    <?php 
+                    // if ($i % 20 === 0 && $i !== $totalQuestions) {
+                        // echo '</div><div class="col-span-1">'; // Close the previous col-span-1 div and open a new one for the next set of questions
+                    // }
+                    $i++;
+                    endforeach;
+                    // echo '</div>'; // Close the last col-span-1 div at the end
+                    ?>
+                </div>
+            </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<div class="pagebreak hidden"></div>
+<section id="answerkey-container" class="">
+    <header class="text-xs mb-4">
+        <div class="grid grid-cols-9">
+            <div class="col-span-1">
+                <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
+            </div>
+            <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                <div>
+                    <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                    <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
+                </div>
+                <div>
+                    <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                </div>
+                <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
+               
+           
+                <div>
+                    <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                    <input type="hidden" name = "term"  value = "<?php echo $term ?>">
+                </div>
+                <div>
+                    <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                    <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
+                </div>
+                <div>
+                    <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
+                    <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
+                </div>
+            </div>
+            <div class="col-span-1"></div>
+        </div>
+    </header>
+    <div>
+        <div class="">
+            <h1 class="text-center text-sm font-bold">KEY ANSWER SHEET</h1>
             <div class="grid grid-cols-3 mt-6">
                     <?php 
                     $i = 1;
@@ -458,24 +537,14 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
                     echo '<div class="col-span-1">'; // Open the initial col-span-1 div
                     foreach ($questions as $row):
                     ?>
-                    <div class="grid grid-cols-10 text-xs content-center circles ">
-                        <div class="col-span-1 py-2 align-middle">
+                    <div class="grid grid-cols-10 text-base content-center">
+                        <div class="col-span-1 py-1 align-middle">
                             <h1><?php echo $i ?>.)</h1>
                         </div>
-                        <div class="col-span-6 flex mx-2 py-2 px-1 border-black border-x-2 w-full justify-center gap-2">
-                            <div class="">
-                                <div class="w-4 h-4  rounded-full border border-black"></div>
-                            </div>
-                            <div class="">
-                                <div class="w-4 h-4  rounded-full border border-black"></div>
-                            </div>
-                            <div class="">
-                                <div class="w-4 h-4  rounded-full border border-black"></div>
-                            </div>
-                            <div class="">
-                                <div class="w-4 h-4  rounded-full border border-black"></div>
-                            </div>
+                        <div class="col-span-6 flex mx-2 py-1 px-1 w-full">
+                            <h1><?= $row['Answer']?></h1>
                         </div>
+                        
                     </div>     
                     <?php 
                     if ($i % 20 === 0 && $i !== $totalQuestions) {
@@ -490,7 +559,6 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         </div>
     </div>
 </section>
-
 <?php 
 } else {
     ?>

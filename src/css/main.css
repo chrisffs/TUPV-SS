@@ -1185,6 +1185,10 @@ html {
   grid-column: span 4 / span 4 !important;
 }
 
+.col-span-5 {
+  grid-column: span 5 / span 5 !important;
+}
+
 .col-span-6 {
   grid-column: span 6 / span 6 !important;
 }
@@ -1884,12 +1888,20 @@ html {
   grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
 }
 
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+
 .grid-cols-7 {
   grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
 }
 
 .grid-cols-9 {
   grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+}
+
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
 }
 
 .grid-rows-2 {
@@ -2628,6 +2640,14 @@ html {
   padding-top: 1.5rem !important;
 }
 
+.pb-1 {
+  padding-bottom: 0.25rem !important;
+}
+
+.pt-1 {
+  padding-top: 0.25rem !important;
+}
+
 .text-left {
   text-align: left !important;
 }
@@ -3025,11 +3045,6 @@ html {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity)) !important;
-}
-
-.hover\:bg-gray-600:hover {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(75 85 99 / var(--tw-bg-opacity)) !important;
 }
 
 .hover\:bg-green-200:hover {
