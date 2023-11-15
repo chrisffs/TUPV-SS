@@ -288,7 +288,7 @@ include '../php/header.php'
                     </div>
                     <!-- ============== END OF SUBJECT =============================== -->
                   
-                    <div class="mb-6 border border-light-200 rounded-lg p-6">
+                    <!-- <div class="mb-6 border border-light-200 rounded-lg p-6">
                         <div class="flex justify-between mb-6">
                             <div>
                                 <h1 class="leading-tight tracking-tight text-lg font-medium">School Year</h1>
@@ -313,7 +313,7 @@ include '../php/header.php'
                         ?>
                         </select>
                         
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- USER SETTINGS STARTS HERE -->   

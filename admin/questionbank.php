@@ -156,7 +156,7 @@ include '../php/header.php'
                            </td>
                            <td class="px-4 py-2">
                               <div class="inline-block">
-                                 <a href="#" class="font-medium text-main dark:text-blue-500 hover:underline">Remove</a>
+                                 <a href="../php/delete.php?id=<?php echo $row['ID']; ?>&delques=true" onclick="return confirm('Are you sure you want to delete this item?');" class="font-medium text-main dark:text-blue-500 hover:underline">Remove</a>
                               </div>
                            </td>
                         </tr>
