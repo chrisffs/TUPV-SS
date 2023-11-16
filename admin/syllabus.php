@@ -186,8 +186,11 @@ include '../php/header.php'
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 
                                 <tr>
-                                        <th scope="col" class="px-4 py-2 font-medium">
-                                            File Name
+                                     <th scope="col" class="px-4 py-2 font-medium">
+                                     File Name
+                                        </th>
+                                        <th scope="col" class="px-4 py-2 font-medium hidden">
+                                            ID
                                         </th>
                                         <th scope="col" class="px-4 py-2 font-medium">
                                             Subject
@@ -227,6 +230,10 @@ include '../php/header.php'
                                         <th scope="row" class="px-4 py-2 font-medium whitespace-nowrap dark:text-white">
                                             <a class="text-main hover:underline hover:underline-offset-4" href="../files/syllabusfiles/<?php echo $row['file']; ?>" target="_blank"><?php echo $row['file']; ?></a>
                                         </th>
+
+                                        <td class="px-4 py-2 hidden">
+                                        <?php echo $row['ID']; ?>
+                                        </td>
                                         <td class="px-4 py-2">
                                         <?php echo $row['subj']; ?>
                                         </td>

@@ -690,7 +690,7 @@ if (isset($_POST['restoresys'])) {
 
     if ($result) {
         // Insert the row into qbchecker_tbl
-        $sql_insert_syllabus = "INSERT INTO syllabuschecker_tbl (NameUpload, subj, subjCode, term, year, file, fileLoc, dateUpload) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload)";
+        $sql_insert_syllabus = "INSERT INTO syllabuschecker_tbl (NameUpload, subj, subjCode, term, year, file, fileLoc, dateUpload, uploaderId) VALUES (:NameUpload, :subj, :subjCode, :term, :year, :file, :fileLoc, :dateUpload, :ui)";
         $stmt_insert_syllabus = $conn->prepare($sql_insert_syllabus);
 
 
@@ -712,6 +712,7 @@ if (isset($_POST['restoresys'])) {
             $stmt_insert_syllabus->bindParam(':file', $result['file']);
             $stmt_insert_syllabus->bindParam(':fileLoc', $result['fileLoc']);
             $stmt_insert_syllabus->bindParam(':dateUpload', $formattedTimestamp);
+            $stmt_insert_syllabus->bindParam(':ui', $result['uploaderId']);
 
             
             $stmt_insert_actlog->bindParam(':type', $type);

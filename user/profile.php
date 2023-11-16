@@ -74,7 +74,7 @@ Make changes to your account
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Account Settings
+                    Update your information
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -86,16 +86,83 @@ Make changes to your account
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
             <p id="id" class="hidden eading-relaxed text-gray-500 dark:text-gray-400"></p>
-            <p id="accountDescription" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
-            <p id="accountUsername" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
-            <p id="accountFullName" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
-            <p id="accountDepartment" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
-            <p id="accountType" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+
+            <div class="relative z-0 w-full mb-6 group">
+            <input type="accountFullName" name="floating_email" id="accountFullName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name</label>
+        </div>
+
+        <div class="relative z-0 w-full mb-6 group">
+            <input type="accountUsername" name="floating_email" id="accountUsername" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Username</label>
+        </div>
+
+          <div>
+          <label for="dept" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+
+          <?php
+              $sql = "SELECT DISTINCT dept FROM courses_tbl";
+              
+              $stmt = $conn->prepare($sql);
+              $stmt->execute();
+              $data = $stmt->fetchAll();
+              
+           ?>
+
+          <select id="dept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <?php  foreach ($data as $row): ?>
+            <option value = "<?php echo $row['dept']; ?>"><?php echo $row['dept']; ?></option>
+                 <?php endforeach; ?>
+      
+          </select>
+          </div>
+
+
+          <button id="changePasswordBtn" class= "hover:text-main duration-200">Change password</button>
+
+      <div class="relative z-0 w-full mb-2 group hidden" id="passwordFields">
+        <input type="password" name="floating_password" id="edituserpass" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="accountPassword" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+  
+        
+      </div>
+
+      <div class="relative z-0 w-full  group hidden" id="confirmPasswordFields">
+        <input type="password" name="floating_confirm_password" id="confirm-Password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="confirmPassword" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm Password</label>
+              
+
+        <div class="mt-4">
+     <svg id = "showPassword" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+    <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+  </svg>
+
+  <svg id = "hidePassword" class="w-6 h-6 hidden text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="m2 13.587 3.055-3.055A4.913 4.913 0 0 1 5 10a5.006 5.006 0 0 1 5-5c.178.008.356.026.532.054l1.744-1.744A8.973 8.973 0 0 0 10 3C4.612 3 0 8.336 0 10a6.49 6.49 0 0 0 2 3.587Z"/>
+    <path d="m12.7 8.714 6.007-6.007a1 1 0 1 0-1.414-1.414L11.286 7.3a2.98 2.98 0 0 0-.588-.21l-.035-.01a2.981 2.981 0 0 0-3.584 3.583c0 .012.008.022.01.033.05.204.12.401.211.59l-6.007 6.007a1 1 0 1 0 1.414 1.414L8.714 12.7c.189.091.386.162.59.211.011 0 .021.007.033.01a2.981 2.981 0 0 0 3.584-3.584c0-.012-.008-.023-.011-.035a3.05 3.05 0 0 0-.21-.588Z"/>
+    <path d="M17.821 6.593 14.964 9.45a4.952 4.952 0 0 1-5.514 5.514L7.665 16.75c.767.165 1.55.25 2.335.251 6.453 0 10-5.258 10-7 0-1.166-1.637-2.874-2.179-3.407Z"/>
+  
+
+    </div>
+
+
+      </div>
+
+
+  </svg>
+  
+
+      <p id="password-match-error-edit" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
+
+     
+                  
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="static-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                <button data-modal-hide="static-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            <button data-modal-hide="static-modal" type="button" class="text-main duration-200 hover:text-white hover:bg-main font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
+
+
+                <button data-modal-hide="static-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Cancel</button>
             </div>
         </div>
     </div>
@@ -265,7 +332,6 @@ Make changes to your account
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/apexcharts/dist/apexcharts.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../src/js/profile_chart.js"></script>
 <script>
 const results = [232, 23]; // Assuming the array represents [wins, losses]
 
@@ -344,91 +410,91 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
     //     show: false,
     //   },
     // }
-    // let syllabus_options = {
-    //   // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
-    //   dataLabels: {
-    //     enabled: true,
-    //     // offsetX: 10,
-    //     style: {
-    //       cssClass: 'text-xs text-white font-medium'
-    //     },
-    //   },
-    //   grid: {
-    //     show: false,
-    //     strokeDashArray: 4,
-    //     padding: {
-    //       left: 16,
-    //       right: 16,
-    //       top: -26
-    //     },
-    //   },
-    //   series: [
-    //     {
-    //       name: "Syllabus Uploads",
-    //       data: [150, 141, 145, 152, 135, 125],
-    //       color: "#1A56DB",
-    //     },
-    //   ],
-    //   chart: {
-    //     height: "100%",
-    //     maxWidth: "100%",
-    //     type: "area",
-    //     fontFamily: "Inter, sans-serif",
-    //     dropShadow: {
-    //       enabled: false,
-    //     },
-    //     toolbar: {
-    //       show: false,
-    //     },
-    //   },
-    //   tooltip: {
-    //     enabled: true,
-    //     x: {
-    //       show: false,
-    //     },
-    //   },
-    //   legend: {
-    //     show: true
-    //   },
-    //   fill: {
-    //     type: "gradient",
-    //     gradient: {
-    //       opacityFrom: 0.55,
-    //       opacityTo: 0,
-    //       shade: "#1C64F2",
-    //       gradientToColors: ["#1C64F2"],
-    //     },
-    //   },
-    //   stroke: {
-    //     width: 6,
-    //   },
-    //   xaxis: {
-    //     categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-    //     labels: {
-    //       show: false,
-    //     },
-    //     axisBorder: {
-    //       show: false,
-    //     },
-    //     axisTicks: {
-    //       show: false,
-    //     },
-    //   },
-    //   yaxis: {
-    //     show: false,
-    //     labels: {
-    //       formatter: function (value) {
-    //         return value;
-    //       }
-    //     }
-    //   },
-    // }
-    // // syllabus_options.series[0].data = data;
-    // console.log(syllabus_options.series[0].data);
-    // if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
-    //   const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
-    //   chart.render();
-    // }
+    let syllabus_options = {
+      // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
+      dataLabels: {
+        enabled: true,
+        // offsetX: 10,
+        style: {
+          cssClass: 'text-xs text-white font-medium'
+        },
+      },
+      grid: {
+        show: false,
+        strokeDashArray: 4,
+        padding: {
+          left: 16,
+          right: 16,
+          top: -26
+        },
+      },
+      series: [
+        {
+          name: "Syllabus Uploads",
+          data: [150, 141, 145, 152, 135, 125],
+          color: "#1A56DB",
+        },
+      ],
+      chart: {
+        height: "100%",
+        maxWidth: "100%",
+        type: "area",
+        fontFamily: "Inter, sans-serif",
+        dropShadow: {
+          enabled: false,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      tooltip: {
+        enabled: true,
+        x: {
+          show: false,
+        },
+      },
+      legend: {
+        show: true
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          opacityFrom: 0.55,
+          opacityTo: 0,
+          shade: "#1C64F2",
+          gradientToColors: ["#1C64F2"],
+        },
+      },
+      stroke: {
+        width: 6,
+      },
+      xaxis: {
+        categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+        labels: {
+          show: false,
+        },
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
+      yaxis: {
+        show: false,
+        labels: {
+          formatter: function (value) {
+            return value;
+          }
+        }
+      },
+    }
+    // syllabus_options.series[0].data = data;
+    console.log(syllabus_options.series[0].data);
+    if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
+      const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
+      chart.render();
+    }
     
 
     let qbank_options = {
@@ -753,25 +819,78 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
       }
   });
 
+  document.addEventListener('DOMContentLoaded', function () {
+    // Fetch data from the server using AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './fetch_accounts.php', true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+
+            if (!data.error) {
+                // Populate modal content with fetched data
+                document.getElementById('id').textContent = data['ID'];
+                document.getElementById('accountFullName').value = data['full_name'];
+                document.getElementById('accountUsername').value = data['username'];
+                document.getElementById('dept').value = data['department'];
+            } else {
+                // Handle the case where an error occurred
+                console.error('Error fetching data:', data.error);
+            }
+        }
+    };
+    xhr.send();
+});
+
+
+$(document).ready(function () {
+    var changePasswordBtn = $("#changePasswordBtn");
+    var passwordFields = $("#passwordFields");
+    var confirmPasswordFields = $("#confirmPasswordFields");
+    var password = $("#edituserpass");
+    var confirmPassword = $("#confirm-Password");
+    var passwordMatchError = $("#password-match-error-edit");
+
+    var showPassword = $("#showPassword");
+    var hidePassword = $("#hidePassword");
+
+    changePasswordBtn.on('click', function () {
+        passwordFields.toggleClass('hidden');
+        confirmPasswordFields.toggleClass('hidden');
+
+    });
+
+    password.on('keyup', checkPasswordMatch);
+    confirmPassword.on('keyup', checkPasswordMatch);
+
+    function checkPasswordMatch() {
+        if (password.val() === confirmPassword.val()) {
+            passwordMatchError.addClass("hidden");
+        } else {
+            passwordMatchError.removeClass("hidden");
+        }
+    }
+
+    // Event listeners for the show/hide password icons
+    showPassword.on('click', function() {
+        password.attr("type", "text");
+        confirmPassword.attr("type", "text");
+        showPassword.addClass("hidden");
+        hidePassword.removeClass("hidden");
+    });
+
+    hidePassword.on('click', function() {
+        password.attr("type", "password");
+        confirmPassword.attr("type", "password");
+        hidePassword.addClass("hidden");
+        showPassword.removeClass("hidden");
+    });
+});
 
   
-  document.getElementById('accountModalBtn').addEventListener('click', function () {
-      
-        var accountId = '<?php echo $_SESSION['ID']; ?>';
 
-        fetch('./fetch_accounts.php?accountId=' + encodeURIComponent(accountId))
-            .then(response => response.json())
-            .then(data => {
-                // Update modal content with fetched data
-                document.getElementById('accountDescription').textContent = data.description;
-                document.getElementById('accountUsername').textContent = 'Username: ' + data.username;
-                document.getElementById('accountFullName').textContent = 'Full Name: ' + data.full_name;
-                document.getElementById('accountDepartment').textContent = 'Department: ' + data.department;
-                document.getElementById('accountType').textContent = 'Type: ' + data.type;
-                // Update other elements with account information
-            })
-            .catch(error => console.error('Error fetching account data:', error));
-    });
+    
+
 </script>
 </body>
 </html>
