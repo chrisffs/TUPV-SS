@@ -92,7 +92,18 @@ if ($result) {
                   <input type="hidden" name="Semester" value="<?php echo $row['Semester']; ?>">
                  
                      <td class="px-4 py-2">
-                     <?php echo $row['dateUpload']; ?>
+                     <?php 
+                        $old_date_timestamp = strtotime($row['dateUpload']);
+                        $date = date('Y/m/d', $old_date_timestamp);
+                        echo $date;
+                        ?>
+                        <span class="block text-xs text-gray-600">
+                           <?php 
+                           $time = date('g:i A', $old_date_timestamp);
+                           echo $time 
+                           ?>
+                        </span>
+               
                      </td>
                      <td class="px-4 py-2">
                      <?php echo $row['uploader']; ?>

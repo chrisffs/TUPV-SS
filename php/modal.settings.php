@@ -180,7 +180,7 @@
                             </select>
                         </div>
                         <div class="sm:col-span-4">
-                            <label for="userUName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                            <label for="userUName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Username <span class="text-main italic text-xs font-light">(TUPV-ID will be the default Username)</span></label>
                             <input type="text" name="userUName" id="userUName" required placeholder="Enter Username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" readonly>
                         </div>
                         <div class="sm:col-span-4">

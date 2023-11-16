@@ -18,7 +18,20 @@ include "../php/user_header.php";
 ?>
 <main class="sm:ml-[64px] sm:ml-6 p-4 md:p-6 mt-[60px]">
 <?php 
-    $sql1 = "( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Accepted' AS status, 'Question' AS type FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, uploadedby, time_uploaded, Question, 'Declined' AS status, 'Question' AS type FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, USERUPLOADID, NAMEUPLOAD, DATEUPLOAD, FILES, 'Accepted' AS status, 'Module' AS type FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) UNION ALL ( SELECT ID, uploaderId, NameUpload, dateUpload, file, 'Declined' AS status, 'Module' AS type FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} ) ORDER BY time_uploaded DESC;";
+    $sql1 = "    
+    ( SELECT ID, uploaderId, uploadedby, dateAccepted, Question, 'Accepted' AS status, 'Question' AS type 
+    FROM questionbank_tbl WHERE uploaderId = {$_SESSION['ID']} ) 
+    UNION ALL 
+    ( SELECT ID, uploaderId, uploadedby, dateDeclined, Question, 'Declined' AS status, 'Question' AS type 
+    FROM qbdecline_tbl WHERE uploaderId = {$_SESSION['ID']} ) 
+    UNION ALL 
+    ( SELECT ID, USERUPLOADID, NAMEUPLOAD, dateAccepted, FILES, 'Accepted' AS status, 'Module' AS type 
+    FROM syllabus_tbl WHERE USERUPLOADID = {$_SESSION['ID']} ) 
+    UNION ALL 
+    ( SELECT ID, uploaderId, NameUpload, dateDeclined, file, 'Declined' AS status, 'Module' AS type 
+    FROM declinedsyllabus_tbl WHERE uploaderId = {$_SESSION['ID']} )
+    ORDER BY dateAccepted DESC;";
+
     $stmt1 = $conn->prepare($sql1);
     $stmt1->execute();
     $data1 = $stmt1->fetchAll();
@@ -46,7 +59,7 @@ include "../php/user_header.php";
                         <?php
                             date_default_timezone_set('Asia/Manila'); // Set the default timezone to Manila
                             // Get the original timestamp (for example, from a database or any source)
-                            $originalTimestamp = strtotime($row1['time_uploaded']); // Replace this with your original timestamp
+                            $originalTimestamp = strtotime($row1['dateAccepted']); // Replace this with your original timestamp
                             $currentTimestamp = time();
 
                             $timeDifference = $currentTimestamp - $originalTimestamp;
@@ -127,7 +140,7 @@ include "../php/user_header.php";
                             <?php
                                 date_default_timezone_set('Asia/Manila'); // Set the default timezone to Manila
                                 // Get the original timestamp (for example, from a database or any source)
-                                $originalTimestamp = strtotime($row1['time_uploaded']); // Replace this with your original timestamp
+                                $originalTimestamp = strtotime($row1['dateAccepted']); // Replace this with your original timestamp
                                 $currentTimestamp = time();
 
                                 $timeDifference = $currentTimestamp - $originalTimestamp;
