@@ -38,7 +38,10 @@
                             </div>
                         </div>
                         <div class="mb-8">
-                            <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary md:text-2xl dark:text-white">User Login</h1>
+                            <h1 class="text-xl font-bold leading-tight tracking-tight text-main md:text-2xl dark:text-white">User Login</h1>
+                            <a href="./ADMIN/index.php" class="text-md font-bold leading-tight tracking-tight text-secondary md:text-sm dark:text-white hover:text-main hover:tracking-tight transition-colors duration-300"> Login as admin </a>
+
+
                             <!-- <h3 class="text-sm text-secondary">Log in with your admin cridentials</h3> -->
                         </div>
                         <div>

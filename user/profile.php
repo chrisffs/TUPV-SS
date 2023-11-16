@@ -39,34 +39,71 @@ include "../php/user_header.php";
                 <div class="">
                     <h1 class="text-xl font-semibold"><?php echo $row['full_name']; ?></h1>
                 </div>
-                <div class="flex flex-col gap-1">
+                <div class="flex flex-col gap-1 border-b">
                     <div class="flex items-center gap-2">
                         <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                             <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
                         </svg>
                         <h1 class="text-sm text-gray-600"><?php echo $row['tupv_id']; ?></h1>
                     </div>
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2 pb-4">
                         <svg class="w-4 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
                             <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
                             <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z"/>
                         </svg>
                         <h1 class="text-sm text-gray-600"><?php echo $row['dptname']; ?></h1>
                     </div>
+
+             
                 </div>
+
+
+
+
+   
+<!-- Modal toggle -->
+<button id = "accountModalBtn" data-modal-target="static-modal" data-modal-toggle="static-modal" class="block text-gray-600 transition duration-200 hover:text-red-500  rounded-lg text-md font-semibold px-5 py-2.5 text-center transform hover:scale-105" type="button">  
+Make changes to your account
+</button>
+
+<!-- Main modal -->
+<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Account Settings
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+            <p id="id" class="hidden eading-relaxed text-gray-500 dark:text-gray-400"></p>
+            <p id="accountDescription" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+            <p id="accountUsername" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+            <p id="accountFullName" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+            <p id="accountDepartment" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+            <p id="accountType" class="text-base leading-relaxed text-gray-500 dark:text-gray-400"></p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="static-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button data-modal-hide="static-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
                 
-                <div class="text-sm">
-                    <h1 class="text-gray-500">Email-Address</h1>
-                    <p>yourname@test.com</p>
-                </div>
-                <div class="text-sm">
-                    <h1 class="text-gray-500">Address</h1>
-                    <p>92 Miles Drive, Newark, NJ 07103, California, United States of America</p>
-                </div>
-                <div class="text-sm">
-                    <h1 class="text-gray-500">Phone Number</h1>
-                    <p>09123456789</p>
-                </div>
+               
               </div>
               <?php endforeach; ?>
               <div class="w-full bg-white rounded-lg border dark:bg-gray-800 p-4 md:p-6">
@@ -714,6 +751,26 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
         });
       }
   });
+
+
+  
+  document.getElementById('accountModalBtn').addEventListener('click', function () {
+      
+        var accountId = '<?php echo $_SESSION['ID']; ?>';
+
+        fetch('./fetch_accounts.php?accountId=' + encodeURIComponent(accountId))
+            .then(response => response.json())
+            .then(data => {
+                // Update modal content with fetched data
+                document.getElementById('accountDescription').textContent = data.description;
+                document.getElementById('accountUsername').textContent = 'Username: ' + data.username;
+                document.getElementById('accountFullName').textContent = 'Full Name: ' + data.full_name;
+                document.getElementById('accountDepartment').textContent = 'Department: ' + data.department;
+                document.getElementById('accountType').textContent = 'Type: ' + data.type;
+                // Update other elements with account information
+            })
+            .catch(error => console.error('Error fetching account data:', error));
+    });
 </script>
 </body>
 </html>

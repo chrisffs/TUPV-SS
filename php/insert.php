@@ -208,7 +208,7 @@ if(isset($_POST['insertuser']))
     $utupvid = $_POST['userTupvId'];
     $udept = $_POST['userDept'];
     $uun = $_POST['userUName'];
-    $upass = $_POST['userPass'];
+    $upass = password_hash($_POST['userPass'], PASSWORD_DEFAULT);;
     $utype = $_POST['usertype'];
 
     // Prepare the SQL statement

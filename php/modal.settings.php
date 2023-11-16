@@ -185,12 +185,12 @@
                         </div>
                         <div class="sm:col-span-4">
                             <label for="userPass" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="userPass" name="userPass" placeholder="Enter Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <input type="password" id="userPass" name="userPass" placeholder="Enter Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="8">
                         </div>
                         <div class="sm:col-span-4">
                             <label for="confirm-password2" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
-                            <input type="password" name="confirm-password2" id="confirm-password2" placeholder="Confirm Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <p id="password-match-error" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
+                            <input type="password" name="confirm-password2" id="confirm-password2" placeholder="Confirm Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="8">
+                            <p id="password-match-error" class="text-xs mt-2 text-red-500 hidden" min="8">Passwords do not match.</p>
                         </div>
                         <div class="sm:col-span-4">
                             <input type="hidden" name="usertype" id="usertype" value="user" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -479,11 +479,11 @@
                         </div>
                         <div class="sm:col-span-4">
                             <label for="edituserpass" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="edituserpass" name="edituserpass" placeholder="Enter Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <input type="password" id="edituserpass" name="edituserpass" placeholder="Enter Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="8">
                         </div>
                         <div class="sm:col-span-4">
                             <label for="confirm-password" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
-                            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="8">
                             <p id="password-match-error-edit" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
                         </div>
                     </div>

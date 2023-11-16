@@ -29,8 +29,9 @@
                 </div>
             </div>
             <div class="mb-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-secondary md:text-2xl dark:text-white">Admin Login</h1>
-                <h3 class="text-sm text-secondary">Log in with your admin cridentials</h3>
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-main md:text-2xl dark:text-white">Admin Login</h1>
+                <a href="../index.php" class="text-md font-bold leading-tight tracking-tight text-secondary md:text-sm dark:text-white hover:text-main hover:tracking-tight transition-colors duration-300"> Login as Faculty </a>
+                <!-- <h3 class="text-sm text-secondary">Log in with your admin cridentials</h3> -->
             </div>
             <div>
                 <form id="login-form" action="../php/admin_login.php" method="post">

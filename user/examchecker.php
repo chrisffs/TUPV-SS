@@ -17,6 +17,13 @@ $page = 'examchecker';
 include "../php/user_header.php";
 ?>
 
+
+
+<!-- EXAM CHECKER CONTENT HERE FROM ALDRICH -->
+
+
+
+
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>
