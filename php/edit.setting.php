@@ -208,6 +208,65 @@ if(isset($_POST['updateUserAccount'])) {
 }
 
 
+
+if (isset($_POST['updateFaculty'])) {
+    $id =  $_POST['id'];
+    $fn = $_POST['fn'];
+    $un = $_POST['un'];
+    $dept = $_POST['dept'];
+    $conpass = $_POST['confirm_password'];
+
+    $passwordChanged = false;
+
+    // Check if a new password is provided
+    if (!empty($conpass)) {
+        // New password is provided, hash it
+        $hashedPassword = password_hash($conpass, PASSWORD_DEFAULT);
+        // Update query with password change
+        $sql = "UPDATE accounts_tbl SET full_name = :fullName, username = :username, department = :dept, password = :pass WHERE ID = :id";
+        $passwordChanged = true;
+    } else {
+        // No new password, keep the existing password
+        // Check if the department is empty, if so, set it to the current department
+        $dept = (!empty($dept)) ? $dept : $row['department'];
+        $sql = "UPDATE accounts_tbl SET full_name = :fullName, username = :username, department = :dept WHERE ID = :id";
+    }
+
+    // Prepare and execute the query
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':fullName', $fn, PDO::PARAM_STR);
+    $stmt->bindParam(':username', $un, PDO::PARAM_STR);
+    $stmt->bindParam(':dept', $dept, PDO::PARAM_STR);
+
+    // If a new password is provided, bind the hashed password
+    if (!empty($conpass)) {
+        $stmt->bindParam(':pass', $hashedPassword, PDO::PARAM_STR);
+    }
+
+    // Execute the query and handle the result
+    if ($stmt->execute()) {
+        echo "Update successful!";
+
+        // Logout the user only if the password is changed
+        if ($passwordChanged) {
+            session_start();
+            session_destroy();
+        }
+
+        $_SESSION['useralert_message'] = "Update Profile Information Success";
+        $_SESSION['useralert_messagecolor'] = "green";
+        header("Location: ../user/profile.php");
+        exit();
+    } else {
+        $_SESSION['useralert_message'] = "Update Profile Information Failed";
+        $_SESSION['useralert_messagecolor'] = "red";
+        echo "Update failed: " . implode(", ", $stmt->errorInfo());
+        header("Location: ../user/profile.php");
+    }
+}
+
+
 $conn = null; // Close the PDO connection
 
 ?>

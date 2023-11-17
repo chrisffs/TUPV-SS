@@ -1,6 +1,8 @@
 <?php 
 include '../php/conn.php';
 include '../php/user_session.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +15,14 @@ include '../php/user_session.php';
     <title>Syllabus | TUPV Syllabus System</title>
 </head>
 <body class="bg-gray-50">
+
 <?php 
 include "../php/user_header.php";
 ?>
 <main class="sm:ml-[64px] sm:ml-6 p-4 md:p-6 mt-[60px]">
+          
     <div class="container mx-auto">
+        
         <div class="row-span-1 col-span-3 pb-6">
             <h1 class="text-2xl font-bold">Profile</h1>
         </div>
@@ -84,83 +89,92 @@ Make changes to your account
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="p-4 md:p-5 space-y-4">
-            <p id="id" class="hidden eading-relaxed text-gray-500 dark:text-gray-400"></p>
+            <form id="editAccount" action="../php/edit.setting.php" method = "post">
+            <?php 
+  include "../php/success.user_insert.php";
+?>
+                  <div class="p-4 md:p-5 space-y-4">
+                
+                  <input type="text" name = "id" value = "<?php echo $row['ID']; ?>" class="hidden">
 
-            <div class="relative z-0 w-full mb-6 group">
-            <input type="accountFullName" name="floating_email" id="accountFullName" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name</label>
-        </div>
+                  <div class="relative z-0 w-full mb-6 group">
+                  <input type="accountFullName" name="fn" id="" value="<?php echo $row['full_name']; ?>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name</label>
+              </div>
 
-        <div class="relative z-0 w-full mb-6 group">
-            <input type="accountUsername" name="floating_email" id="accountUsername" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Username</label>
-        </div>
+              <div class="relative z-0 w-full mb-6 group">
+                  <input type="accountUsername" name="un" id="" value="<?php echo $row['username']; ?>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Username</label>
+              </div>
 
-          <div>
-          <label for="dept" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+                <div>
+                <label for="dept" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
 
-          <?php
-              $sql = "SELECT DISTINCT dept FROM courses_tbl";
+                <?php
+                    $sql = "SELECT DISTINCT dept FROM courses_tbl";
+                    
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $data = $stmt->fetchAll();
+                    
+                ?>
+
+                <!-- Make sure the name attribute is set to "dept" -->
+                <select id="dept" name="dept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="<?php echo $row['department']; ?>" selected><?php echo $row['department']; ?></option>
+                    <?php foreach ($data as $deptRow): ?>
+                        <?php if ($row['department'] != $deptRow['dept']) : ?>
+                            <option value="<?php echo $deptRow['dept']; ?>"><?php echo $deptRow['dept']; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+
+                </div>
+
+
+                <a id="changePasswordBtn" class= "hover:text-main duration-200 cursor-pointer">Change password</a>
+
+            <div class="relative z-0 w-full mb-2 group hidden" id="passwordFields">
+              <input type="password" name="password" id="edituserpass" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "  />
+              <label for="accountPassword" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+        
               
-              $stmt = $conn->prepare($sql);
-              $stmt->execute();
-              $data = $stmt->fetchAll();
-              
-           ?>
+            </div>
 
-          <select id="dept" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <?php  foreach ($data as $row): ?>
-            <option value = "<?php echo $row['dept']; ?>"><?php echo $row['dept']; ?></option>
-                 <?php endforeach; ?>
-      
-          </select>
+            <div class="relative z-0 w-full  group hidden" id="confirmPasswordFields">
+              <input type="password" name="confirm_password" id="confirm-Password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+              <label for="confirmPassword" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" required>Confirm Password</label>
+                    
+
+              <div class="mt-4">
+          <svg id = "showPassword" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+          <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+        </svg>
+
+        <svg id = "hidePassword" class="w-6 h-6 hidden text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="m2 13.587 3.055-3.055A4.913 4.913 0 0 1 5 10a5.006 5.006 0 0 1 5-5c.178.008.356.026.532.054l1.744-1.744A8.973 8.973 0 0 0 10 3C4.612 3 0 8.336 0 10a6.49 6.49 0 0 0 2 3.587Z"/>
+          <path d="m12.7 8.714 6.007-6.007a1 1 0 1 0-1.414-1.414L11.286 7.3a2.98 2.98 0 0 0-.588-.21l-.035-.01a2.981 2.981 0 0 0-3.584 3.583c0 .012.008.022.01.033.05.204.12.401.211.59l-6.007 6.007a1 1 0 1 0 1.414 1.414L8.714 12.7c.189.091.386.162.59.211.011 0 .021.007.033.01a2.981 2.981 0 0 0 3.584-3.584c0-.012-.008-.023-.011-.035a3.05 3.05 0 0 0-.21-.588Z"/>
+          <path d="M17.821 6.593 14.964 9.45a4.952 4.952 0 0 1-5.514 5.514L7.665 16.75c.767.165 1.55.25 2.335.251 6.453 0 10-5.258 10-7 0-1.166-1.637-2.874-2.179-3.407Z"/>
+        
+
           </div>
 
 
-          <button id="changePasswordBtn" class= "hover:text-main duration-200">Change password</button>
-
-      <div class="relative z-0 w-full mb-2 group hidden" id="passwordFields">
-        <input type="password" name="floating_password" id="edituserpass" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="accountPassword" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-  
-        
-      </div>
-
-      <div class="relative z-0 w-full  group hidden" id="confirmPasswordFields">
-        <input type="password" name="floating_confirm_password" id="confirm-Password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="confirmPassword" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm Password</label>
-              
-
-        <div class="mt-4">
-     <svg id = "showPassword" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-    <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-  </svg>
-
-  <svg id = "hidePassword" class="w-6 h-6 hidden text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-    <path d="m2 13.587 3.055-3.055A4.913 4.913 0 0 1 5 10a5.006 5.006 0 0 1 5-5c.178.008.356.026.532.054l1.744-1.744A8.973 8.973 0 0 0 10 3C4.612 3 0 8.336 0 10a6.49 6.49 0 0 0 2 3.587Z"/>
-    <path d="m12.7 8.714 6.007-6.007a1 1 0 1 0-1.414-1.414L11.286 7.3a2.98 2.98 0 0 0-.588-.21l-.035-.01a2.981 2.981 0 0 0-3.584 3.583c0 .012.008.022.01.033.05.204.12.401.211.59l-6.007 6.007a1 1 0 1 0 1.414 1.414L8.714 12.7c.189.091.386.162.59.211.011 0 .021.007.033.01a2.981 2.981 0 0 0 3.584-3.584c0-.012-.008-.023-.011-.035a3.05 3.05 0 0 0-.21-.588Z"/>
-    <path d="M17.821 6.593 14.964 9.45a4.952 4.952 0 0 1-5.514 5.514L7.665 16.75c.767.165 1.55.25 2.335.251 6.453 0 10-5.258 10-7 0-1.166-1.637-2.874-2.179-3.407Z"/>
-  
-
-    </div>
-
-
-      </div>
-
-
-  </svg>
-  
-
-      <p id="password-match-error-edit" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
-
-     
-                  
             </div>
-            <!-- Modal footer -->
-            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button data-modal-hide="static-modal" type="button" class="text-main duration-200 hover:text-white hover:bg-main font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
 
+
+        </svg>
+        
+
+            <p id="password-match-error-edit" class="text-xs mt-2 text-red-500 hidden">Passwords do not match.</p>
+            </form>
+          
+                        
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button form="editAccount" data-modal-hide="static-modal" type="submit" name = "updateFaculty" class="text-main duration-200 hover:text-white hover:bg-main font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
+             
 
                 <button data-modal-hide="static-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Cancel</button>
             </div>
@@ -843,6 +857,49 @@ console.log(`Win rate: ${winRate.toFixed(2)}%`);
 });
 
 
+// $(document).ready(function () {
+//     var changePasswordBtn = $("#changePasswordBtn");
+//     var passwordFields = $("#passwordFields");
+//     var confirmPasswordFields = $("#confirmPasswordFields");
+//     var password = $("#edituserpass");
+//     var confirmPassword = $("#confirm-Password");
+//     var passwordMatchError = $("#password-match-error-edit");
+
+//     var showPassword = $("#showPassword");
+//     var hidePassword = $("#hidePassword");
+
+//     changePasswordBtn.on('click', function () {
+//         passwordFields.toggleClass('hidden');
+//         confirmPasswordFields.toggleClass('hidden');
+
+//     });
+
+//     password.on('keyup', checkPasswordMatch);
+//     confirmPassword.on('keyup', checkPasswordMatch);
+
+//     function checkPasswordMatch() {
+//         if (password.val() === confirmPassword.val()) {
+//             passwordMatchError.addClass("hidden");
+//         } else {
+//             passwordMatchError.removeClass("hidden");
+//         }
+//     }
+
+//     // Event listeners for the show/hide password icons
+//     showPassword.on('click', function() {
+//         password.attr("type", "text");
+//         confirmPassword.attr("type", "text");
+//         showPassword.addClass("hidden");
+//         hidePassword.removeClass("hidden");
+//     });
+
+//     hidePassword.on('click', function() {
+//         password.attr("type", "password");
+//         confirmPassword.attr("type", "password");
+//         hidePassword.addClass("hidden");
+//         showPassword.removeClass("hidden");
+//     });
+// });
 $(document).ready(function () {
     var changePasswordBtn = $("#changePasswordBtn");
     var passwordFields = $("#passwordFields");
@@ -854,10 +911,11 @@ $(document).ready(function () {
     var showPassword = $("#showPassword");
     var hidePassword = $("#hidePassword");
 
+    var editAccountForm = $("#editAccount");
+
     changePasswordBtn.on('click', function () {
         passwordFields.toggleClass('hidden');
         confirmPasswordFields.toggleClass('hidden');
-
     });
 
     password.on('keyup', checkPasswordMatch);
@@ -885,7 +943,24 @@ $(document).ready(function () {
         hidePassword.addClass("hidden");
         showPassword.removeClass("hidden");
     });
+
+    // Form submission handler
+    editAccountForm.on('submit', function (event) {
+        if (password.val() !== confirmPassword.val()) {
+            // Passwords don't match, prevent form submission
+            passwordMatchError.removeClass("hidden");
+            
+            // Add an alert
+            alert("Passwords do not match. Please check and try again.");
+
+            event.preventDefault();
+        } else {
+            // Passwords match, you can proceed with form submission
+            passwordMatchError.addClass("hidden");
+        }
+    });
 });
+
 
   
 
