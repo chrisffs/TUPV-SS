@@ -3130,11 +3130,6 @@ html {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity)) !important;
 }
 
-.hover\:bg-gray-700:hover {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
-}
-
 .hover\:bg-green-200:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(188 240 218 / var(--tw-bg-opacity)) !important;
@@ -3155,6 +3150,11 @@ html {
   background-color: rgb(217 217 217 / var(--tw-bg-opacity)) !important;
 }
 
+.hover\:bg-main:hover {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(196 32 60 / var(--tw-bg-opacity)) !important;
+}
+
 .hover\:bg-red-100:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(253 232 232 / var(--tw-bg-opacity)) !important;
@@ -3173,11 +3173,6 @@ html {
 .hover\:bg-yellow-200:hover {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(252 233 106 / var(--tw-bg-opacity)) !important;
-}
-
-.hover\:bg-main:hover {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(196 32 60 / var(--tw-bg-opacity)) !important;
 }
 
 .hover\:tracking-tight:hover {

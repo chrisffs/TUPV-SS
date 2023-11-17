@@ -110,12 +110,63 @@ $(document).ready( function () {
         $("#editUserAccount-modal").addClass("flex");
     });
 
-    $("#confirm-password").on('keyup', function() {
-        var password = $("#edituserpass").val();
-        var confirmPassword = $(this).val();
-        console.log(password);
-        console.log(confirmPassword);
-        if (password === confirmPassword) {
+    // $("#confirm-password").on('keyup', function() {
+    //     var password = $("#edituserpass").val();
+    //     var confirmPassword = $(this).val();
+    //     console.log(password);
+    //     console.log(confirmPassword);
+    //     if (password === confirmPassword) {
+    //         // Passwords match, hide the error message
+    //         $("#password-match-error-edit").addClass("hidden");
+    //     } else {
+    //         // Passwords do not match, show the error message
+    //         $("#password-match-error-edit").removeClass("hidden");
+    //     }
+    // });
+    var addUserForm = $("#addUserForm");
+    var password = $("#userPass");
+    var confirmPassword = $("#confirm-password2");
+    var passwordMatchError = $("#password-match-error");
+
+    var editUserAccountForm = $("#editUserAccountForm");
+    var editUserPass = $("#edituserpass");
+    var confirmPasswordEdit = $("#confirm-password");
+    // Event listener for checking password match
+    confirmPassword.on('keyup', function () {
+        var passwordValue = password.val();
+        var confirmPasswordValue = $(this).val();
+
+        if (passwordValue === confirmPasswordValue) {
+            // Passwords match, hide the error message
+            passwordMatchError.addClass("hidden");
+        } else {
+            // Passwords do not match, show the error message
+            passwordMatchError.removeClass("hidden");
+        }
+    });
+
+    // Form submission handler
+    addUserForm.on('submit', function (event) {
+        if (password.val() !== confirmPassword.val()) {
+            // Passwords don't match, prevent form submission
+            passwordMatchError.removeClass("hidden");
+
+            // Add an alert
+            alert("Passwords do not match. Please check and try again.");
+
+            event.preventDefault();
+        } else {
+            // Passwords match, you can proceed with form submission
+            passwordMatchError.addClass("hidden");
+        }
+    });
+
+    // Event listener for checking password match
+    confirmPasswordEdit.on('keyup', function () {
+        var editUserPassValue = editUserPass.val();
+        var confirmPasswordEditValue = $(this).val();
+
+        if (editUserPassValue === confirmPasswordEditValue) {
             // Passwords match, hide the error message
             $("#password-match-error-edit").addClass("hidden");
         } else {
@@ -123,19 +174,22 @@ $(document).ready( function () {
             $("#password-match-error-edit").removeClass("hidden");
         }
     });
-    $("#confirm-password2").on('keyup', function() {
-        var password2 = $("#userPass").val();
-        var confirmPassword2 = $(this).val();
-        console.log(confirmPassword2);
-        if (password2 === confirmPassword2) {
-            // Passwords match, hide the error message
-            $("#password-match-error").addClass("hidden");
+
+    // Form submission handler
+    editUserAccountForm.on('submit', function (event) {
+        if (editUserPass.val() !== confirmPasswordEdit.val()) {
+            // Passwords don't match, prevent form submission
+            $("#password-match-error-edit").removeClass("hidden");
+
+            // Add an alert
+            alert("Passwords do not match. Please check and try again.");
+
+            event.preventDefault();
         } else {
-            // Passwords do not match, show the error message
-            $("#password-match-error").removeClass("hidden");
+            // Passwords match, you can proceed with form submission
+            $("#password-match-error-edit").addClass("hidden");
         }
     });
-
 
 
 
