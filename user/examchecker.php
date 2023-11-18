@@ -51,7 +51,7 @@ include "../php/user_header.php";
                     </div>
                 </div>
                 <div class="flex items-center justify-end p-2 border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit" value="Submit" name="insertfile" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">Upload File</button>
+                    <button type="submit" value="Submit" name="checkExam" class="text-white bg-main hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800">Upload File</button>
                 </div>
             </form>
         </div>
