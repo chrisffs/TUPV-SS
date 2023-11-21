@@ -90,30 +90,19 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
             </select>
         </div>
 
-                        <!-- <div class="col-span-1"> 
+                        <div class="col-span-1"> 
                             <h4 class="text-xs text-secondary">Available Questions:</h4>
                             <h4  class="text-s text-main" id="content_count">0</h4>
-                        </div> -->
+                        </div>
 
-            <div class="col-span-2">
-            <label for="part" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exam Parts</label>
-            <select name="part" id="part"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                <option disabled selected hidden> Choose how many parts </option>
-                <option value ="1"> 1 part </option>
-                <option value ="2"> 2 parts </option>
-                <option value ="3"> 3 parts </option>
-            </select>
-        
-        </div>
+    
                        
         
         <div class="col-span-2">
-            <label for="testpart" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TEST</label>
-            <input id="testpart" name="testpart" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">
+            <label for="exam_no_of_items" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No of items</label>
+            <input id="exam_no_of_items" name="exam_no_of_items" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">
             <div class="col-span-1 flex"> 
       
-                            <h4 class="text-xs text-secondary">Available Questions:</h4>
-                            <h4  class="text-s text-main" id="content_count">0</h4>
                            
             </div>
         

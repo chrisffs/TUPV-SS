@@ -1225,10 +1225,6 @@ html {
   margin: 1rem !important;
 }
 
-.m-1 {
-  margin: 0.25rem !important;
-}
-
 .-mx-1 {
   margin-left: -0.25rem !important;
   margin-right: -0.25rem !important;

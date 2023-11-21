@@ -10,6 +10,7 @@ include '../php/user_session.php';
     <link rel="stylesheet" href="../src/css/main.css">
     <link rel="icon" href="../src/img/tupvlogo.png">
     <title>Question Bank | TUPV Syllabus System</title>
+    <script src="https://cdn.tiny.cloud/1/u6v8l0b8e7vnfveub4tw5iyvqwcf4uvtd51zjiyfd24wc5ca/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
 <?php 
@@ -128,35 +129,54 @@ include "../php/user_header.php";
     </div>
     
 </main>
+<script src="https://cdn.tiny.cloud/1/u6v8l0b8e7vnfveub4tw5iyvqwcf4uvtd51zjiyfd24wc5ca/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+ <script src="../node_modules/@codecogs/eqneditor-tinymce6/eqneditor.js"></script>
+
+
+
+
 <script>
 $(document).ready(function() {
     setTimeout(function() {
         $(".alert").addClass("hidden"); // Add the 'hidden' class to hide the element
     }, 3000);
+
     $('.text-truncate').each(function() {
         const text = $(this).text();
         const truncated = text.split(' ').slice(0, 5).join(' '); // Get the first 20 words
         $(this).text(truncated + '...'); // Display truncated text with ellipsis
     });
-    $("#no_of_cards-btn").click(function() {
+
+    $("#no_of_cards-btn").click(function () {
         // Get the number of cards from the input field
         let noOfCards = $("#no_of_cards").val();
-        $('#no_of_questions').val(noOfCards)
+        $('#no_of_questions').val(noOfCards);
         // Remove any existing question cards
         $(".question-card").remove();
-
-        // Generate question cards based on the user's input
         for (let i = 1; i <= noOfCards; i++) {
             let form = generateQuestionCard(i);
             $(".add-question-btn").before(form);
-        }
-        $(".add-question-btn").addClass('hidden')
-        if (noOfCards == 0) {
-            $(".add-question-btn").removeClass('hidden')
+
+            // Initialize TinyMCE with MathType configuration
+            tinymce.init({
+                selector: `#editor-${i}`,
+                height: 300,
+                plugins: 'advlist autolink lists link image charmap print preview anchor imagetools eqneditor',
+                toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | wiris | eqneditor',
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i'
+                ],
+                imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
+                imagetools_credentials_hosts: ['www.tinymce.com', 'codepen.io']
+            });
         }
 
+        $(".add-question-btn").addClass('hidden');
+        if (noOfCards == 0) {
+            $(".add-question-btn").removeClass('hidden');
+        }
     });
     function generateQuestionCard(i) {
         let subj = `qbank_subject-user${i}`;
@@ -217,8 +237,8 @@ $(document).ready(function() {
                     </select>
                 </div>
                 <div class="col-span-3">
-                    <label for="${quest}" class="block mb-2 text-sm font-medium text-gray-900">Question</label>
-                    <textarea id="${quest}" rows="4" name="${quest}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write the question here..."></textarea>
+                    <label for="editor-${i}" class="block mb-2 text-sm font-medium text-gray-900">Question</label>
+                    <textarea id="editor-${i}" rows="4" name="${quest}" class="hidden p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write the question here..."></textarea>
                 </div>
                 <div class="col-span-3">
                     <div class="flex">
@@ -269,5 +289,9 @@ $(document).ready(function() {
     }
 });
 </script>
+
+
+
+
 </body>
 </html>
