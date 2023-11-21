@@ -66,33 +66,33 @@ include "../php/user_header.php";
 
 
    
-<!-- Modal toggle -->
-<button id = "accountModalBtn" data-modal-target="static-modal" data-modal-toggle="static-modal" class="block text-gray-600 transition duration-200 hover:text-red-500  rounded-lg text-md font-semibold px-5 py-2.5 text-center transform hover:scale-105" type="button">  
-Make changes to your account
-</button>
+                  <!-- Modal toggle -->
+                  <button id = "accountModalBtn" data-modal-target="static-modal" data-modal-toggle="static-modal" class="block text-gray-600 transition duration-200 hover:text-red-500  rounded-lg text-md font-semibold px-5 py-2.5 text-center transform hover:scale-105" type="button">  
+                  Make changes to your account
+                  </button>
 
-<!-- Main modal -->
-<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Update your information
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <form id="editAccount" action="../php/edit.setting.php" method = "post">
-            <?php 
-  include "../php/success.user_insert.php";
-?>
+                  <!-- Main modal -->
+                  <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                      <div class="relative p-4 w-full max-w-2xl max-h-full">
+                          <!-- Modal content -->
+                          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                              <!-- Modal header -->
+                              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                      Update your information
+                                  </h3>
+                                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="static-modal">
+                                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span class="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              <!-- Modal body -->
+                              <form id="editAccount" action="../php/edit.setting.php" method = "post">
+                              <?php 
+                    include "../php/success.user_insert.php";
+                  ?>
                   <div class="p-4 md:p-5 space-y-4">
                 
                   <input type="text" name = "id" value = "<?php echo $row['ID']; ?>" class="hidden">
@@ -180,7 +180,7 @@ Make changes to your account
             </div>
         </div>
     </div>
-</div>
+  </div>
 
 
                 
@@ -236,6 +236,7 @@ Make changes to your account
                       <dd class="text-blue-600 dark:text-blue-300 text-sm font-medium">Accepted</dd>
                     </dl>
                   </div>
+<<<<<<< HEAD
                   <!-- <button data-collapse-toggle="more-details" type="button" class="hover:underline text-xs text-gray-500 dark:text-gray-400 font-medium inline-flex items-center">Show more details <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
@@ -293,6 +294,8 @@ Make changes to your account
                       </div>
                   </div>
                   <div class="py-6" id="rate-chart"></div> -->
+=======
+>>>>>>> c566d327ed9947fbbc10fbd78d6c66e06f93bda1
                 </div>
               </div>
               
@@ -302,12 +305,40 @@ Make changes to your account
                     <h1 class="font-semibold text-xl">Your Stats</h1>
                 </div>
 
-                <div class="flex flex-col gap-4 grow">
-                    <div class="h-1/2">
+                <div class="flex flex-col md:flex-row gap-4 grow">
+                    <div class="md:w-1/2">
                         <div class="flex flex-col justify-between h-full w-full bg-white rounded-lg border dark:bg-gray-800 p-4 md:p-6">
                             <div class="flex justify-between">
                                 <div>
-                                    <h5 title="Total Uploaded Files" class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">52</h5>
+                                    <h5 title="Total Uploaded Files" class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
+                                    <?php
+                                    $sql = "SELECT SUM(total_rows) AS total_count
+                                    FROM (
+                                      SELECT COUNT(*) AS total_rows
+                                      FROM syllabus_tbl
+                                      WHERE YEAR(DATEUPLOAD) = YEAR(CURDATE())
+                                        AND WEEK(DATEUPLOAD) = WEEK(CURDATE())
+                                        AND USERUPLOADID = {$_SESSION['ID']}
+                                      
+                                      UNION ALL
+                                      
+                                      SELECT COUNT(*) AS total_rows
+                                      FROM syllabuschecker_tbl
+                                      WHERE YEAR(dateUpload) = YEAR(CURDATE())
+                                        AND WEEK(dateUpload) = WEEK(CURDATE())
+                                        AND uploaderId = {$_SESSION['ID']}
+                                    ) AS combined_counts;";
+                                    
+
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->execute();
+                                    $data = $stmt->fetchAll();
+                                    
+                                    foreach ($data as $row):
+                                    echo $row['total_count'];
+                                    endforeach; 
+                                    ?>
+                                    </h5>
                                     <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Syllabus uploads this week</p>
                                 </div>
                                 <div title="Uploaded 12% of all Syllabus files" class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
@@ -320,12 +351,44 @@ Make changes to your account
                             <div class="" id="syllabus-chart"></div>
                         </div>
                     </div>
-                    <div class="h-1/2">
+                    <div class="md:w-1/2">
                         <div class="flex flex-col justify-between h-full w-full w-full bg-white rounded-lg border dark:bg-gray-800 p-4 md:p-6">
                             <div class="flex justify-between">
                                 <div>
-                                    <h5 title="Total Submitted Questions" class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">231</h5>
+                                    <h5 title="Total Submitted Questions" class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
+                                    <?php
+                                    $sql = "SELECT SUM(total_rows) AS total_count
+                                    FROM (
+                                      SELECT COUNT(*) AS total_rows
+                                      FROM questionbank_tbl
+                                      WHERE YEAR(time_uploaded) = YEAR(CURDATE())
+                                        AND WEEK(time_uploaded) = WEEK(CURDATE())
+                                        AND uploaderId = {$_SESSION['ID']}
+                                      
+                                      UNION ALL
+                                      
+                                      SELECT COUNT(*) AS total_rows
+                                      FROM qbchecker_tbl
+                                      WHERE YEAR(time_uploaded) = YEAR(CURDATE())
+                                        AND WEEK(time_uploaded) = WEEK(CURDATE())
+                                        AND uploaderId = {$_SESSION['ID']}
+                                    ) AS combined_counts;";
+                                    
+                    
+
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->execute();
+                                    $data = $stmt->fetchAll();
+                                    
+                                    foreach ($data as $row):
+                                    echo $row['total_count'];
+                                    endforeach; 
+                                    ?>
+                                    </h5>
                                     <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Question Bank submissions this week</p>
+                                    <div>
+                                      
+                                    </div>
                                 </div>
                                 <div class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
                                     12%
@@ -347,619 +410,638 @@ Make changes to your account
 <script src="../node_modules/apexcharts/dist/apexcharts.min.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script>
-const results = [232, 23]; // Assuming the array represents [wins, losses]
+  document.addEventListener('DOMContentLoaded', function () {
+  // Fetch data from the server using AJAX
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', './fetch_accounts.php', true);
+  xhr.onload = function () {
+      if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
 
-const [totalWins, totalLosses] = results;
-
-// Using reduce() to calculate the win rate
-const winRate = results.reduce((acc, value) => acc / (acc + value), 0) * 100;
-
-console.log(`Win rate: ${winRate.toFixed(2)}%`);
-
-  // ApexCharts options and config
-  window.addEventListener("load", function() {
-    // let syllabus_options = {
-    //   chart: {
-    //     height: "100%",
-    //     maxWidth: "100%",
-    //     type: "area",
-    //     fontFamily: "Inter, sans-serif",
-    //     dropShadow: {
-    //       enabled: false,
-    //     },
-    //     toolbar: {
-    //       show: false,
-    //     },
-    //   },
-    //   tooltip: {
-    //     enabled: true,
-    //     x: {
-    //       show: false,
-    //     },
-    //   },
-    //   fill: {
-    //     type: "gradient",
-    //     gradient: {
-    //       opacityFrom: 0.55,
-    //       opacityTo: 0,
-    //       shade: "#C4203C",
-    //       gradientToColors: ["#C4203C"],
-    //     },
-    //   },
-    //   dataLabels: {
-    //     enabled: false,
-    //   },
-    //   stroke: {
-    //     width: 6,
-    //   },
-    //   grid: {
-    //     show: false,
-    //     strokeDashArray: 4,
-    //     padding: {
-    //       left: 2,
-    //       right: 2,
-    //       top: 0
-    //     },
-    //   },
-    //   series: [
-    //     {
-    //       name: "Syllabus Uploads",
-    //       data: [8, , , , ,],
-    //       color: "#C4203C",
-    //     }
-    //   ],
-    //   xaxis: {
-    //     categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-    //     labels: {
-    //       show: false,
-    //     },
-    //     axisBorder: {
-    //       show: false,
-    //     },
-    //     axisTicks: {
-    //       show: false,
-    //     },
-    //   },
-    //   yaxis: {
-    //     show: false,
-    //   },
-    // }
-    let syllabus_options = {
-      // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
-      dataLabels: {
-        enabled: true,
-        // offsetX: 10,
-        style: {
-          cssClass: 'text-xs text-white font-medium'
-        },
-      },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 16,
-          right: 16,
-          top: -26
-        },
-      },
-      series: [
-        {
-          name: "Syllabus Uploads",
-          data: [150, 141, 145, 152, 135, 125],
-          color: "#1A56DB",
-        },
-      ],
-      chart: {
-        height: "100%",
-        maxWidth: "100%",
-        type: "area",
-        fontFamily: "Inter, sans-serif",
-        dropShadow: {
-          enabled: false,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      tooltip: {
-        enabled: true,
-        x: {
-          show: false,
-        },
-      },
-      legend: {
-        show: true
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          opacityFrom: 0.55,
-          opacityTo: 0,
-          shade: "#1C64F2",
-          gradientToColors: ["#1C64F2"],
-        },
-      },
-      stroke: {
-        width: 6,
-      },
-      xaxis: {
-        categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-        labels: {
-          show: false,
-        },
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-      },
-      yaxis: {
-        show: false,
-        labels: {
-          formatter: function (value) {
-            return value;
-          }
-        }
-      },
-    }
-    // syllabus_options.series[0].data = data;
-    console.log(syllabus_options.series[0].data);
-    if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
-      const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
-      chart.render();
-    }
-    
-
-    let qbank_options = {
-      chart: {
-        height: "100%",
-        maxWidth: "100%",
-        type: "area",
-        fontFamily: "Inter, sans-serif",
-        dropShadow: {
-          enabled: false,
-        },
-        toolbar: {
-          show: false,
-        },
-      },
-      tooltip: {
-        enabled: true,
-        x: {
-          show: false,
-        },
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          opacityFrom: 0.55,
-          opacityTo: 0,
-          shade: "#15803d",
-          gradientToColors: ["#15803d"],
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: 6,
-      },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 2,
-          right: 2,
-          top: 0
-        },
-      },
-      series: [
-        {
-          name: "Question Bank Submissions",
-          data: [0, 52, 12, 10, 18, 5],
-          color: "#15803d",
-        }
-      ],
-      xaxis: {
-        categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-        labels: {
-          show: false,
-        },
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-      },
-      yaxis: {
-        show: false,
-      },
-    }
-    if (document.getElementById("qbank-chart") && typeof ApexCharts !== 'undefined') {
-      const chart = new ApexCharts(document.getElementById("qbank-chart"), qbank_options);
-      chart.render();
-    }
-
-    const options = {
-      colors: ["#1A56DB", "#FDBA74"],
-      series: [
-        {
-          name: "Syllabus Uploads",
-          color: "#1A56DB",
-          data: [
-            { x: "Mon", y: 1 },
-            { x: "Tue", y: 12 },
-            { x: "Wed", y: 3 },
-            { x: "Thu", y: 21 },
-            { x: "Fri", y: 2 },
-            { x: "Sat", y: 3 },
-            { x: "Sun", y: 11 },
-          ],
-        },
-        {
-          name: "Question Bank Submissions",
-          color: "#FDBA74",
-          data: [
-            { x: "Mon", y: 32 },
-            { x: "Tue", y: 13 },
-            { x: "Wed", y: 41 },
-            { x: "Thu", y: 24 },
-            { x: "Fri", y: 22 },
-            { x: "Sat", y: 11 },
-            { x: "Sun", y: 43 },
-          ],
-        },
-      ],
-      chart: {
-        type: "bar",
-        height: "320px",
-        fontFamily: "Inter, sans-serif",
-        toolbar: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: "70%",
-          borderRadiusApplication: "end",
-          borderRadius: 8,
-        },
-      },
-      tooltip: {
-        shared: true,
-        intersect: false,
-        style: {
-          fontFamily: "Inter, sans-serif",
-        },
-      },
-      states: {
-        hover: {
-          filter: {
-            type: "darken",
-            value: 1,
-          },
-        },
-      },
-      stroke: {
-        show: true,
-        width: 0,
-        colors: ["transparent"],
-      },
-      grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-          left: 2,
-          right: 2,
-          top: -14
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      legend: {
-        show: false,
-      },
-      xaxis: {
-        floating: false,
-        labels: {
-          show: true,
-          style: {
-            fontFamily: "Inter, sans-serif",
-            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-          }
-        },
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-      },
-      yaxis: {
-        show: false,
-      },
-      fill: {
-        opacity: 1,
-      },
-    }
-
-    if(document.getElementById("column-chart") && typeof ApexCharts !== 'undefined') {
-      const chart = new ApexCharts(document.getElementById("column-chart"), options);
-      chart.render();
-    }
-
-    const getChartOptions = () => {
-        return {
-          series: [11, 9],
-          colors: ["#1C64F2", "#16BDCA"],
-          chart: {
-            height: 320,
-            width: "100%",
-            type: "donut",
-          },
-          stroke: {
-            colors: ["transparent"],
-            lineCap: "",
-          },
-          plotOptions: {
-            pie: {
-              donut: {
-                labels: {
-                  show: true,
-                  name: {
-                    show: true,
-                    fontFamily: "Inter, sans-serif",
-                    offsetY: 20,
-                  },
-                  total: {
-                    showAlways: true,
-                    show: true,
-                    label: "Acceptance Rate",
-                    fontFamily: "Inter, sans-serif",
-                    formatter: function (w) {
-                      const sum = (w.globals.seriesTotals[0] / (w.globals.seriesTotals[0] + w.globals.seriesTotals[1]))
-                      const percent = sum * 100
-                      return `${percent.toFixed(2)}%`
-                    },
-                  },
-                  value: {
-                    show: true,
-                    fontFamily: "Inter, sans-serif",
-                    offsetY: -20,
-                    formatter: function (value) {
-                      return value 
-                    },
-                  },
-                },
-                size: "80%",
-              },
-            },
-          },
-          grid: {
-            padding: {
-              top: -2,
-            },
-          },
-          labels: ["Accepted", "Declined"],
-          dataLabels: {
-            enabled: false,
-          },
-          legend: {
-            position: "bottom",
-            fontFamily: "Inter, sans-serif",
-          },
-          yaxis: {
-            labels: {
-              formatter: function (value) {
-                return value + ""
-              },
-            },
-          },
-          xaxis: {
-            labels: {
-              formatter: function (value) {
-                return value  + ""
-              },
-            },
-            axisTicks: {
-              show: false,
-            },
-            axisBorder: {
-              show: false,
-            },
-          },
-        }
-      }
-
-      if (document.getElementById("rate-chart") && typeof ApexCharts !== 'undefined') {
-        const chart = new ApexCharts(document.getElementById("rate-chart"), getChartOptions());
-        chart.render();
-
-        // Get all the checkboxes by their class name
-        const checkboxes = document.querySelectorAll('#devices input[type="checkbox"]');
-
-        // // Function to handle the checkbox change event
-        // function handleCheckboxChange(event, chart) {
-        //     const checkbox = event.target;
-        //     if (checkbox.checked) {
-        //         switch(checkbox.value) {
-        //           case 'syllabus':
-        //             chart.updateSeries([3, 7]);
-        //             break;
-        //           case 'qbank':
-        //             chart.updateSeries([8, 2]);
-        //             break;
-        //           default:
-        //             chart.updateSeries([9, 1]);
-        //         }
-        //     } else {
-        //         chart.updateSeries([6, 4]);
-        //     }
-        // }
-        function handleCheckboxChange() {
-          const series = [];
-
-          checkboxes.forEach(checkbox => {
-              if (checkbox.checked) {
-                  switch (checkbox.value) {
-                      case 'syllabus':
-                          series.push([3, 7]);
-                          break;
-                      case 'qbank':
-                          series.push([8, 2]);
-                          break;
-                      default:
-                          series.push([11, 9]);
-                  }
-              }
-          });
-
-          if (series.length === 0) {
-              chart.updateSeries([11, 9]); // Default series if no checkbox is checked
+          if (!data.error) {
+              // Populate modal content with fetched data
+              document.getElementById('id').textContent = data['ID'];
+              document.getElementById('accountFullName').value = data['full_name'];
+              document.getElementById('accountUsername').value = data['username'];
+              document.getElementById('dept').value = data['department'];
           } else {
-              const updatedSeries = series.reduce((acc, val) => [acc[0] + val[0], acc[1] + val[1]]);
-              chart.updateSeries(updatedSeries);
+              // Handle the case where an error occurred
+              console.error('Error fetching data:', data.error);
           }
       }
-
-        // Attach the event listener to each checkbox
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener('change', (event) => handleCheckboxChange(event, chart));
-        });
-      }
+  };
+  xhr.send();
   });
 
-  document.addEventListener('DOMContentLoaded', function () {
-    // Fetch data from the server using AJAX
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', './fetch_accounts.php', true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
 
-            if (!data.error) {
-                // Populate modal content with fetched data
-                document.getElementById('id').textContent = data['ID'];
-                document.getElementById('accountFullName').value = data['full_name'];
-                document.getElementById('accountUsername').value = data['username'];
-                document.getElementById('dept').value = data['department'];
-            } else {
-                // Handle the case where an error occurred
-                console.error('Error fetching data:', data.error);
-            }
-        }
-    };
-    xhr.send();
-});
+  // $(document).ready(function () {
+  //     var changePasswordBtn = $("#changePasswordBtn");
+  //     var passwordFields = $("#passwordFields");
+  //     var confirmPasswordFields = $("#confirmPasswordFields");
+  //     var password = $("#edituserpass");
+  //     var confirmPassword = $("#confirm-Password");
+  //     var passwordMatchError = $("#password-match-error-edit");
+
+  //     var showPassword = $("#showPassword");
+  //     var hidePassword = $("#hidePassword");
+
+  //     changePasswordBtn.on('click', function () {
+  //         passwordFields.toggleClass('hidden');
+  //         confirmPasswordFields.toggleClass('hidden');
+
+  //     });
+
+  //     password.on('keyup', checkPasswordMatch);
+  //     confirmPassword.on('keyup', checkPasswordMatch);
+
+  //     function checkPasswordMatch() {
+  //         if (password.val() === confirmPassword.val()) {
+  //             passwordMatchError.addClass("hidden");
+  //         } else {
+  //             passwordMatchError.removeClass("hidden");
+  //         }
+  //     }
+
+  //     // Event listeners for the show/hide password icons
+  //     showPassword.on('click', function() {
+  //         password.attr("type", "text");
+  //         confirmPassword.attr("type", "text");
+  //         showPassword.addClass("hidden");
+  //         hidePassword.removeClass("hidden");
+  //     });
+
+  //     hidePassword.on('click', function() {
+  //         password.attr("type", "password");
+  //         confirmPassword.attr("type", "password");
+  //         hidePassword.addClass("hidden");
+  //         showPassword.removeClass("hidden");
+  //     });
+  // });
+  $(document).ready(function () {
+  var changePasswordBtn = $("#changePasswordBtn");
+  var passwordFields = $("#passwordFields");
+  var confirmPasswordFields = $("#confirmPasswordFields");
+  var password = $("#edituserpass");
+  var confirmPassword = $("#confirm-Password");
+  var passwordMatchError = $("#password-match-error-edit");
+
+  var showPassword = $("#showPassword");
+  var hidePassword = $("#hidePassword");
+
+  var editAccountForm = $("#editAccount");
+
+  changePasswordBtn.on('click', function () {
+      passwordFields.toggleClass('hidden');
+      confirmPasswordFields.toggleClass('hidden');
+  });
+
+  password.on('keyup', checkPasswordMatch);
+  confirmPassword.on('keyup', checkPasswordMatch);
+
+  function checkPasswordMatch() {
+      if (password.val() === confirmPassword.val()) {
+          passwordMatchError.addClass("hidden");
+      } else {
+          passwordMatchError.removeClass("hidden");
+      }
+  }
+
+  // Event listeners for the show/hide password icons
+  showPassword.on('click', function() {
+      password.attr("type", "text");
+      confirmPassword.attr("type", "text");
+      showPassword.addClass("hidden");
+      hidePassword.removeClass("hidden");
+  });
+
+  hidePassword.on('click', function() {
+      password.attr("type", "password");
+      confirmPassword.attr("type", "password");
+      hidePassword.addClass("hidden");
+      showPassword.removeClass("hidden");
+  });
+
+  // Form submission handler
+  editAccountForm.on('submit', function (event) {
+      if (password.val() !== confirmPassword.val()) {
+          // Passwords don't match, prevent form submission
+          passwordMatchError.removeClass("hidden");
+          
+          // Add an alert
+          alert("Passwords do not match. Please check and try again.");
+
+          event.preventDefault();
+      } else {
+          // Passwords match, you can proceed with form submission
+          passwordMatchError.addClass("hidden");
+      }
+  });
+  });
 
 
-// $(document).ready(function () {
-//     var changePasswordBtn = $("#changePasswordBtn");
-//     var passwordFields = $("#passwordFields");
-//     var confirmPasswordFields = $("#confirmPasswordFields");
-//     var password = $("#edituserpass");
-//     var confirmPassword = $("#confirm-Password");
-//     var passwordMatchError = $("#password-match-error-edit");
+</script>
 
-//     var showPassword = $("#showPassword");
-//     var hidePassword = $("#hidePassword");
 
-//     changePasswordBtn.on('click', function () {
-//         passwordFields.toggleClass('hidden');
-//         confirmPasswordFields.toggleClass('hidden');
 
-//     });
 
-//     password.on('keyup', checkPasswordMatch);
-//     confirmPassword.on('keyup', checkPasswordMatch);
 
-//     function checkPasswordMatch() {
-//         if (password.val() === confirmPassword.val()) {
-//             passwordMatchError.addClass("hidden");
-//         } else {
-//             passwordMatchError.removeClass("hidden");
+
+
+
+
+
+
+<script>
+// const results = [232, 23]; // Assuming the array represents [wins, losses]
+
+// const [totalWins, totalLosses] = results;
+
+// // Using reduce() to calculate the win rate
+// const winRate = results.reduce((acc, value) => acc / (acc + value), 0) * 100;
+
+// // console.log(`Win rate: ${winRate.toFixed(2)}%`);
+
+//   // ApexCharts options and config
+//   window.addEventListener("load", function() {
+//     // let syllabus_options = {
+//     //   chart: {
+//     //     height: "100%",
+//     //     maxWidth: "100%",
+//     //     type: "area",
+//     //     fontFamily: "Inter, sans-serif",
+//     //     dropShadow: {
+//     //       enabled: false,
+//     //     },
+//     //     toolbar: {
+//     //       show: false,
+//     //     },
+//     //   },
+//     //   tooltip: {
+//     //     enabled: true,
+//     //     x: {
+//     //       show: false,
+//     //     },
+//     //   },
+//     //   fill: {
+//     //     type: "gradient",
+//     //     gradient: {
+//     //       opacityFrom: 0.55,
+//     //       opacityTo: 0,
+//     //       shade: "#C4203C",
+//     //       gradientToColors: ["#C4203C"],
+//     //     },
+//     //   },
+//     //   dataLabels: {
+//     //     enabled: false,
+//     //   },
+//     //   stroke: {
+//     //     width: 6,
+//     //   },
+//     //   grid: {
+//     //     show: false,
+//     //     strokeDashArray: 4,
+//     //     padding: {
+//     //       left: 2,
+//     //       right: 2,
+//     //       top: 0
+//     //     },
+//     //   },
+//     //   series: [
+//     //     {
+//     //       name: "Syllabus Uploads",
+//     //       data: [8, , , , ,],
+//     //       color: "#C4203C",
+//     //     }
+//     //   ],
+//     //   xaxis: {
+//     //     categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+//     //     labels: {
+//     //       show: false,
+//     //     },
+//     //     axisBorder: {
+//     //       show: false,
+//     //     },
+//     //     axisTicks: {
+//     //       show: false,
+//     //     },
+//     //   },
+//     //   yaxis: {
+//     //     show: false,
+//     //   },
+//     // }
+//     let syllabus_options = {
+//       // enable and customize data labels using the following example, learn more from here: https://apexcharts.com/docs/datalabels/
+//       dataLabels: {
+//         enabled: true,
+//         // offsetX: 10,
+//         style: {
+//           cssClass: 'text-xs text-white font-medium'
+//         },
+//       },
+//       grid: {
+//         show: false,
+//         strokeDashArray: 4,
+//         padding: {
+//           left: 16,
+//           right: 16,
+//           top: -26
+//         },
+//       },
+//       series: [
+//         {
+//           name: "Syllabus Uploads",
+//           data: [150, 141, 145, 152, 135, 125],
+//           color: "#1A56DB",
+//         },
+//       ],
+//       chart: {
+//         height: "100%",
+//         maxWidth: "100%",
+//         type: "area",
+//         fontFamily: "Inter, sans-serif",
+//         dropShadow: {
+//           enabled: false,
+//         },
+//         toolbar: {
+//           show: false,
+//         },
+//       },
+//       tooltip: {
+//         enabled: true,
+//         x: {
+//           show: false,
+//         },
+//       },
+//       legend: {
+//         show: true
+//       },
+//       fill: {
+//         type: "gradient",
+//         gradient: {
+//           opacityFrom: 0.55,
+//           opacityTo: 0,
+//           shade: "#1C64F2",
+//           gradientToColors: ["#1C64F2"],
+//         },
+//       },
+//       stroke: {
+//         width: 6,
+//       },
+//       xaxis: {
+//         categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+//         labels: {
+//           show: false,
+//         },
+//         axisBorder: {
+//           show: false,
+//         },
+//         axisTicks: {
+//           show: false,
+//         },
+//       },
+//       yaxis: {
+//         show: false,
+//         labels: {
+//           formatter: function (value) {
+//             return value;
+//           }
 //         }
+//       },
+//     }
+//     // syllabus_options.series[0].data = data;
+//     // console.log(syllabus_options.series[0].data);
+//     if (document.getElementById("syllabus-chart") && typeof ApexCharts !== 'undefined') {
+//       const chart = new ApexCharts(document.getElementById("syllabus-chart"), syllabus_options);
+//       chart.render();
+//     }
+    
+
+//     let qbank_options = {
+//       chart: {
+//         height: "100%",
+//         maxWidth: "100%",
+//         type: "area",
+//         fontFamily: "Inter, sans-serif",
+//         dropShadow: {
+//           enabled: false,
+//         },
+//         toolbar: {
+//           show: false,
+//         },
+//       },
+//       tooltip: {
+//         enabled: true,
+//         x: {
+//           show: false,
+//         },
+//       },
+//       fill: {
+//         type: "gradient",
+//         gradient: {
+//           opacityFrom: 0.55,
+//           opacityTo: 0,
+//           shade: "#15803d",
+//           gradientToColors: ["#15803d"],
+//         },
+//       },
+//       dataLabels: {
+//         enabled: false,
+//       },
+//       stroke: {
+//         width: 6,
+//       },
+//       grid: {
+//         show: false,
+//         strokeDashArray: 4,
+//         padding: {
+//           left: 2,
+//           right: 2,
+//           top: 0
+//         },
+//       },
+//       series: [
+//         {
+//           name: "Question Bank Submissions",
+//           data: [0, 52, 12, 10, 18, 5],
+//           color: "#15803d",
+//         }
+//       ],
+//       xaxis: {
+//         categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+//         labels: {
+//           show: false,
+//         },
+//         axisBorder: {
+//           show: false,
+//         },
+//         axisTicks: {
+//           show: false,
+//         },
+//       },
+//       yaxis: {
+//         show: false,
+//       },
+//     }
+//     if (document.getElementById("qbank-chart") && typeof ApexCharts !== 'undefined') {
+//       const chart = new ApexCharts(document.getElementById("qbank-chart"), qbank_options);
+//       chart.render();
 //     }
 
-//     // Event listeners for the show/hide password icons
-//     showPassword.on('click', function() {
-//         password.attr("type", "text");
-//         confirmPassword.attr("type", "text");
-//         showPassword.addClass("hidden");
-//         hidePassword.removeClass("hidden");
+//     const options = {
+//       colors: ["#1A56DB", "#FDBA74"],
+//       series: [
+//         {
+//           name: "Syllabus Uploads",
+//           color: "#1A56DB",
+//           data: [
+//             { x: "Mon", y: 1 },
+//             { x: "Tue", y: 12 },
+//             { x: "Wed", y: 3 },
+//             { x: "Thu", y: 21 },
+//             { x: "Fri", y: 2 },
+//             { x: "Sat", y: 3 },
+//             { x: "Sun", y: 11 },
+//           ],
+//         },
+//         {
+//           name: "Question Bank Submissions",
+//           color: "#FDBA74",
+//           data: [
+//             { x: "Mon", y: 32 },
+//             { x: "Tue", y: 13 },
+//             { x: "Wed", y: 41 },
+//             { x: "Thu", y: 24 },
+//             { x: "Fri", y: 22 },
+//             { x: "Sat", y: 11 },
+//             { x: "Sun", y: 43 },
+//           ],
+//         },
+//       ],
+//       chart: {
+//         type: "bar",
+//         height: "320px",
+//         fontFamily: "Inter, sans-serif",
+//         toolbar: {
+//           show: false,
+//         },
+//       },
+//       plotOptions: {
+//         bar: {
+//           horizontal: false,
+//           columnWidth: "70%",
+//           borderRadiusApplication: "end",
+//           borderRadius: 8,
+//         },
+//       },
+//       tooltip: {
+//         shared: true,
+//         intersect: false,
+//         style: {
+//           fontFamily: "Inter, sans-serif",
+//         },
+//       },
+//       states: {
+//         hover: {
+//           filter: {
+//             type: "darken",
+//             value: 1,
+//           },
+//         },
+//       },
+//       stroke: {
+//         show: true,
+//         width: 0,
+//         colors: ["transparent"],
+//       },
+//       grid: {
+//         show: false,
+//         strokeDashArray: 4,
+//         padding: {
+//           left: 2,
+//           right: 2,
+//           top: -14
+//         },
+//       },
+//       dataLabels: {
+//         enabled: false,
+//       },
+//       legend: {
+//         show: false,
+//       },
+//       xaxis: {
+//         floating: false,
+//         labels: {
+//           show: true,
+//           style: {
+//             fontFamily: "Inter, sans-serif",
+//             cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+//           }
+//         },
+//         axisBorder: {
+//           show: false,
+//         },
+//         axisTicks: {
+//           show: false,
+//         },
+//       },
+//       yaxis: {
+//         show: false,
+//       },
+//       fill: {
+//         opacity: 1,
+//       },
+//     }
+
+//     if(document.getElementById("column-chart") && typeof ApexCharts !== 'undefined') {
+//       const chart = new ApexCharts(document.getElementById("column-chart"), options);
+//       chart.render();
+//     }
+
+//     $.ajax({
+//       url: '../php/charts/getData.php',
+//       method: 'GET',
+//       dataType: 'json',
+//       success: function (data) {
+//         // Update chart with the fetched data
+//         const seriesData = [data.total_count_accepted, data.total_count_declined];
+//         let chartOptions = getChartOptions(seriesData);
+//         chartOptions.series = seriesData;
+//         renderChart(chartOptions);
+//       },
+//       error: function (error) {
+//         console.error('Error fetching data:', error);
+//       }
 //     });
 
-//     hidePassword.on('click', function() {
-//         password.attr("type", "password");
-//         confirmPassword.attr("type", "password");
-//         hidePassword.addClass("hidden");
-//         showPassword.removeClass("hidden");
-//     });
-// });
-$(document).ready(function () {
-    var changePasswordBtn = $("#changePasswordBtn");
-    var passwordFields = $("#passwordFields");
-    var confirmPasswordFields = $("#confirmPasswordFields");
-    var password = $("#edituserpass");
-    var confirmPassword = $("#confirm-Password");
-    var passwordMatchError = $("#password-match-error-edit");
+    
+//     const getChartOptions = () => {
+//         return {
+//           series: [11, 9],
+//           colors: ["#1C64F2", "#16BDCA"],
+//           chart: {
+//             height: 320,
+//             width: "100%",
+//             type: "donut",
+//           },
+//           stroke: {
+//             colors: ["transparent"],
+//             lineCap: "",
+//           },
+//           plotOptions: {
+//             pie: {
+//               donut: {
+//                 labels: {
+//                   show: true,
+//                   name: {
+//                     show: true,
+//                     fontFamily: "Inter, sans-serif",
+//                     offsetY: 20,
+//                   },
+//                   total: {
+//                     showAlways: true,
+//                     show: true,
+//                     label: "Acceptance Rate",
+//                     fontFamily: "Inter, sans-serif",
+//                     formatter: function (w) {
+//                       const sum = (w.globals.seriesTotals[0] / (w.globals.seriesTotals[0] + w.globals.seriesTotals[1]))
+//                       const percent = sum * 100
+//                       return `${percent.toFixed(2)}%`
+//                     },
+//                   },
+//                   value: {
+//                     show: true,
+//                     fontFamily: "Inter, sans-serif",
+//                     offsetY: -20,
+//                     formatter: function (value) {
+//                       return value 
+//                     },
+//                   },
+//                 },
+//                 size: "80%",
+//               },
+//             },
+//           },
+//           grid: {
+//             padding: {
+//               top: -2,
+//             },
+//           },
+//           labels: ["Accepted", "Declined"],
+//           dataLabels: {
+//             enabled: false,
+//           },
+//           legend: {
+//             position: "bottom",
+//             fontFamily: "Inter, sans-serif",
+//           },
+//           yaxis: {
+//             labels: {
+//               formatter: function (value) {
+//                 return value + ""
+//               },
+//             },
+//           },
+//           xaxis: {
+//             labels: {
+//               formatter: function (value) {
+//                 return value  + ""
+//               },
+//             },
+//             axisTicks: {
+//               show: false,
+//             },
+//             axisBorder: {
+//               show: false,
+//             },
+//           },
+//         }
+//       }
+//       // Function to render the chart
+//       function renderChart(options) {
 
-    var showPassword = $("#showPassword");
-    var hidePassword = $("#hidePassword");
+      
+//       if (document.getElementById("rate-chart") && typeof ApexCharts !== 'undefined') {
+//         const chart = new ApexCharts(document.getElementById("rate-chart"), options);
+//         chart.render();
 
-    var editAccountForm = $("#editAccount");
+//         // Get all the checkboxes by their class name
+//         const checkboxes = document.querySelectorAll('#devices input[type="checkbox"]');
 
-    changePasswordBtn.on('click', function () {
-        passwordFields.toggleClass('hidden');
-        confirmPasswordFields.toggleClass('hidden');
-    });
+//         function handleCheckboxChange() {
+//           const series = [];
 
-    password.on('keyup', checkPasswordMatch);
-    confirmPassword.on('keyup', checkPasswordMatch);
+//           checkboxes.forEach(checkbox => {
+//               if (checkbox.checked) {
+//                   switch (checkbox.value) {
+//                       case 'syllabus':
+//                           series.push([3, 7]);
+//                           break;
+//                       case 'qbank':
+//                           series.push([8, 2]);
+//                           break;
+//                       default:
+//                           series.push([11, 9]);
+//                   }
+//               }
+//           });
 
-    function checkPasswordMatch() {
-        if (password.val() === confirmPassword.val()) {
-            passwordMatchError.addClass("hidden");
-        } else {
-            passwordMatchError.removeClass("hidden");
-        }
-    }
+//           if (series.length === 0) {
+//               chart.updateSeries([11, 9]); // Default series if no checkbox is checked
+//           } else {
+//               const updatedSeries = series.reduce((acc, val) => [acc[0] + val[0], acc[1] + val[1]]);
+//               chart.updateSeries(updatedSeries);
+//           }
+//       }
 
-    // Event listeners for the show/hide password icons
-    showPassword.on('click', function() {
-        password.attr("type", "text");
-        confirmPassword.attr("type", "text");
-        showPassword.addClass("hidden");
-        hidePassword.removeClass("hidden");
-    });
+//         // Attach the event listener to each checkbox
+//         checkboxes.forEach((checkbox) => {
+//             checkbox.addEventListener('change', (event) => handleCheckboxChange(event, chart));
+//         });
+//       }
+//     }
+//   });
 
-    hidePassword.on('click', function() {
-        password.attr("type", "password");
-        confirmPassword.attr("type", "password");
-        hidePassword.addClass("hidden");
-        showPassword.removeClass("hidden");
-    });
 
-    // Form submission handler
-    editAccountForm.on('submit', function (event) {
-        if (password.val() !== confirmPassword.val()) {
-            // Passwords don't match, prevent form submission
-            passwordMatchError.removeClass("hidden");
-            
-            // Add an alert
-            alert("Passwords do not match. Please check and try again.");
-
-            event.preventDefault();
-        } else {
-            // Passwords match, you can proceed with form submission
-            passwordMatchError.addClass("hidden");
-        }
-    });
-});
 
 
   
