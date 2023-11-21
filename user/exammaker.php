@@ -90,15 +90,32 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
             </select>
         </div>
 
-                        <div class="col-span-1"> 
+                        <!-- <div class="col-span-1"> 
                             <h4 class="text-xs text-secondary">Available Questions:</h4>
                             <h4  class="text-s text-main" id="content_count">0</h4>
-                        </div>
-                       
+                        </div> -->
 
+            <div class="col-span-2">
+            <label for="part" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exam Parts</label>
+            <select name="part" id="part"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <option disabled selected hidden> Choose how many parts </option>
+                <option value ="1"> 1 part </option>
+                <option value ="2"> 2 parts </option>
+                <option value ="3"> 3 parts </option>
+            </select>
+        
+        </div>
+                       
+        
         <div class="col-span-2">
-            <label for="exam_no_of_items" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. of Items</label>
-            <input id="exam_no_of_items" name="exam_no_of_items" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">
+            <label for="testpart" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">TEST</label>
+            <input id="testpart" name="testpart" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">
+            <div class="col-span-1 flex"> 
+      
+                            <h4 class="text-xs text-secondary">Available Questions:</h4>
+                            <h4  class="text-s text-main" id="content_count">0</h4>
+                           
+            </div>
         
         </div>
     </div>
@@ -125,20 +142,6 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
 
 
 
-            <!-- <div class="fixed right-6 bottom-6">
-        
-        <button type="submit"  id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
-                <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
-            </svg>
-        </button>
-  
-    <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-        Print Exam
-        <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-</div> -->
         </aside>
         <div class="grow h-[88vh] overflow-auto overflow-x-hidden lg:w-2/3">
             <h1 class="text-xl font-semibold p-4 sticky">Questions</h1>
@@ -230,7 +233,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
 </div>
-<!-- <a href="../files/answersheets/40_items.docx"></a> -->
+
    
     
 </main>
