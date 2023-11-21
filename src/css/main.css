@@ -1225,6 +1225,10 @@ html {
   margin: 1rem !important;
 }
 
+.m-5 {
+  margin: 1.25rem !important;
+}
+
 .-mx-1 {
   margin-left: -0.25rem !important;
   margin-right: -0.25rem !important;
@@ -1503,6 +1507,10 @@ html {
   display: grid !important;
 }
 
+.contents {
+  display: contents !important;
+}
+
 .hidden {
   display: none !important;
 }
@@ -1727,6 +1735,10 @@ html {
   width: 2rem !important;
 }
 
+.w-\[150px\] {
+  width: 150px !important;
+}
+
 .w-\[16px\] {
   width: 16px !important;
 }
@@ -1905,6 +1917,10 @@ html {
   resize: both !important;
 }
 
+.list-inside {
+  list-style-position: inside !important;
+}
+
 .list-none {
   list-style-type: none !important;
 }
@@ -2059,6 +2075,12 @@ html {
   --tw-space-x-reverse: 0 !important;
   margin-right: calc(1rem * var(--tw-space-x-reverse)) !important;
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))) !important;
+}
+
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0 !important;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse))) !important;
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse)) !important;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -2929,6 +2951,11 @@ html {
 .text-red-500 {
   --tw-text-opacity: 1 !important;
   color: rgb(240 82 82 / var(--tw-text-opacity)) !important;
+}
+
+.text-red-600 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(224 36 36 / var(--tw-text-opacity)) !important;
 }
 
 .text-red-800 {
@@ -3975,10 +4002,6 @@ html {
 
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  .lg\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
   .lg\:grid-cols-4 {

@@ -203,7 +203,7 @@ def main():
 
     BUBBLE_OPTIONS = int(sys.argv[3])
 
-    BUBBLE_SIZE = 10 # 20 for bigger bubble size
+    BUBBLE_SIZE = 3 # 20 for bigger bubble size
 
     QUESTIONS_ITEMS = len(ANSWER_KEY)
     # print(f"Total number of questions:", QUESTIONS_ITEMS)

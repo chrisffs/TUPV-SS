@@ -99,6 +99,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
         <div class="col-span-2">
             <label for="exam_no_of_items" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No. of Items</label>
             <input id="exam_no_of_items" name="exam_no_of_items" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="" type="number" placeholder="Enter no. of Questions" required min="1" max="60">
+        
         </div>
     </div>
 </form>
@@ -216,18 +217,20 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
 <form id="insertForm" action="../php/user_print.php" method="post">
     <div class="fixed right-6 bottom-6">
         
-        <button type="submit"  id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
+        <button type="submit" id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
                 <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
             </svg>
+            <h1 class="hidden" id="no_of_items"><?= $i-1?></h1>
         </button>
-  
+
     <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
         Print Exam
         <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
 </div>
+<!-- <a href="../files/answersheets/40_items.docx"></a> -->
    
     
 </main>
@@ -377,7 +380,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
     </section>
 
 <div class="pagebreak hidden"></div>
-<section id="answersheet-container" class="">
+<section id="" class="hidden">
     <header class="text-xs mb-4">
         <div class="grid grid-cols-9">
             <div class="col-span-1">
@@ -453,39 +456,18 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
             <h1 class="text-center text-sm font-bold">ANSWERSHEET</h1>
             <div class="flex justify-center">
                 <div class="grid grid-cols-1 mt-2">
+                    <div>
+
+                   
                     <?php 
-                    $i = 1;
                     $totalQuestions = count($questions);
-                    // echo '<div class="col-span-1">'; // Open the initial col-span-1 div
-                    foreach ($questions as $row):
+                    if ($totalQuestions == 30) {
+                        ?> 
+                        <img class="w-[150px]" src="../src/answersheets/30_items.png" alt="">
+                        <?php
+                    }
                     ?>
-                    <div class="grid grid-cols-3 text-xs content-center circles">
-                        <div class="col-span-1 pt-1 flex items-center justify-end">
-                            <h1><?php echo $i ?>.)</h1>
-                        </div>
-                        <div class="col-span-2 flex mx-2 pt-1 border-black border-x-2 w-full justify-center gap-1">
-                            <div class="">
-                                <div class="w-4 h-4 rounded-full border border-black"></div>
-                            </div>
-                            <div class="">
-                                <div class="w-4 h-4 rounded-full border border-black"></div>
-                            </div>
-                            <div class="">
-                                <div class="w-4 h-4 rounded-full border border-black"></div>
-                            </div>
-                            <div class="">
-                                <div class="w-4 h-4 rounded-full border border-black"></div>
-                            </div>
-                        </div>
-                    </div>     
-                    <?php 
-                    // if ($i % 20 === 0 && $i !== $totalQuestions) {
-                        // echo '</div><div class="col-span-1">'; // Close the previous col-span-1 div and open a new one for the next set of questions
-                    // }
-                    $i++;
-                    endforeach;
-                    // echo '</div>'; // Close the last col-span-1 div at the end
-                    ?>
+                    </div>
                 </div>
             </div>
             </div>
@@ -494,7 +476,7 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
     </div>
 </section>
 <div class="pagebreak hidden"></div>
-<section id="answerkey-container" class="">
+<section id="answerkey-container" class="hidden">
     <header class="text-xs mb-4">
         <div class="grid grid-cols-9">
             <div class="col-span-1">
@@ -530,6 +512,9 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
     <div>
         <div class="">
             <h1 class="text-center text-sm font-bold">KEY ANSWER SHEET</h1>
+            <h1 class="text-center text-sm font-bold">TESTPAPER CODE: 
+            <?= $UC ?>
+            </h1>
             <div class="grid grid-cols-3 mt-6">
                     <?php 
                     $i = 1;
@@ -578,7 +563,49 @@ $years = $stmtYear->fetchAll(PDO::FETCH_COLUMN);
 
 
 $(document).ready(function () {
+    // $('#print-btn').on('click', function () {
+    //     // Get the content of the #no_of_items element
+    //     var noOfItems = $('#no_of_items').text();
+
+    //     // Create a link element
+    //     var downloadLink = $('<a></a>');
+
+    //     // Set the href attribute to the dynamically generated file path
+    //     downloadLink.attr('href', `../files/answersheets/${noOfItems}_items.docx`);
+
+    //     // Set the download attribute to specify the file name
+    //     downloadLink.attr('download', `${noOfItems}_items.docx`);
+
+    //     // Append the link to the body
+    //     $('body').append(downloadLink);
+
+    //     // Trigger a click on the link to start the download
+    //     downloadLink[0].click();
+
+    //     // Remove the link from the body
+    //     downloadLink.remove();
+    // });
     $('#print-btn').click(function () {
+       // Get the content of the #no_of_items element
+       var noOfItems = $('#no_of_items').text();
+
+        // Create a link element
+        var downloadLink = $('<a></a>');
+
+        // Set the href attribute to the dynamically generated file path
+        downloadLink.attr('href', `../files/answersheets/${noOfItems}_items.docx`);
+
+        // Set the download attribute to specify the file name
+        downloadLink.attr('download', `${noOfItems}_items.docx`);
+
+        // Append the link to the body
+        $('body').append(downloadLink);
+
+        // Trigger a click on the link to start the download
+        downloadLink[0].click();
+
+        // Remove the link from the body
+        downloadLink.remove();
         // Send an AJAX request to your PHP script to insert data into the database
         $.ajax({
             url: '../php/user_print.php',

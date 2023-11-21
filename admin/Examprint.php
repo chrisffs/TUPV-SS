@@ -109,7 +109,7 @@ $questions = $stmt->fetchAll();
     </section>
 
     <!-- <div class="pagebreak hidden"></div> -->
-    <section id="" class="print-hide print-hide w-[21cm] p-[1cm] min-h-[29.7cm] border border-[#D3D3D3] shadow-lg">
+    <section id="" class="hidden print-hide w-[21cm] p-[1cm] min-h-[29.7cm] border border-[#D3D3D3] shadow-lg">
         <header class="text-xs mb-4">
             <div class="grid grid-cols-9">
                 <div class="col-span-1">
@@ -392,7 +392,7 @@ $questions = $stmt->fetchAll();
   
 </section>
 <div class="pagebreak hidden"></div>
-<section id="answersheet-container" class="hidden">
+<section id="" class="hidden print-hide">
     <header class="text-xs mb-4">
         <div class="grid grid-cols-9">
             <div class="col-span-1">

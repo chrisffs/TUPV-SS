@@ -37,14 +37,14 @@
 }
 
 .circles:first-child > div:last-child {
-    border-top: 2px solid black;
+    border-top: 1px solid black;
 }
 /* .circles:first-child > div {
     padding-top: 1rem !important;
 } */
 
 .circles:last-child > div:last-child {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
 }
 .circles:last-child > div {
     padding-bottom: 4px !important;

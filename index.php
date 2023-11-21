@@ -40,7 +40,7 @@
                         <div class="mb-8">
                             <h1 class="text-xl font-bold leading-tight tracking-tight text-main md:text-2xl dark:text-white">User Login</h1>
                             <a href="./ADMIN/index.php" class="text-md font-bold leading-tight tracking-tight text-secondary md:text-sm dark:text-white hover:text-main hover:tracking-tight transition-colors duration-300"> Login as admin </a>
-
+                            
 
                             <!-- <h3 class="text-sm text-secondary">Log in with your admin cridentials</h3> -->
                         </div>
@@ -71,6 +71,16 @@
                     </div>
                     <div class="mt-2">
                         <h4 class="text-xs">Powered by College of Engineering Technology</h4>
+                    </div>
+                    <div class="mt-4 min-w-0">
+                        <a href="./user/examchecker_student.php" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-main focus:z-10 focus:ring-4 focus:ring-gray-200 group flex items-center justify-center gap-2 text-start">
+                            <div>
+                                Exam Checker
+                            </div>
+                            <svg class="w-[16px] h-[16px] dark:text-white group-hover:translate-x-1 transition ease-in-out" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>

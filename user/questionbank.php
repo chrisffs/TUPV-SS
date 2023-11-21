@@ -22,73 +22,8 @@ include "../php/user_header.php";
             <?php 
             include "../php/success.user_insert.php";
             ?>
-            <div class="pb-6">
-                <div class="mb-4 md:mb-6 bg-white flex flex-col lg:flex-row justify-between">
-                    <div class="w-full text-lg md:text-xl font-semibold text-left text-gray-900">
-                        Submit Questions using excel.
-                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">You can easily upload multiple-choice questions and other related details using <span class="text-green-600 font-semibold italic">Excel</span>. You can download our <a href="../files/excel/questionbank_file_template.xlsx" class="text-green-600 underline hover:no-underline">Excel template</a>. This template is specifically designed to make the question submission process as seamless as possible.</p>
-                    </div>
-                </div>
-                <form action="../php/user_insert-excel.php" method="post" enctype="multipart/form-data" class="">
-                    <div class="grid grid-cols-3 gap-2">
-                        <div class="col-span-3">
-                            <?php
-                                $sql = "SELECT * FROM subject_tbl ORDER BY subjectName ASC";
-                                $stmt = $conn->prepare($sql);
-                                $stmt->execute();
-                                $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            ?>
-                            <label for="excel_file_subj" class="block my-2 text-sm font-medium text-gray-900">Subject</label>
-                            <select id="excel_file_subj" name="excel_file_subj" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                                <option selected disabled hidden value="">Choose the Subject</option>
-                                <?php foreach ($subjects as $row): ?>
-                                    <option value="<?php echo $row['subjectName']; ?>"><?php echo $row['subjectName']; ?></option>
-                                <?php endforeach; ?>
-                            </select> 
-                        </div>
-                        <div class="col-span-1">
-                            <label for="excel_file_year" class="block my-2 text-sm font-medium text-gray-900">Year</label>
-                            <select id="excel_file_year" name="excel_file_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                                <option selected disabled hidden value="">Choose Year</option>
-                                <option value="1st Year">1st Year</option>
-                                <option value="2nd Year">2nd Year</option>
-                                <option value="3rd Year">3rd Year</option>
-                                <option value="4th Year">4th Year</option>
-                            </select>
-                        </div>
-                        <div class="col-span-1">
-                            <label for="excel_file_term" class="block my-2 text-sm font-medium text-gray-900">Term</label>
-                            <select id="excel_file_term" name="excel_file_term" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                                <option selected disabled hidden value="">Choose Term</option>
-                                <option value="Prelim">Prelim</option>
-                                <option value="Midterm">Midterm</option>
-                                <option value="Endterm">Endterm</option>
-                            </select>
-                        </div>
-                        <div class="col-span-1">
-                            <label for="excel_file_sem" class="block my-2 text-sm font-medium text-gray-900">Semester</label>
-                            <select id="excel_file_sem" name="excel_file_sem" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                                <option selected disabled hidden value="">Choose Semester</option>
-                                <option value="1st Semester">1st Semester</option>
-                                <option value="2nd Semester">2nd Semester</option>
-                                <option value="3rd Semester">3rd Semester</option>
-                            </select>
-                        </div>
-                        <div class="col-span-3">
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Excel file here</label>
-                            <div class="flex items-center gap-2">
-                                <div class="grow">
-                                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" id="file_input" name="excel" type="file" required>
-                                </div>
-                                <div class="">
-                                    <button type="submit" name="submit_excel" class="whitespace-nowrap focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit Excel file</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="py-6 border-t">
+         
+            <div>
                 <div class="mb-4 md:mb-6 bg-white flex flex-col lg:flex-row justify-between">
                     <div class="w-full text-lg md:text-xl font-semibold text-left text-gray-900">
                         Submit Questions by filling up forms.

@@ -24,9 +24,9 @@ include "../php/user_header.php";
     <div class="container mx-auto">
         
         <div class="row-span-1 col-span-3 pb-6">
-            <h1 class="text-2xl font-bold">Profile</h1>
+            <h1 class="text-2xl font-bold text-center">Profile</h1>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="flex justify-center gap-6">
             <div class="col-span-1 flex flex-col gap-4">
               <?php
               $sql = "SELECT * FROM `accounts_tbl` INNER JOIN departmenttbl ON accounts_tbl.department = departmenttbl.acronym WHERE accounts_tbl.ID = {$_SESSION['ID']} ";
@@ -280,7 +280,7 @@ Make changes to your account
                           </div>
                       </div> -->
                   </div>
-                  <div>
+                  <!-- <div>
                       <div class="flex" id="devices">
                           <div class="flex items-center mr-4">
                               <input id="syllabus" type="checkbox" value="syllabus" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 checked:bg-blue-600">
@@ -292,12 +292,12 @@ Make changes to your account
                           </div>
                       </div>
                   </div>
-                  <div class="py-6" id="rate-chart"></div>
+                  <div class="py-6" id="rate-chart"></div> -->
                 </div>
               </div>
               
             </div>
-            <div class="col-span-2 flex flex-col gap-4">
+            <!-- <div class="col-span-2 flex flex-col gap-4">
                 <div class="bg-white rounded-lg border p-6">
                     <h1 class="font-semibold text-xl">Your Stats</h1>
                 </div>
@@ -338,7 +338,7 @@ Make changes to your account
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </main>
