@@ -1755,6 +1755,14 @@ html {
   width: 100% !important;
 }
 
+.w-1\/4 {
+  width: 25% !important;
+}
+
+.w-3\/4 {
+  width: 75% !important;
+}
+
 .min-w-0 {
   min-width: 0px !important;
 }
