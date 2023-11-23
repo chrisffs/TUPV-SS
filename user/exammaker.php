@@ -116,405 +116,127 @@ include "../php/user_header.php";
         </aside>
         <div class="grow h-[88vh] overflow-auto overflow-x-hidden lg:w-2/3">
             <h1 class="text-xl font-semibold p-4 sticky">Questions</h1>
-            <div class="p-4 h-full flex flex-col gap-2">
-                <?php 
+            <form id="insertForm" action="./test1.php" method="post" onsubmit="return confirm('Are you sure you want to decline this?');">
+                <div class="p-4 h-full flex flex-col gap-2">
+                    <?php 
+                    if(isset($_POST['generate_exam'])) {
+                        $UC =  generateRandomString();
+                        $sub = $_POST['exam_subj'];
+                        $year = $_POST['exam_year'];
+                        $term = $_POST['exam_term'];
+                        $sem = $_POST['exam_semester'];
+                        $parts = $_POST['part'];
 
-                if(isset($_POST['generate_exam'])) {
-                    $UC =  generateRandomString();
-                    $sub = $_POST['exam_subj'];
-                    $year = $_POST['exam_year'];
-                    $term = $_POST['exam_term'];
-                    $sem = $_POST['exam_semester'];
-                    $parts = $_POST['part'];
+                        $i = 1;
+                        
+                        for ($partNumber = 1; $partNumber <= $parts; $partNumber++) {
+                            // Calculate number of questions for the current part
+                            $currentPartKey = 'testpart' . $partNumber;
+                            $noq = !empty($_POST[$currentPartKey]) ? (int)$_POST[$currentPartKey] : 0;
 
-                    for ($partNumber = 1; $partNumber <= $parts; $partNumber++) {
-                        // Calculate number of questions for the current part
-                        $currentPartKey = 'testpart' . $partNumber;
-                        $noq = !empty($_POST[$currentPartKey]) ? (int)$_POST[$currentPartKey] : 0;
+                            // Your existing SQL query and preparation
+                            $sql = "SELECT * FROM `questionbank_tbl` WHERE Subject LIKE :subject AND Year LIKE :year AND Term LIKE :term AND Semester LIKE :semester ORDER BY RAND() LIMIT :number_of_items";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bindParam(':subject', $sub);
+                            $stmt->bindParam(':year', $year);
+                            $stmt->bindParam(':term', $term);
+                            $stmt->bindParam(':semester', $sem);
+                            $stmt->bindParam(':number_of_items', $noq);
+                            $stmt->execute();
+                            $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                        // Your existing SQL query and preparation
-                        $sql = "SELECT * FROM `questionbank_tbl` WHERE Subject LIKE :subject AND Year LIKE :year AND Term LIKE :term AND Semester LIKE :semester ORDER BY RAND() LIMIT :number_of_items";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bindParam(':subject', $sub);
-                        $stmt->bindParam(':year', $year);
-                        $stmt->bindParam(':term', $term);
-                        $stmt->bindParam(':semester', $sem);
-                        $stmt->bindParam(':number_of_items', $noq);
-                        $stmt->execute();
-                        $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                        if (count($questions) === 0) {
-                            ?>
-                            <div class="bg-light border p-4 rounded-lg">
-                                <h1 class="text-center">No questions found for the following criteria.</h1>
-                            </div>
-                            <?php
-                        } else {
-                            $i = 1;
-                            ?>
-                            <div class="flex items-center">
-                                <div class="flex w-3/4">
-                                    <h1 class="font-bold text-lg">Test <?php echo $partNumber; ?>: Multiple Choice (&nbsp</h1><span id="points<?php echo $partNumber; ?>" class="points font-bold text-lg"></span>
-                                </div>
-                                <input id="test-points<?php echo $partNumber; ?>" name="test-points<?php echo $partNumber; ?>" class="test-points-input block w-1/4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" type="number" placeholder="Enter points per items" required>
-                            </div>
-                            <?php
-                            foreach ($questions as $row):
+                            if (count($questions) === 0) {
                                 ?>
-                                <div class="bg-light grid grid-cols-4 text-xs border p-4 gap-x-2 rounded-lg relative">
-                                    <div class="col-span-4">
-                                        <h2><?php echo $i; ?>.) <?php echo $row['Question']; ?></h2>
-                                    </div>
-                                    <div class="col-span-4">
-                                        <span>A.</span> <?php echo $row['A']; ?>
-                                    </div>
-                                    <div class="col-span-4">
-                                        <span>B.</span> <?php echo $row['B']; ?>
-                                    </div>
-                                    <div class="col-span-4">
-                                        <span>C.</span> <?php echo $row['C']; ?>
-                                    </div>
-                                    <div class="col-span-4">
-                                        <span>D.</span> <?php echo $row['D']; ?>
-                                    </div>
+                                <div class="bg-light border p-4 rounded-lg">
+                                    <h1 class="text-center">No questions found for the following criteria.</h1>
                                 </div>
-                                <?php 
-                                $i++;
-                            endforeach;
+                                <?php
+                            } else {
+                                
+                                ?>
+                                <div class="flex items-center">
+                                    <div class="flex w-3/4 gap-2 items-center">
+                                        <h1 class="font-bold text-lg">Test <?php echo $partNumber; ?>: Multiple Choice</h1><span id="points<?php echo $partNumber; ?>" class="points font-medium"></span>
+                                    </div>
+
+                                </div>
+                                <?php
+                                foreach ($questions as $row):
+                                    ?>
+                                    <div class="bg-light grid grid-cols-4 text-xs border p-4 gap-x-2 rounded-lg">
+                                        <div class="col-span-4">
+                                            <h2><?php echo $i; ?>.) <?php echo htmlspecialchars($row['Question']); ?></h2>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <span>A.</span> <?php echo htmlspecialchars($row['A']); ?>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <span>B.</span> <?php echo htmlspecialchars($row['B']); ?>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <span>C.</span> <?php echo htmlspecialchars($row['C']); ?>
+                                        </div>
+                                        <div class="col-span-4">
+                                            <span>D.</span> <?php echo htmlspecialchars($row['D']); ?>
+                                        </div>
+                                        <div class="col-span-1">
+                                            <input type="hidden" name = "term"  value = "<?php echo $term ?>">
+                                        </div>
+                                        <div class="col-span-1">
+                                            <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
+                                        </div>
+                                        <div class="col-span-1">
+                                            <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
+                                        </div>
+                                        <div class="col-span-4">
+                                            <input type="text" name = "Question<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Question']); ?>">
+                                        </div>
+                                        <div class="col-span-4">
+                                            <input type="hidden" name = "A<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['A']); ?>">
+                                        </div>
+                                        <div class="col-span-4">
+                                            <input type="hidden" name = "B<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['B']); ?>">
+                                        </div>
+                                        <div class="col-span-4">
+                                            <input type="hidden" name = "C<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['C']); ?>">
+                                        </div>
+                                        <div class="col-span-4">
+                                            <input type="hidden" name = "D<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['D']); ?>">
+                                        </div>
+                                        <div class="col-span-4">
+                                            <input type="hidden" name = "ans<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Answer']); ?>">
+                                            <input type="hidden" name = "ID<?php echo $i; ?>"  value = "<?php echo $row['ID']; ?>">
+                                            <input type="hidden" name = "test_part<?php echo $i; ?>"  value = "<?php echo $partNumber; ?>">
+                                            <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
+                                        </div>
+                                    </div>
+                                    <?php 
+                                    $i++;
+                                endforeach;
+                            }
                         }
-                    }
-                ?>
-                </div>    
+                        ?>
+                
+                </div>   
+            </form> 
         </div>
     </div>
+    <div class="fixed right-6 bottom-6">    
+        <button form="insertForm" type="submit" id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+            </svg>
+            <h1 class="hidden" id="no_of_items"><?= $i-1?></h1>
+        </button>
 
-    
-
-   
-
-
-    <form id="insertForm" action="../php/user_print.php" method="post">
-        <div class="fixed right-6 bottom-6">
-            
-            <button type="submit" id="print-btn" name="print_btn" class="cursor-pointer text-white bg-main hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm p-4 text-center" data-tooltip-target="tooltip-print" data-tooltip-placement="left">
-                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
-                    <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
-                </svg>
-                <h1 class="hidden" id="no_of_items"><?= $i-1?></h1>
-            </button>
-
-            <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                Print Exam
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-        </div> 
+        <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible whitespace-nowrap inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Print Exam
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+    </div> 
 </main>
 
-
-
-        <section id="testpaper-container" class="hidden">
-            <header class="text-xs mb-4">
-                <div class="grid grid-cols-9">
-                    <div class="col-span-1">
-                        <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-                    </div>
-                    <div class="col-span-7 flex flex-col gap-2 grow text-center">
-                        <div>
-                            <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
-                            <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
-                        </div>
-                        <div>
-                            <h3>OFFICE OF THE COLLEGE DEAN</h3>
-                        </div>
-                        <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
-                    
-                
-                        <div>
-                            <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
-                            <input type="hidden" name = "term"  value = "<?php echo $term ?>">
-                        </div>
-                        <div>
-                            <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
-                            <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
-                        </div>
-                        <div>
-                            <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
-                            <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
-                        </div>
-                    </div>
-                    <div class="col-span-1"></div>
-                </div>
-            </header>
-
-            
-
-
-
-
-            <div>
-                <h1 class="text-center text-sm font-bold mb-6">QUESTIONAIRE</h1>
-                <?php 
-                $i = 1;
-                foreach ($questions as $row):
-                ?>
-                <div class="grid grid-cols-4 text-xs relative my-2">
-                    <div class="col-span-4">
-            
-                    <input type="hidden" name = "ans"  value = "<?php echo $row['Answer']; ?>">
-                    <input type="hidden" name = "ID"  value = "<?php echo $row['ID']; ?>">
-                    <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
-
-                        <h1><?php echo $i ?>.) <?php echo $row['Question']; ?></h1>
-                        <input type="hidden" name = "Question"  value = "<?php echo $row['Question']; ?>">
-                    </div>
-                    <div class="col-span-4">
-                        <span>A.</span> <?php echo $row['A']; ?>
-                        <input type="hidden" name = "A"  value = "<?php echo $row['A']; ?>">
-                    </div>
-                    <div class="col-span-4">
-                        <span>B.</span> <?php echo $row['B']; ?>
-                        <input type="hidden" name = "B"  value = "<?php echo $row['B']; ?>">
-                    </div>
-                    <div class="col-span-4">
-                        <span>C.</span> <?php echo $row['C']; ?>
-                        <input type="hidden" name = "C"  value = "<?php echo $row['C']; ?>">
-                    </div>
-                    <div class="col-span-4">
-                        <span>D.</span> <?php echo $row['D']; ?>
-                        <input type="hidden" name = "D"  value = "<?php echo $row['D']; ?>">
-                    </div>
-                </div>     
-                <?php 
-                $i++;
-                endforeach;
-
-                // bugged
-
-                $combined_answer = "";
-
-                foreach ($questions as $row) {
-                    
-                    $question = $row['Question'];
-                    $answer = $row['Answer'];
-                    $optionA = $row['A'];
-                    $optionB = $row['B'];
-                    $optionC = $row['C'];
-                    $optionD = $row['D'];
-
-
-                    $conversion = array("A" => "1", "B" => "2", "C" => "3", "D" => "4");
-                    $converted_answer = strtr($answer, $conversion);
-                    $combined_answer .= $converted_answer . ", ";
-            
-                    // Prepare the SQL statement
-                    $stmt = $conn->prepare("INSERT INTO generatedquestions_tbl (Question, A, B, C, D,  Answer, UniqueCode) VALUES (:question, :optionA, :optionB, :optionC, :optionD, :answer, :UC)");
-            
-                    // Bind the parameters
-                    $stmt->bindParam(':question', $question);
-                    $stmt->bindParam(':optionA', $optionA);
-                    $stmt->bindParam(':optionB', $optionB);
-                    $stmt->bindParam(':optionC', $optionC);
-                    $stmt->bindParam(':optionD', $optionD);
-                    $stmt->bindParam(':answer', $answer);
-                    $stmt->bindParam(':UC', $UC);
-                    
-
-            
-                    // Execute the statement
-                    $stmt->execute();
-
-                
-                }
-
-                $combined_answer = rtrim($combined_answer, ', ');
-
-                $stmt2 = $conn->prepare("INSERT INTO answers_tbl (ans, uc) VALUES (:options, :UC)");
-
-                $stmt2->bindParam(':options', $combined_answer);
-                $stmt2->bindParam(':UC', $UC);
-
-                $stmt2->execute();
-            
-
-
-
-            
-                
-                ?>
-            </div>
-
-        </form>
-
-
-  
-    </section>
-
-<div class="pagebreak hidden"></div>
-<section id="" class="hidden">
-    <header class="text-xs mb-4">
-        <div class="grid grid-cols-9">
-            <div class="col-span-1">
-                <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-            </div>
-            <div class="col-span-7 flex flex-col gap-2 grow text-center">
-                <div>
-                    <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
-                    <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
-                </div>
-                <div>
-                    <h3>OFFICE OF THE COLLEGE DEAN</h3>
-                </div>
-                <div>
-                    <h3 class="uppercase font-bold"><?php echo $term ?> Exam</h3>
-                </div>
-                <div>
-                    <h3 class="uppercase font-bold underline"><?php echo $sub ?></h3>
-                </div>
-                <div>
-                    <h3 class="uppercase font-bold underline"><?php echo $sem ?>, 2023-2024</h3>
-                </div>
-            </div>
-            <div class="col-span-1"></div>
-        </div>
-        <div class="text-sm flex flex-col gap-3">
-            <div class="grid grid-cols-4 gap-2">
-                <div class="col-span-3 flex">
-                    <p class="whitespace-nowrap">Name:</p>
-                    <div class="w-full border-b border-black relative">
-                        <div class="relative top-[1rem] text-[10px]">
-                            <div class="grid grid-cols-7">
-                                <div class="col-span-3">Last Name</div>
-                                <div class="col-span-3">First Name</div>
-                                <div class="col-span-1">M.I</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-span-1 flex">
-                    <p class="whitespace-nowrap">Yr. & Sec.</p>
-                    <div class="w-full border-b border-black relative">
-                    </div>
-                </div>
-                <!-- <div class="col-span-1 flex gap-2">
-                    <p>Score</p>
-                    <div class="relative">
-                        <div class="top-[-3.7rem] absolute w-20 h-20 border-2 border-black"></div>
-                    </div>
-                </div> -->
-            </div>
-            <div class="grid grid-cols-5 gap-2">
-                <div class="col-span-2 flex">
-                    <p class="whitespace-nowrap">Instructor:</p>
-                    <div class="w-full border-b border-black">
-                    </div>
-                </div>
-                <div class="col-span-2 flex">
-                    <p class="whitespace-nowrap">Proctor:</p>
-                    <div class="w-full border-b border-black">
-                    </div>
-                </div>
-                <div class="col-span-1 flex gap-2">
-                    <p>Date:</p>
-                    <div class="w-full border-b border-black">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div>
-        <div class="">
-            <h1 class="text-center text-sm font-bold">ANSWERSHEET</h1>
-            <div class="flex justify-center">
-                <div class="grid grid-cols-1 mt-2">
-                    <div>
-
-                   
-                    <?php 
-                    $totalQuestions = count($questions);
-                    if ($totalQuestions == 30) {
-                        ?> 
-                        <img class="w-[150px]" src="../src/answersheets/30_items.png" alt="">
-                        <?php
-                    }
-                    ?>
-                    </div>
-                </div>
-            </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<div class="pagebreak hidden"></div>
-<section id="answerkey-container" class="hidden">
-    <header class="text-xs mb-4">
-        <div class="grid grid-cols-9">
-            <div class="col-span-1">
-                <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-            </div>
-            <div class="col-span-7 flex flex-col gap-2 grow text-center">
-                <div>
-                    <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
-                    <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
-                </div>
-                <div>
-                    <h3>OFFICE OF THE COLLEGE DEAN</h3>
-                </div>
-                <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
-               
-           
-                <div>
-                    <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
-                    <input type="hidden" name = "term"  value = "<?php echo $term ?>">
-                </div>
-                <div>
-                    <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
-                    <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
-                </div>
-                <div>
-                    <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
-                    <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
-                </div>
-            </div>
-            <div class="col-span-1"></div>
-        </div>
-    </header>
-    <div>
-        <div class="">
-            <h1 class="text-center text-sm font-bold">KEY ANSWER SHEET</h1>
-            <h1 class="text-center text-sm font-bold">TESTPAPER CODE: 
-            <?= $UC ?>
-            </h1>
-            <div class="grid grid-cols-3 mt-6">
-                    <?php 
-                    $i = 1;
-                    $totalQuestions = count($questions);
-                    echo '<div class="col-span-1">'; // Open the initial col-span-1 div
-                    foreach ($questions as $row):
-                    ?>
-                    <div class="grid grid-cols-10 text-base content-center">
-                        <div class="col-span-1 py-1 align-middle">
-                            <h1><?php echo $i ?>.)</h1>
-                        </div>
-                        <div class="col-span-6 flex mx-2 py-1 px-1 w-full">
-                            <h1><?= $row['Answer']?></h1>
-                        </div>
-                        
-                    </div>     
-                    <?php 
-                    if ($i % 20 === 0 && $i !== $totalQuestions) {
-                        echo '</div><div class="col-span-1">'; // Close the previous col-span-1 div and open a new one for the next set of questions
-                    }
-                    $i++;
-                    endforeach;
-                    echo '</div>'; // Close the last col-span-1 div at the end
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <?php 
 } else {
     ?>
@@ -535,9 +257,9 @@ include "../php/user_header.php";
 
 
 $(document).ready(function () {
-    // $('#print-btn').on('click', function () {
-    //     // Get the content of the #no_of_items element
-    //     var noOfItems = $('#no_of_items').text();
+    $('#print-btn').click(function () {
+    //    // Get the content of the #no_of_items element
+    //    var noOfItems = $('#no_of_items').text();
 
     //     // Create a link element
     //     var downloadLink = $('<a></a>');
@@ -556,44 +278,22 @@ $(document).ready(function () {
 
     //     // Remove the link from the body
     //     downloadLink.remove();
-    // });
-    $('#print-btn').click(function () {
-       // Get the content of the #no_of_items element
-       var noOfItems = $('#no_of_items').text();
-
-        // Create a link element
-        var downloadLink = $('<a></a>');
-
-        // Set the href attribute to the dynamically generated file path
-        downloadLink.attr('href', `../files/answersheets/${noOfItems}_items.docx`);
-
-        // Set the download attribute to specify the file name
-        downloadLink.attr('download', `${noOfItems}_items.docx`);
-
-        // Append the link to the body
-        $('body').append(downloadLink);
-
-        // Trigger a click on the link to start the download
-        downloadLink[0].click();
-
-        // Remove the link from the body
-        downloadLink.remove();
         // Send an AJAX request to your PHP script to insert data into the database
-        $.ajax({
-            url: '../php/user_print.php',
-            type: 'POST',
-            data: $('#insertForm').serialize(),
-            success: function (response) {
-                // Handle the response, e.g., show an alert or redirect to another page
+        // $.ajax({
+        //     url: '.test1.php',
+        //     type: 'POST',
+        //     data: $('#insertForm').serialize(),
+        //     success: function (response) {
+        //         // Handle the response, e.g., show an alert or redirect to another page
              
-            },
-            error: function () {
-                alert('An error occurred while sending data to the server.');
-            }
-        });
+        //     },
+        //     error: function () {
+        //         alert('An error occurred while sending data to the server.');
+        //     }
+        // });
 
-        // Trigger the print action
-        window.print();
+        // // Trigger the print action
+        // window.print();
     });
 
     setTimeout(function () {

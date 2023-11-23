@@ -16,9 +16,18 @@ $(document).ready(function () {
     });
     $(".test-points-input").on("input", function () {
         // Get the input value
-        var points = $(this).val();
-        console.log($(this).closest(".flex"));
-        // Update the nearest .points span within the same container with the input value
-        $(this).closest(".flex").find(".points").text(points + "points each )");
+        var inputValue = $(this).val();
+        console.log($(this).attr('id').split("test-points").pop());
+        // Check if the input value is not empty
+        if (inputValue.trim() !== "") {
+            // If not empty, display the points information
+            var points = "( " + inputValue + " points each )";
+            // Update the nearest .points span within the same container with the input value
+            $(".points" + $(this).attr('id').split("test-points").pop()).text(points);
+        } else {
+            // If empty, clear the points information
+            $(".points" + $(this).attr('id').split("test-points").pop()).text("");
+        }
     });
 });
+

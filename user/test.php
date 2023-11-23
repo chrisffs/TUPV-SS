@@ -334,28 +334,383 @@
             </div>
         </div>
     </main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
-<script>
-function toggleDropdown(event) {
-    const button = event.currentTarget; // Get the button that triggered the event
-    const dropdown = button.nextElementSibling; // Get the associated dropdown
-    const arrowUp = button.children[2];
-    const arrowDown = button.children[3];
-    
-    if (dropdown.classList.contains("hidden")) {
-        dropdown.classList.remove("hidden");
-        button.classList.remove("border-transparent");
-        button.classList.add("border-[#C4203C]");
-        arrowUp.classList.remove("hidden");
-        arrowDown.classList.add("hidden");
-    } else {
-        dropdown.classList.add("hidden");
-        button.classList.remove("border-[#C4203C]");
-        button.classList.add("border-transparent");
-        arrowUp.classList.add("hidden");
-        arrowDown.classList.remove("hidden");
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+    <script>
+    function toggleDropdown(event) {
+        const button = event.currentTarget; // Get the button that triggered the event
+        const dropdown = button.nextElementSibling; // Get the associated dropdown
+        const arrowUp = button.children[2];
+        const arrowDown = button.children[3];
+        
+        if (dropdown.classList.contains("hidden")) {
+            dropdown.classList.remove("hidden");
+            button.classList.remove("border-transparent");
+            button.classList.add("border-[#C4203C]");
+            arrowUp.classList.remove("hidden");
+            arrowDown.classList.add("hidden");
+        } else {
+            dropdown.classList.add("hidden");
+            button.classList.remove("border-[#C4203C]");
+            button.classList.add("border-transparent");
+            arrowUp.classList.add("hidden");
+            arrowDown.classList.remove("hidden");
+        }
     }
-}
-</script>
+    </script>
 </body>
+
+<section id="testpaper-container" class="hidden">
+            <header class="text-xs mb-4">
+                <div class="grid grid-cols-9">
+                    <div class="col-span-1">
+                        <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
+                    </div>
+                    <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                        <div>
+                            <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                            <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
+                        </div>
+                        <div>
+                            <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                        </div>
+                        <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
+                    
+                
+                        <div>
+                            <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                            <input type="hidden" name = "term"  value = "<?php echo $term ?>">
+                        </div>
+                        <div>
+                            <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                            <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
+                        </div>
+                        <div>
+                            <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
+                            <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
+                        </div>
+                    </div>
+                    <div class="col-span-1"></div>
+                </div>
+            </header>
+
+            
+
+
+
+
+            <div>
+                <h1 class="text-center text-sm font-bold mb-6">QUESTIONAIRE</h1>
+                <?php 
+                $i = 1;
+                foreach ($questions as $row):
+                ?>
+                <div class="grid grid-cols-4 text-xs relative my-2">
+                    <div class="col-span-4">
+            
+                    <input type="hidden" name = "ans"  value = "<?php echo $row['Answer']; ?>">
+                    <input type="hidden" name = "ID"  value = "<?php echo $row['ID']; ?>">
+                    <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
+
+                        <h1><?php echo $i ?>.) <?php echo $row['Question']; ?></h1>
+                        <input type="hidden" name = "Question"  value = "<?php echo $row['Question']; ?>">
+                    </div>
+                    <div class="col-span-4">
+                        <span>A.</span> <?php echo $row['A']; ?>
+                        <input type="hidden" name = "A"  value = "<?php echo $row['A']; ?>">
+                    </div>
+                    <div class="col-span-4">
+                        <span>B.</span> <?php echo $row['B']; ?>
+                        <input type="hidden" name = "B"  value = "<?php echo $row['B']; ?>">
+                    </div>
+                    <div class="col-span-4">
+                        <span>C.</span> <?php echo $row['C']; ?>
+                        <input type="hidden" name = "C"  value = "<?php echo $row['C']; ?>">
+                    </div>
+                    <div class="col-span-4">
+                        <span>D.</span> <?php echo $row['D']; ?>
+                        <input type="hidden" name = "D"  value = "<?php echo $row['D']; ?>">
+                    </div>
+                </div>     
+                <?php 
+                $i++;
+                endforeach;
+
+                // bugged
+
+                $combined_answer = "";
+
+                foreach ($questions as $row) {
+                    
+                    $question = $row['Question'];
+                    $answer = $row['Answer'];
+                    $optionA = $row['A'];
+                    $optionB = $row['B'];
+                    $optionC = $row['C'];
+                    $optionD = $row['D'];
+
+
+                    $conversion = array("A" => "1", "B" => "2", "C" => "3", "D" => "4");
+                    $converted_answer = strtr($answer, $conversion);
+                    $combined_answer .= $converted_answer . ", ";
+            
+                    // Prepare the SQL statement
+                    $stmt = $conn->prepare("INSERT INTO generatedquestions_tbl (Question, A, B, C, D,  Answer, UniqueCode) VALUES (:question, :optionA, :optionB, :optionC, :optionD, :answer, :UC)");
+            
+                    // Bind the parameters
+                    $stmt->bindParam(':question', $question);
+                    $stmt->bindParam(':optionA', $optionA);
+                    $stmt->bindParam(':optionB', $optionB);
+                    $stmt->bindParam(':optionC', $optionC);
+                    $stmt->bindParam(':optionD', $optionD);
+                    $stmt->bindParam(':answer', $answer);
+                    $stmt->bindParam(':UC', $UC);
+                    
+
+            
+                    // Execute the statement
+                    $stmt->execute();
+
+                
+                }
+
+                $combined_answer = rtrim($combined_answer, ', ');
+
+                $stmt2 = $conn->prepare("INSERT INTO answers_tbl (ans, uc) VALUES (:options, :UC)");
+
+                $stmt2->bindParam(':options', $combined_answer);
+                $stmt2->bindParam(':UC', $UC);
+
+                $stmt2->execute();
+            
+
+
+
+            
+                
+                ?>
+            </div>
+
+        </form>
+
+
+  
+        </section>
+
+    <div class="pagebreak hidden"></div>
+    <section id="" class="hidden">
+        <header class="text-xs mb-4">
+            <div class="grid grid-cols-9">
+                <div class="col-span-1">
+                    <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
+                </div>
+                <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                    <div>
+                        <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                        <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
+                    </div>
+                    <div>
+                        <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                    </div>
+                    <div>
+                        <h3 class="uppercase font-bold"><?php echo $term ?> Exam</h3>
+                    </div>
+                    <div>
+                        <h3 class="uppercase font-bold underline"><?php echo $sub ?></h3>
+                    </div>
+                    <div>
+                        <h3 class="uppercase font-bold underline"><?php echo $sem ?>, 2023-2024</h3>
+                    </div>
+                </div>
+                <div class="col-span-1"></div>
+            </div>
+            <div class="text-sm flex flex-col gap-3">
+                <div class="grid grid-cols-4 gap-2">
+                    <div class="col-span-3 flex">
+                        <p class="whitespace-nowrap">Name:</p>
+                        <div class="w-full border-b border-black relative">
+                            <div class="relative top-[1rem] text-[10px]">
+                                <div class="grid grid-cols-7">
+                                    <div class="col-span-3">Last Name</div>
+                                    <div class="col-span-3">First Name</div>
+                                    <div class="col-span-1">M.I</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex">
+                        <p class="whitespace-nowrap">Yr. & Sec.</p>
+                        <div class="w-full border-b border-black relative">
+                        </div>
+                    </div>
+                    <!-- <div class="col-span-1 flex gap-2">
+                        <p>Score</p>
+                        <div class="relative">
+                            <div class="top-[-3.7rem] absolute w-20 h-20 border-2 border-black"></div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="grid grid-cols-5 gap-2">
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Instructor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Proctor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex gap-2">
+                        <p>Date:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div>
+            <div class="">
+                <h1 class="text-center text-sm font-bold">ANSWERSHEET</h1>
+                <div class="flex justify-center">
+                    <div class="grid grid-cols-1 mt-2">
+                        <div>
+
+                    
+                        <?php 
+                        $totalQuestions = count($questions);
+                        if ($totalQuestions == 30) {
+                            ?> 
+                            <img class="w-[150px]" src="../src/answersheets/30_items.png" alt="">
+                            <?php
+                        }
+                        ?>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <div class="pagebreak hidden"></div>
+    <section id="answerkey-container" class="hidden">
+        <header class="text-xs mb-4">
+            <div class="grid grid-cols-9">
+                <div class="col-span-1">
+                    <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
+                </div>
+                <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                    <div>
+                        <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                        <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
+                    </div>
+                    <div>
+                        <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                    </div>
+                    <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
+                
+            
+                    <div>
+                        <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                        <input type="hidden" name = "term"  value = "<?php echo $term ?>">
+                    </div>
+                    <div>
+                        <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                        <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
+                    </div>
+                    <div>
+                        <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
+                        <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
+                    </div>
+                </div>
+                <div class="col-span-1"></div>
+            </div>
+        </header>
+        <div>
+            <div class="">
+                <h1 class="text-center text-sm font-bold">KEY ANSWER SHEET</h1>
+                <h1 class="text-center text-sm font-bold">TESTPAPER CODE: 
+                <?= $UC ?>
+                </h1>
+                <div class="grid grid-cols-3 mt-6">
+                        <?php 
+                        $i = 1;
+                        $totalQuestions = count($questions);
+                        echo '<div class="col-span-1">'; // Open the initial col-span-1 div
+                        foreach ($questions as $row):
+                        ?>
+                        <div class="grid grid-cols-10 text-base content-center">
+                            <div class="col-span-1 py-1 align-middle">
+                                <h1><?php echo $i ?>.)</h1>
+                            </div>
+                            <div class="col-span-6 flex mx-2 py-1 px-1 w-full">
+                                <h1><?= $row['Answer']?></h1>
+                            </div>
+                            
+                        </div>     
+                        <?php 
+                        if ($i % 20 === 0 && $i !== $totalQuestions) {
+                            echo '</div><div class="col-span-1">'; // Close the previous col-span-1 div and open a new one for the next set of questions
+                        }
+                        $i++;
+                        endforeach;
+                        echo '</div>'; // Close the last col-span-1 div at the end
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['print_btn'])) {
+                        $partNumber = 1; // You might need to set this value based on your logic
+                        $combined_answer = "";
+                        $partNumber = $_POST['test_part'];
+                        $uCode = $_POST['uc'];
+
+                        foreach ($questions as $row) {
+                            $question = $row['Question'];
+                            $answer = $row['Answer'];
+                            $optionA = $row['A'];
+                            $optionB = $row['B'];
+                            $optionC = $row['C'];
+                            $optionD = $row['D'];
+                            
+                            // Assuming $partNumber is part of the form data, adjust as needed
+                            $testNum = "T" . $partNumber;
+                            $testUC = $uCode;
+                    
+                            $conversion = array("A" => "1", "B" => "2", "C" => "3", "D" => "4");
+                            $converted_answer = strtr($answer, $conversion);
+                            $combined_answer .= $converted_answer . ", ";
+                    
+                            // Prepare the SQL statement
+                            $stmt = $conn->prepare("INSERT INTO generatedquestions_tbl (Question, A, B, C, D, Answer, test_number, UniqueCode) VALUES (:question, :optionA, :optionB, :optionC, :optionD, :answer, :test_num, :UC)");
+                    
+                            // Bind the parameters
+                            $stmt->bindParam(':question', $question);
+                            $stmt->bindParam(':optionA', $optionA);
+                            $stmt->bindParam(':optionB', $optionB);
+                            $stmt->bindParam(':optionC', $optionC);
+                            $stmt->bindParam(':optionD', $optionD);
+                            $stmt->bindParam(':answer', $answer);
+                            $stmt->bindParam(':test_num', $testNum);
+                            $stmt->bindParam(':UC', $testUC);
+                    
+                            // Execute the statement
+                            $stmt->execute();
+                        }
+
+                        $combined_answer = rtrim($combined_answer, ', ');
+
+                        // Assuming 'ans' is the correct name, adjust if needed
+                        $stmt2 = $conn->prepare("INSERT INTO answers_tbl (ans, uc) VALUES (:options, :UC)");
+
+                        $stmt2->bindParam(':options', $combined_answer);
+                        $stmt2->bindParam(':UC', $UC);
+
+                        $stmt2->execute();
+
+                        // header('location: ');
+                    }
 </html>
