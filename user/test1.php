@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['print_btn'])) {
         $term = $_POST['term'];
         $sub = $_POST['sub'];
         $sem = $_POST['sem'];
+        $noq = $_POST['noq'];
         $question = $_POST['Question' . $i];
         $optionA = $_POST['A' . $i];
         $optionB = $_POST['B' . $i];
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['print_btn'])) {
     }
 
     // Redirect or perform additional actions after inserting data
-    header("Location: ./paper.php?uniquecode=$uc&Term=$term&Subj=$sub&Semester=$sem");
+    header("Location: ./paper.php?uniquecode=$uc&Term=$term&Subj=$sub&Semester=$sem&noq=$noq");
     exit();
 }
 ?>

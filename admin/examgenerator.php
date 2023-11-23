@@ -73,6 +73,9 @@ if ($result) {
                         No. of items
                      </th>
                      <th scope="col" class="px-4 py-2 font-medium">
+                        No. of Sets
+                     </th>
+                     <th scope="col" class="px-4 py-2 font-medium">
                         Exam Code
                      </th>
 
@@ -84,7 +87,7 @@ if ($result) {
 
                <?php foreach ($data1 as $row): ?>
                   
-                  <tr onclick="redirectToExamPrint('<?php echo $row['uniquecode']; ?>', '<?php echo $row['Term']; ?>', '<?php echo $row['Subj']; ?>', '<?php echo $row['Semester']; ?>')" class="bg-white border-b dark:bg-gray-800 cursor-pointer dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
+                  <tr onclick="redirectToExamPrint('<?php echo $row['uniquecode']; ?>', '<?php echo $row['Term']; ?>', '<?php echo $row['Subj']; ?>', '<?php echo $row['Semester']; ?>', '<?php echo $row['exam_sets']; ?>')" class="bg-white border-b dark:bg-gray-800 cursor-pointer dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600">
 
                   <input type="hidden" name="uniquecode" value="<?php echo $row['uniquecode']; ?>">
                   <input type="hidden" name="Term" value="<?php echo $row['Term']; ?>">
@@ -121,6 +124,9 @@ if ($result) {
                      <td class="px-4 py-2">
                      <?php echo $row['items']; ?>
                      </td>
+                     <td class="px-4 py-2">
+                     <?php echo $row['exam_sets']; ?>
+                     </td>
                      <td class="px-4 py-2 text-blue-600">
                      <?php echo $row['uniquecode']; ?>
                      </td>
@@ -143,9 +149,9 @@ $(document).ready( function () {
    });
 } );
 
-function redirectToExamPrint(uniquecode, term, subj, semester) {
+function redirectToExamPrint(uniquecode, term, subj, semester, sets) {
     // Redirect to examprint.php with the data
-    window.location.href = `./Examprint.php?uniquecode=${uniquecode}&Term=${term}&Subj=${subj}&Semester=${semester}`;
+    window.location.href = `./Examprint.php?uniquecode=${uniquecode}&Term=${term}&Subj=${subj}&Semester=${semester}&Sets=${sets}`;
 }
 </script>
 <script src="../src/js/jquery.dataTables.js"></script>

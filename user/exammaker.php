@@ -119,6 +119,7 @@ include "../php/user_header.php";
             <form id="insertForm" action="./test1.php" method="post" onsubmit="return confirm('Are you sure you want to decline this?');">
                 <div class="p-4 h-full flex flex-col gap-2">
                     <?php 
+                    $totalQuestions = 0;
                     if(isset($_POST['generate_exam'])) {
                         $UC =  generateRandomString();
                         $sub = $_POST['exam_subj'];
@@ -126,13 +127,14 @@ include "../php/user_header.php";
                         $term = $_POST['exam_term'];
                         $sem = $_POST['exam_semester'];
                         $parts = $_POST['part'];
-
+                        
                         $i = 1;
                         
                         for ($partNumber = 1; $partNumber <= $parts; $partNumber++) {
                             // Calculate number of questions for the current part
                             $currentPartKey = 'testpart' . $partNumber;
                             $noq = !empty($_POST[$currentPartKey]) ? (int)$_POST[$currentPartKey] : 0;
+                            $totalQuestions += $noq;
 
                             // Your existing SQL query and preparation
                             $sql = "SELECT * FROM `questionbank_tbl` WHERE Subject LIKE :subject AND Year LIKE :year AND Term LIKE :term AND Semester LIKE :semester ORDER BY RAND() LIMIT :number_of_items";
@@ -158,57 +160,40 @@ include "../php/user_header.php";
                                     <div class="flex w-3/4 gap-2 items-center">
                                         <h1 class="font-bold text-lg">Test <?php echo $partNumber; ?>: Multiple Choice</h1><span id="points<?php echo $partNumber; ?>" class="points font-medium"></span>
                                     </div>
-
+                                    
                                 </div>
                                 <?php
                                 foreach ($questions as $row):
                                     ?>
                                     <div class="bg-light grid grid-cols-4 text-xs border p-4 gap-x-2 rounded-lg">
-                                        <div class="col-span-4">
-                                            <h2><?php echo $i; ?>.) <?php echo htmlspecialchars($row['Question']); ?></h2>
+                                        <div class="col-span-4 flex gap-2">
+                                            <h2><?php echo $i; ?>.)</h2>
+                                            <div>
+                                            <?php echo $row['Question']; ?>
+                                            </div>
                                         </div>
                                         <div class="col-span-4">
-                                            <span>A.</span> <?php echo htmlspecialchars($row['A']); ?>
+                                            <span>A.</span> <?php echo $row['A']; ?>
                                         </div>
                                         <div class="col-span-4">
-                                            <span>B.</span> <?php echo htmlspecialchars($row['B']); ?>
+                                            <span>B.</span> <?php echo $row['B']; ?>
                                         </div>
                                         <div class="col-span-4">
-                                            <span>C.</span> <?php echo htmlspecialchars($row['C']); ?>
+                                            <span>C.</span> <?php echo $row['C']; ?>
                                         </div>
                                         <div class="col-span-4">
-                                            <span>D.</span> <?php echo htmlspecialchars($row['D']); ?>
+                                            <span>D.</span> <?php echo $row['D']; ?>
                                         </div>
-                                        <div class="col-span-1">
-                                            <input type="hidden" name = "term"  value = "<?php echo $term ?>">
-                                        </div>
-                                        <div class="col-span-1">
-                                            <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
-                                        </div>
-                                        <div class="col-span-1">
-                                            <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
-                                        </div>
-                                        <div class="col-span-4">
-                                            <input type="text" name = "Question<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Question']); ?>">
-                                        </div>
-                                        <div class="col-span-4">
-                                            <input type="hidden" name = "A<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['A']); ?>">
-                                        </div>
-                                        <div class="col-span-4">
-                                            <input type="hidden" name = "B<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['B']); ?>">
-                                        </div>
-                                        <div class="col-span-4">
-                                            <input type="hidden" name = "C<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['C']); ?>">
-                                        </div>
-                                        <div class="col-span-4">
-                                            <input type="hidden" name = "D<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['D']); ?>">
-                                        </div>
-                                        <div class="col-span-4">
-                                            <input type="hidden" name = "ans<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Answer']); ?>">
-                                            <input type="hidden" name = "ID<?php echo $i; ?>"  value = "<?php echo $row['ID']; ?>">
-                                            <input type="hidden" name = "test_part<?php echo $i; ?>"  value = "<?php echo $partNumber; ?>">
-                                            <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
-                                        </div>
+                                        <input type="text" name = "Question<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Question'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <input type="text" name = "A<?php echo $i; ?>"  value = "<?php echo $row['A']; ?>">
+                                        <input type="text" name = "B<?php echo $i; ?>"  value = "<?php echo $row['B']; ?>">
+                                        <input type="text" name = "C<?php echo $i; ?>"  value = "<?php echo $row['C']; ?>">
+                                        <input type="text" name = "D<?php echo $i; ?>"  value = "<?php echo $row['D']; ?>">
+                                        <input type="text" name = "ans<?php echo $i; ?>"  value = "<?php echo $row['Answer']; ?>">
+                                        <input type="hidden" name = "ID<?php echo $i; ?>"  value = "<?php echo $row['ID']; ?>">
+                                        <input type="hidden" name = "test_part<?php echo $i; ?>"  value = "<?php echo $partNumber; ?>">
+                                        <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
+                                        
                                     </div>
                                     <?php 
                                     $i++;
@@ -216,7 +201,10 @@ include "../php/user_header.php";
                             }
                         }
                         ?>
-                
+                    <input type="text" name = "noq"  value = "<?php echo $totalQuestions ?>">
+                    <input type="text" name = "term"  value = "<?php echo $term ?>">
+                    <input type="text" name = "sub"  value = "<?php echo $sub ?>">
+                    <input type="text" name = "sem"  value = "<?php echo $sem ?>">
                 </div>   
             </form> 
         </div>
