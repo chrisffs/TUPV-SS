@@ -373,6 +373,9 @@ include '../php/header.php'
                                         DEPARTMENT
                                     </th>
                                     <th scope="col" class="px-4 py-2 font-medium">
+                                        COURSE
+                                    </th>
+                                    <th scope="col" class="px-4 py-2 font-medium">
                                         TYPE
                                     </th>
                                     <th scope="col" class="px-4 py-2 font-medium">
@@ -401,6 +404,9 @@ include '../php/header.php'
                                     <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                         <?php echo $row['department']; ?>
                                     </th>
+                                    <th scope="row" class="px-4 py-2 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                        <?php echo $row['course']; ?>
+                                    </th>
                                     <td class="px-4 py-2">
                                         <?php echo $row['type']; ?>
                                     </td>
@@ -412,7 +418,8 @@ include '../php/header.php'
                                             data-tupvid="<?php echo $row['tupv_id']; ?>"  
                                             data-userfname="<?php echo $row['full_name']; ?>"
                                             data-userdept="<?php echo $row['department']; ?>"
-                                            data-usertype="<?php echo $row['type']; ?>">
+                                            data-usertype="<?php echo $row['type']; ?>"
+                                            data-usercourse="<?php echo $row['course']; ?>">
                                                 Edit details
                                             </a>
                                             <a type="button" data-modal-target="editUserAccount-modal" data-modal-toggle="editUserAccount-modal" class="text-blue-600 text-sm dark:text-blue-500 hover:underline cursor-pointer edit-userAccount" 

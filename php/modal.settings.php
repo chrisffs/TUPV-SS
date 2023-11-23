@@ -160,11 +160,11 @@
                             <label for="userFullName" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
                             <input type="text" name="userFullName" id="userFullName" required placeholder="User Full Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-1">
                             <label for="userTupvId" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">TUPV ID</label>
                             <input type="text" name="userTupvId" id="userTupvId" required placeholder="User TUPV-ID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-1">
                             <?php
                                 $sql = "SELECT * FROM departmenttbl";
                                 $stmt = $conn->prepare($sql);
@@ -176,6 +176,21 @@
                                 <option selected disabled hidden value="">Choose a Department</option>
                                 <?php foreach ($data as $row): ?>
                                 <option value="<?php echo $row['acronym']; ?>"> <?php echo $row['acronym']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <?php
+                                $sql = "SELECT * FROM courses_tbl";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $data = $stmt->fetchAll();
+                            ?>
+                            <label for="userCourse" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
+                            <select id="userCourse" name= "userCourse" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                <option selected disabled hidden value="">Choose a Course</option>
+                                <?php foreach ($data as $row): ?>
+                                <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -393,11 +408,11 @@
                             <label for="edituserfname" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
                             <input type="text" name="edituserfname" id="edituserfname" required placeholder="User Full Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-1">
                             <label for="editusertupvid" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">TUPV ID</label>
                             <input type="text" name="editusertupvid" id="editusertupvid" required placeholder="User TUPV-ID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-1">
                             <?php
                                 $sql = "SELECT * FROM departmenttbl";
                                 $stmt = $conn->prepare($sql);
@@ -409,6 +424,21 @@
                                 <option selected disabled hidden value="N/A">Choose a Department</option>
                                 <?php foreach ($data as $row): ?>
                                 <option value="<?php echo $row['acronym']; ?>"> <?php echo $row['acronym']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <?php
+                                $sql = "SELECT * FROM courses_tbl";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->execute();
+                                $data = $stmt->fetchAll();
+                            ?>
+                            <label for="editusercourse" class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
+                            <select id="editusercourse" name= "editusercourse" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled hidden value="N/A">Choose a Department</option>
+                                <?php foreach ($data as $row): ?>
+                                <option value="<?php echo $row['courseName']; ?>"> <?php echo $row['courseName']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

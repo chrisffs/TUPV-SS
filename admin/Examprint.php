@@ -6,6 +6,7 @@ $term = isset($_GET['Term']) ? $_GET['Term'] : '';
 $sub = isset($_GET['Subj']) ? $_GET['Subj'] : '';
 $sem = isset($_GET['Semester']) ? $_GET['Semester'] : '';
 $sets = isset($_GET['Sets']) ? $_GET['Sets'] : '';
+$id = isset($_GET['ID']) ? $_GET['ID'] : '';
 $stmt = $conn->prepare('SELECT * FROM generatedquestions_tbl2 WHERE UniqueCode = ?');
 $stmt->execute([$uniquecode]);
 $questions = $stmt->fetchAll();
@@ -25,37 +26,123 @@ $questions = $stmt->fetchAll();
 </head>
 <body>
     
-<div class="paper-container w-4/5 flex flex-col items-center">
+<div class="paper-container flex flex-col items-center">
 
     <section id="test_paper" class="w-[21cm] p-[1cm] min-h-[29.7cm] mt-10 border border-[#D3D3D3] shadow-lg">
         <header class="text-xs mb-4">
             <div class="grid grid-cols-9">
-                <div class="col-span-1">
-                    <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-                </div>
-                <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                <div class="col-span-2 flex justify-end">
                     <div>
-                        <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                        <img class="object-cover w-[75px]" src="../src/img/tupvlogo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-span-5 flex flex-col gap-2 grow text-center">
+                    <div>
+                        <h1 class="">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
                         <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
                     </div>
                     <div>
                         <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                        <?php 
+                            $stmt = $conn->prepare("SELECT * FROM accounts_tbl INNER JOIN departmenttbl ON accounts_tbl.department = departmenttbl.acronym WHERE accounts_tbl.ID = ?");
+                            $stmt->execute([$id]);
+                            $dept = $stmt->fetchAll();
+                            foreach ($dept as $row):
+                            ?>
+                        <h3>
+                            <?php 
+                            echo $row['dptname'];
+                            ?>
+                        </h3>
+                        <h3><?= $row['course']?> Department</h3>
+                        <?php endforeach;?>
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                        <h3 class="border-0 uppercase text-xs" type = "text" name = "term"><?php echo $term ?> EXAMINATION</h3>
                         <input type="hidden" name = "term"  value = "<?php echo $term ?>">
                         <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                        <h3 class=""  name = "sub">
+                            <?php 
+                            $stmt = $conn->prepare("SELECT * FROM subject_tbl WHERE subjectName = ?");
+                            $stmt->execute([$sub]);
+                            $subject = $stmt->fetchAll();
+                            foreach ($subject as $row):
+                                echo $row['subjCode'] . " " . $row['subjectName'];
+                            endforeach;
+                            ?>
+                        </h3>
+                        <h3 class=""  name = "sem">
+                            <?php echo $sem ?>, 
+                            <?php
+                                $currentYear = date('Y');
+                                $nextYear = $currentYear + 1;
+
+                                $schoolYear = $currentYear . '-' . $nextYear;
+
+                                echo "SY " . $schoolYear;
+                            ?>
+                        </h3>
                         <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
                         <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
                     </div>
                 </div>
-                <div class="col-span-1"></div>
+                <div class="col-span-2 text-[8px]">
+                    <h1>F-PCO-122</h1>
+                    <h1>
+                    <?php
+                        $today = date('d M Y');
+                        echo $today;
+                        ?>
+                    </h1>
+                </div>
+            </div>
+            <div class="text-sm flex flex-col gap-3">
+                <div class="grid grid-cols-4 gap-2">
+                    <div class="col-span-3 flex">
+                        <p class="whitespace-nowrap">Name:</p>
+                        <div class="w-full border-b border-black relative">
+                            <div class="relative top-[1rem] text-[10px]">
+                                <div class="grid grid-cols-7">
+                                    <div class="col-span-3">Last Name</div>
+                                    <div class="col-span-3">First Name</div>
+                                    <div class="col-span-1">M.I</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex">
+                        <p class="whitespace-nowrap">Yr. & Sec.</p>
+                        <div class="w-full border-b border-black relative">
+                        </div>
+                    </div>
+                    <!-- <div class="col-span-1 flex gap-2">
+                        <p>Score</p>
+                        <div class="relative">
+                            <div class="top-[-3.7rem] absolute w-20 h-20 border-2 border-black"></div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="grid grid-cols-5 gap-2">
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Instructor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Proctor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex gap-2">
+                        <p>Date:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
         <div>
@@ -86,8 +173,8 @@ $questions = $stmt->fetchAll();
             ?>
             <div class="test-group">
                 <div class="flex items-center">
-                    <div class="flex w-3/4 gap-2 items-center">
-                        <h1 class="font-bold text-lg">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
+                    <div class="flex w-3/4 gap-2 items-center text-sm uppercase">
+                        <h1 class="font-bold">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
                     </div>
                     <input id="test-points<?php echo $testNum; ?>" name="test-points<?php echo $testNum; ?>" class="print-hide test-points-input block w-1/4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" type="number" placeholder="Enter points per items">
                 </div>
@@ -143,32 +230,118 @@ $questions = $stmt->fetchAll();
     <section id="test_paper2" class="<?php if($sets == "1 set") { echo "hidden print-hide";}?>w-[21cm] p-[1cm] min-h-[29.7cm] mt-10 border border-[#D3D3D3] shadow-lg">
         <header class="text-xs mb-4">
             <div class="grid grid-cols-9">
-                <div class="col-span-1">
-                    <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-                </div>
-                <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                <div class="col-span-2 flex justify-end">
                     <div>
-                        <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                        <img class="object-cover w-[75px]" src="../src/img/tupvlogo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-span-5 flex flex-col gap-2 grow text-center">
+                    <div>
+                        <h1 class="">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
                         <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
                     </div>
                     <div>
                         <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                        <?php 
+                            $stmt = $conn->prepare("SELECT * FROM accounts_tbl INNER JOIN departmenttbl ON accounts_tbl.department = departmenttbl.acronym WHERE accounts_tbl.ID = ?");
+                            $stmt->execute([$id]);
+                            $dept = $stmt->fetchAll();
+                            foreach ($dept as $row):
+                            ?>
+                        <h3>
+                            <?php 
+                            echo $row['dptname'];
+                            ?>
+                        </h3>
+                        <h3><?= $row['course']?> Department</h3>
+                        <?php endforeach;?>
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                        <h3 class="border-0 uppercase text-xs" type = "text" name = "term"><?php echo $term ?> EXAMINATION</h3>
                         <input type="hidden" name = "term"  value = "<?php echo $term ?>">
                         <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                        <h3 class=""  name = "sub">
+                            <?php 
+                            $stmt = $conn->prepare("SELECT * FROM subject_tbl WHERE subjectName = ?");
+                            $stmt->execute([$sub]);
+                            $subject = $stmt->fetchAll();
+                            foreach ($subject as $row):
+                                echo $row['subjCode'] . " " . $row['subjectName'];
+                            endforeach;
+                            ?>
+                        </h3>
+                        <h3 class=""  name = "sem">
+                            <?php echo $sem ?>, 
+                            <?php
+                                $currentYear = date('Y');
+                                $nextYear = $currentYear + 1;
+
+                                $schoolYear = $currentYear . '-' . $nextYear;
+
+                                echo "SY " . $schoolYear;
+                            ?>
+                        </h3>
                         <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
                         <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
                     </div>
                 </div>
-                <div class="col-span-1"></div>
+                <div class="col-span-2 text-[8px]">
+                    <h1>F-PCO-122</h1>
+                    <h1>
+                    <?php
+                        $today = date('d M Y');
+                        echo $today;
+                        ?>
+                    </h1>
+                </div>
+            </div>
+            <div class="text-sm flex flex-col gap-3">
+                <div class="grid grid-cols-4 gap-2">
+                    <div class="col-span-3 flex">
+                        <p class="whitespace-nowrap">Name:</p>
+                        <div class="w-full border-b border-black relative">
+                            <div class="relative top-[1rem] text-[10px]">
+                                <div class="grid grid-cols-7">
+                                    <div class="col-span-3">Last Name</div>
+                                    <div class="col-span-3">First Name</div>
+                                    <div class="col-span-1">M.I</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex">
+                        <p class="whitespace-nowrap">Yr. & Sec.</p>
+                        <div class="w-full border-b border-black relative">
+                        </div>
+                    </div>
+                    <!-- <div class="col-span-1 flex gap-2">
+                        <p>Score</p>
+                        <div class="relative">
+                            <div class="top-[-3.7rem] absolute w-20 h-20 border-2 border-black"></div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="grid grid-cols-5 gap-2">
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Instructor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Proctor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex gap-2">
+                        <p>Date:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
         <div>
@@ -199,8 +372,8 @@ $questions = $stmt->fetchAll();
             ?>
             <div class="test-group">
                 <div class="flex items-center">
-                    <div class="flex w-3/4 gap-2 items-center">
-                        <h1 class="font-bold text-lg">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
+                    <div class="flex w-3/4 gap-2 items-center text-sm uppercase">
+                        <h1 class="font-bold">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
                     </div>
                     
                     <input id="test-points<?php echo $testNum; ?>" name="test-points<?php echo $testNum; ?>" class="print-hide test-points-input block w-1/4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" type="number" placeholder="Enter points per items">
@@ -257,32 +430,118 @@ $questions = $stmt->fetchAll();
     <section id="test_paper3" class="<?php if($sets == "1 set" || $sets == "2 sets") { echo "hidden print-hide";}?> w-[21cm] p-[1cm] min-h-[29.7cm] mt-10 border border-[#D3D3D3] shadow-lg">
         <header class="text-xs mb-4">
             <div class="grid grid-cols-9">
-                <div class="col-span-1">
-                    <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-                </div>
-                <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                <div class="col-span-2 flex justify-end">
                     <div>
-                        <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                        <img class="object-cover w-[75px]" src="../src/img/tupvlogo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-span-5 flex flex-col gap-2 grow text-center">
+                    <div>
+                        <h1 class="">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
                         <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
                     </div>
                     <div>
                         <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                        <?php 
+                            $stmt = $conn->prepare("SELECT * FROM accounts_tbl INNER JOIN departmenttbl ON accounts_tbl.department = departmenttbl.acronym WHERE accounts_tbl.ID = ?");
+                            $stmt->execute([$id]);
+                            $dept = $stmt->fetchAll();
+                            foreach ($dept as $row):
+                            ?>
+                        <h3>
+                            <?php 
+                            echo $row['dptname'];
+                            ?>
+                        </h3>
+                        <h3><?= $row['course']?> Department</h3>
+                        <?php endforeach;?>
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                        <h3 class="border-0 uppercase text-xs" type = "text" name = "term"><?php echo $term ?> EXAMINATION</h3>
                         <input type="hidden" name = "term"  value = "<?php echo $term ?>">
                         <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                        <h3 class=""  name = "sub">
+                            <?php 
+                            $stmt = $conn->prepare("SELECT * FROM subject_tbl WHERE subjectName = ?");
+                            $stmt->execute([$sub]);
+                            $subject = $stmt->fetchAll();
+                            foreach ($subject as $row):
+                                echo $row['subjCode'] . " " . $row['subjectName'];
+                            endforeach;
+                            ?>
+                        </h3>
+                        <h3 class=""  name = "sem">
+                            <?php echo $sem ?>, 
+                            <?php
+                                $currentYear = date('Y');
+                                $nextYear = $currentYear + 1;
+
+                                $schoolYear = $currentYear . '-' . $nextYear;
+
+                                echo "SY " . $schoolYear;
+                            ?>
+                        </h3>
                         <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
                         <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
                     </div>
                 </div>
-                <div class="col-span-1"></div>
+                <div class="col-span-2 text-[8px]">
+                    <h1>F-PCO-122</h1>
+                    <h1>
+                    <?php
+                        $today = date('d M Y');
+                        echo $today;
+                        ?>
+                    </h1>
+                </div>
+            </div>
+            <div class="text-sm flex flex-col gap-3">
+                <div class="grid grid-cols-4 gap-2">
+                    <div class="col-span-3 flex">
+                        <p class="whitespace-nowrap">Name:</p>
+                        <div class="w-full border-b border-black relative">
+                            <div class="relative top-[1rem] text-[10px]">
+                                <div class="grid grid-cols-7">
+                                    <div class="col-span-3">Last Name</div>
+                                    <div class="col-span-3">First Name</div>
+                                    <div class="col-span-1">M.I</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex">
+                        <p class="whitespace-nowrap">Yr. & Sec.</p>
+                        <div class="w-full border-b border-black relative">
+                        </div>
+                    </div>
+                    <!-- <div class="col-span-1 flex gap-2">
+                        <p>Score</p>
+                        <div class="relative">
+                            <div class="top-[-3.7rem] absolute w-20 h-20 border-2 border-black"></div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="grid grid-cols-5 gap-2">
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Instructor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-2 flex">
+                        <p class="whitespace-nowrap">Proctor:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex gap-2">
+                        <p>Date:</p>
+                        <div class="w-full border-b border-black">
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
         <div>
@@ -313,8 +572,8 @@ $questions = $stmt->fetchAll();
             ?>
             <div class="test-group">
                 <div class="flex items-center">
-                    <div class="flex w-3/4 gap-2 items-center">
-                        <h1 class="font-bold text-lg">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
+                    <div class="flex w-3/4 gap-2 items-center text-sm uppercase">
+                        <h1 class="font-bold">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
                     </div>
                     
                     <input id="test-points<?php echo $testNum; ?>" name="test-points<?php echo $testNum; ?>" class="print-hide test-points-input block w-1/4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" type="number" placeholder="Enter points per items">
@@ -373,31 +632,74 @@ $questions = $stmt->fetchAll();
     <section id="answer-key" class="w-[21cm] p-[1cm] min-h-[29.7cm] mt-10 border border-[#D3D3D3] shadow-lg">
         <header class="text-xs mb-4">
             <div class="grid grid-cols-9">
-                <div class="col-span-1">
-                    <img class="object-cover " src="../src/img/tupvlogo.png" alt="">
-                </div>
-                <div class="col-span-7 flex flex-col gap-2 grow text-center">
+                <div class="col-span-2 flex justify-end">
                     <div>
-                        <h1 class="font-bold text-sm">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
+                        <img class="object-cover w-[75px]" src="../src/img/tupvlogo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-span-5 flex flex-col gap-2 grow text-center">
+                    <div>
+                        <h1 class="">TECHNOLOGICAL UNIVERSITY OF THE PHILIPPINES VISAYAS</h1>
                         <h2 class="">Capt. Sabi St., City of Talisay, Negros Occidental</h2>
                     </div>
                     <div>
                         <h3>OFFICE OF THE COLLEGE DEAN</h3>
+                        <?php 
+                            $stmt = $conn->prepare("SELECT * FROM accounts_tbl INNER JOIN departmenttbl ON accounts_tbl.department = departmenttbl.acronym WHERE accounts_tbl.ID = ?");
+                            $stmt->execute([$id]);
+                            $dept = $stmt->fetchAll();
+                            foreach ($dept as $row):
+                            ?>
+                        <h3>
+                            <?php 
+                            echo $row['dptname'];
+                            ?>
+                        </h3>
+                        <h3><?= $row['course']?> Department</h3>
+                        <?php endforeach;?>
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold" type = "text" name = "term"><?php echo $term ?> Exam</h3>
+                        <h3 class="border-0 uppercase text-xs" type = "text" name = "term"><?php echo $term ?> EXAMINATION</h3>
                         <input type="hidden" name = "term"  value = "<?php echo $term ?>">
+                        <input type="hidden" name = "noq"  value = "<?php echo $noq ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sub"><?php echo $sub ?></h3>
+                        <h3 class=""  name = "sub">
+                            <?php 
+                            $stmt = $conn->prepare("SELECT * FROM subject_tbl WHERE subjectName = ?");
+                            $stmt->execute([$sub]);
+                            $subject = $stmt->fetchAll();
+                            foreach ($subject as $row):
+                                echo $row['subjCode'] . " " . $row['subjectName'];
+                            endforeach;
+                            ?>
+                        </h3>
+                        <h3 class=""  name = "sem">
+                            <?php echo $sem ?>, 
+                            <?php
+                                $currentYear = date('Y');
+                                $nextYear = $currentYear + 1;
+
+                                $schoolYear = $currentYear . '-' . $nextYear;
+
+                                echo "SY " . $schoolYear;
+                            ?>
+                        </h3>
                         <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
                     </div>
                     <div>
-                        <h3 class="uppercase font-bold underline"  name = "sem"><?php echo $sem ?>, 2023-2024</h3>
                         <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
                     </div>
                 </div>
-                <div class="col-span-1"></div>
+                <div class="col-span-2 text-[8px]">
+                    <h1>F-PCO-122</h1>
+                    <h1>
+                    <?php
+                        $today = date('d M Y');
+                        echo $today;
+                        ?>
+                    </h1>
+                </div>
             </div>
         </header>
         <div>
@@ -428,8 +730,8 @@ $questions = $stmt->fetchAll();
             ?>
             <div class="test-group">
                 <div class="flex items-center">
-                    <div class="flex w-3/4 gap-2 items-center">
-                        <h1 class="font-bold text-lg">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
+                    <div class="flex w-3/4 gap-2 items-center text-sm uppercase">
+                        <h1 class="font-bold">Test <?php echo $testNum; ?>: Multiple Choice</h1><span id="points<?php echo $testNum; ?>" class="points<?php echo $testNum; ?> font-medium"></span>
                     </div>
                 </div>
                 <div class="questions">

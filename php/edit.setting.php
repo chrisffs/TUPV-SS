@@ -154,12 +154,12 @@ if(isset($_POST['updateUserDetails'])) {
     $userfname = $_POST['edituserfname'];
     $usertupvid = $_POST['editusertupvid'];
     $userdept = $_POST['edituserdept'];
-    // $username = $_POST['edituseruname'];
+    $usercourse = $_POST['editusercourse'];
     // $userpass = password_hash($_POST['edituserpass'], PASSWORD_DEFAULT);
     $usertype = $_POST['editusertype'];
 
     // Prepare and execute the SQL query to update the department
-    $sql = "UPDATE accounts_tbl SET tupv_id = :editusertupvid, full_name = :edituserfname, department = :edituserdept, type = :editusertype, user_picture = :picture, userpic_fileloc = :piclocation WHERE ID = :edituserid";
+    $sql = "UPDATE accounts_tbl SET tupv_id = :editusertupvid, full_name = :edituserfname, department = :edituserdept, course = :editusercourse, type = :editusertype, user_picture = :picture, userpic_fileloc = :piclocation WHERE ID = :edituserid";
     $stmt = $conn->prepare($sql);
 
     // Bind parameters
@@ -167,6 +167,7 @@ if(isset($_POST['updateUserDetails'])) {
     $stmt->bindParam(':edituserfname', $userfname);
     $stmt->bindParam(':editusertupvid', $usertupvid);
     $stmt->bindParam(':edituserdept', $userdept);
+    $stmt->bindParam(':editusercourse', $usercourse);
     $stmt->bindParam(':editusertype', $usertype);
     $stmt->bindParam(':picture', $userpic);
     $stmt->bindParam(':piclocation', $userpicloc);

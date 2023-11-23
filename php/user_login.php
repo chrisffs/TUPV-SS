@@ -24,6 +24,7 @@ if (isset($_POST['login'])) {
             $_SESSION['password'] = $result['password'];
             $_SESSION['full_name'] = $result['full_name'];
             $_SESSION['department'] = $result['department'];
+            $_SESSION['course'] = $result['course'];
             $_SESSION['type'] = $result['type'];
 
             // Check if header location is correct

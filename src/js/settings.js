@@ -80,6 +80,7 @@ $(document).ready( function () {
         var userTupvId = $(this).data("tupvid");
         var userFname = $(this).data("userfname");
         var userDept = $(this).data("userdept");
+        var userCourse = $(this).data("usercourse");
         var userType = $(this).data("usertype");
 
         // Populate the modal fields with the data
@@ -89,6 +90,7 @@ $(document).ready( function () {
         $("#editusertupvid").val(userTupvId);
         $("#edituserfname").val(userFname);
         $("#edituserdept").val(userDept);
+        $("#editusercourse").val(userCourse);
         $("#editusertype").val(userType);
         
         // Show the edit modal

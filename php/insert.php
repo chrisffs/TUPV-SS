@@ -88,12 +88,13 @@ if(isset($_POST['insertuser']))
         $ufn = $_POST['userFullName'];
         $utupvid = $_POST['userTupvId'];
         $udept = $_POST['userDept'];
+        $ucourse = $_POST['userCourse'];
         $uun = $_POST['userUName'];
         $upass = password_hash($_POST['userPass'], PASSWORD_DEFAULT);
         $utype = $_POST['usertype'];
 
         // Prepare the SQL statement
-        $sql = "INSERT INTO accounts_tbl (tupv_id, username, password, full_name, department, type, user_picture, userpic_fileloc) VALUES (:tupvid, :username, :password, :fullname, :department, :type, :picture, :piclocation)";
+        $sql = "INSERT INTO accounts_tbl (tupv_id, username, password, full_name, course, department, type, user_picture, userpic_fileloc) VALUES (:tupvid, :username, :password, :fullname, :course, :department, :type, :picture, :piclocation)";
         $stmt = $conn->prepare($sql);
         
         // Bind parameters
@@ -102,6 +103,7 @@ if(isset($_POST['insertuser']))
         $stmt->bindParam(':password', $upass);
         $stmt->bindParam(':fullname', $ufn);
         $stmt->bindParam(':department', $udept);
+        $stmt->bindParam(':course', $ucourse);
         $stmt->bindParam(':type', $utype);
         $stmt->bindParam(':picture', $userpic);
         $stmt->bindParam(':piclocation', $userpicloc);

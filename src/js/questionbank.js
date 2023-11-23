@@ -29,7 +29,7 @@ $(document).ready( function () {
         console.log(question);
         // Populate the modal fields with the data
         $("#ID").text(id);
-        $("#question").text(question);
+        $("#question").html(question);
         $("#a").text(a);
         $("#b").text(b);
         $("#c").text(c);
@@ -52,7 +52,7 @@ $(document).ready( function () {
 
         // Populate the modal fields with the data
         $("#IDchecker").text(idchecker);
-        $("#questionchecker").text(questionchecker);
+        $("#questionchecker").html(questionchecker);
         $("#achecker").text(achecker);
         $("#bchecker").text(bchecker);
         $("#cchecker").text(cchecker);

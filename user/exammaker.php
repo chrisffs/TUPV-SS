@@ -116,7 +116,7 @@ include "../php/user_header.php";
         </aside>
         <div class="grow h-[88vh] overflow-auto overflow-x-hidden lg:w-2/3">
             <h1 class="text-xl font-semibold p-4 sticky">Questions</h1>
-            <form id="insertForm" action="./test1.php" method="post" onsubmit="return confirm('Are you sure you want to decline this?');">
+            <form id="insertForm" action="./test1.php" method="post" >
                 <div class="p-4 h-full flex flex-col gap-2">
                     <?php 
                     $totalQuestions = 0;
@@ -184,12 +184,12 @@ include "../php/user_header.php";
                                         <div class="col-span-4">
                                             <span>D.</span> <?php echo $row['D']; ?>
                                         </div>
-                                        <input type="text" name = "Question<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Question'], ENT_QUOTES, 'UTF-8') ?>">
-                                        <input type="text" name = "A<?php echo $i; ?>"  value = "<?php echo $row['A']; ?>">
-                                        <input type="text" name = "B<?php echo $i; ?>"  value = "<?php echo $row['B']; ?>">
-                                        <input type="text" name = "C<?php echo $i; ?>"  value = "<?php echo $row['C']; ?>">
-                                        <input type="text" name = "D<?php echo $i; ?>"  value = "<?php echo $row['D']; ?>">
-                                        <input type="text" name = "ans<?php echo $i; ?>"  value = "<?php echo $row['Answer']; ?>">
+                                        <input type="hidden" name = "Question<?php echo $i; ?>"  value = "<?php echo htmlspecialchars($row['Question'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <input type="hidden" name = "A<?php echo $i; ?>"  value = "<?php echo $row['A']; ?>">
+                                        <input type="hidden" name = "B<?php echo $i; ?>"  value = "<?php echo $row['B']; ?>">
+                                        <input type="hidden" name = "C<?php echo $i; ?>"  value = "<?php echo $row['C']; ?>">
+                                        <input type="hidden" name = "D<?php echo $i; ?>"  value = "<?php echo $row['D']; ?>">
+                                        <input type="hidden" name = "ans<?php echo $i; ?>"  value = "<?php echo $row['Answer']; ?>">
                                         <input type="hidden" name = "ID<?php echo $i; ?>"  value = "<?php echo $row['ID']; ?>">
                                         <input type="hidden" name = "test_part<?php echo $i; ?>"  value = "<?php echo $partNumber; ?>">
                                         <input type="hidden" name = "uc"  value = "<?php echo $UC ?>">
@@ -201,10 +201,10 @@ include "../php/user_header.php";
                             }
                         }
                         ?>
-                    <input type="text" name = "noq"  value = "<?php echo $totalQuestions ?>">
-                    <input type="text" name = "term"  value = "<?php echo $term ?>">
-                    <input type="text" name = "sub"  value = "<?php echo $sub ?>">
-                    <input type="text" name = "sem"  value = "<?php echo $sem ?>">
+                    <input type="hidden" name = "noq"  value = "<?php echo $totalQuestions ?>">
+                    <input type="hidden" name = "term"  value = "<?php echo $term ?>">
+                    <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
+                    <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
                 </div>   
             </form> 
         </div>
