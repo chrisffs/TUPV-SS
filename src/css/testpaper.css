@@ -1,12 +1,28 @@
 @media print {
     #print-btn {
-        display: none;
+        display: none !important;
     }
     .print-hide {
-        display: none;
+        display: none !important;
     }
     #testpaper-container, #answersheet-container, #answerkey-container, .pagebreak {
         display: block !important;
+    }
+    #test_paper, #test_paper2, #test_paper3, #answer-key {
+        /* Revert width, padding, and min-height to default values */
+        width: auto !important;
+        padding: 0 !important;
+        min-height: auto !important;
+
+        /* Remove top margin and border */
+        margin-top: 0 !important;
+        border: none !important;
+
+        /* Remove box shadow */
+        box-shadow: none !important;
+    }
+    .paper-container {
+        width: auto !important;
     }
 }
 
