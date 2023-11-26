@@ -130,23 +130,25 @@ include "../php/user_header.php";
                         
                         $i = 1;
                         
+                        // Fetch a larger pool of questions initially
+                        $sqlAllQuestions = "SELECT * FROM `questionbank_tbl` WHERE Subject LIKE :subject AND Year LIKE :year AND Term LIKE :term AND Semester LIKE :semester ORDER BY RAND()";
+                        $stmtAllQuestions = $conn->prepare($sqlAllQuestions);
+                        $stmtAllQuestions->bindParam(':subject', $sub);
+                        $stmtAllQuestions->bindParam(':year', $year);
+                        $stmtAllQuestions->bindParam(':term', $term);
+                        $stmtAllQuestions->bindParam(':semester', $sem);
+                        $stmtAllQuestions->execute();
+                        $allQuestions = $stmtAllQuestions->fetchAll(PDO::FETCH_ASSOC);
+
                         for ($partNumber = 1; $partNumber <= $parts; $partNumber++) {
                             // Calculate number of questions for the current part
                             $currentPartKey = 'testpart' . $partNumber;
                             $noq = !empty($_POST[$currentPartKey]) ? (int)$_POST[$currentPartKey] : 0;
                             $totalQuestions += $noq;
 
-                            // Your existing SQL query and preparation
-                            $sql = "SELECT * FROM `questionbank_tbl` WHERE Subject LIKE :subject AND Year LIKE :year AND Term LIKE :term AND Semester LIKE :semester ORDER BY RAND() LIMIT :number_of_items";
-                            $stmt = $conn->prepare($sql);
-                            $stmt->bindParam(':subject', $sub);
-                            $stmt->bindParam(':year', $year);
-                            $stmt->bindParam(':term', $term);
-                            $stmt->bindParam(':semester', $sem);
-                            $stmt->bindParam(':number_of_items', $noq);
-                            $stmt->execute();
-                            $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+                            $questions = array_slice($allQuestions, 0, $noq);
+                            $allQuestions = array_slice($allQuestions, $noq); // Remove used questions
+                            
                             if (count($questions) === 0) {
                                 ?>
                                 <div class="bg-light border p-4 rounded-lg">
@@ -201,7 +203,7 @@ include "../php/user_header.php";
                             }
                         }
                         ?>
-                    <input type="hidden" name = "noq"  value = "<?php echo $totalQuestions ?>">
+                    <input type="hidden" name = "noq"  value = "<?php echo $i - 1?>">
                     <input type="hidden" name = "term"  value = "<?php echo $term ?>">
                     <input type="hidden" name = "sub"  value = "<?php echo $sub ?>">
                     <input type="hidden" name = "sem"  value = "<?php echo $sem ?>">
